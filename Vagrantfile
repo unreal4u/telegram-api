@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
     config.vm.box = "rasmus/php7dev"
-    config.vm.provision :shell, path: "web-bootstrap.sh"
+    config.vm.provision :shell, path: "vagrant-telegram-install.sh"
 
     config.vm.network "public_network", type: "dhcp"
     config.vm.network :forwarded_port, guest: 80, host: 8080
