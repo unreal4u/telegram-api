@@ -1,4 +1,6 @@
 /vendor/
 /.vagrant/
 
-.idea
+/examples/conf.php
+
+/.idea

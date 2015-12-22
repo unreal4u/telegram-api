@@ -1,48 +1,106 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace unreal4u;
+
+use unreal4u\Telegram\Message;
+use unreal4u\LinkedData\Contact;
+use unreal4u\LinkedData\Group;
+use \GuzzleHttp\Client;
 
 class TelegramLog
 {
     protected $_contacts = [];
 
-    public function __construct()
+    private $_botToken = '';
+    private $_apiUrl = '';
+
+    /**
+     * TelegramLog constructor.
+     * @param string $botToken
+     */
+    public function __construct(string $botToken)
     {
-        // @TODO
+        $this->_botToken = $botToken;
+        $this->constructApiUrl();
     }
 
     /**
-     * Assigns a contact to our internal object
-     *
+     * @return TelegramLog
+     */
+    final private function constructApiUrl(): TelegramLog
+    {
+        $this->_apiUrl = "https://api.telegram.org/bot" . $this->_botToken;
+
+        return $this;
+    }
+
+    private function _composeMessage(string $chatId, string $text): Message
+    {
+        return new Message([
+            'chatId' => $chatId,
+            'text' => $text,
+        ]);
+    }
+
+    private function _sendMessage(Message $message): TelegramLog
+    {
+        $client = new Client();
+        $client->post($this->_apiUrl . '/sendMessage', [
+            'form_params' => [
+                'chat_id' => $message->chatId,
+                'text' => $message->text,
+            ]
+        ]);
+
+        return $this;
+    }
+
+    private function _getData(string $method): \stdClass
+    {
+        $client = new Client();
+        $response = $client->post($this->_apiUrl . '/' . $method);
+
+        return json_decode((string)$response->getBody());
+    }
+
+    /**
+     * @return \stdClass
+     */
+    public function getUpdates(): \stdClass
+    {
+        return $this->_getData('getUpdates');
+    }
+
+    /**
+     * @return \stdClass
+     */
+    public function getInformation(): \stdClass
+    {
+        return $this->_getData('getMe');
+    }
+
+    /**
+     * @param string $message
      * @param Contact $contact
-     * @return $this
+     * @return TelegramLog
+     * @throws \Exception
      */
-    public function assignContact(Contact $contact)
+    public function sendToUser(string $message, Contact $contact): TelegramLog
     {
-        $this->_contacts[] = $contact;
-        return $this;
+        return $this->_sendMessage($this->_composeMessage($contact->chatId, $message));
     }
 
     /**
-     * Assign multiple contacts
+     * Sends a message to a group
      *
-     * @param array $contacts
-     * @return $this
+     * @param string $message
+     * @param string $groupId
+     * @return TelegramLog
      */
-    public function assignContacts(array $contacts = [])
+    public function broadcast(string $message, Group $group): TelegramLog
     {
-        foreach ($contacts as $contact) {
-            $this->assignContact($contact);
-        }
-
-        return $this;
-    }
-
-    public function sendToUser(string $message, string $userId) {
-        return $this;
-    }
-
-    public function broadcastToGroup(string $message, string $groupId) {
-        return $this;
+        return $this->_sendMessage($this->_composeMessage($group->chatId, $message));
     }
 }

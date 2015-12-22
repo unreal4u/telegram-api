@@ -3,6 +3,7 @@
   "description": "This class can send messages to Telegram",
   "require": {
     "php": ">=5.5.29",
+    "guzzlehttp/guzzle": "~6.0",
     "monolog/monolog": "@stable",
     "zyberspace/telegram-cli-client": "0.4.*"
   },
