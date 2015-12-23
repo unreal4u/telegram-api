@@ -2,10 +2,9 @@
   "name": "unreal4u/telegram-log",
   "description": "This class can send messages to Telegram",
   "require": {
-    "php": ">=5.5.29",
+    "php": ">=7.0.0",
     "guzzlehttp/guzzle": "~6.0",
-    "monolog/monolog": "@stable",
-    "zyberspace/telegram-cli-client": "0.4.*"
+    "monolog/monolog": "@stable"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",

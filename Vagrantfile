@@ -7,9 +7,6 @@ Vagrant.configure(2) do |config|
     config.vm.network "public_network", type: "dhcp"
     config.vm.network :forwarded_port, guest: 80, host: 8080
 
-    config.vm.synced_folder ".", "/vagrant", disabled: true
-    config.vm.synced_folder "src/", "/var/www/default/src/"
-    config.vm.synced_folder "tests/", "/var/www/default/tests/"
-    config.vm.synced_folder "vendor/", "/var/www/default/vendor"
-    config.vm.synced_folder "examples/", "/var/www/default/examples"
+    config.vm.synced_folder ".", "/var/www/default/"
+    config.vm.provision :shell, path: "composer-install.sh"
 end
