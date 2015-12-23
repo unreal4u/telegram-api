@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\MethodDefinitions;
-use unreal4u\Telegram\Types\Message;
 
 /**
  * Object that resembles a message object in Telegram

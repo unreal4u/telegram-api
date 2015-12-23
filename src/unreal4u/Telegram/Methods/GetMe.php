@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\MethodDefinitions;
-use unreal4u\Telegram\Types\User;
 
 /**
  * A simple method for testing your bot's auth token. Requires no parameters. Returns basic information about the bot in

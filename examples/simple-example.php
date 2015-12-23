@@ -25,6 +25,11 @@ printf(
 );
 
 $sendMessage = new SendMessage();
-$sendMessage->chat_id = '10955729';
+$sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world to the user... now revamped!';
+$tgLog->performApiRequest($sendMessage);
+
+$sendMessage = new SendMessage();
+$sendMessage->chat_id = A_GROUP_CHAT_ID;
+$sendMessage->text = 'And this is an hello the the group... from scratch :D';
 $tgLog->performApiRequest($sendMessage);
