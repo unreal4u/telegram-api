@@ -8,20 +8,23 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 use \unreal4u\TelegramLog;
-use \unreal4u\LinkedData\Contact;
-use \unreal4u\LinkedData\Group;
+use \unreal4u\Telegram\Methods\GetMe;
+use \unreal4u\Telegram\Methods\SendMessage;
 
 $tgLog = new TelegramLog(BOT_TOKEN);
-$userInformation = $tgLog->getInformation();
+
+$getMe = new GetMe();
+$userInformation = $tgLog->performApiRequest($getMe);
+
 printf(
-    'This bot is called <strong>%s</strong> and has id <strong>%d</strong>%s',
-    $userInformation->result->first_name,
-    $userInformation->result->id,
+    'This bot is called <strong>%s</strong> (username %s) and has id <strong>%d</strong>%s',
+    $userInformation->first_name,
+    $userInformation->username,
+    $userInformation->id,
     PHP_EOL
 );
 
-#$updates = $tgLog->getUpdates();
-#echo '<pre>' . print_r($updates, true) . '</pre>';
-
-$tgLog->sendToUser('Hello world to the user', new Contact(UNREAL4U_USER));
-$tgLog->broadcast('Hello world to the group!', new Group(UNREAL4U_GROUP));
+$sendMessage = new SendMessage();
+$sendMessage->chat_id = '10955729';
+$sendMessage->text = 'Hello world to the user... now revamped!';
+$tgLog->performApiRequest($sendMessage);

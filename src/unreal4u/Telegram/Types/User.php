@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace unreal4u\Telegram\Types;
+
+use unreal4u\InternalFunctionality\Filler;
+
+/**
+ * This object represents a Telegram user or bot.
+ *
+ * @see https://core.telegram.org/bots/api#user
+ */
+class User extends Filler
+{
+    /**
+     * Unique identifier for this user or bot
+     * @var int
+     */
+    public $id = 0;
+
+    /**
+     * User‘s or bot’s first name
+     * @var string
+     */
+    public $first_name = '';
+
+    /**
+     * Optional. User‘s or bot’s last name
+     * @var string
+     */
+    public $last_name = '';
+
+    /**
+     * Optional. User‘s or bot’s username
+     * @var string
+     */
+    public $username = '';
+
+    public function __construct(\stdClass $data=null)
+    {
+        $this->populateObject($data);
+    }
+}

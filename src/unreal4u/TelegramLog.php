@@ -4,17 +4,24 @@ declare(strict_types = 1);
 
 namespace unreal4u;
 
-use unreal4u\Telegram\Message;
-use unreal4u\LinkedData\Contact;
-use unreal4u\LinkedData\Group;
 use \GuzzleHttp\Client;
 
+/**
+ * Handler for Monolog
+ */
 class TelegramLog
 {
-    protected $_contacts = [];
+    /**
+     * Stores the token
+     * @var string
+     */
+    private $botToken = '';
 
-    private $_botToken = '';
-    private $_apiUrl = '';
+    /**
+     * Stores the API URL from Telegram
+     * @var string
+     */
+    private $apiUrl = '';
 
     /**
      * TelegramLog constructor.
@@ -22,8 +29,20 @@ class TelegramLog
      */
     public function __construct(string $botToken)
     {
-        $this->_botToken = $botToken;
+        $this->botToken = $botToken;
         $this->constructApiUrl();
+    }
+
+    public function performApiRequest($method) {
+        $client = new Client();
+        $response = $client->post($this->composeApiMethodUrl($method), [
+            'form_params' => get_object_vars($method),
+        ]);
+
+        $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::objectType();
+        $jsonDecoded = json_decode((string)$response->getBody());
+
+        return new $returnObject($jsonDecoded->result);
     }
 
     /**
@@ -31,76 +50,18 @@ class TelegramLog
      */
     final private function constructApiUrl(): TelegramLog
     {
-        $this->_apiUrl = "https://api.telegram.org/bot" . $this->_botToken;
-
+        $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken;
         return $this;
     }
 
-    private function _composeMessage(string $chatId, string $text): Message
-    {
-        return new Message([
-            'chatId' => $chatId,
-            'text' => $text,
-        ]);
-    }
-
-    private function _sendMessage(Message $message): TelegramLog
-    {
-        $client = new Client();
-        $client->post($this->_apiUrl . '/sendMessage', [
-            'form_params' => [
-                'chat_id' => $message->chatId,
-                'text' => $message->text,
-            ]
-        ]);
-
-        return $this;
-    }
-
-    private function _getData(string $method): \stdClass
-    {
-        $client = new Client();
-        $response = $client->post($this->_apiUrl . '/' . $method);
-
-        return json_decode((string)$response->getBody());
-    }
-
     /**
-     * @return \stdClass
-     */
-    public function getUpdates(): \stdClass
-    {
-        return $this->_getData('getUpdates');
-    }
-
-    /**
-     * @return \stdClass
-     */
-    public function getInformation(): \stdClass
-    {
-        return $this->_getData('getMe');
-    }
-
-    /**
-     * @param string $message
-     * @param Contact $contact
-     * @return TelegramLog
-     * @throws \Exception
-     */
-    public function sendToUser(string $message, Contact $contact): TelegramLog
-    {
-        return $this->_sendMessage($this->_composeMessage($contact->chatId, $message));
-    }
-
-    /**
-     * Sends a message to a group
+     * Builds up the URL with which we can work with
      *
-     * @param string $message
-     * @param string $groupId
-     * @return TelegramLog
+     * @param $call
+     * @return string
      */
-    public function broadcast(string $message, Group $group): TelegramLog
+    private function composeApiMethodUrl($call): string
     {
-        return $this->_sendMessage($this->_composeMessage($group->chatId, $message));
+        return $this->apiUrl . '/' . $call::apiMethod();
     }
 }
