@@ -192,7 +192,7 @@ class Message extends Filler
             $data->chat = new Chat($data->chat);
         }
 
-        // forward_from == User type
+        // forward_from == User object
         if (!empty($data->forward_from)) {
             $data->forward_from = new User($data->forward_from);
         }
@@ -202,6 +202,7 @@ class Message extends Filler
             $data->reply_to_message = new Message($data->reply_to_message);
         }
 
+        // ... etc
         if (!empty($data->audio)) {
             $data->reply_to_message = new Audio($data->reply_to_message);
         }
@@ -219,11 +220,11 @@ class Message extends Filler
         }
 
         if (!empty($data->voice)) {
-            // TODO
+            $this->voice = new Voice($data->voice);
         }
 
         if (!empty($data->contact)) {
-            // TODO
+            $this->contact = new Contact($data->contact);
         }
 
         if (!empty($data->location)) {
