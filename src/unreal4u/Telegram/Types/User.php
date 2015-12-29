@@ -9,6 +9,8 @@ use unreal4u\InternalFunctionality\Filler;
 /**
  * This object represents a Telegram user or bot.
  *
+ * Objects defined as-is december 2015
+ *
  * @see https://core.telegram.org/bots/api#user
  */
 class User extends Filler
@@ -37,7 +39,7 @@ class User extends Filler
      */
     public $username = '';
 
-    public function __construct(\stdClass $data=null)
+    public function __construct(\stdClass $data = null)
     {
         $this->populateObject($data);
     }

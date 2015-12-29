@@ -9,6 +9,8 @@ use unreal4u\InternalFunctionality\Filler;
 /**
  * This object represents a message.
  *
+ * Objects defined as-is december 2015
+ *
  * @see https://core.telegram.org/bots/api#message
  */
 class Message extends Filler
@@ -178,8 +180,60 @@ class Message extends Filler
      */
     public $migrate_from_chat_id = 0;
 
-    public function __construct(\stdClass $data=null)
+    public function __construct(\stdClass $data = null)
     {
+        // From is of User type of data
+        if (!empty($data->from)) {
+            $data->from = new User($data->from);
+        }
+
+        // Chat always should be a chat object
+        if (!empty($data->chat)) {
+            $data->chat = new Chat($data->chat);
+        }
+
+        // forward_from == User type
+        if (!empty($data->forward_from)) {
+            $data->forward_from = new User($data->forward_from);
+        }
+
+        // reply_to_message == Message object
+        if (!empty($data->reply_to_message)) {
+            $data->reply_to_message = new Message($data->reply_to_message);
+        }
+
+        if (!empty($data->audio)) {
+            // TODO
+        }
+
+        if (!empty($data->document)) {
+            // TODO
+        }
+
+        if (!empty($data->sticker)) {
+            // TODO
+        }
+
+        if (!empty($data->video)) {
+            // TODO
+        }
+
+        if (!empty($data->contact)) {
+            // TODO
+        }
+
+        if (!empty($data->location)) {
+            // TODO
+        }
+
+        if (!empty($data->new_chat_participant)) {
+            $data->new_chat_participant = new User($data->new_chat_participant);
+        }
+
+        if (!empty($data->left_chat_participant)) {
+            $data->left_chat_participant = new User($data->left_chat_participant);
+        }
+
         $this->populateObject($data);
     }
 }

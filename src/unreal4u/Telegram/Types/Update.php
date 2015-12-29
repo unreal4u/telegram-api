@@ -10,6 +10,8 @@ use unreal4u\Telegram\Types\Message;
 /**
  * This object represents an incoming update.
  *
+ * Objects defined as-is december 2015
+ *
  * @see https://core.telegram.org/bots/api#update
  */
 class Update extends Filler
@@ -28,13 +30,12 @@ class Update extends Filler
      */
     public $message = null;
 
-    public function __construct(\stdClass $data=null)
+    public function __construct(\stdClass $data = null)
     {
-        $this->populateObject($data);
-    }
+        if (!empty($data->message)) {
+            $data->message = new Message($data->message);
+        }
 
-    public function performApiCall(): Message
-    {
-        return new Message();
+        $this->populateObject($data);
     }
 }

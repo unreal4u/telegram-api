@@ -33,7 +33,8 @@ class TelegramLog
         $this->constructApiUrl();
     }
 
-    public function performApiRequest($method) {
+    public function performApiRequest($method)
+    {
         $client = new Client();
         $response = $client->post($this->composeApiMethodUrl($method), [
             'form_params' => get_object_vars($method),

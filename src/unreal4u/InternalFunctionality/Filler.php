@@ -6,7 +6,7 @@ namespace unreal4u\InternalFunctionality;
 
 abstract class Filler
 {
-    final protected function populateObject(\stdClass $data=null): Filler
+    final protected function populateObject(\stdClass $data = null): Filler
     {
         if (!is_null($data)) {
             foreach ($data as $key => $value) {

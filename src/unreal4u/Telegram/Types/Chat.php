@@ -5,10 +5,11 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Types;
 
 use unreal4u\InternalFunctionality\Filler;
-use unreal4u\Telegram\Types\Message;
 
 /**
  * This object represents a chat.
+ *
+ * Objects defined as-is december 2015
  *
  * @see https://core.telegram.org/bots/api#chat
  */
@@ -22,7 +23,7 @@ class Chat extends Filler
 
     /**
      * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
-     * @var String
+     * @var string
      */
     public $type = '';
 
@@ -50,13 +51,8 @@ class Chat extends Filler
      */
     public $last_name = '';
 
-    public function __construct(\stdClass $data=null)
+    public function __construct(\stdClass $data = null)
     {
         $this->populateObject($data);
-    }
-
-    public function performApiCall(): Message
-    {
-        return new Message();
     }
 }
