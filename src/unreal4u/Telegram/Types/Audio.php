@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace unreal4u\Telegram\Types;
+
+use unreal4u\InternalFunctionality\Filler;
+
+/**
+ * This object represents an audio file to be treated as music by the Telegram clients
+ *
+ * Objects defined as-is december 2015
+ *
+ * @see https://core.telegram.org/bots/api#audio
+ */
+class Audio extends Filler
+{
+    /**
+     * Unique identifier for this file
+     * @var string
+     */
+    public $file_id = '';
+
+    /**
+     * Duration of the audio in seconds as defined by sender
+     * @var int
+     */
+    public $duration = 0;
+
+    /**
+     * Optional. Performer of the audio as defined by sender or by audio tags
+     * @var string
+     */
+    public $performer = '';
+
+    /**
+     * Optional. Title of the audio as defined by sender or by audio tags
+     * @var string
+     */
+    public $title = '';
+
+    /**
+     * Optional. MIME type of the file as defined by sender
+     * @var string
+     */
+    public $mime_type = '';
+
+    /**
+     * Optional. File size
+     * @var int
+     */
+    public $file_size = 0;
+
+    public function __construct(\stdClass $data = null)
+    {
+        $this->populateObject($data);
+    }
+}

@@ -203,18 +203,22 @@ class Message extends Filler
         }
 
         if (!empty($data->audio)) {
-            // TODO
+            $data->reply_to_message = new Audio($data->reply_to_message);
         }
 
         if (!empty($data->document)) {
-            // TODO
+            $data->document = new Document($data->document);
         }
 
         if (!empty($data->sticker)) {
-            // TODO
+            $data->sticker = new Sticker($data->sticker);
         }
 
         if (!empty($data->video)) {
+            $this->video = new Video($data->video);
+        }
+
+        if (!empty($data->voice)) {
             // TODO
         }
 
@@ -223,7 +227,7 @@ class Message extends Filler
         }
 
         if (!empty($data->location)) {
-            // TODO
+            $this->location = new Location($data->location);
         }
 
         if (!empty($data->new_chat_participant)) {
