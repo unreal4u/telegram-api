@@ -8,5 +8,5 @@ interface MethodDefinitions
 {
     public static function apiMethod(): string;
 
-    public static function objectType(): string;
+    public static function bindToObjectType(): string;
 }

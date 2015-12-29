@@ -56,7 +56,7 @@ class SendMessage implements MethodDefinitions
         return 'sendMessage';
     }
 
-    public static function objectType(): string
+    public static function bindToObjectType(): string
     {
         return 'Message';
     }

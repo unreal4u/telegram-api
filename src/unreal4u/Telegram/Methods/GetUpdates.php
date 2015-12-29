@@ -53,7 +53,7 @@ class GetUpdates implements MethodDefinitions
      *
      * @return string
      */
-    public static function objectType(): string
+    public static function bindToObjectType(): string
     {
         return 'Custom\\UpdatesArray';
     }

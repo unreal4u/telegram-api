@@ -40,7 +40,7 @@ class TelegramLog
             'form_params' => get_object_vars($method),
         ]);
 
-        $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::objectType();
+        $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
         $jsonDecoded = json_decode((string)$response->getBody());
 
         return new $returnObject($jsonDecoded->result);

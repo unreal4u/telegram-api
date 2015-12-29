@@ -19,7 +19,7 @@ class GetMe implements MethodDefinitions
         return 'getMe';
     }
 
-    public static function objectType(): string
+    public static function bindToObjectType(): string
     {
         return 'User';
     }
