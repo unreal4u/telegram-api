@@ -211,6 +211,12 @@ class Message extends Filler
             $data->document = new Document($data->document);
         }
 
+        if (!empty($data->photo)) {
+            foreach ($data->photo as $id => $photo) {
+                $data->photo[$id] = new PhotoSize($photo);
+            }
+        }
+
         if (!empty($data->sticker)) {
             $data->sticker = new Sticker($data->sticker);
         }
@@ -237,6 +243,12 @@ class Message extends Filler
 
         if (!empty($data->left_chat_participant)) {
             $data->left_chat_participant = new User($data->left_chat_participant);
+        }
+
+        if (!empty($data->new_chat_photo)) {
+            foreach ($data->new_chat_photo as $id => $photo) {
+                $data->new_chat_photo[$id] = new Photo($photo);
+            }
         }
 
         $this->populateObject($data);
