@@ -1,11 +1,6 @@
 <?php
 
-chdir(dirname(__FILE__) . '/../');
-include('vendor/autoload.php');
-include('examples/conf.php');
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+include('basics.php');
 
 use \unreal4u\TelegramLog;
 use \unreal4u\Telegram\Methods\GetUpdates;
