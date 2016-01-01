@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u;
 
 use \GuzzleHttp\Client;
+use unreal4u\Telegram\Types\File;
 
 /**
  * Handler for Monolog
@@ -33,6 +34,12 @@ class TelegramLog
         $this->constructApiUrl();
     }
 
+    /**
+     * Performs the actual telegram request to telegram's servers
+     *
+     * @param $method
+     * @return mixed
+     */
     public function performApiRequest($method)
     {
         $client = new Client();
@@ -44,6 +51,28 @@ class TelegramLog
         $jsonDecoded = json_decode((string)$response->getBody());
 
         return new $returnObject($jsonDecoded->result);
+    }
+
+    /**
+     * Will download a file from the Telegram server. Before calling this function, you have to call the getFile method!
+     *
+     * @see unreal4u\Telegram\Types\File
+     * @see unreal4u\Telegram\Methods\GetFile
+     *
+     * @param File $file
+     * @return string
+     */
+    public function downloadFile(File $file): string
+    {
+        /*
+         * https://api.telegram.org/file/bot<token>/<file_path>
+         */
+
+        $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
+        $client = new Client();
+        $response = $client->get($url);
+
+        return (string)$response->getBody();
     }
 
     /**
