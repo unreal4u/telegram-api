@@ -4,21 +4,20 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
-use unreal4u\Telegram\Types\Update;
+use unreal4u\Telegram\Types\PhotoSize;
 
 /**
  * Mockup class to generate a real telegram update representation
  */
-class UpdatesArray
+class PhotoSizeArray
 {
     public $data = [];
 
     public function __construct(array $data = null)
     {
         if (!empty($data)) {
-            foreach ($data as $telegramResponse) {
-                // Create an actual Update object and fill the array
-                $this->data[] = new Update($telegramResponse);
+            foreach ($data as $id => $photo) {
+                $this->data[$id] = new PhotoSize($photo);
             }
         }
     }
@@ -30,8 +29,8 @@ class UpdatesArray
      */
     public function traverseUpdates()
     {
-        foreach ($this->data as $update) {
-            yield $update;
+        foreach ($this->data as $photo) {
+            yield $photo;
         }
     }
 }

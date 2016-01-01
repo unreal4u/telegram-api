@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Types;
 
 use unreal4u\InternalFunctionality\Filler;
+use unreal4u\Telegram\Types\Custom\PhotoSizeArray;
 
 /**
  * This object represents a message.
@@ -212,9 +213,8 @@ class Message extends Filler
         }
 
         if (!empty($data->photo)) {
-            foreach ($data->photo as $id => $photo) {
-                $data->photo[$id] = new PhotoSize($photo);
-            }
+            $photoArray = new PhotoSizeArray($data->photo);
+            $data->photo = $photoArray->data;
         }
 
         if (!empty($data->sticker)) {
@@ -222,19 +222,19 @@ class Message extends Filler
         }
 
         if (!empty($data->video)) {
-            $this->video = new Video($data->video);
+            $data->video = new Video($data->video);
         }
 
         if (!empty($data->voice)) {
-            $this->voice = new Voice($data->voice);
+            $data->voice = new Voice($data->voice);
         }
 
         if (!empty($data->contact)) {
-            $this->contact = new Contact($data->contact);
+            $data->contact = new Contact($data->contact);
         }
 
         if (!empty($data->location)) {
-            $this->location = new Location($data->location);
+            $data->location = new Location($data->location);
         }
 
         if (!empty($data->new_chat_participant)) {
@@ -246,9 +246,8 @@ class Message extends Filler
         }
 
         if (!empty($data->new_chat_photo)) {
-            foreach ($data->new_chat_photo as $id => $photo) {
-                $data->new_chat_photo[$id] = new Photo($photo);
-            }
+            $photoArray = new PhotoSizeArray($data->new_chat_photo);
+            $data->new_chat_photo = $photoArray->data;
         }
 
         $this->populateObject($data);
