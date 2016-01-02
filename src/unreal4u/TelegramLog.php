@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u;
 
 use \GuzzleHttp\Client;
+use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Telegram\Types\File;
 
 /**
@@ -62,17 +63,11 @@ class TelegramLog
      * @param File $file
      * @return string
      */
-    public function downloadFile(File $file): string
+    public function downloadFile(File $file): TelegramDocument
     {
-        /*
-         * https://api.telegram.org/file/bot<token>/<file_path>
-         */
-
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $client = new Client();
-        $response = $client->get($url);
-
-        return (string)$response->getBody();
+        return new TelegramDocument($client->get($url));
     }
 
     /**
