@@ -63,6 +63,6 @@ class Video extends Filler
             $data->thumb = new PhotoSize($data->thumb);
         }
 
-        $this->populateObject($data);
+        parent::__construct($data);
     }
 }

@@ -50,9 +50,4 @@ class Chat extends Filler
      * @var string
      */
     public $last_name = '';
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

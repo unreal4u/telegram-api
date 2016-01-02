@@ -38,9 +38,4 @@ class PhotoSize extends Filler
      * @var int
      */
     public $file_size = 0;
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

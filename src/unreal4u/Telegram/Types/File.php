@@ -35,9 +35,4 @@ class File extends Filler
      * @var string
      */
     public $file_path = '';
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

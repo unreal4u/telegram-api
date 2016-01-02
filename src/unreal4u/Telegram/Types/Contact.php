@@ -38,9 +38,4 @@ class Contact extends Filler
      * @var int
      */
     public $user_id = 0;
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

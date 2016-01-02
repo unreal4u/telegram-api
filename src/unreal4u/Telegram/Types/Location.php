@@ -26,9 +26,4 @@ class Location extends Filler
      * @var float
      */
     public $latitude = 0.0;
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

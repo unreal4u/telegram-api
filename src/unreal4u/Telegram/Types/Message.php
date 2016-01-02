@@ -250,6 +250,6 @@ class Message extends Filler
             $data->new_chat_photo = $photoArray->data;
         }
 
-        $this->populateObject($data);
+        parent::__construct($data);
     }
 }

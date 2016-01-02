@@ -38,9 +38,4 @@ class User extends Filler
      * @var string
      */
     public $username = '';
-
-    public function __construct(\stdClass $data = null)
-    {
-        $this->populateObject($data);
-    }
 }

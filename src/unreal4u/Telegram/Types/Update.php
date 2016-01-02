@@ -36,6 +36,6 @@ class Update extends Filler
             $data->message = new Message($data->message);
         }
 
-        $this->populateObject($data);
+        parent::__construct($data);
     }
 }
