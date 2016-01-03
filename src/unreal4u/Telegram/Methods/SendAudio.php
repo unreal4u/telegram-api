@@ -64,11 +64,6 @@ class SendAudio extends AbstractMethodFunctions
      */
     public $reply_markup = null;
 
-    public static function apiMethod(): string
-    {
-        return 'sendAudio';
-    }
-
     public static function requiresMultipartForm(): bool
     {
         return true;

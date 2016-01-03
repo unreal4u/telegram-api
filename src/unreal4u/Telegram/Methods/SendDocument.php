@@ -7,11 +7,12 @@ namespace unreal4u\Telegram\Methods;
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
 
 /**
- * Use this method to send photos. On success, the sent Message is returned
+ * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any
+ * type of up to 50 MB in size, this limit may be changed in the future.
  *
- * @see https://core.telegram.org/bots/api#sendphoto
+ * @see https://core.telegram.org/bots/api#senddocument
  */
-class SendPhoto extends AbstractMethodFunctions
+class SendDocument extends AbstractMethodFunctions
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

@@ -43,11 +43,6 @@ class GetUpdates extends AbstractMethodFunctions
      */
     public $timeout = 0;
 
-    public static function apiMethod(): string
-    {
-        return 'getUpdates';
-    }
-
     /**
      * This call will return an array with updates, so call up a custom type to do this
      *

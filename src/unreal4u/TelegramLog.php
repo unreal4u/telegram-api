@@ -96,7 +96,10 @@ class TelegramLog
      */
     private function composeApiMethodUrl($call): string
     {
-        return $this->apiUrl . '/' . $call::apiMethod();
+        $completeClassName = get_class($call);
+        $methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
+
+        return $this->apiUrl . '/' . $methodName;
     }
 
     /**

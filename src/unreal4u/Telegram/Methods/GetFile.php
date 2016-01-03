@@ -23,11 +23,6 @@ class GetFile extends AbstractMethodFunctions
      */
     public $file_id = '';
 
-    public static function apiMethod(): string
-    {
-        return 'getFile';
-    }
-
     /**
      * This call will return an array with updates, so call up a custom type to do this
      *

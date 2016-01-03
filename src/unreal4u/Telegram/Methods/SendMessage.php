@@ -50,9 +50,4 @@ class SendMessage extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function apiMethod(): string
-    {
-        return 'sendMessage';
-    }
 }

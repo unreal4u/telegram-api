@@ -14,11 +14,6 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  */
 class GetMe extends AbstractMethodFunctions
 {
-    public static function apiMethod(): string
-    {
-        return 'getMe';
-    }
-
     public static function bindToObjectType(): string
     {
         return 'User';

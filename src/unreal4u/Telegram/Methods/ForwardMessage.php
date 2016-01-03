@@ -31,9 +31,4 @@ class ForwardMessage extends AbstractMethodFunctions
      * @var int
      */
     public $message_id = 0;
-
-    public static function apiMethod(): string
-    {
-        return 'forwardMessage';
-    }
 }
