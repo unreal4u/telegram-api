@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#voice
  */
-class Video extends AbstractFiller
+class Voice extends AbstractFiller
 {
     /**
      * Unique identifier for this file
