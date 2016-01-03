@@ -1,0 +1,27 @@
+<?php
+
+include('basics.php');
+
+use unreal4u\Telegram\Methods\SendSticker;
+use unreal4u\TelegramLog;
+use GuzzleHttp\Exception\ClientException;
+
+$tgLog = new TelegramLog(BOT_TOKEN);
+
+$sendSticker = new SendSticker();
+$sendSticker->chat_id = A_USER_CHAT_ID;
+// Send out cURL-style file
+$sendSticker->sticker = 'BQADBAADsgUAApv7sgABW0IQT2B3WekC';
+
+try {
+    $message = $tgLog->performApiRequest($sendSticker);
+    echo '<pre>';
+    var_dump($message);
+    echo '</pre>';
+} catch (ClientException $e) {
+    echo '<pre>';
+    var_dump($e->getMessage());
+    var_dump($e->getRequest());
+    var_dump($e->getTrace());
+    echo '</pre>';
+}
