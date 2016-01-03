@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
+use unreal4u\InternalFunctionality\AbstractMethodFunctions;
 use unreal4u\InternalFunctionality\MethodDefinitions;
 
 /**
@@ -12,7 +13,7 @@ use unreal4u\InternalFunctionality\MethodDefinitions;
  *
  * @see https://core.telegram.org/bots/api#getme
  */
-class GetMe implements MethodDefinitions
+class GetMe extends AbstractMethodFunctions implements MethodDefinitions
 {
     public static function apiMethod(): string
     {

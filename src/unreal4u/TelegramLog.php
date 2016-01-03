@@ -43,11 +43,18 @@ class TelegramLog
      */
     public function performApiRequest($method)
     {
-        $client = new Client();
-        $response = $client->post($this->composeApiMethodUrl($method), [
-            'form_params' => get_object_vars($method),
-        ]);
+        // Things get a bit complicated when we want to send documents or images
+        if ($method::requiresMultipartForm() === true) {
+            $formData = $this->buildMultipartFormData($method);
+        } else {
+            // If we have no need to send a multi-part form, save all the hassle and do things the quick way
+            $formData = [
+                'form_params' => get_object_vars($method),
+            ];
+        }
 
+        $client = new Client();
+        $response = $client->post($this->composeApiMethodUrl($method), $formData);
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
         $jsonDecoded = json_decode((string)$response->getBody());
 
@@ -88,5 +95,33 @@ class TelegramLog
     private function composeApiMethodUrl($call): string
     {
         return $this->apiUrl . '/' . $call::apiMethod();
+    }
+
+    /**
+     * Builds up
+     *
+     * @param $method
+     * @return array
+     */
+    private function buildMultipartFormData($method): array
+    {
+        $formData = [
+            'multipart' => [],
+        ];
+
+        foreach (get_object_vars($method) as $id => $value) {
+            // Always send a string unless it's a file
+            $fieldValue = (string)$value;
+            if (is_string($value) && strpos($value, '@') === 0) {
+                $fieldValue = fopen(substr($value, 1), 'r');
+            }
+
+            $formData['multipart'][] = [
+                'name' => $id,
+                'contents' => $fieldValue,
+            ];
+        }
+
+        return $formData;
     }
 }

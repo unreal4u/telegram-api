@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\Filler;
+use unreal4u\InternalFunctionality\AbstractFiller;
 
 /**
  * This object represents a chat.
@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\Filler;
  *
  * @see https://core.telegram.org/bots/api#chat
  */
-class Chat extends Filler
+class Chat extends AbstractFiller
 {
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value

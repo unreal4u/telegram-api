@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
+use unreal4u\InternalFunctionality\AbstractMethodFunctions;
 use unreal4u\InternalFunctionality\MethodDefinitions;
 
 /**
@@ -15,7 +16,7 @@ use unreal4u\InternalFunctionality\MethodDefinitions;
  *
  * @see https://core.telegram.org/bots/api#getfile
  */
-class GetFile implements MethodDefinitions
+class GetFile extends AbstractMethodFunctions implements MethodDefinitions
 {
     /**
      * File identifier to get info about

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\Filler;
+use unreal4u\InternalFunctionality\AbstractFiller;
 
 /**
  * This object represents a phone contact
@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\Filler;
  *
  * @see https://core.telegram.org/bots/api#contact
  */
-class Contact extends Filler
+class Contact extends AbstractFiller
 {
     /**
      * Contact's phone number

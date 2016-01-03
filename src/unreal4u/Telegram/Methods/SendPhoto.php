@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
+use unreal4u\InternalFunctionality\AbstractMethodFunctions;
 use unreal4u\InternalFunctionality\MethodDefinitions;
 
 /**
@@ -11,7 +12,7 @@ use unreal4u\InternalFunctionality\MethodDefinitions;
  *
  * @see https://core.telegram.org/bots/api#sendphoto
  */
-class SendPhoto implements MethodDefinitions
+class SendPhoto extends AbstractMethodFunctions implements MethodDefinitions
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -39,7 +40,7 @@ class SendPhoto implements MethodDefinitions
     public $reply_to_message_id = 0;
 
     /**
-     * Optional	Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide
+     * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide
      * keyboard or to force a reply from the user
      * @var null
      */
@@ -50,8 +51,8 @@ class SendPhoto implements MethodDefinitions
         return 'sendPhoto';
     }
 
-    public static function bindToObjectType(): string
+    public static function requiresMultipartForm(): bool
     {
-        return 'Message';
+        return true;
     }
 }
