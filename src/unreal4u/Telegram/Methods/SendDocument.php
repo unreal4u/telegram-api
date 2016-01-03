@@ -21,17 +21,11 @@ class SendDocument extends AbstractMethodFunctions
     public $chat_id = '';
 
     /**
-     * Photo to send. You can either pass a file_id as String to resend a photo that is already on the Telegram servers,
-     * or upload a new photo using curl's @ notation.
+     * File to send. You can either pass a file_id as String to resend a file that is already on the Telegram servers,
+     * or upload a new file using curl's @ notation.
      * @var string
      */
-    public $photo = '';
-
-    /**
-     * Optional. Photo caption (may also be used when resending photos by file_id)
-     * @var string
-     */
-    public $caption = '';
+    public $document = '';
 
     /**
      * Optional. If the message is a reply, ID of the original message

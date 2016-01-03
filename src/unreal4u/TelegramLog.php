@@ -132,6 +132,7 @@ class TelegramLog
     {
         // Always send a string unless it's a file
         $fieldValue = (string)$value;
+        // @FIXME : chat_id can contain an @ and will fail opening a file
         if (is_string($value) && strpos($value, '@') === 0) {
             $fieldValue = fopen(substr($value, 1), 'r');
         }
