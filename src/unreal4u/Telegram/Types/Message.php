@@ -205,7 +205,7 @@ class Message extends AbstractFiller
 
         // ... etc
         if (!empty($data->audio)) {
-            $data->reply_to_message = new Audio($data->reply_to_message);
+            $data->audio = new Audio($data->audio);
         }
 
         if (!empty($data->document)) {

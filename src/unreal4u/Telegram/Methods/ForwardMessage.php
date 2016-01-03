@@ -5,14 +5,13 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
-use unreal4u\InternalFunctionality\MethodDefinitions;
 
 /**
  * Object that resembles a message object in Telegram
  *
  * @see https://core.telegram.org/bots/api#forwardmessage
  */
-class ForwardMessage extends AbstractMethodFunctions implements MethodDefinitions
+class ForwardMessage extends AbstractMethodFunctions
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

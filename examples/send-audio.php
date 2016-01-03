@@ -3,19 +3,19 @@
 include('basics.php');
 
 use unreal4u\TelegramLog;
-use unreal4u\Telegram\Methods\SendPhoto;
+use unreal4u\Telegram\Methods\SendAudio;
 use GuzzleHttp\Exception\ClientException;
 
 $tgLog = new TelegramLog(BOT_TOKEN);
 
-$sendPhoto = new SendPhoto();
-$sendPhoto->chat_id = A_USER_CHAT_ID;
+$sendAudio = new SendAudio();
+$sendAudio->chat_id = A_USER_CHAT_ID;
 // Send out cURL-style file
-$sendPhoto->photo = '@examples/binary-test-data/demo-photo.jpg';
-$sendPhoto->caption = 'Not sure if sending image or image not arriving';
+$sendAudio->audio = '@examples/binary-test-data/ICQ-uh-oh.mp3';
+$sendAudio->title = 'The famous ICQ new message alert';
 
 try {
-    $message = $tgLog->performApiRequest($sendPhoto);
+    $message = $tgLog->performApiRequest($sendAudio);
     echo '<pre>';
     var_dump($message);
     echo '</pre>';
