@@ -39,8 +39,8 @@ class SendLocation extends AbstractMethodFunctions implements MethodDefinitions
     public $reply_to_message_id = 0;
 
     /**
-     * Optional	Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide
-     * keyboard or to force a reply from the user.
+     * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
+     * hide keyboard or to force a reply from the user.
      * @var null
      */
     public $reply_markup = null;

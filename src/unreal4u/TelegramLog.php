@@ -44,12 +44,14 @@ class TelegramLog
     public function performApiRequest($method)
     {
         // Things get a bit complicated when we want to send documents or images
+        $arrayForm = get_object_vars($method);
+
         if ($method::requiresMultipartForm() === true) {
-            $formData = $this->buildMultipartFormData($method);
+            $formData = $this->buildMultipartFormData($arrayForm);
         } else {
             // If we have no need to send a multi-part form, save all the hassle and do things the quick way
             $formData = [
-                'form_params' => get_object_vars($method),
+                'form_params' => $arrayForm,
             ];
         }
 
@@ -98,30 +100,42 @@ class TelegramLog
     }
 
     /**
-     * Builds up
+     * Builds up a multipart form-like array for Guzzle
      *
-     * @param $method
-     * @return array
+     * @param mixed $method Any supported Telegram method
+     * @return array Returns the actual form
      */
-    private function buildMultipartFormData($method): array
+    private function buildMultipartFormData(array $data): array
     {
         $formData = [
             'multipart' => [],
         ];
 
-        foreach (get_object_vars($method) as $id => $value) {
-            // Always send a string unless it's a file
-            $fieldValue = (string)$value;
-            if (is_string($value) && strpos($value, '@') === 0) {
-                $fieldValue = fopen(substr($value, 1), 'r');
-            }
-
-            $formData['multipart'][] = [
-                'name' => $id,
-                'contents' => $fieldValue,
-            ];
+        foreach ($data as $id => $value) {
+            $formData['multipart'][] = $this->constructFieldArray($id, $value);
         }
 
         return $formData;
+    }
+
+    /**
+     * Return the most specific subpart of the multipart form
+     *
+     * @param string $id
+     * @param mixed $value
+     * @return array
+     */
+    private function constructFieldArray(string $id, $value): array
+    {
+        // Always send a string unless it's a file
+        $fieldValue = (string)$value;
+        if (is_string($value) && strpos($value, '@') === 0) {
+            $fieldValue = fopen(substr($value, 1), 'r');
+        }
+
+        return [
+            'name' => $id,
+            'contents' => $fieldValue,
+        ];
     }
 }
