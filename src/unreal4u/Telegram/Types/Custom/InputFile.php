@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace unreal4u\Telegram\Types\Custom;
+
+/**
+ * This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual
+ * way that files are uploaded via the browser.
+ *
+ * @see https://core.telegram.org/bots/api#inputfile
+ */
+class InputFile
+{
+    /**
+     * The path of the file
+     * @var string
+     */
+    public $path = '';
+
+    /**
+     * Optional. File size, if known
+     * @var int
+     */
+    private $stream = null;
+
+    public function __construct(string $path)
+    {
+        $this->path = $path;
+        $this->setStream();
+    }
+
+    /**
+     * Will setup the stream
+     *
+     * @return InputFile
+     */
+    private function setStream(): InputFile
+    {
+        if (is_readable($this->path)) {
+            $this->stream = fopen($this->path, 'r');
+        } else {
+            throw new unreal4u\CustomExceptions\FileNotReadable(sprintf('Can not read %s, please check', $this->path));
+        }
+
+        return $this;
+    }
+
+    public function getStream()
+    {
+        $this->setStream();
+        return $this->stream;
+    }
+}

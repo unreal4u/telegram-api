@@ -25,6 +25,8 @@ class TelegramLog
      */
     private $apiUrl = '';
 
+    private $formType = 'application/x-www-form-urlencoded';
+
     /**
      * TelegramLog constructor.
      * @param string $botToken
@@ -43,17 +45,7 @@ class TelegramLog
      */
     public function performApiRequest($method)
     {
-        // Things get a bit complicated when we want to send documents or images
-        $arrayForm = get_object_vars($method);
-
-        if ($method::requiresMultipartForm() === true) {
-            $formData = $this->buildMultipartFormData($arrayForm);
-        } else {
-            // If we have no need to send a multi-part form, save all the hassle and do things the quick way
-            $formData = [
-                'form_params' => $arrayForm,
-            ];
-        }
+        $formData = $this->constructFormData($method);
 
         $client = new Client();
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
@@ -88,6 +80,33 @@ class TelegramLog
         return $this;
     }
 
+    private function constructFormData($method): array
+    {
+        foreach ($method as $key => $value) {
+            if (is_object($value) && get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                $this->formType = 'multipart/form-data';
+                $stream = $value->getStream();
+                $id = $key;
+            }
+        }
+
+        switch ($this->formType) {
+            case 'application/x-www-form-urlencoded':
+                $formData = [
+                    'form_params' => get_object_vars($method),
+                ];
+                break;
+            case 'multipart/form-data':
+                $formData = $this->buildMultipartFormData(get_object_vars($method), $id, $stream);
+                break;
+            default:
+                $formData = [];
+                break;
+        }
+
+        return $formData;
+    }
+
     /**
      * Builds up the URL with which we can work with
      *
@@ -108,38 +127,28 @@ class TelegramLog
      * @param mixed $method Any supported Telegram method
      * @return array Returns the actual form
      */
-    private function buildMultipartFormData(array $data): array
+    private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {
         $formData = [
             'multipart' => [],
         ];
 
         foreach ($data as $id => $value) {
-            $formData['multipart'][] = $this->constructFieldArray($id, $value);
+            // Always send as a string unless it's a file
+            $multiPart = [
+                'name' => $id,
+                'contents' => null,
+            ];
+
+            if ($id === $fileKeyName) {
+                $multiPart['contents'] = $stream;
+            } else {
+                $multiPart['contents'] = (string)$value;
+            }
+
+            $formData['multipart'][] = $multiPart;
         }
 
         return $formData;
-    }
-
-    /**
-     * Return the most specific subpart of the multipart form
-     *
-     * @param string $id
-     * @param mixed $value
-     * @return array
-     */
-    private function constructFieldArray(string $id, $value): array
-    {
-        // Always send a string unless it's a file
-        $fieldValue = (string)$value;
-        // @FIXME : chat_id can contain an @ and will fail opening a file
-        if (is_string($value) && strpos($value, '@') === 0) {
-            $fieldValue = fopen(substr($value, 1), 'r');
-        }
-
-        return [
-            'name' => $id,
-            'contents' => $fieldValue,
-        ];
     }
 }

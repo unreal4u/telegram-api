@@ -21,10 +21,11 @@ class SendPhoto extends AbstractMethodFunctions
 
     /**
      * Photo to send. You can either pass a file_id as String to resend a photo that is already on the Telegram servers,
-     * or upload a new photo using curl's @ notation.
+     * or upload a new photo using the InputFile class
+     * @see unreal4u\Telegram\Types\Custom\InputFile
      * @var string
      */
-    public $photo = '';
+    public $photo = null;
 
     /**
      * Optional. Photo caption (may also be used when resending photos by file_id)
@@ -44,9 +45,4 @@ class SendPhoto extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }

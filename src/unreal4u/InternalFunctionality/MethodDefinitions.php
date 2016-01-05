@@ -7,6 +7,4 @@ namespace unreal4u\InternalFunctionality;
 interface MethodDefinitions
 {
     public static function bindToObjectType(): string;
-
-    public static function requiresMultipartForm(): bool;
 }

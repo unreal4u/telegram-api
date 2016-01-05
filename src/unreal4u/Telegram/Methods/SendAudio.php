@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio
@@ -27,11 +28,12 @@ class SendAudio extends AbstractMethodFunctions
     public $chat_id = '';
 
     /**
-     * Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram
-     * servers, or upload a new audio file using curl's @ notation.
-     * @var string
+     * Audio file to send. Associate an InputFile with it
+     *
+     * @see unreal4u\Telegram\Types\Custom\InputFile
+     * @var InputFile
      */
-    public $audio = '';
+    public $audio = null;
 
     /**
      * Optional. Duration of the audio in seconds
@@ -63,9 +65,4 @@ class SendAudio extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }

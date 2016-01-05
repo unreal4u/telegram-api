@@ -3,6 +3,7 @@
 include('basics.php');
 
 use unreal4u\Telegram\Methods\SendDocument;
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramLog;
 use GuzzleHttp\Exception\ClientException;
 
@@ -10,8 +11,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendDocument = new SendDocument();
 $sendDocument->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
-$sendDocument->document = '@'.__FILE__;
+$sendDocument->document = new InputFile(__FILE__);
 
 try {
     $message = $tgLog->performApiRequest($sendDocument);

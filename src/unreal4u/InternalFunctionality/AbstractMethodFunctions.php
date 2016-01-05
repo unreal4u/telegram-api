@@ -20,14 +20,4 @@ abstract class AbstractMethodFunctions implements MethodDefinitions
     {
         return 'Message';
     }
-
-    /**
-     * Most of the methods don't require a multipart form data type, so set the default to false.
-     *
-     * @return bool
-     */
-    public static function requiresMultipartForm(): bool
-    {
-        return false;
-    }
 }

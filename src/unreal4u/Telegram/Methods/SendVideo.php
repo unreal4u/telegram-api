@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On
@@ -23,10 +24,11 @@ class SendVideo extends AbstractMethodFunctions
 
     /**
      * Video to send. You can either pass a file_id as String to resend a video that is already on the Telegram servers,
-     * or upload a new video file using curl's @ notation.
-     * @var string
+     * or upload a new video file using the InputFile class
+     * @see unreal4u\Telegram\Types\Custom\InputFile
+     * @var InputFile
      */
-    public $video = '';
+    public $video = null;
 
     /**
      * Optional. Duration of sent video in seconds
@@ -52,9 +54,4 @@ class SendVideo extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }

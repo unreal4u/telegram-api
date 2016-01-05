@@ -2,6 +2,7 @@
 
 include('basics.php');
 
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramLog;
 use unreal4u\Telegram\Methods\SendVoice;
 use GuzzleHttp\Exception\ClientException;
@@ -10,8 +11,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendVoice = new SendVoice();
 $sendVoice->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
-$sendVoice->voice = '@examples/binary-test-data/demo-voice.ogg';
+$sendVoice->voice = new InputFile('examples/binary-test-data/demo-voice.ogg');
 
 try {
     $message = $tgLog->performApiRequest($sendVoice);

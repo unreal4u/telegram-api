@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any
@@ -22,10 +23,13 @@ class SendDocument extends AbstractMethodFunctions
 
     /**
      * File to send. You can either pass a file_id as String to resend a file that is already on the Telegram servers,
-     * or upload a new file using curl's @ notation.
-     * @var string
+     * or upload a new file using the InputFile class
+     *
+     * @see unreal4u\Telegram\Types\Custom\InputFile
+     *
+     * @var InputFile
      */
-    public $document = '';
+    public $document = null;
 
     /**
      * Optional. If the message is a reply, ID of the original message
@@ -39,9 +43,4 @@ class SendDocument extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }

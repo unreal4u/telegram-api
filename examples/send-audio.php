@@ -2,6 +2,7 @@
 
 include('basics.php');
 
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramLog;
 use unreal4u\Telegram\Methods\SendAudio;
 use GuzzleHttp\Exception\ClientException;
@@ -10,8 +11,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendAudio = new SendAudio();
 $sendAudio->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
-$sendAudio->audio = '@examples/binary-test-data/ICQ-uh-oh.mp3';
+$sendAudio->audio = new InputFile('examples/binary-test-data/ICQ-uh-oh.mp3');
 $sendAudio->title = 'The famous ICQ new message alert';
 
 try {

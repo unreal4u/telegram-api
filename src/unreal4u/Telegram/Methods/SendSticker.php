@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send .webp stickers. On success, the sent Message is returned.
@@ -21,10 +22,11 @@ class SendSticker extends AbstractMethodFunctions
 
     /**
      * Sticker to send. You can either pass a file_id as String to resend a sticker that is already on the Telegram
-     * servers, or upload a new sticker using curl's @ notation.
-     * @var string
+     * servers, or upload a new sticker using the InputFile class
+     * @see unreal4u\Telegram\Types\Custom\InputFile.
+     * @var InputFile
      */
-    public $sticker = '';
+    public $sticker = null;
 
     /**
      * Optional. If the message is a reply, ID of the original message
@@ -38,9 +40,4 @@ class SendSticker extends AbstractMethodFunctions
      * @var null
      */
     public $reply_markup = null;
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }

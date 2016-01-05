@@ -2,6 +2,7 @@
 
 include('basics.php');
 
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramLog;
 use unreal4u\Telegram\Methods\SendVideo;
 use GuzzleHttp\Exception\ClientException;
@@ -10,8 +11,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendVideo = new SendVideo();
 $sendVideo->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
-$sendVideo->video = '@examples/binary-test-data/demo-video.mp4';
+$sendVideo->video = new InputFile('examples/binary-test-data/demo-video.mp4');
 $sendVideo->caption = 'Example of a video file sent with Telegram';
 
 try {

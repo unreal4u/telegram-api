@@ -2,6 +2,7 @@
 
 include('basics.php');
 
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramLog;
 use unreal4u\Telegram\Methods\SendPhoto;
 use GuzzleHttp\Exception\ClientException;
@@ -10,8 +11,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendPhoto = new SendPhoto();
 $sendPhoto->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
-$sendPhoto->photo = '@examples/binary-test-data/demo-photo.jpg';
+$sendPhoto->photo = new InputFile('examples/binary-test-data/demo-photo.jpg');
 $sendPhoto->caption = 'Not sure if sending image or image not arriving';
 
 try {

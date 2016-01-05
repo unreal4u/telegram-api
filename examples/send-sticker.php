@@ -10,7 +10,7 @@ $tgLog = new TelegramLog(BOT_TOKEN);
 
 $sendSticker = new SendSticker();
 $sendSticker->chat_id = A_USER_CHAT_ID;
-// Send out cURL-style file
+// Send out an existing sticker
 $sendSticker->sticker = 'BQADBAADsgUAApv7sgABW0IQT2B3WekC';
 
 try {
