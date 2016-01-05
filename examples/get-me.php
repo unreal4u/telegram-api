@@ -3,10 +3,10 @@
 include('basics.php');
 
 use GuzzleHttp\Exception\ClientException;
-use unreal4u\TelegramLog;
+use unreal4u\TgLog;
 use unreal4u\Telegram\Methods\GetMe;
 
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $getMe = new GetMe();
 

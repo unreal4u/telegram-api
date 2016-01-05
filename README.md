@@ -1,7 +1,8 @@
 Telegram Log 
 ======
 
-Enables sending messages to Telegram via PHP.
+Enables sending messages, photos, videos and many other things to Telegram from PHP via the open-source Telegram API.
+I hope I'll be able to build a complete implementation soon. For now it remains a bit of work in progress.
 
 About this class
 --------
@@ -18,6 +19,14 @@ This project was born to study the new concepts of PHP7 and to integrate some ot
 about but didn't have the time to play with them. The idea behind was to create a simple to use class which could
 play nicely with the Telegram API. 
 
+Why PHP7 only?
+----------
+
+Mainly because PHP7 is a fantastic release and I wanted to release some new software based solely on this new version. 
+If however there is a lot of interest from the community to get a PHP5.6 or PHP5.5 compatible version, I could make one.
+You are free as well to contribute with a PHP-earlier branch. Just send in a pull request. However, take into 
+consideration that the master branch will be PHP7 only.
+
 Installation
 ----------
 
@@ -29,7 +38,7 @@ Basic usage
 ----------
 
 <pre>
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
@@ -97,4 +106,3 @@ Want to colaborate?
 
 You are free to do so, just send a pull request. Try to respect the PSR-2 styling guide (or PSR-12 whenever it comes 
 out). 
-

@@ -3,11 +3,11 @@
 include('basics.php');
 
 use \unreal4u\MonologHandler;
-use \unreal4u\TelegramLog;
+use \unreal4u\TgLog;
 use \Monolog\Logger;
 
 #$monologTgLogger = new MonologHandler(new TelegramLog(BOT_TOKEN), A_USER_CHAT_ID, Logger::DEBUG); // Sends from DEBUG+
-$monologTgLogger = new MonologHandler(new TelegramLog(BOT_TOKEN), A_USER_CHAT_ID, Logger::ERROR); // Sends ERROR+
+$monologTgLogger = new MonologHandler(new TgLog(BOT_TOKEN), A_USER_CHAT_ID, Logger::ERROR); // Sends ERROR+
 
 //Create logger
 $logger = new Logger('TelegramLogger');

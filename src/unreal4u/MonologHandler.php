@@ -15,7 +15,7 @@ class MonologHandler extends AbstractProcessingHandler
 {
     /**
      * Holds Telegram object
-     * @var TelegramLog
+     * @var TgLog
      */
     private $tgLog = null;
 
@@ -28,12 +28,12 @@ class MonologHandler extends AbstractProcessingHandler
     /**
      * MonologHandler constructor.
      *
-     * @param TelegramLog $tgLog
+     * @param TgLog $tgLog
      * @param int $chatId
      * @param int $level
      * @param bool $bubble
      */
-    public function __construct(TelegramLog $tgLog, int $chatId, $level = Logger::DEBUG, $bubble = true)
+    public function __construct(TgLog $tgLog, int $chatId, $level = Logger::DEBUG, $bubble = true)
     {
         $this->tgLog = $tgLog;
         $this->chatId = $chatId;

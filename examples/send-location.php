@@ -2,10 +2,10 @@
 
 include('basics.php');
 
-use unreal4u\TelegramLog;
+use unreal4u\TgLog;
 use unreal4u\Telegram\Methods\SendLocation;
 
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $location = new SendLocation();
 $location->chat_id = A_USER_CHAT_ID;

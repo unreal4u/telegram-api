@@ -1,12 +1,12 @@
 <?php
 
 use unreal4u\Telegram\Methods\getUserProfilePhotos;
-use unreal4u\TelegramLog;
+use unreal4u\TgLog;
 
 include('basics.php');
 
 $userProfilePhotos = new getUserProfilePhotos();
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $userProfilePhotos->user_id = A_USER_ID;
 $userProfilePhotos = $tgLog->performApiRequest($userProfilePhotos);

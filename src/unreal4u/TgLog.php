@@ -9,9 +9,9 @@ use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Telegram\Types\File;
 
 /**
- * Handler for Monolog
+ * The main API which does it all
  */
-class TelegramLog
+class TgLog
 {
     /**
      * Stores the token
@@ -72,9 +72,9 @@ class TelegramLog
     }
 
     /**
-     * @return TelegramLog
+     * @return TgLog
      */
-    final private function constructApiUrl(): TelegramLog
+    final private function constructApiUrl(): TgLog
     {
         $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken;
         return $this;

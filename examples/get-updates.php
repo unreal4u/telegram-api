@@ -2,10 +2,10 @@
 
 include('basics.php');
 
-use \unreal4u\TelegramLog;
+use \unreal4u\TgLog;
 use \unreal4u\Telegram\Methods\GetUpdates;
 
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $getUpdates = new GetUpdates();
 $updates = $tgLog->performApiRequest($getUpdates);

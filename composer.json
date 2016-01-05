@@ -1,19 +1,31 @@
 {
-  "name": "unreal4u/telegram-log",
-  "description": "This class can send messages to Telegram",
+  "name": "unreal4u/telegram-api",
+  "description": "Complete implementation used to communicate with the open-source Telegram API",
+  "keywords": [
+    "Telegram",
+    "API",
+    "Telegram Bot"
+  ],
+  "authors": [
+    {
+      "name": "Camilo Sperberg",
+      "email": "me@unreal4u.com",
+      "homepage": "https://github.com/unreal4u/telegram-api/graphs/contributors"
+    }
+  ],
   "require": {
     "php": ">=7.0.0",
     "guzzlehttp/guzzle": "~6.0",
-    "monolog/monolog": "@stable"
+    "monolog/monolog": "~1.17"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",
     "phpmd/phpmd": "@stable"
   },
   "autoload": {
-    "psr-0": {
-      "unreal4u": "src/"
-    },
-    "license": "MIT"
-  }
+    "psr-4": {
+      "unreal4u\\": "src/unreal4u"
+    }
+  },
+  "license": "MIT"
 }

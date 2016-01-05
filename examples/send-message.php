@@ -3,10 +3,10 @@
 include('basics.php');
 
 use GuzzleHttp\Exception\ClientException;
-use \unreal4u\TelegramLog;
+use \unreal4u\TgLog;
 use \unreal4u\Telegram\Methods\SendMessage;
 
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;

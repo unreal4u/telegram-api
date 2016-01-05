@@ -2,12 +2,12 @@
 
 include('basics.php');
 
-use \unreal4u\TelegramLog;
+use \unreal4u\TgLog;
 // @TODO Change to use \unreal4u\Telegram\Methods\{GetMe, SendMessage}; once PSR-12 is definitive
 use \unreal4u\Telegram\Methods\GetMe;
 use \unreal4u\Telegram\Methods\SendMessage;
 
-$tgLog = new TelegramLog(BOT_TOKEN);
+$tgLog = new TgLog(BOT_TOKEN);
 
 $getMe = new GetMe();
 $userInformation = $tgLog->performApiRequest($getMe);
