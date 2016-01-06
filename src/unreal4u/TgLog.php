@@ -36,6 +36,12 @@ class TgLog
     private $formType = 'application/x-www-form-urlencoded';
 
     /**
+     * Stores the last method name used
+     * @var string
+     */
+    protected $methodName = '';
+
+    /**
      * TelegramLog constructor.
      * @param string $botToken
      */
@@ -54,13 +60,9 @@ class TgLog
     public function performApiRequest($method)
     {
         $this->resetObjectValues();
-        $formData = $this->constructFormData($method);
+        $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
-        $client = new Client();
-        $response = $client->post($this->composeApiMethodUrl($method), $formData);
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
-        $jsonDecoded = json_decode((string)$response->getBody());
-
         return new $returnObject($jsonDecoded->result);
     }
 
@@ -81,6 +83,7 @@ class TgLog
     }
 
     /**
+     * Builds up the Telegram API url
      * @return TgLog
      */
     final private function constructApiUrl(): TgLog
@@ -89,9 +92,25 @@ class TgLog
         return $this;
     }
 
+    /**
+     * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
+     *
+     * @param $method
+     * @param array $formData
+     * @return \stdClass
+     */
+    protected function sendRequestToTelegram($method, array $formData): \stdClass
+    {
+        $client = new Client();
+        $response = $client->post($this->composeApiMethodUrl($method), $formData);
+        return json_decode((string)$response->getBody());
+    }
+
     private function resetObjectValues(): TgLog
     {
         $this->formType = 'application/x-www-form-urlencoded';
+        $this->methodName = '';
+
         return $this;
     }
 
@@ -155,12 +174,12 @@ class TgLog
      * @param $call
      * @return string
      */
-    private function composeApiMethodUrl($call): string
+    protected function composeApiMethodUrl($call): string
     {
         $completeClassName = get_class($call);
-        $methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
+        $this->methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
 
-        return $this->apiUrl . '/' . $methodName;
+        return $this->apiUrl . '/' . $this->methodName;
     }
 
     /**

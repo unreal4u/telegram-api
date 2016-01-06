@@ -1,0 +1,1 @@
+{"ok":true,"result":{"id":123456789,"first_name":"Mock test","username":"mockTestBot"}}

@@ -20,11 +20,17 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",
-    "phpmd/phpmd": "@stable"
+    "phpmd/phpmd": "@stable",
+    "phpunit/phpunit": "@stable"
   },
   "autoload": {
     "psr-4": {
       "unreal4u\\": "src/unreal4u"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tests\\": "tests"
     }
   },
   "license": "MIT"

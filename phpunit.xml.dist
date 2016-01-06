@@ -1,0 +1,15 @@
+<phpunit colors="true" bootstrap="vendor/autoload.php" stopOnError="true" stopOnFailure="true" stopOnSkipped="true" strict="true">
+    <filter>
+        <blacklist>
+            <directory suffix=".php">./vendor</directory>
+        </blacklist>
+    </filter>
+
+    <testsuite name="telegramApi">
+        <directory>./tests/</directory>
+    </testsuite>
+
+    <logging>
+        <!-- log type="coverage-html" target="tests/report/" charset="UTF-8" / -->
+    </logging>
+</phpunit>
