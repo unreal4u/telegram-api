@@ -60,10 +60,8 @@ Without any preference or ordering:
 
 * UptimeRobot integration (maybe another project?)
 * InlineBots
-* Keyboard integration
 * Better documentation
 * Unit tests (note that until this is done, the code should be considered very alpha!)
-* Composer package
 
 Why this class?
 ----------

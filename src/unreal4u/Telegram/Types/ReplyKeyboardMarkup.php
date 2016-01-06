@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
 
 /**
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
@@ -14,7 +14,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  * @see https://core.telegram.org/bots/api#replykeyboardmarkup
  * @see https://core.telegram.org/bots#keyboards
  */
-class ReplyKeyboardMarkup extends AbstractFiller
+class ReplyKeyboardMarkup extends AbstractKeyboardMethods
 {
     /**
      * Array of button rows, each represented by an Array of Strings
@@ -41,16 +41,4 @@ class ReplyKeyboardMarkup extends AbstractFiller
      * @var bool
      */
     public $one_time_keyboard = false;
-
-    /**
-     * Optional. Use this parameter if you want to show the keyboard to specific users only. Targets:
-     *      1) users that are @mentioned in the text of the Message object;
-     *      2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
-     *
-     * Example: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the
-     * new language. Other users in the group don’t see the keyboard.
-     *
-     * @var bool
-     */
-    public $selective = false;
 }

@@ -25,6 +25,14 @@ class TgLog
      */
     private $apiUrl = '';
 
+    /**
+     * With this flag we'll know what type of request to send to Telegram
+     *
+     * 'application/x-www-form-urlencoded' is the "normal" one, which is simpler and quicker.
+     * 'multipart/form-data' should be used only to upload documents, photos, etc.
+     *
+     * @var string
+     */
     private $formType = 'application/x-www-form-urlencoded';
 
     /**
@@ -45,6 +53,7 @@ class TgLog
      */
     public function performApiRequest($method)
     {
+        $this->resetObjectValues();
         $formData = $this->constructFormData($method);
 
         $client = new Client();
@@ -80,15 +89,15 @@ class TgLog
         return $this;
     }
 
+    private function resetObjectValues(): TgLog
+    {
+        $this->formType = 'application/x-www-form-urlencoded';
+        return $this;
+    }
+
     private function constructFormData($method): array
     {
-        foreach ($method as $key => $value) {
-            if (is_object($value) && get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
-                $this->formType = 'multipart/form-data';
-                $stream = $value->getStream();
-                $id = $key;
-            }
-        }
+        $result = $this->checkSpecialConditions($method);
 
         switch ($this->formType) {
             case 'application/x-www-form-urlencoded':
@@ -97,7 +106,7 @@ class TgLog
                 ];
                 break;
             case 'multipart/form-data':
-                $formData = $this->buildMultipartFormData(get_object_vars($method), $id, $stream);
+                $formData = $this->buildMultipartFormData(get_object_vars($method), $result['id'], $result['stream']);
                 break;
             default:
                 $formData = [];
@@ -105,6 +114,39 @@ class TgLog
         }
 
         return $formData;
+    }
+
+    /**
+     * Can perform any special checks needed to be performed before sending the actual request to Telegram
+     *
+     * This will return an array with data that will be different in each case (for now). This can be changed in the
+     * future.
+     *
+     * @param $method
+     * @return array
+     */
+    private function checkSpecialConditions($method): array
+    {
+        $return = [false];
+
+        foreach ($method as $key => $value) {
+            if (is_object($value)) {
+                if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                    // If we are about to send a file, we must use the multipart/form-data way
+                    $this->formType = 'multipart/form-data';
+                    $return = [
+                        'id' => $key,
+                        'stream' => $value->getStream(),
+                    ];
+                } elseif (in_array('unreal4u\\InternalFunctionality\\AbstractKeyboardMethods', class_parents($value))) {
+                    // If we are about to send a KeyboardMethod, we must send a serialized object
+                    $method->$key = json_encode($value);
+                    $return = [true];
+                }
+            }
+        }
+
+        return $return;
     }
 
     /**
@@ -124,8 +166,10 @@ class TgLog
     /**
      * Builds up a multipart form-like array for Guzzle
      *
-     * @param mixed $method Any supported Telegram method
-     * @return array Returns the actual form
+     * @param array $data The original object in array form
+     * @param string $fileKeyName A file handler will be sent instead of a string, state here which field it is
+     * @param mixed $stream The actual file handler
+     * @return array Returns the actual formdata to be sent
      */
     private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {

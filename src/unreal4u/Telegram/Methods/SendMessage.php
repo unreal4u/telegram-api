@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Methods;
 
 use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
 
 /**
  * Object that resembles a message object in Telegram
@@ -47,7 +48,7 @@ class SendMessage extends AbstractMethodFunctions
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
-     * @var null
+     * @var AbstractKeyboardMethods
      */
     public $reply_markup = null;
 }
