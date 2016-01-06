@@ -1,0 +1,16 @@
+language: php
+php:
+  - 7.0
+  - hhvm
+matrix:
+  allow_failures:
+    - php: hhvm
+before_script:
+  - "mkdir -p ~/.composer"
+  - composer self-update
+  - composer install -o
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.clover
+#after_script:
+#  - wget https://scrutinizer-ci.com/ocular.phar
+#  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
