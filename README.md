@@ -38,11 +38,11 @@ Basic usage
 ----------
 
 <pre>
-$tgLog = new TgLog(BOT_TOKEN);
-
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
+
+$tgLog = new TgLog(BOT_TOKEN);
 $message = $tgLog->performApiRequest($sendMessage);
 </pre>
 
