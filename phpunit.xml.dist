@@ -1,12 +1,12 @@
 <phpunit colors="true" bootstrap="vendor/autoload.php" stopOnError="true" stopOnFailure="true" stopOnSkipped="true"
          strict="true">
     <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/unreal4u/</directory>
+        </whitelist>
         <blacklist>
             <directory suffix=".php">./vendor</directory>
         </blacklist>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">/src/unreal4u/</directory>
-        </whitelist>
     </filter>
 
     <testsuite name="telegramApi">
