@@ -17,7 +17,7 @@ try {
     echo '</pre>';
 } catch (ClientException $e) {
     // Do whatever you want, function below contains exact JSON output from Telegram
-    echo '<pre>';
+    echo 'Exception catched, error is: <pre>';
     print_r(json_decode((string)$e->getResponse()->getBody()));
     echo '</pre>';
 }

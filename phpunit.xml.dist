@@ -1,5 +1,4 @@
-<phpunit colors="true" bootstrap="vendor/autoload.php" stopOnError="true" stopOnFailure="true" stopOnSkipped="true"
-         strict="true">
+<phpunit colors="true" bootstrap="vendor/autoload.php" strict="true">
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src/unreal4u/</directory>

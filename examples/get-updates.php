@@ -8,6 +8,7 @@ use \unreal4u\Telegram\Methods\GetUpdates;
 $tgLog = new TgLog(BOT_TOKEN);
 
 $getUpdates = new GetUpdates();
+#$getUpdates->offset = 328221148;
 $updates = $tgLog->performApiRequest($getUpdates);
 
 echo '<pre>';
