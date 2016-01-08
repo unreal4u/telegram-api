@@ -104,3 +104,24 @@ Want to colaborate?
 
 You are free to do so, just send a pull request. Try to respect the PSR-2 styling guide (or PSR-12 whenever it comes 
 out). 
+
+Instructions
+
+1- Clone this repo
+
+2- Execute: 
+<pre>
+vagrant up # Might take a while :)
+vagrant ssh
+cd /var/www/default/
+composer install -o
+</pre>
+
+3- To unit test:
+<pre>
+vagrant ssh
+cd /var/www/default/
+vendor/bin/phpunit
+</pre>
+
+4- That's all folks!
