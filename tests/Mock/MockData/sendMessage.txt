@@ -1,0 +1,1 @@
+{"ok":true,"result":{"message_id":14,"from":{"id":123456789,"first_name":"unreal4uBot","username":"unreal4uBot"},"chat":{"id":12341234,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u","type":"private"},"date":1452254253,"text":"Hello world"}}

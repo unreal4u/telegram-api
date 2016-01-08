@@ -60,7 +60,7 @@ class GetMeTest extends \PHPUnit_Framework_TestCase
         $getMe = new GetMe();
 
         $this->tgLog->specificTest = 'invalidBotToken';
-        $this->tgLog->mustThrowException = true;
+        $this->tgLog->mockException = true;
 
         try {
             $this->tgLog->performApiRequest($getMe);

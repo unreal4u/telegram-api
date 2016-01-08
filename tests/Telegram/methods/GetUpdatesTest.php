@@ -73,10 +73,10 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
 
     public function test_emptyUpdates()
     {
+        $this->tgLog->specificTest = 'emptyResponse';
+
         $getUpdates = new GetUpdates();
         $getUpdates->offset = 12345679;
-
-        $this->tgLog->specificTest = 'emptyResponse';
         $result = $this->tgLog->performApiRequest($getUpdates);
 
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Custom\\UpdatesArray', $result);

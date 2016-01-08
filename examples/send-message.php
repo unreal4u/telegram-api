@@ -15,7 +15,7 @@ try {
     $tgLog->performApiRequest($sendMessage);
     printf('Message "%s" sent!<br/>%s', $sendMessage->text, PHP_EOL);
 } catch (ClientException $e) {
-    echo '<pre>';
+    echo 'Error detected trying to send message to user: <pre>';
     var_dump($e->getRequest());
     echo '</pre>';
     die();
@@ -28,8 +28,8 @@ try {
     $tgLog->performApiRequest($sendMessage);
     printf('Message "%s" sent!<br/>%s', $sendMessage->text, PHP_EOL);
 } catch (ClientException $e) {
-    echo '<pre>';
-    var_dump($e->getRequest());
+    echo 'Error detected trying to send message to group: <pre>';
+    print_r((string)$e->getResponse()->getBody());
     echo '</pre>';
     die();
 }

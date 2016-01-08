@@ -16,7 +16,7 @@ class MockTgLog extends TgLog
      * Must be set on true to throw a new exception
      * @var bool
      */
-    public $mustThrowException = false;
+    public $mockException = false;
 
     protected function sendRequestToTelegram($method, array $formData): \stdClass
     {
@@ -34,7 +34,7 @@ class MockTgLog extends TgLog
             $this->specificTest
         );
 
-        if ($this->mustThrowException) {
+        if ($this->mockException) {
             throw new MockClientException(file_get_contents($filename));
         }
 
