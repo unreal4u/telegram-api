@@ -21,10 +21,6 @@ try {
     echo '</pre>';
 }
 
-#echo '<pre>';
-#var_dump($file);
-#echo '</pre>';
-
 // Don't do anything if we have already output (as we can't modify those headers)
 if (!headers_sent()) {
     $tgDocument = $tgLog->downloadFile($file);

@@ -53,22 +53,23 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf('unreal4u\\Telegram\\Types\\Update', $result->data);
         $this->assertCount(1, $result->data);
 
-        $firstResult = $result->data[0];
-        $this->assertEquals(12345678, $firstResult->update_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $firstResult->message);
+        foreach ($result->traverseUpdates() as $theUpdate) {
+            $this->assertEquals(12345678, $theUpdate->update_id);
+            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $theUpdate->message);
 
-        $theMessage = $firstResult->message;
-        $this->assertEquals(12, $theMessage->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $theMessage->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $theMessage->chat);
-        $this->assertEquals('Hello bot', $theMessage->text);
-        $this->assertEquals(12345678, $theMessage->from->id);
-        $this->assertEquals('unreal4u', $theMessage->from->username);
-        $this->assertEquals(98765432, $theMessage->chat->id);
-        $this->assertEquals('unreal4u', $theMessage->chat->username);
+            $theMessage = $theUpdate->message;
+            $this->assertEquals(12, $theMessage->message_id);
+            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $theMessage->from);
+            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $theMessage->chat);
+            $this->assertEquals('Hello bot', $theMessage->text);
+            $this->assertEquals(12345678, $theMessage->from->id);
+            $this->assertEquals('unreal4u', $theMessage->from->username);
+            $this->assertEquals(98765432, $theMessage->chat->id);
+            $this->assertEquals('unreal4u', $theMessage->chat->username);
 
-        $this->assertEquals(1452120442, $theMessage->date);
-        $this->assertNull($theMessage->audio);
+            $this->assertEquals(1452120442, $theMessage->date);
+            $this->assertNull($theMessage->audio);
+        }
     }
 
     public function test_emptyUpdates()

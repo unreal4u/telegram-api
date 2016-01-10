@@ -34,7 +34,7 @@ class UserProfilePhotos extends AbstractFiller
     {
         if (!empty($data->photos)) {
             $photoArray = new UserProfilePhotosArray($data->photos);
-            $data->photos = [ $photoArray->data ];
+            $data->photos = [$photoArray->data];
         }
 
         parent::__construct($data);

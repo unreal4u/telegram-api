@@ -52,9 +52,9 @@ class TgLog
     }
 
     /**
-     * Performs the actual telegram request to telegram's servers
+     * Prepares and sends an API request to Telegram
      *
-     * @param $method
+     * @param mixed $method
      * @return mixed
      */
     public function performApiRequest($method)
@@ -73,7 +73,7 @@ class TgLog
      * @see unreal4u\Telegram\Methods\GetFile
      *
      * @param File $file
-     * @return string
+     * @return TelegramDocument
      */
     public function downloadFile(File $file): TelegramDocument
     {

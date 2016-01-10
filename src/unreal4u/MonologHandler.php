@@ -49,6 +49,7 @@ class MonologHandler extends AbstractProcessingHandler
         $sendMessage = new SendMessage();
         $sendMessage->text = $record['formatted'];
         $sendMessage->chat_id = $this->chatId;
+        $sendMessage->disable_web_page_preview = true;
 
         $this->tgLog->performApiRequest($sendMessage);
         return $this;

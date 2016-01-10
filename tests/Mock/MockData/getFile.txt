@@ -1,0 +1,1 @@
+{"ok":true,"result":{"file_id":"XXXYYYZZZ","file_size":5254,"file_path":"voice\/file_8"}}
