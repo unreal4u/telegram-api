@@ -1,11 +1,11 @@
 <?php
 
-use unreal4u\Telegram\Methods\getUserProfilePhotos;
+use unreal4u\Telegram\Methods\GetUserProfilePhotos;
 use unreal4u\TgLog;
 
 include('basics.php');
 
-$userProfilePhotos = new getUserProfilePhotos();
+$userProfilePhotos = new GetUserProfilePhotos();
 $tgLog = new TgLog(BOT_TOKEN);
 
 $userProfilePhotos->user_id = A_USER_ID;
