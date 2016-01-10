@@ -11,7 +11,7 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  *
  * @see https://core.telegram.org/bots/api#getuserprofilephotos
  */
-class getUserProfilePhotos extends AbstractMethodFunctions
+class GetUserProfilePhotos extends AbstractMethodFunctions
 {
     /**
      * Unique identifier of the target user
