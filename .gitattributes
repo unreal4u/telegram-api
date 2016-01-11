@@ -1,0 +1,11 @@
+# To test this: git archive --format zip -v -o telegram-api.zip HEAD
+tests/ export-ignore
+vendor/ export-ignore
+.git* export-ignore
+.*.yml export-ignore
+phpunit.xml.dist export-ignore
+Vagrantfile export-ignore
+composer-install.sh export-ignore
+
+*.php diff=php
+
