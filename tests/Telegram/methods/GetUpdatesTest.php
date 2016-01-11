@@ -33,7 +33,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = GetUpdates::bindToObjectType();
         $this->assertEquals('Custom\\UpdatesArray', $type);
@@ -42,9 +42,9 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests a private message "Hello bot" to the bot
      *
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_getUpdatesMessageIncoming()
+    public function testGetUpdatesMessageIncoming()
     {
         $getUpdates = new GetUpdates();
 
@@ -53,7 +53,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf('unreal4u\\Telegram\\Types\\Update', $result->data);
         $this->assertCount(1, $result->data);
 
-        foreach ($result->traverseUpdates() as $theUpdate) {
+        foreach ($result->traverseObject() as $theUpdate) {
             $this->assertEquals(12345678, $theUpdate->update_id);
             $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $theUpdate->message);
 
@@ -72,7 +72,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function test_emptyUpdates()
+    public function testEmptyUpdates()
     {
         $this->tgLog->specificTest = 'emptyResponse';
 

@@ -3,6 +3,7 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
+use tests\Mock\MockClientException;
 use unreal4u\Telegram\Methods\GetUserProfilePhotos;
 
 class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
@@ -33,7 +34,7 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = GetUserProfilePhotos::bindToObjectType();
         $this->assertEquals('UserProfilePhotos', $type);
@@ -42,9 +43,9 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests a private message "Hello bot" to the bot
      *
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_getUserProfilePhotos()
+    public function testGetUserProfilePhotos()
     {
         $getUserProfilePhotos = new GetUserProfilePhotos();
 
@@ -58,6 +59,48 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         foreach ($result->photos[0] as $photo) {
             $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);
             $i++;
+        }
+    }
+
+    public function testGetUserProfilePhotosMultiplePhotos()
+    {
+        $this->tgLog->specificTest = 'multiplePhotos';
+
+        $getUserProfilePhotos = new GetUserProfilePhotos();
+        $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
+
+        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertCount(2, $result->photos);
+        $this->assertCount(4, $result->photos[0]);
+        $this->assertCount(3, $result->photos[1]);
+    }
+
+    public function testGetUserProfilePhotosNoPhotos()
+    {
+        $this->tgLog->specificTest = 'noPhotos';
+
+        $getUserProfilePhotos = new GetUserProfilePhotos();
+        $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
+
+        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertCount(0, $result->photos);
+    }
+
+    public function testGetUserProfilePhotosInvalidUser()
+    {
+        $this->tgLog->specificTest = 'invalidUser';
+        $this->tgLog->mockException = true;
+
+        try {
+            $getUserProfilePhotos = new GetUserProfilePhotos();
+            $this->tgLog->performApiRequest($getUserProfilePhotos);
+        } catch (MockClientException $e) {
+            $this->assertInstanceOf('\\stdClass', $e->decodedResponse);
+            $this->assertEquals(400, $e->decodedResponse->error_code);
+
+            // Rethrow and set the expected exception this time
+            $this->setExpectedException('tests\\Mock\\MockClientException');
+            throw $e;
         }
     }
 }

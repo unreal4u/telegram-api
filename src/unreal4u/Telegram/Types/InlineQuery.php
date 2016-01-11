@@ -40,11 +40,10 @@ class InlineQuery extends AbstractFiller
      */
     public $offset = '';
 
-    public function __construct(\stdClass $data)
+    protected function mapSubObjects(): array
     {
-        if (!empty($data->from)) {
-            $data->from = new User($data->from);
-        }
-        parent::__construct($data);
+        return [
+            'from' => 'User',
+        ];
     }
 }

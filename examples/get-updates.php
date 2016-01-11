@@ -12,7 +12,7 @@ $getUpdates = new GetUpdates();
 $updates = $tgLog->performApiRequest($getUpdates);
 
 echo '<pre>';
-foreach ($updates->traverseUpdates() as $update) {
+foreach ($updates->traverseObject() as $update) {
     var_dump($update);
     #var_dump(sprintf('Chat id is #%d', $update->message->chat->id));
 }

@@ -43,20 +43,12 @@ class Update extends AbstractFiller
      */
     public $chosen_inline_result = null;
 
-    public function __construct(\stdClass $data = null)
+    protected function mapSubObjects(): array
     {
-        if (!empty($data->message)) {
-            $data->message = new Message($data->message);
-        }
-
-        if (!empty($data->inline_query)) {
-            // TODO
-        }
-
-        if (!empty($data->chosen_inline_result)) {
-            // TODO
-        }
-
-        parent::__construct($data);
+        return [
+            'message' => 'Message',
+            'inline_query' => '', // TODO
+            'chosen_inline_result' => '', // TODO
+        ];
     }
 }

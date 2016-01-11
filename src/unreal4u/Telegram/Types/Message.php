@@ -181,78 +181,11 @@ class Message extends AbstractFiller
      */
     public $migrate_from_chat_id = 0;
 
-    public function __construct(\stdClass $data = null)
-    {
-        // From is of User type of data
-        if (!empty($data->from)) {
-            $data->from = new User($data->from);
-        }
-
-        // Chat always should be a chat object
-        if (!empty($data->chat)) {
-            $data->chat = new Chat($data->chat);
-        }
-
-        // forward_from == User object
-        if (!empty($data->forward_from)) {
-            $data->forward_from = new User($data->forward_from);
-        }
-
-        // reply_to_message == Message object
-        if (!empty($data->reply_to_message)) {
-            $data->reply_to_message = new Message($data->reply_to_message);
-        }
-
-        // ... etc
-        if (!empty($data->audio)) {
-            $data->audio = new Audio($data->audio);
-        }
-
-        if (!empty($data->document)) {
-            $data->document = new Document($data->document);
-        }
-
-        if (!empty($data->photo)) {
-            $photoArray = new PhotoSizeArray($data->photo);
-            $data->photo = $photoArray->data;
-        }
-
-        if (!empty($data->sticker)) {
-            $data->sticker = new Sticker($data->sticker);
-        }
-
-        if (!empty($data->video)) {
-            $data->video = new Video($data->video);
-        }
-
-        if (!empty($data->voice)) {
-            $data->voice = new Voice($data->voice);
-        }
-
-        if (!empty($data->contact)) {
-            $data->contact = new Contact($data->contact);
-        }
-
-        if (!empty($data->location)) {
-            $data->location = new Location($data->location);
-        }
-
-        if (!empty($data->new_chat_participant)) {
-            $data->new_chat_participant = new User($data->new_chat_participant);
-        }
-
-        if (!empty($data->left_chat_participant)) {
-            $data->left_chat_participant = new User($data->left_chat_participant);
-        }
-
-        if (!empty($data->new_chat_photo)) {
-            $photoArray = new PhotoSizeArray($data->new_chat_photo);
-            $data->new_chat_photo = $photoArray->data;
-        }
-
-        parent::__construct($data);
-    }
-
+    /**
+     * A message contains several subobjects, map them in this function
+     *
+     * @return array
+     */
     protected function mapSubObjects(): array
     {
         return [
@@ -262,7 +195,7 @@ class Message extends AbstractFiller
             'reply_to_message' => 'Message',
             'audio' => 'Audio',
             'document' => 'Document',
-            'photo' => 'PhotoSizeArray', // Special case!
+            'photo' => 'Custom\\PhotoSizeArray',
             'sticker' => 'Sticker',
             'video' => 'Video',
             'voice' => 'Voice',
@@ -270,7 +203,7 @@ class Message extends AbstractFiller
             'location' => 'Location',
             'new_chat_participant' => 'User',
             'left_chat_participant' => 'User',
-            'new_chat_photo' => 'PhotoSizeArray', // Special case!
+            'new_chat_photo' => 'Custom\\PhotoSizeArray',
         ];
     }
 }

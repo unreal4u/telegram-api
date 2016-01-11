@@ -45,12 +45,10 @@ class Document extends AbstractFiller
      */
     public $file_size = 0;
 
-    public function __construct(\stdClass $data = null)
+    protected function mapSubObjects(): array
     {
-        if (!empty($data->thumb)) {
-            $data->thumb = new PhotoSize($data->thumb);
-        }
-
-        parent::__construct($data);
+        return [
+            'thumb' => 'Custom\\PhotoSize',
+        ];
     }
 }

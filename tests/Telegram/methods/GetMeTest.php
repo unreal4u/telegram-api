@@ -34,16 +34,16 @@ class GetMeTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = GetMe::bindToObjectType();
         $this->assertEquals('User', $type);
     }
 
     /**
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_getMe()
+    public function testGetMe()
     {
         $getMe = new GetMe();
 
@@ -55,7 +55,7 @@ class GetMeTest extends \PHPUnit_Framework_TestCase
         $this->assertStringEndsWith('Bot', $result->username);
     }
 
-    public function test_getMeInvalidBotToken()
+    public function testGetMeInvalidBotToken()
     {
         $getMe = new GetMe();
 

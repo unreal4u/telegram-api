@@ -30,13 +30,10 @@ class UserProfilePhotos extends AbstractFiller
      */
     public $photos = [];
 
-    public function __construct(\stdClass $data)
+    protected function mapSubObjects(): array
     {
-        if (!empty($data->photos)) {
-            $photoArray = new UserProfilePhotosArray($data->photos);
-            $data->photos = [$photoArray->data];
-        }
-
-        parent::__construct($data);
+        return [
+            'photos' => 'Custom\\UserProfilePhotosArray',
+        ];
     }
 }

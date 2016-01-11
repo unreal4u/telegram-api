@@ -4,12 +4,13 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
+use unreal4u\InternalFunctionality\CustomArrayType;
 use unreal4u\Telegram\Types\Update;
 
 /**
  * Mockup class to generate a real telegram update representation
  */
-class UpdatesArray
+class UpdatesArray implements CustomArrayType
 {
     public $data = [];
 
@@ -28,7 +29,7 @@ class UpdatesArray
      *
      * @return \Generator
      */
-    public function traverseUpdates()
+    public function traverseObject()
     {
         foreach ($this->data as $update) {
             yield $update;

@@ -34,16 +34,16 @@ class GetFileTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = GetFile::bindToObjectType();
         $this->assertEquals('File', $type);
     }
 
     /**
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_getFile()
+    public function testGetFile()
     {
         $getFile = new GetFile();
 
@@ -53,7 +53,7 @@ class GetFileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('voice/file_8', $result->file_path);
     }
 
-    public function test_getFileInvalidFileId()
+    public function testGetFileInvalidFileId()
     {
         $getFile = new GetFile();
 

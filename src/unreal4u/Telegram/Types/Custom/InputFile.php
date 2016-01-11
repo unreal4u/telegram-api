@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
+use unreal4u\CustomExceptions\FileNotReadable;
+
 /**
  * This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual
  * way that files are uploaded via the browser.
@@ -40,7 +42,7 @@ class InputFile
         if (is_readable($this->path)) {
             $this->stream = fopen($this->path, 'r');
         } else {
-            throw new unreal4u\CustomExceptions\FileNotReadable(sprintf('Can not read %s, please check', $this->path));
+            throw new FileNotReadable(sprintf('Can not read %s, please check', $this->path));
         }
 
         return $this;

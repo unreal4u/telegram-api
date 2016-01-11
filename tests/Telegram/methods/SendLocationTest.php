@@ -33,16 +33,16 @@ class SendLocationTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = SendLocation::bindToObjectType();
         $this->assertEquals('Message', $type);
     }
 
     /**
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_SendLocation()
+    public function testSendLocation()
     {
         $sendLocation = new SendLocation();
         $sendLocation->chat_id = 12341234;

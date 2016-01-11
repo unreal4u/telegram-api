@@ -4,23 +4,26 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
+use unreal4u\InternalFunctionality\CustomArrayType;
 use unreal4u\Telegram\Types\PhotoSize;
 
 /**
  * Mockup class to generate a real telegram update representation
  */
-class UserProfilePhotosArray
+class UserProfilePhotosArray implements CustomArrayType
 {
     public $data = [];
 
     public function __construct(array $data = null)
     {
         if (!empty($data)) {
+            $i = 0;
             foreach ($data as $telegramResponse) {
                 foreach ($telegramResponse as $photoSize) {
                     // Create an actual PhotoSize object and fill the array
-                    $this->data[] = new PhotoSize($photoSize);
+                    $this->data[$i][] = new PhotoSize($photoSize);
                 }
+                $i++;
             }
         }
     }
@@ -30,7 +33,7 @@ class UserProfilePhotosArray
      *
      * @return \Generator
      */
-    public function traverseUpdates()
+    public function traverseObject()
     {
         foreach ($this->data as $update) {
             yield $update;

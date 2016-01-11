@@ -35,23 +35,23 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
     /**
      * Asserts that the GetMe method ALWAYS load in a user type
      */
-    public function test_bindToObjectType()
+    public function testBindToObjectType()
     {
         $type = SendMessage::bindToObjectType();
         $this->assertEquals('Message', $type);
     }
 
     /**
-     * @depends test_bindToObjectType
+     * @depends testBindToObjectType
      */
-    public function test_SendMessage()
+    public function testSendMessage()
     {
         $sendMessage = new SendMessage();
         $sendMessage->chat_id = 12341234;
         $sendMessage->text = 'Hello world';
-	    $result = $this->tgLog->performApiRequest($sendMessage);
+        $result = $this->tgLog->performApiRequest($sendMessage);
 
-	    $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
         $this->assertEquals(14, $result->message_id);
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
@@ -70,9 +70,9 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
     /**
      * Keyboard options don't give anything special back, those are just commands to the user. Test this condition
      *
-     * @depends test_SendMessage
+     * @depends testSendMessage
      */
-    public function test_SendMessageWithKeyboardOptions()
+    public function testSendMessageWithKeyboardOptions()
     {
         $sendMessage = new SendMessage();
         $sendMessage->chat_id = 12341234;
@@ -96,7 +96,7 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sendMessage->text, $result->text);
     }
 
-    public function test_SendMessageChatNotFound()
+    public function testSendMessageChatNotFound()
     {
         $this->tgLog->specificTest = 'chatNotFound';
         $this->tgLog->mockException = true;
@@ -115,6 +115,5 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
             $this->setExpectedException('tests\\Mock\\MockClientException');
             throw $e;
         }
-
     }
 }
