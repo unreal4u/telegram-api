@@ -15,8 +15,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "guzzlehttp/guzzle": "~6.0",
-    "monolog/monolog": "~1.17"
+    "guzzlehttp/guzzle": "~6.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "@stable",
