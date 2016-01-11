@@ -1,6 +1,6 @@
+[![Build Status](https://travis-ci.org/unreal4u/telegram-api.svg)](https://travis-ci.org/unreal4u/telegram-api)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/build.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/build-status/master)
 
 Telegram Log 
 ======
