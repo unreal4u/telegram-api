@@ -253,7 +253,7 @@ class Message extends AbstractFiller
         parent::__construct($data);
     }
 
-    protected function mapSubObjects():
+    protected function mapSubObjects(): array
     {
         return [
             'from' => 'User',
