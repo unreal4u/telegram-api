@@ -252,4 +252,25 @@ class Message extends AbstractFiller
 
         parent::__construct($data);
     }
+
+    protected function mapSubObjects():
+    {
+        return [
+            'from' => 'User',
+            'chat' => 'Chat',
+            'forward_from' => 'User',
+            'reply_to_message' => 'Message',
+            'audio' => 'Audio',
+            'document' => 'Document',
+            'photo' => 'PhotoSizeArray', // Special case!
+            'sticker' => 'Sticker',
+            'video' => 'Video',
+            'voice' => 'Voice',
+            'contact' => 'Contact',
+            'location' => 'Location',
+            'new_chat_participant' => 'User',
+            'left_chat_participant' => 'User',
+            'new_chat_photo' => 'PhotoSizeArray', // Special case!
+        ];
+    }
 }

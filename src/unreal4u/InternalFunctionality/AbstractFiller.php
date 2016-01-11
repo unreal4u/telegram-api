@@ -21,4 +21,9 @@ abstract class AbstractFiller
 
         return $this;
     }
+
+    protected function mapSubObjects(): array
+    {
+        return [];
+    }
 }
