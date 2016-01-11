@@ -1,6 +1,8 @@
+[![Latest Stable Version](https://poser.pugx.org/unreal4u/telegram-api/v/stable)](https://packagist.org/packages/unreal4u/telegram-api)
 [![Build Status](https://travis-ci.org/unreal4u/telegram-api.svg)](https://travis-ci.org/unreal4u/telegram-api)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
+[![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
 Telegram Log 
 ======
@@ -34,8 +36,14 @@ consideration that the master branch will be PHP7 only.
 Installation
 ----------
 
+The preferred method is composer, so add the following to your composer.json:
+
 <pre>
-// @TODO
+{
+  "require": {
+    "unreal4u/telegram-api": "~1.0"
+  }
+}
 </pre>
 
 Basic usage
@@ -62,10 +70,9 @@ TODOs
 
 Without any preference or ordering: 
 
+* **InlineBots** (!!)
 * UptimeRobot integration (maybe another project?)
-* InlineBots
-* Better documentation
-* Unit tests (note that until this is done, the code should be considered very alpha!)
+* Better documentation (?)
 
 Why this class?
 ----------
@@ -90,9 +97,9 @@ project was born.
 Extra requirements
 ----------
 
-You need an actual working bot at Telegram to get started. To do so, initiate a talk with the @BotFather (lol) and 
-follow its instructions. More information on how to do so can be found at the amazing documentation here:
-[https://core.telegram.org/bots](https://core.telegram.org/bots)
+You need an actual working bot at Telegram to get started. To do so, initiate a talk with the 
+[@BotFather](https://telegram.me/botfather) (lol) and follow its instructions. More information on how to do so can be 
+found at the amazing documentation here: [https://core.telegram.org/bots](https://core.telegram.org/bots)
 
 Also [check here for step-by-step instructions](https://github.com/akalongman/php-telegram-bot/blob/master/README.md).
 

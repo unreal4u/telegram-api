@@ -33,14 +33,9 @@ class SetWebhook extends AbstractMethodFunctions
     public $url = '';
 
     /**
-     * Optional	Upload your public key certificate so that the root certificate in use can be checked. See our
+     * Optional. Upload your public key certificate so that the root certificate in use can be checked. See our
      * self-signed guide for details.
      * @var string
      */
     public $certificate = '';
-
-    public static function requiresMultipartForm(): bool
-    {
-        return true;
-    }
 }
