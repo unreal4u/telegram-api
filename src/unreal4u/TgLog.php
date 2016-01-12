@@ -77,7 +77,7 @@ class TgLog
      */
     public function downloadFile(File $file): TelegramDocument
     {
-        $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
+        $url = $this->apiUrl . $file->file_path;
         $client = new Client();
         return new TelegramDocument($client->get($url));
     }
@@ -88,7 +88,7 @@ class TgLog
      */
     final private function constructApiUrl(): TgLog
     {
-        $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken;
+        $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken . '/';
         return $this;
     }
 
@@ -179,7 +179,7 @@ class TgLog
         $completeClassName = get_class($call);
         $this->methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
 
-        return $this->apiUrl . '/' . $this->methodName;
+        return $this->apiUrl . $this->methodName;
     }
 
     /**

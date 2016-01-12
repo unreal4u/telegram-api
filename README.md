@@ -70,7 +70,7 @@ TODOs
 
 Without any preference or ordering: 
 
-* **InlineBots** (!!)
+* **InlineBots** (!!) (v1.1.0)
 * UptimeRobot integration (maybe another project?)
 * Better documentation (?)
 
