@@ -16,7 +16,6 @@ About this class
 * Enables you to send messages, stickers, location and other methods via PHP to Telegram.
 * Respects and implements the default types and methods made by Telegram itself.
 * Doesn't need any dependency: you are free to do whatever you want with the available data.
-* Can integrate with Monolog via the Monolog Handler.
 
 Detailed description
 ---------
@@ -109,6 +108,13 @@ Getting everything started up
 The most difficult thing to do when performing an action with the Telegram API is to get the chat_id, which is the 
 actual conversation window the bot talks to. You can execute the GetUpdates() method in order to get this chatId. Note
 that there are some caveats on this, so you may be better out with the SetWebhook() method instead. 
+
+Semver
+-----------
+
+I will try my best to respect Semantic Versioning.  
+That being said, the first stable release is v1.0.0, from there on no mayor BC changes will occur unless we update
+the major.
 
 Want to colaborate?
 -----------
