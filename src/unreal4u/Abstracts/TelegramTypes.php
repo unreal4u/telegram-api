@@ -2,16 +2,22 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\InternalFunctionality;
+namespace unreal4u\Abstracts;
 
-abstract class AbstractFiller
+abstract class TelegramTypes
 {
     public function __construct(\stdClass $data = null)
     {
         $this->populateObject($data);
     }
 
-    final protected function populateObject(\stdClass $data = null): AbstractFiller
+    /**
+     * Fills the class with the data passed on through the constructor
+     *
+     * @param \stdClass $data
+     * @return TelegramTypes
+     */
+    final protected function populateObject(\stdClass $data = null): TelegramTypes
     {
         if (!is_null($data)) {
             $subObjects = $this->mapSubObjects();

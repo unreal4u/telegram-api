@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\InternalFunctionality;
+namespace unreal4u\Abstracts;
 
-abstract class AbstractKeyboardMethods extends AbstractFiller
+abstract class KeyboardMethods extends TelegramTypes
 {
     /**
      * Optional. Use this parameter if you want to show the keyboard to specific users only. Targets:

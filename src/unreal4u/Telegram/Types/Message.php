@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\Telegram\Types\Custom\PhotoSizeArray;
 
 /**
@@ -14,7 +14,7 @@ use unreal4u\Telegram\Types\Custom\PhotoSizeArray;
  *
  * @see https://core.telegram.org/bots/api#message
  */
-class Message extends AbstractFiller
+class Message extends TelegramTypes
 {
     /**
      * Unique message identifier

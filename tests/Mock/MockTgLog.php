@@ -3,7 +3,7 @@
 namespace tests\Mock;
 
 use unreal4u\TgLog;
-use unreal4u\InternalFunctionality\AbstractTelegramMethods;
+use unreal4u\Abstracts\TelegramMethods;
 
 class MockTgLog extends TgLog
 {
@@ -19,7 +19,7 @@ class MockTgLog extends TgLog
      */
     public $mockException = false;
 
-    protected function sendRequestToTelegram(AbstractTelegramMethods $method, array $formData): \stdClass
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): \stdClass
     {
         $this->composeApiMethodUrl($method);
 

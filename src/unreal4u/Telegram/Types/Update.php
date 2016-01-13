@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\Telegram\Types\Message;
 
 /**
@@ -15,7 +15,7 @@ use unreal4u\Telegram\Types\Message;
  *
  * @see https://core.telegram.org/bots/api#update
  */
-class Update extends AbstractFiller
+class Update extends TelegramTypes
 {
     /**
      * The update‘s unique identifier. Update identifiers start from a certain positive number and increase

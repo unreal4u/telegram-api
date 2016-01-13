@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 
 /**
  * This object represents a point on the map
@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#photosize
  */
-class Location extends AbstractFiller
+class Location extends TelegramTypes
 {
     /**
      * Longitude as defined by sender

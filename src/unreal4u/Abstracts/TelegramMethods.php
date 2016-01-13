@@ -2,12 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\InternalFunctionality;
+namespace unreal4u\Abstracts;
+
+use unreal4u\Interfaces\TelegramMethodDefinitions;
 
 /**
- * Methods that all Telegram methods should implement
+ * Contains methods that all Telegram methods should implement
  */
-abstract class AbstractTelegramMethods implements MethodDefinitions
+abstract class TelegramMethods implements TelegramMethodDefinitions
 {
     /**
      * Most of the methods will return a Message object on success, so set that as default.

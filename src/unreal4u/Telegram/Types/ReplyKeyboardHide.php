@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
+use unreal4u\Abstracts\KeyboardMethods;
 
 /**
  * Upon receiving a message with this object, Telegram clients will hide the current custom keyboard and display the
@@ -16,7 +16,7 @@ use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
  *
  * @see https://core.telegram.org/bots/api#replykeyboardhide
  */
-class ReplyKeyboardHide extends AbstractKeyboardMethods
+class ReplyKeyboardHide extends KeyboardMethods
 {
     /**
      * Requests clients to hide the custom keyboard

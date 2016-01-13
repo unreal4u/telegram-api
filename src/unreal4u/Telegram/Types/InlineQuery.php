@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 
 /**
  * This object represents an incoming inline query. When the user sends an empty query, your bot could return some
@@ -14,7 +14,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#inlinequery
  */
-class InlineQuery extends AbstractFiller
+class InlineQuery extends TelegramTypes
 {
     /**
      * Unique identifier for this query

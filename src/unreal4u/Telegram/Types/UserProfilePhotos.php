@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\Telegram\Types\Custom\UserProfilePhotosArray;
 
 /**
@@ -14,7 +14,7 @@ use unreal4u\Telegram\Types\Custom\UserProfilePhotosArray;
  *
  * @see https://core.telegram.org/bots/api#userprofilephotos
  */
-class UserProfilePhotos extends AbstractFiller
+class UserProfilePhotos extends TelegramTypes
 {
     /**
      * Total number of profile pictures the target user has

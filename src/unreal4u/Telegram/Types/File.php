@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 
 /**
  * This object represents a file ready to be downloaded. The file can be downloaded via the link
@@ -16,7 +16,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#file
  */
-class File extends AbstractFiller
+class File extends TelegramTypes
 {
     /**
      * Unique identifier for this file

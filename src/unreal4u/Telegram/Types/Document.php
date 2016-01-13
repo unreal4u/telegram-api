@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 
 /**
  * This object represents a general file (as opposed to photos, voice messages and audio files).
@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#document
  */
-class Document extends AbstractFiller
+class Document extends TelegramTypes
 {
     /**
      * Unique identifier for this file

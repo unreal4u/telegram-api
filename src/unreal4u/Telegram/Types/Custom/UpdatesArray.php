@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
-use unreal4u\InternalFunctionality\CustomArrayType;
+use unreal4u\Interfaces\CustomArrayType;
 use unreal4u\Telegram\Types\Update;
 
 /**

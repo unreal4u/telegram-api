@@ -1,6 +1,6 @@
 <?php
 
-namespace unreal4u\InternalFunctionality;
+namespace unreal4u\Interfaces;
 
 /**
  * Used in all custom types that are an array

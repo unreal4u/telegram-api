@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractFiller;
+use unreal4u\Abstracts\TelegramTypes;
 
 /**
  * This object represents one size of a photo or a file / sticker thumbnail
@@ -13,7 +13,7 @@ use unreal4u\InternalFunctionality\AbstractFiller;
  *
  * @see https://core.telegram.org/bots/api#photosize
  */
-class PhotoSize extends AbstractFiller
+class PhotoSize extends TelegramTypes
 {
     /**
      * Unique identifier for this file

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractTelegramMethods;
+use unreal4u\Abstracts\TelegramMethods;
 use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
@@ -15,7 +15,7 @@ use unreal4u\Telegram\Types\Custom\InputFile;
  *
  * @see https://core.telegram.org/bots/api#sendvoice
  */
-class SendVoice extends AbstractTelegramMethods
+class SendVoice extends TelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

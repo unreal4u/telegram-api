@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractTelegramMethods;
+use unreal4u\Abstracts\TelegramMethods;
 
 /**
  * Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5
@@ -17,7 +17,7 @@ use unreal4u\InternalFunctionality\AbstractTelegramMethods;
  *
  * @see https://core.telegram.org/bots/api#sendchataction
  */
-class SendChatAction extends AbstractTelegramMethods
+class SendChatAction extends TelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

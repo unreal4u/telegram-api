@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types;
 
-use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
+use unreal4u\Abstracts\KeyboardMethods;
 
 /**
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
@@ -14,7 +14,7 @@ use unreal4u\InternalFunctionality\AbstractKeyboardMethods;
  * @see https://core.telegram.org/bots/api#replykeyboardmarkup
  * @see https://core.telegram.org/bots#keyboards
  */
-class ReplyKeyboardMarkup extends AbstractKeyboardMethods
+class ReplyKeyboardMarkup extends KeyboardMethods
 {
     /**
      * Array of button rows, each represented by an Array of Strings

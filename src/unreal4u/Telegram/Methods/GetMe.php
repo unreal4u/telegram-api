@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractTelegramMethods;
+use unreal4u\Abstracts\TelegramMethods;
 
 /**
  * A simple method for testing your bot's auth token. Requires no parameters. Returns basic information about the bot in
@@ -12,7 +12,7 @@ use unreal4u\InternalFunctionality\AbstractTelegramMethods;
  *
  * @see https://core.telegram.org/bots/api#getme
  */
-class GetMe extends AbstractTelegramMethods
+class GetMe extends TelegramMethods
 {
     public static function bindToObjectType(): string
     {

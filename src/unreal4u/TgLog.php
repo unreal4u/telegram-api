@@ -6,7 +6,7 @@ namespace unreal4u;
 
 use \GuzzleHttp\Client;
 use unreal4u\InternalFunctionality\TelegramDocument;
-use unreal4u\InternalFunctionality\AbstractTelegramMethods;
+use unreal4u\Abstracts\TelegramMethods;
 use unreal4u\Telegram\Types\File;
 
 /**
@@ -58,7 +58,7 @@ class TgLog
      * @param mixed $method
      * @return mixed
      */
-    public function performApiRequest(AbstractTelegramMethods $method)
+    public function performApiRequest(TelegramMethods $method)
     {
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
@@ -96,11 +96,11 @@ class TgLog
     /**
      * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
      *
-     * @param $method
+     * @param TelegramMethods $method
      * @param array $formData
      * @return \stdClass
      */
-    protected function sendRequestToTelegram(AbstractTelegramMethods $method, array $formData): \stdClass
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): \stdClass
     {
         $client = new Client();
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
@@ -115,7 +115,7 @@ class TgLog
         return $this;
     }
 
-    private function constructFormData(AbstractTelegramMethods $method): array
+    private function constructFormData(TelegramMethods $method): array
     {
         $result = $this->checkSpecialConditions($method);
 
@@ -142,10 +142,10 @@ class TgLog
      * This will return an array with data that will be different in each case (for now). This can be changed in the
      * future.
      *
-     * @param $method
+     * @param TelegramMethods $method
      * @return array
      */
-    private function checkSpecialConditions(AbstractTelegramMethods $method): array
+    private function checkSpecialConditions(TelegramMethods $method): array
     {
         $return = [false];
 
@@ -158,7 +158,7 @@ class TgLog
                         'id' => $key,
                         'stream' => $value->getStream(),
                     ];
-                } elseif (in_array('unreal4u\\InternalFunctionality\\AbstractKeyboardMethods', class_parents($value))) {
+                } elseif (in_array('unreal4u\\Abstracts\\KeyboardMethods', class_parents($value))) {
                     // If we are about to send a KeyboardMethod, we must send a serialized object
                     $method->$key = json_encode($value);
                     $return = [true];
@@ -172,10 +172,10 @@ class TgLog
     /**
      * Builds up the URL with which we can work with
      *
-     * @param $call
+     * @param TelegramMethods $call
      * @return string
      */
-    protected function composeApiMethodUrl(AbstractTelegramMethods $call): string
+    protected function composeApiMethodUrl(TelegramMethods $call): string
     {
         $completeClassName = get_class($call);
         $this->methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
@@ -188,7 +188,7 @@ class TgLog
      *
      * @param array $data The original object in array form
      * @param string $fileKeyName A file handler will be sent instead of a string, state here which field it is
-     * @param mixed $stream The actual file handler
+     * @param resource $stream The actual file handler
      * @return array Returns the actual formdata to be sent
      */
     private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array

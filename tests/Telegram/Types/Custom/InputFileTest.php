@@ -13,7 +13,7 @@ class InputFileTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidFile()
     {
-        $this->setExpectedException('unreal4u\\CustomExceptions\\FileNotReadable');
+        $this->setExpectedException('unreal4u\\Exceptions\\FileNotReadable');
         $this->inputFile = new InputFile('non-existant-file.txt');
     }
 }
