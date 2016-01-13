@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Use this method to send answers to an inline query. On success, True is returned.
@@ -12,7 +12,7 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  *
  * @see https://core.telegram.org/bots/api#answerinlinequery
  */
-class AnswerInlineQuery extends AbstractMethodFunctions
+class AnswerInlineQuery extends AbstractTelegramMethods
 {
     /**
      * Unique identifier for the answered query

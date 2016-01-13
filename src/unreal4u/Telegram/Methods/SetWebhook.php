@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update
@@ -24,7 +24,7 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  *
  * @see https://core.telegram.org/bots/api#setwebhook
  */
-class SetWebhook extends AbstractMethodFunctions
+class SetWebhook extends AbstractTelegramMethods
 {
     /**
      * Optional. HTTPS url to send updates to. Use an empty string to remove webhook integration

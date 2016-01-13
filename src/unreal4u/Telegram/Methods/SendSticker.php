@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 use unreal4u\Telegram\Types\Custom\InputFile;
 
 /**
@@ -12,7 +12,7 @@ use unreal4u\Telegram\Types\Custom\InputFile;
  *
  * @see https://core.telegram.org/bots/api#sendsticker
  */
-class SendSticker extends AbstractMethodFunctions
+class SendSticker extends AbstractTelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

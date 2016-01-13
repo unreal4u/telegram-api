@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * This will get the updates Telegram has for our bot
@@ -21,7 +21,7 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  *
  * @see https://core.telegram.org/bots/api#getupdates
  */
-class GetUpdates extends AbstractMethodFunctions
+class GetUpdates extends AbstractTelegramMethods
 {
     /**
      * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of

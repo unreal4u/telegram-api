@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
  *
  * @see https://core.telegram.org/bots/api#getuserprofilephotos
  */
-class GetUserProfilePhotos extends AbstractMethodFunctions
+class GetUserProfilePhotos extends AbstractTelegramMethods
 {
     /**
      * Unique identifier of the target user

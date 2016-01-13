@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Object that resembles a message object in Telegram
  *
  * @see https://core.telegram.org/bots/api#sendlocation
  */
-class SendLocation extends AbstractMethodFunctions
+class SendLocation extends AbstractTelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

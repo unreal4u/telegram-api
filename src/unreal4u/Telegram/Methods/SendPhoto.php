@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Use this method to send photos. On success, the sent Message is returned
  *
  * @see https://core.telegram.org/bots/api#sendphoto
  */
-class SendPhoto extends AbstractMethodFunctions
+class SendPhoto extends AbstractTelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)

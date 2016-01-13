@@ -6,7 +6,7 @@ namespace unreal4u;
 
 use \GuzzleHttp\Client;
 use unreal4u\InternalFunctionality\TelegramDocument;
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 use unreal4u\Telegram\Types\File;
 
 /**
@@ -58,7 +58,7 @@ class TgLog
      * @param mixed $method
      * @return mixed
      */
-    public function performApiRequest(AbstractMethodFunctions $method)
+    public function performApiRequest(AbstractTelegramMethods $method)
     {
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
@@ -100,7 +100,7 @@ class TgLog
      * @param array $formData
      * @return \stdClass
      */
-    protected function sendRequestToTelegram(AbstractMethodFunctions $method, array $formData): \stdClass
+    protected function sendRequestToTelegram(AbstractTelegramMethods $method, array $formData): \stdClass
     {
         $client = new Client();
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
@@ -115,7 +115,7 @@ class TgLog
         return $this;
     }
 
-    private function constructFormData(AbstractMethodFunctions $method): array
+    private function constructFormData(AbstractTelegramMethods $method): array
     {
         $result = $this->checkSpecialConditions($method);
 
@@ -145,7 +145,7 @@ class TgLog
      * @param $method
      * @return array
      */
-    private function checkSpecialConditions(AbstractMethodFunctions $method): array
+    private function checkSpecialConditions(AbstractTelegramMethods $method): array
     {
         $return = [false];
 
@@ -175,7 +175,7 @@ class TgLog
      * @param $call
      * @return string
      */
-    protected function composeApiMethodUrl(AbstractMethodFunctions $call): string
+    protected function composeApiMethodUrl(AbstractTelegramMethods $call): string
     {
         $completeClassName = get_class($call);
         $this->methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));

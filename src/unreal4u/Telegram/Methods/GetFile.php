@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Methods;
 
-use unreal4u\InternalFunctionality\AbstractMethodFunctions;
+use unreal4u\InternalFunctionality\AbstractTelegramMethods;
 
 /**
  * Use this method to get basic info about a file and prepare it for downloading. For the moment, bots can download
@@ -15,7 +15,7 @@ use unreal4u\InternalFunctionality\AbstractMethodFunctions;
  *
  * @see https://core.telegram.org/bots/api#getfile
  */
-class GetFile extends AbstractMethodFunctions
+class GetFile extends AbstractTelegramMethods
 {
     /**
      * File identifier to get info about
