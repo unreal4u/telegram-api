@@ -35,8 +35,8 @@ class UserProfilePhotosArray implements CustomArrayType
      */
     public function traverseObject()
     {
-        foreach ($this->data as $update) {
-            yield $update;
+        foreach ($this->data as $data) {
+            yield $data;
         }
     }
 }

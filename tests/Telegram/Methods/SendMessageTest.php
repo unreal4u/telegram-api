@@ -81,6 +81,12 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
         $sendMessage->reply_markup->keyboard = [['Yes', 'No']];
         $result = $this->tgLog->performApiRequest($sendMessage);
 
+        // Important assert: ensure we send a serialized object to Telegram
+        $this->assertEquals(
+            trim(file_get_contents('tests/Mock/MockData/sendMessage-replyKeyboardMarkup.txt')),
+            $sendMessage->reply_markup
+        );
+
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
         $this->assertEquals(14, $result->message_id);
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);

@@ -48,7 +48,7 @@ class Document extends AbstractFiller
     protected function mapSubObjects(): array
     {
         return [
-            'thumb' => 'Custom\\PhotoSize',
+            'thumb' => 'PhotoSize',
         ];
     }
 }

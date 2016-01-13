@@ -48,7 +48,7 @@ class Sticker extends AbstractFiller
     protected function mapSubObjects(): array
     {
         return [
-            'thumb' => 'Custom\\PhotoSize',
+            'thumb' => 'PhotoSize',
         ];
     }
 }
