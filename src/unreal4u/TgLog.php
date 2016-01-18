@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u;
 
 use \GuzzleHttp\Client;
+use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Abstracts\TelegramMethods;
 use unreal4u\Telegram\Types\File;
@@ -58,12 +59,15 @@ class TgLog
      * @param mixed $method
      * @return mixed
      */
-    public function performApiRequest(TelegramMethods $method)
+    public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
+        echo '<pre>';
+        var_dump($jsonDecoded->result);
+        echo '</pre>';
         return new $returnObject($jsonDecoded->result);
     }
 

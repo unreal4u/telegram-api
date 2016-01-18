@@ -4,13 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
+use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\Interfaces\CustomArrayType;
 use unreal4u\Telegram\Types\Update;
 
 /**
  * Mockup class to generate a real telegram update representation
  */
-class UpdatesArray implements CustomArrayType
+class UpdatesArray extends TelegramTypes implements CustomArrayType
 {
     public $data = [];
 
