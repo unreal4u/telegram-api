@@ -65,9 +65,6 @@ class TgLog
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
-        echo '<pre>';
-        var_dump($jsonDecoded->result);
-        echo '</pre>';
         return new $returnObject($jsonDecoded->result);
     }
 
