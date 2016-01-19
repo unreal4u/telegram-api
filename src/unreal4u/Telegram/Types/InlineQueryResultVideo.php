@@ -85,5 +85,4 @@ class InlineQueryResultVideo extends InlineQueryResult
      * @var string
      */
     public $description = '';
-
 }

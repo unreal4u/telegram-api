@@ -42,8 +42,8 @@ class AnswerInlineQuery extends TelegramMethods
 
     /**
      * Optional. Pass the offset that a client should send in the next query with the same text to receive more results.
-     * Pass an empty string if there are no more results or if you don‘t support pagination. Offset length can’t exceed
-     * 64 bytes.
+     * Pass an empty string if there are no more results or if you don‘t support pagination. Offset length can’t
+     * exceed 64 bytes.
      * @var string
      */
     public $next_offset = '';
