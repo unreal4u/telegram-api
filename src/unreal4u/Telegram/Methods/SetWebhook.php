@@ -38,4 +38,9 @@ class SetWebhook extends TelegramMethods
      * @var string
      */
     public $certificate = '';
+
+    public static function bindToObjectType(): string
+    {
+        return 'Custom\\ResultBoolean';
+    }
 }
