@@ -64,7 +64,7 @@ Different methods return different object types.
 
 Please refer to the examples directory to view examples of all implemented methods.
 
-Special note: getting updates via Webhook
+Getting updates via Webhook
 ---------
 
 The first you'll have to do is register a webhook with Telegram via the SetWebhook method:
@@ -87,15 +87,6 @@ Now <code>$update</code> will contain the actual Update object. Hope that wasn't
 
 More information on this? You can check [how I implemented](https://github.com/unreal4u/tg-timebot) my 
 [timeBot](https://telegram.me/TheTimeBot).
-
-TODOs
----------
-
-Without any preference or ordering: 
-
-* **InlineBots** (!!) (v1.1.0)
-* UptimeRobot integration (maybe another project?)
-* Better documentation (?)
 
 Why this class?
 ----------
