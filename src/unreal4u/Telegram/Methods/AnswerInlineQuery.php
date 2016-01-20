@@ -52,4 +52,11 @@ class AnswerInlineQuery extends TelegramMethods
     {
         return 'Custom\\ResultBoolean';
     }
+
+    public function performSpecialConditions(): TelegramMethods
+    {
+        $this->results = json_encode($this->results);
+
+        return parent::performSpecialConditions();
+    }
 }

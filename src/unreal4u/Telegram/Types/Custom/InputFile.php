@@ -21,7 +21,7 @@ class InputFile
     public $path = '';
 
     /**
-     * Optional. File size, if known
+     * The actual stream to the file
      * @var int
      */
     private $stream = null;

@@ -148,6 +148,8 @@ class TgLog
      */
     private function checkSpecialConditions(TelegramMethods $method): array
     {
+        $method->performSpecialConditions();
+
         $return = [false];
 
         foreach ($method as $key => $value) {
@@ -159,10 +161,6 @@ class TgLog
                         'id' => $key,
                         'stream' => $value->getStream(),
                     ];
-                } elseif (in_array('unreal4u\\Abstracts\\KeyboardMethods', class_parents($value))) {
-                    // If we are about to send a KeyboardMethod, we must send a serialized object
-                    $method->$key = json_encode($value);
-                    $return = [true];
                 }
             }
         }
