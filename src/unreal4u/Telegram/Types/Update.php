@@ -47,8 +47,8 @@ class Update extends TelegramTypes
     {
         return [
             'message' => 'Message',
-            'inline_query' => '', // TODO
-            'chosen_inline_result' => '', // TODO
+            'inline_query' => 'InlineQuery',
+            'chosen_inline_result' => 'ChosenInlineResult',
         ];
     }
 }
