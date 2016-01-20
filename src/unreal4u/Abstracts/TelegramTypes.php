@@ -6,7 +6,7 @@ namespace unreal4u\Abstracts;
 
 abstract class TelegramTypes
 {
-    public function __construct(\stdClass $data = null)
+    public function __construct(array $data = null)
     {
         $this->populateObject($data);
     }
@@ -17,7 +17,7 @@ abstract class TelegramTypes
      * @param \stdClass $data
      * @return TelegramTypes
      */
-    final protected function populateObject(\stdClass $data = null): TelegramTypes
+    final protected function populateObject(array $data = null): TelegramTypes
     {
         if (!is_null($data)) {
             $subObjects = $this->mapSubObjects();

@@ -65,7 +65,7 @@ class TgLog
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
-        return new $returnObject($jsonDecoded->result);
+        return new $returnObject($jsonDecoded['result']);
     }
 
     /**
@@ -99,13 +99,13 @@ class TgLog
      *
      * @param TelegramMethods $method
      * @param array $formData
-     * @return \stdClass
+     * @return array
      */
-    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): \stdClass
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
     {
         $client = new Client();
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
-        return json_decode((string)$response->getBody());
+        return json_decode((string)$response->getBody(), true);
     }
 
     private function resetObjectValues(): TgLog
