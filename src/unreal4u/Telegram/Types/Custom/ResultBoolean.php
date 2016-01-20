@@ -3,10 +3,12 @@ declare(strict_types = 1);
 
 namespace unreal4u\Telegram\Types\Custom;
 
+use unreal4u\Abstracts\TelegramTypes;
+
 /**
  * Some APIs (mainly inline bots) respond with boolean types
  */
-class ResultBoolean
+class ResultBoolean extends TelegramTypes
 {
     public $data = false;
 

@@ -64,6 +64,30 @@ Different methods return different object types.
 
 Please refer to the examples directory to view examples of all implemented methods.
 
+Special note: getting updates via Webhook
+---------
+
+The first you'll have to do is register a webhook with Telegram via the SetWebhook method:
+
+<pre>
+$setWebhook = new SetWebhook();
+$setWebhook->url = '[YOUR HTTPS URL]';
+
+$tgLog = new TgLog(BOT_TOKEN);
+$tgLog->performApiRequest($setWebhook);
+</pre>
+
+This will leave you prepared to start receiving updates on the chosen URL: 
+
+<pre>
+$update = new Update($_POST);
+</pre>
+
+Now <code>$update</code> will contain the actual Update object. Hope that wasn't too difficult :)
+
+More information on this? You can check [how I implemented](https://github.com/unreal4u/tg-timebot) my 
+[timeBot](https://telegram.me/TheTimeBot).
+
 TODOs
 ---------
 
