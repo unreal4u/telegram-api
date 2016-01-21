@@ -88,6 +88,42 @@ Now <code>$update</code> will contain the actual Update object. Hope that wasn't
 More information on this? You can check [how I implemented](https://github.com/unreal4u/tg-timebot) my 
 [timeBot](https://telegram.me/TheTimeBot).
 
+Inline bots
+----------
+
+These type of bots were introduced in January 2016 and extend the capabilities current bots have. With this type of bots
+you can basically just invoke a bot in whatever conversation you have with somebody and then some quick search results
+will appear so that you can choose from one.
+
+This class implements those type of bots and the usage is pretty simple, set up a webhook and put the $_POST request
+into an update class. This will fill out any details you may have. 
+
+What's different from normal updates however is that you are now required to check the Update object: in an inline bot
+message will not be set, but inline_query will be. (Or optionally chosen_inline_result). You will also get an ID which
+you are required to send back (so that Telegram knows what to display to which user). 
+
+The following example code should help you a lot with this: 
+
+<pre>
+$update = new Update($_POST);
+
+if (!empty($update->inline_query)) {
+    $inlineQueryResultArticle = new InlineQueryResultArticle();
+    $inlineQueryResultArticle->title = 'Hello world';
+    $inlineQueryResultArticle->message_text = 'This should be interesting';
+    $inlineQueryResultArticle->id = md5(uniqid());
+    
+    $answerInlineQuery = new AnswerInlineQuery();
+    $answerInlineQuery->inline_query_id = $update->inline_query->id;
+    $answerInlineQuery->results[] = $inlineQueryResultArticle;
+    
+    $tgLog = new TgLog(BOT_TOKEN);
+    $result = $tgLog->performApiRequest($answerInlineQuery);
+}
+</pre>
+
+A functional example can be found in a [working implementation](https://github.com/unreal4u/tg-timebot).
+
 Why this class?
 ----------
 
