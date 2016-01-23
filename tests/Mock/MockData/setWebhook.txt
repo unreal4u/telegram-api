@@ -1,0 +1,1 @@
+{"ok":true,"result":true,"description":"Webhook was set"}
