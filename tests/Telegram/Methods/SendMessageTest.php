@@ -83,7 +83,7 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
 
         // Important assert: ensure we send a serialized object to Telegram
         $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/sendMessage-replyKeyboardMarkup.txt')),
+            trim(file_get_contents('tests/Mock/MockData/SendMessage-replyKeyboardMarkup.txt')),
             $sendMessage->reply_markup
         );
 

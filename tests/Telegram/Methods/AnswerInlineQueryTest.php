@@ -60,7 +60,7 @@ class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
         $result = $this->tgLog->performApiRequest($answerInlineQuery);
 
         $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/answerInlineQueryArticle_unit-test-001.txt')),
+            trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.txt')),
             $answerInlineQuery->results
         );
 
