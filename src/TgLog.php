@@ -171,13 +171,18 @@ class TgLog
     /**
      * Builds up the URL with which we can work with
      *
+     * All methods in the Bot API are case-insensitive.
+     * All queries must be made using UTF-8.
+     *
+     * @see https://core.telegram.org/bots/api#making-requests
+     *
      * @param TelegramMethods $call
      * @return string
      */
     protected function composeApiMethodUrl(TelegramMethods $call): string
     {
         $completeClassName = get_class($call);
-        $this->methodName = lcfirst(substr($completeClassName, strrpos($completeClassName, '\\') + 1));
+        $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
 
         return $this->apiUrl . $this->methodName;
     }
