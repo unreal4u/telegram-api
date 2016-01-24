@@ -4,6 +4,7 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
 use unreal4u\Telegram\Methods\GetUpdates;
+use tests\Mock\MockClientException;
 
 class GetUpdatesTest extends \PHPUnit_Framework_TestCase
 {
@@ -83,5 +84,25 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Custom\\UpdatesArray', $result);
         $this->assertEquals(12345679, $getUpdates->offset);
         $this->assertCount(0, $result->data);
+    }
+
+    public function testWebHookAlreadyActive()
+    {
+        $this->tgLog->specificTest = 'webhookActive';
+        $this->tgLog->mockException = true;
+
+        try {
+            $getUpdates = new GetUpdates();
+            $this->tgLog->performApiRequest($getUpdates);
+        } catch (MockClientException $e) {
+            $this->assertInstanceOf('\\stdClass', $e->decodedResponse);
+            $this->assertEquals(409, $e->decodedResponse->error_code);
+
+            // Rethrow and set the expected exception this time
+            $this->setExpectedException('tests\\Mock\\MockClientException');
+            throw $e;
+        }
+
+
     }
 }
