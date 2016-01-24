@@ -4,25 +4,26 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-Telegram Log 
+Telegram API 
 ======
 
-Enables sending messages, photos, videos and many other things to Telegram from PHP via the open-source Telegram API.
-I hope I'll be able to build a complete implementation soon. For now it remains a bit of work in progress.
+This is a complete PHP7 bot API implementation for Telegram.
 
 About this class
 --------
 
 * Enables you to send messages, stickers, location and other methods via PHP to Telegram.
 * Respects and implements the default types and methods made by Telegram itself.
-* Doesn't need any dependency: you are free to do whatever you want with the available data.
+* Doesn't need any dependency, except for Guzzle. I'm working on an implementation that doesn't require Guzzle as well.
+* Inline bots support!
 
 Detailed description
 ---------
 
 This project was born to study the new concepts of PHP7 and to integrate some other knowledge I had previously heard
 about but didn't have the time to play with them. The idea behind was to create a simple to use class which could
-play nicely with the Telegram API. 
+play nicely with the Telegram API. The end result however ended up being a complete bot API implementation, which can be
+used very easily.
 
 Why PHP7 only?
 ----------
@@ -67,7 +68,7 @@ Please refer to the examples directory to view examples of all implemented metho
 Getting updates via Webhook
 ---------
 
-The first you'll have to do is register a webhook with Telegram via the SetWebhook method:
+The first thing you'll have to do is register a webhook with Telegram via the SetWebhook method:
 
 <pre>
 $setWebhook = new SetWebhook();
@@ -86,7 +87,8 @@ $update = new Update($_POST);
 Now <code>$update</code> will contain the actual Update object. Hope that wasn't too difficult :)
 
 More information on this? You can check [how I implemented](https://github.com/unreal4u/tg-timebot) my 
-[timeBot](https://telegram.me/TheTimeBot).
+[timeBot](https://telegram.me/TheTimeBot). Take however into account that the cited repo is only a playground (for now), 
+so it can happen that things in that repository may or may not work as expected.
 
 Inline bots
 ----------
