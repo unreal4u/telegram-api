@@ -56,8 +56,8 @@ class TgLog
     /**
      * Prepares and sends an API request to Telegram
      *
-     * @param mixed $method
-     * @return mixed
+     * @param TelegramMethods $method
+     * @return TelegramTypes
      */
     public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
