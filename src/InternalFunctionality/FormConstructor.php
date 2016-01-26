@@ -10,7 +10,7 @@ class FormConstructor
      * @param TelegramMethods $method
      * @return mixed
      */
-    private function constructFormData(TelegramMethods $method): array
+    public function constructFormData(TelegramMethods $method): array
     {
         $result = $this->checkSpecialConditions($method);
 
@@ -40,8 +40,10 @@ class FormConstructor
      * @param TelegramMethods $method
      * @return array
      */
-    private function checkSpecialConditions(TelegramMethods $method): array
+    public function checkSpecialConditions(TelegramMethods $method): array
     {
+        $method->performSpecialConditions();
+
         $return = [false];
 
         foreach ($method as $key => $value) {
@@ -53,10 +55,6 @@ class FormConstructor
                         'id' => $key,
                         'stream' => $value->getStream(),
                     ];
-                } elseif (in_array('unreal4u\\InternalFunctionality\\KeyboardMethods', class_parents($value))) {
-                    // If we are about to send a KeyboardMethod, we must send a serialized object
-                    $method->$key = json_encode($value);
-                    $return = [true];
                 }
             }
         }
@@ -72,7 +70,7 @@ class FormConstructor
      * @param resource $stream The actual file handler
      * @return array Returns the actual formdata to be sent
      */
-    private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
+    public function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {
         $formData = [
             'multipart' => [],

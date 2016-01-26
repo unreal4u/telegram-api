@@ -29,42 +29,13 @@ class TgLogTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    public function providerBuildMultipartFormData()
-    {
-        $mapValues[] = [
-            [
-                'id' => 'lala',
-                'contents' => 'lolo',
-            ],
-            'non-existant',
-            null,
-            [
-                'multipart' => [
-                    0 => [
-                        'name' => 'id',
-                        'contents' => 'lala',
-                    ],
-                    1 => [
-                        'name' => 'contents',
-                        'contents' => 'lolo',
-                    ]
-                ]
-            ],
-        ];
-
-        return $mapValues;
-    }
-
-    /**
-     * @dataProvider providerBuildMultipartFormData
-     */
-    public function testBuildMultipartFormData(array $data, string $fileKeyName, $stream = null, array $expected = [])
+    /*public function testBuildMultipartFormData(array $data, string $fileKeyName, $stream = null, array $expected = [])
     {
         $call = new \ReflectionMethod('unreal4u\\TgLog', 'buildMultipartFormData');
         $call->setAccessible(true);
         $result = $call->invokeArgs(new \unreal4u\TgLog('TEST-TEST'), [$data, $fileKeyName, $stream]);
         $this->assertEquals($expected, $result);
-    }
+    }*/
 
     public function testComposeApiMethodUrl()
     {

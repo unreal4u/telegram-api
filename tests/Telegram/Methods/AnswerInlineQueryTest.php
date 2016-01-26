@@ -3,7 +3,6 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use tests\Mock\MockClientException;
 use unreal4u\Telegram\Methods\AnswerInlineQuery;
 use unreal4u\Telegram\Types\InlineQueryResultArticle;
 
