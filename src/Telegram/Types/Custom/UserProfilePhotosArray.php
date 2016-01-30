@@ -6,6 +6,7 @@ namespace unreal4u\Telegram\Types\Custom;
 
 use unreal4u\Interfaces\CustomArrayType;
 use unreal4u\Telegram\Types\PhotoSize;
+use Psr\Log\LoggerInterface;
 
 /**
  * Mockup class to generate a real telegram update representation
@@ -14,14 +15,14 @@ class UserProfilePhotosArray implements CustomArrayType
 {
     public $data = [];
 
-    public function __construct(array $data = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (!empty($data)) {
             $i = 0;
             foreach ($data as $telegramResponse) {
                 foreach ($telegramResponse as $photoSize) {
                     // Create an actual PhotoSize object and fill the array
-                    $this->data[$i][] = new PhotoSize($photoSize);
+                    $this->data[$i][] = new PhotoSize($photoSize, $logger);
                 }
                 $i++;
             }

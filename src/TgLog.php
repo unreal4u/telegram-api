@@ -75,11 +75,13 @@ class TgLog
      */
     public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
+        $this->logger->debug('Going to perform API request, resetting internal class values');
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
         $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
-        return new $returnObject($jsonDecoded['result']);
+        $this->logger->debug(sprintf('Decoded response from server, instantiating new %s class', $returnObject));
+        return new $returnObject($jsonDecoded['result'], $this->logger);
     }
 
     /**
@@ -93,8 +95,10 @@ class TgLog
      */
     public function downloadFile(File $file): TelegramDocument
     {
+        $this->logger->debug('Downloading file from Telegram, creating URI');
         $url = $this->apiUrl . $file->file_path;
         $client = new Client();
+        $this->logger->debug('About to perform request');
         return new TelegramDocument($client->get($url));
     }
 
@@ -118,8 +122,11 @@ class TgLog
      */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
     {
+        $this->logger->debug('About to instantiate HTTP Client');
         $client = new Client();
+        $this->logger->info('About to perform POST to Telegram bot API');
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
+        $this->logger->debug('Got response back from Telegram, applying json_decode');
         return json_decode((string)$response->getBody(), true);
     }
 
@@ -137,6 +144,7 @@ class TgLog
 
         switch ($this->formType) {
             case 'application/x-www-form-urlencoded':
+                $this->logger->debug('Creating x-www-form-urlencoded form');
                 $formData = [
                     'form_params' => get_object_vars($method),
                 ];
@@ -145,6 +153,7 @@ class TgLog
                 $formData = $this->buildMultipartFormData(get_object_vars($method), $result['id'], $result['stream']);
                 break;
             default:
+                $this->logger->critical('Invalid form-type detected');
                 $formData = [];
                 break;
         }
@@ -163,6 +172,7 @@ class TgLog
      */
     private function checkSpecialConditions(TelegramMethods $method): array
     {
+        $this->logger->debug('Checking special conditions');
         $method->performSpecialConditions();
 
         $return = [false];
@@ -170,6 +180,7 @@ class TgLog
         foreach ($method as $key => $value) {
             if (is_object($value)) {
                 if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                    $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                     // If we are about to send a file, we must use the multipart/form-data way
                     $this->formType = 'multipart/form-data';
                     $return = [
@@ -198,6 +209,7 @@ class TgLog
     {
         $completeClassName = get_class($call);
         $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
+        $this->logger->debug(sprintf('Selected API method is %s', $this->methodName));
 
         return $this->apiUrl . $this->methodName;
     }
@@ -212,6 +224,7 @@ class TgLog
      */
     private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {
+        $this->logger->debug('Creating multi-part form array data');
         $formData = [
             'multipart' => [],
         ];
