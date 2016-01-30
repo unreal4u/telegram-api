@@ -9,6 +9,7 @@ use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Abstracts\TelegramMethods;
 use unreal4u\Telegram\Types\File;
+use Psr\Log\LoggerInterface;
 
 /**
  * The main API which does it all
@@ -20,6 +21,12 @@ class TgLog
      * @var string
      */
     private $botToken = '';
+
+    /**
+     * Contains an instance to a PSR-3 compatible logger
+     * @var LoggerInterface
+     */
+    protected $logger = null;
 
     /**
      * Stores the API URL from Telegram
@@ -47,9 +54,10 @@ class TgLog
      * TelegramLog constructor.
      * @param string $botToken
      */
-    public function __construct(string $botToken)
+    public function __construct(string $botToken, LoggerInterface $logger = null)
     {
         $this->botToken = $botToken;
+        $this->logger = $logger;
         $this->constructApiUrl();
     }
 
@@ -91,6 +99,7 @@ class TgLog
     final private function constructApiUrl(): TgLog
     {
         $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken . '/';
+        $this->logger->info('Build up the API URL');
         return $this;
     }
 
