@@ -4,8 +4,9 @@ declare(strict_types = 1);
 
 namespace unreal4u;
 
-use \GuzzleHttp\Client;
+use GuzzleHttp\Client;
 use unreal4u\Abstracts\TelegramTypes;
+use unreal4u\InternalFunctionality\DummyLogger;
 use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Abstracts\TelegramMethods;
 use unreal4u\Telegram\Types\File;
@@ -57,7 +58,12 @@ class TgLog
     public function __construct(string $botToken, LoggerInterface $logger = null)
     {
         $this->botToken = $botToken;
+
+        if (is_null($logger)) {
+            $logger = new DummyLogger();
+        }
         $this->logger = $logger;
+
         $this->constructApiUrl();
     }
 
@@ -99,7 +105,7 @@ class TgLog
     final private function constructApiUrl(): TgLog
     {
         $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken . '/';
-        $this->logger->info('Build up the API URL');
+        $this->logger->debug('Built up the API URL');
         return $this;
     }
 
