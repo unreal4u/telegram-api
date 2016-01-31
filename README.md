@@ -12,7 +12,7 @@ This is a complete PHP7 bot API implementation for Telegram.
 About this class
 --------
 
-* Enables you to send messages, stickers, location and other methods via PHP to Telegram.
+* Enables you to send messages, stickers, location and other methods via PHP a Telegram user (or group).
 * Respects and implements the default types and methods made by Telegram itself.
 * Doesn't need any dependency, except for Guzzle. I'm working on an implementation that doesn't require Guzzle as well.
 * Inline bots support!
@@ -38,25 +38,25 @@ Installation
 
 The preferred method is composer, so add the following to your composer.json:
 
-<pre>
+```json
 {
   "require": {
     "unreal4u/telegram-api": "~1.0"
   }
 }
-</pre>
+```
 
 Basic usage
 ----------
 
-<pre>
+```php
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
 
 $tgLog = new TgLog(BOT_TOKEN);
 $message = $tgLog->performApiRequest($sendMessage);
-</pre>
+```
 
 With the SendMessage() object, you can create a message to be sent through the TelegramLog object.  
 All other functionality is based upon this behaviour, so every other method is very similar: you instantiate an object, 
@@ -70,19 +70,19 @@ Getting updates via Webhook
 
 The first thing you'll have to do is register a webhook with Telegram via the SetWebhook method:
 
-<pre>
+```php
 $setWebhook = new SetWebhook();
 $setWebhook->url = '[YOUR HTTPS URL]';
 
 $tgLog = new TgLog(BOT_TOKEN);
 $tgLog->performApiRequest($setWebhook);
-</pre>
+```
 
 This will leave you prepared to start receiving updates on the chosen URL: 
 
-<pre>
+```php
 $update = new Update($_POST);
-</pre>
+```
 
 Now <code>$update</code> will contain the actual Update object. Hope that wasn't too difficult :)
 
@@ -106,7 +106,7 @@ you are required to send back (so that Telegram knows what to display to which u
 
 The following example code should help you a lot with this: 
 
-<pre>
+```php
 $update = new Update($_POST);
 
 if (!empty($update->inline_query)) {
@@ -122,7 +122,7 @@ if (!empty($update->inline_query)) {
     $tgLog = new TgLog(BOT_TOKEN);
     $result = $tgLog->performApiRequest($answerInlineQuery);
 }
-</pre>
+```
 
 A functional example can be found in a [working implementation](https://github.com/unreal4u/tg-timebot).
 
@@ -146,6 +146,9 @@ But I wanted to study a bunch of new concepts for me and make a standalone clien
 I had heard of all these great tools previously but I didn't have a nice project to work on and learn properly. So this
 project was born. 
 
+At the same time, I wanted an API that did respect Telegram's API model as much as possible, while being friendly to a
+developer as well. The result of that is this package, check the examples for usage.
+
 Extra requirements
 ----------
 
@@ -165,7 +168,7 @@ that there are some caveats on this, so you may be better out with the SetWebhoo
 Semver
 -----------
 
-I will try my best to respect Semantic Versioning.  
+I will try my best to respect [Semantic Versioning](http://semver.org).  
 That being said, the first stable release is v1.0.0, from there on no mayor BC changes will occur unless we update
 the major.
 
@@ -177,21 +180,28 @@ out).
 
 Instructions
 
-1- Clone this repo
+* Clone this repo
 
-2- Execute: 
-<pre>
+* Execute: 
+```bash
 vagrant up # Might take a while :)
 vagrant ssh
 cd /var/www/default/
 composer install -o
-</pre>
+```
 
-3- To unit test:
-<pre>
+* To unit test:
+```bash
 vagrant ssh
 cd /var/www/default/
 vendor/bin/phpunit
-</pre>
+```
 
-4- That's all folks!
+* To unit test with code coverage:
+```bash
+vagrant ssh
+cd /var/www/default/
+./execute-tests.sh
+```
+
+* That's all folks!
