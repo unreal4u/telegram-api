@@ -90,41 +90,8 @@ More information on this? You can check [how I implemented](https://github.com/u
 [timeBot](https://telegram.me/TheTimeBot). Take however into account that the cited repo is only a playground (for now), 
 so it can happen that things in that repository may or may not work as expected.
 
-Inline bots
+[Inline bots](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots)
 ----------
-
-These type of bots were introduced in January 2016 and extend the capabilities current bots have. With this type of bots
-you can basically just invoke a bot in whatever conversation you have with somebody and then some quick search results
-will appear so that you can choose from one.
-
-This class implements those type of bots and the usage is pretty simple, set up a webhook and put the $_POST request
-into an update class. This will fill out any details you may have. 
-
-What's different from normal updates however is that you are now required to check the Update object: in an inline bot
-message will not be set, but inline_query will be. (Or optionally chosen_inline_result). You will also get an ID which
-you are required to send back (so that Telegram knows what to display to which user). 
-
-The following example code should help you a lot with this: 
-
-```php
-$update = new Update($_POST);
-
-if (!empty($update->inline_query)) {
-    $inlineQueryResultArticle = new InlineQueryResultArticle();
-    $inlineQueryResultArticle->title = 'Hello world';
-    $inlineQueryResultArticle->message_text = 'This should be interesting';
-    $inlineQueryResultArticle->id = md5(uniqid());
-    
-    $answerInlineQuery = new AnswerInlineQuery();
-    $answerInlineQuery->inline_query_id = $update->inline_query->id;
-    $answerInlineQuery->results[] = $inlineQueryResultArticle;
-    
-    $tgLog = new TgLog(BOT_TOKEN);
-    $result = $tgLog->performApiRequest($answerInlineQuery);
-}
-```
-
-A functional example can be found in a [working implementation](https://github.com/unreal4u/tg-timebot).
 
 Why this class?
 ----------
@@ -149,14 +116,8 @@ project was born.
 At the same time, I wanted an API that did respect Telegram's API model as much as possible, while being friendly to a
 developer as well. The result of that is this package, check the examples for usage.
 
-Extra requirements
+[Extra requirements](https://github.com/unreal4u/telegram-api/wiki/Creating-a-bot)
 ----------
-
-You need an actual working bot at Telegram to get started. To do so, initiate a talk with the 
-[@BotFather](https://telegram.me/botfather) (lol) and follow its instructions. More information on how to do so can be 
-found at the amazing documentation here: [https://core.telegram.org/bots](https://core.telegram.org/bots)
-
-Also [check here for step-by-step instructions](https://github.com/akalongman/php-telegram-bot/blob/master/README.md).
 
 Getting everything started up
 -----------
@@ -172,36 +133,5 @@ I will try my best to respect [Semantic Versioning](http://semver.org).
 That being said, the first stable release is v1.0.0, from there on no mayor BC changes will occur unless we update
 the major.
 
-Want to colaborate?
+[Want to colaborate?](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F)
 -----------
-
-You are free to do so, just send a pull request. Try to respect the PSR-2 styling guide (or PSR-12 whenever it comes 
-out). 
-
-Instructions
-
-* Clone this repo
-
-* Execute: 
-```bash
-vagrant up # Might take a while :)
-vagrant ssh
-cd /var/www/default/
-composer install -o
-```
-
-* To unit test:
-```bash
-vagrant ssh
-cd /var/www/default/
-vendor/bin/phpunit
-```
-
-* To unit test with code coverage:
-```bash
-vagrant ssh
-cd /var/www/default/
-./execute-tests.sh
-```
-
-* That's all folks!
