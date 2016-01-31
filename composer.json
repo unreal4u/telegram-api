@@ -1,6 +1,6 @@
 {
   "name": "unreal4u/telegram-api",
-  "description": "Complete implementation used to communicate with the open-source Telegram API",
+  "description": "A complete Telegram bot API implementation written in PHP, with support for inline bots!",
   "keywords": [
     "Telegram",
     "API",
