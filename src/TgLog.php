@@ -124,7 +124,6 @@ class TgLog
     {
         $this->logger->debug('About to instantiate HTTP Client');
         $client = new Client();
-        $this->logger->info('About to perform POST to Telegram bot API');
         $response = $client->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
         return json_decode((string)$response->getBody(), true);
@@ -209,7 +208,7 @@ class TgLog
     {
         $completeClassName = get_class($call);
         $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
-        $this->logger->debug(sprintf('Selected API method is %s', $this->methodName));
+        $this->logger->info('About to perform API request', ['method' => $this->methodName]);
 
         return $this->apiUrl . $this->methodName;
     }
