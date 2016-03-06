@@ -96,7 +96,7 @@ class TgLog
     public function downloadFile(File $file): TelegramDocument
     {
         $this->logger->debug('Downloading file from Telegram, creating URI');
-        $url = $this->apiUrl . $file->file_path;
+        $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $client = new Client();
         $this->logger->debug('About to perform request');
         return new TelegramDocument($client->get($url));
