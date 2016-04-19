@@ -579,16 +579,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "64d40a593fc31a8abf4ce3d200147ddf8ca64e52"
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/64d40a593fc31a8abf4ce3d200147ddf8ca64e52",
-                "reference": "64d40a593fc31a8abf4ce3d200147ddf8ca64e52",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/92f5c61b5c64159faec5298325ffab0c7e59dcc8",
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8",
                 "shasum": ""
             },
             "require": {
@@ -597,7 +597,7 @@
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-token-stream": "~1.3",
                 "sebastian/environment": "^1.3.2",
-                "sebastian/version": "~1.0"
+                "sebastian/version": "~1.0|~2.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
@@ -637,7 +637,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-01-11 10:05:34"
+            "time": "2016-02-04 13:05:19"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -819,16 +819,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.1.6",
+            "version": "5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "72e92139712e868c3888ed4dd4d3c3eb365b1bb7"
+                "reference": "ebde9bac26b1138eb99e1aa841feaa51b4a08314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/72e92139712e868c3888ed4dd4d3c3eb365b1bb7",
-                "reference": "72e92139712e868c3888ed4dd4d3c3eb365b1bb7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ebde9bac26b1138eb99e1aa841feaa51b4a08314",
+                "reference": "ebde9bac26b1138eb99e1aa841feaa51b4a08314",
                 "shasum": ""
             },
             "require": {
@@ -851,7 +851,7 @@
                 "sebastian/exporter": "~1.2",
                 "sebastian/global-state": "~1.0",
                 "sebastian/resource-operations": "~1.0",
-                "sebastian/version": "~1.0",
+                "sebastian/version": "~1.0|~2.0",
                 "symfony/yaml": "~2.1|~3.0"
             },
             "suggest": {
@@ -863,7 +863,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.1.x-dev"
+                    "dev-master": "5.2.x-dev"
                 }
             },
             "autoload": {
@@ -889,7 +889,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-01-29 09:19:36"
+            "time": "2016-02-11 14:58:25"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1327,19 +1327,27 @@
         },
         {
             "name": "sebastian/version",
-            "version": "1.0.6",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/version.git",
-                "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6"
+                "reference": "c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
-                "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5",
+                "reference": "c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.6"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "src/"
@@ -1358,7 +1366,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2016-02-04 12:56:52"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -1600,16 +1608,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691"
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/3df409958a646dad2bc5046c3fb671ee24a1a691",
-                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3cf0709d7fe936e97bee9e954382e449003f1d9a",
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a",
                 "shasum": ""
             },
             "require": {
@@ -1645,7 +1653,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-26 13:39:53"
+            "time": "2016-02-02 13:44:19"
         }
     ],
     "aliases": [],
