@@ -50,6 +50,9 @@ Basic usage
 ----------
 
 ```php
+use \unreal4u\TelegramAPI\TgLog;
+use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
@@ -71,6 +74,9 @@ Getting updates via Webhook
 The first thing you'll have to do is register a webhook with Telegram via the SetWebhook method:
 
 ```php
+use \unreal4u\TelegramAPI\TgLog;
+use \unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
+
 $setWebhook = new SetWebhook();
 $setWebhook->url = '[YOUR HTTPS URL]';
 
@@ -81,6 +87,8 @@ $tgLog->performApiRequest($setWebhook);
 This will leave you prepared to start receiving updates on the chosen URL: 
 
 ```php
+use \unreal4u\TelegramAPI\Telegram\Types\Update;
+
 $update = new Update($_POST);
 ```
 

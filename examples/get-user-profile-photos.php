@@ -1,8 +1,8 @@
 <?php
 
 use GuzzleHttp\Exception\ClientException;
-use unreal4u\Telegram\Methods\GetUserProfilePhotos;
-use unreal4u\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
+use unreal4u\TelegramAPI\TgLog;
 
 include('basics.php');
 

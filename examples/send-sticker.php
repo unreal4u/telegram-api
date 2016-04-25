@@ -2,8 +2,8 @@
 
 include('basics.php');
 
-use unreal4u\Telegram\Methods\SendSticker;
-use unreal4u\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
+use unreal4u\TelegramAPI\TgLog;
 use GuzzleHttp\Exception\ClientException;
 
 $tgLog = new TgLog(BOT_TOKEN);

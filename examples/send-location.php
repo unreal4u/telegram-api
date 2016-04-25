@@ -2,8 +2,8 @@
 
 include('basics.php');
 
-use unreal4u\TgLog;
-use unreal4u\Telegram\Methods\SendLocation;
+use unreal4u\TelegramAPI\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\SendLocation;
 
 $tgLog = new TgLog(BOT_TOKEN);
 

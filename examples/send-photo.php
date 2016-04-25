@@ -2,9 +2,9 @@
 
 include('basics.php');
 
-use unreal4u\Telegram\Types\Custom\InputFile;
-use unreal4u\TgLog;
-use unreal4u\Telegram\Methods\SendPhoto;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\SendPhoto;
 use GuzzleHttp\Exception\ClientException;
 
 $tgLog = new TgLog(BOT_TOKEN);

@@ -2,8 +2,8 @@
 
 include('basics.php');
 
-use \unreal4u\TgLog;
-use \unreal4u\Telegram\Methods\GetUpdates;
+use \unreal4u\TelegramAPI\TgLog;
+use \unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
 
 $tgLog = new TgLog(BOT_TOKEN);
 

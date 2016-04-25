@@ -3,9 +3,9 @@
 include('basics.php');
 
 use GuzzleHttp\Exception\ClientException;
-use unreal4u\Telegram\Types\ReplyKeyboardMarkup;
-use \unreal4u\TgLog;
-use \unreal4u\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
+use unreal4u\TelegramAPI\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $tgLog = new TgLog(BOT_TOKEN);
 
