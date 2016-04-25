@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\InternalFunctionality\DummyLogger;
 use unreal4u\InternalFunctionality\TelegramDocument;
@@ -17,6 +18,11 @@ use Psr\Log\LoggerInterface;
  */
 class TgLog
 {
+    /**
+     * @var ClientInterface
+     */
+    protected $httpClient;
+
     /**
      * Stores the token
      * @var string
@@ -63,6 +69,7 @@ class TgLog
             $logger = new DummyLogger();
         }
         $this->logger = $logger;
+        $this->httpClient = new Client();
 
         $this->constructApiUrl();
     }
@@ -97,9 +104,8 @@ class TgLog
     {
         $this->logger->debug('Downloading file from Telegram, creating URI');
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
-        $client = new Client();
         $this->logger->debug('About to perform request');
-        return new TelegramDocument($client->get($url));
+        return new TelegramDocument($this->httpClient->get($url));
     }
 
     /**
@@ -123,8 +129,7 @@ class TgLog
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
     {
         $this->logger->debug('About to instantiate HTTP Client');
-        $client = new Client();
-        $response = $client->post($this->composeApiMethodUrl($method), $formData);
+        $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
         return json_decode((string)$response->getBody(), true);
     }
