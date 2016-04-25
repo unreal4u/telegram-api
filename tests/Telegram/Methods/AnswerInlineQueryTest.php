@@ -3,8 +3,8 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\AnswerInlineQuery;
-use unreal4u\Telegram\Types\InlineQueryResultArticle;
+use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResultArticle;
 
 class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -63,7 +63,7 @@ class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
             $answerInlineQuery->results
         );
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Custom\\ResultBoolean', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\ResultBoolean', $result);
         $this->assertTrue($result->data);
     }
 }

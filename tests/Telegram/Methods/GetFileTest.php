@@ -4,7 +4,7 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockClientException;
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\GetFile;
+use unreal4u\TelegramAPI\Telegram\Methods\GetFile;
 
 class GetFileTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,7 +48,7 @@ class GetFileTest extends \PHPUnit_Framework_TestCase
         $getFile = new GetFile();
 
         $result = $this->tgLog->performApiRequest($getFile);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\File', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\File', $result);
         $this->assertEquals('XXXYYYZZZ', $result->file_id);
         $this->assertEquals('voice/file_8', $result->file_path);
     }

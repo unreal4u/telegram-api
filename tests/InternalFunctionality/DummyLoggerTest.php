@@ -2,7 +2,7 @@
 
 namespace tests\InternalFunctionality;
 
-use unreal4u\InternalFunctionality\DummyLogger;
+use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 
 class DummyLoggerTest extends \PHPUnit_Framework_TestCase
 {

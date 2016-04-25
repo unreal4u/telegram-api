@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
-use unreal4u\Abstracts\TelegramTypes;
-use unreal4u\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
  * This object represents an incoming update.

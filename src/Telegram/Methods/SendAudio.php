@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Methods;
+namespace unreal4u\TelegramAPI\Telegram\Methods;
 
-use unreal4u\Abstracts\TelegramMethods;
-use unreal4u\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio
@@ -30,7 +30,7 @@ class SendAudio extends TelegramMethods
     /**
      * Audio file to send. Associate an InputFile with it
      *
-     * @see unreal4u\Telegram\Types\Custom\InputFile
+     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile
      * @var InputFile
      */
     public $audio = null;

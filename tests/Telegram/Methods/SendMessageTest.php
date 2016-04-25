@@ -4,8 +4,8 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
 use tests\Mock\MockClientException;
-use unreal4u\Telegram\Methods\SendMessage;
-use unreal4u\Telegram\Types\ReplyKeyboardMarkup;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 
 class SendMessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,10 +51,10 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
         $sendMessage->text = 'Hello world';
         $result = $this->tgLog->performApiRequest($sendMessage);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
         $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
         $this->assertEquals(123456789, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendMessage->chat_id, $result->chat->id);
@@ -87,10 +87,10 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
             $sendMessage->reply_markup
         );
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
         $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
         $this->assertEquals(123456789, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendMessage->chat_id, $result->chat->id);

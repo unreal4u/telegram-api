@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
-use unreal4u\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
 /**
  * This object represents a result of an inline query that was chosen by the user and sent to their chat partner.

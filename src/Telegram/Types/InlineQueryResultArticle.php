@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
 /**
  * Represents a link to an article or web page

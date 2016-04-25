@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Methods;
+namespace unreal4u\TelegramAPI\Telegram\Methods;
 
-use unreal4u\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.

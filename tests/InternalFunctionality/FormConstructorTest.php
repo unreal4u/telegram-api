@@ -2,7 +2,7 @@
 
 namespace tests\InternalFunctionality;
 
-use unreal4u\InternalFunctionality\FormConstructor;
+use unreal4u\TelegramAPI\InternalFunctionality\FormConstructor;
 
 class FormConstructorTest extends \PHPUnit_Framework_TestCase
 {

@@ -3,7 +3,7 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\SendSticker;
+use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 
 class SendStickerTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,10 +50,10 @@ class SendStickerTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->tgLog->performApiRequest($sendSticker);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
         $this->assertEquals(17, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendSticker->chat_id, $result->chat->id);
@@ -64,9 +64,9 @@ class SendStickerTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($result->voice);
         $this->assertNull($result->video);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Sticker', $result->sticker);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Sticker', $result->sticker);
         $this->assertEquals($sendSticker->sticker, $result->sticker->file_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\PhotoSize', $result->sticker->thumb);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->sticker->thumb);
         $this->assertEquals(128, $result->sticker->thumb->height);
     }
 }

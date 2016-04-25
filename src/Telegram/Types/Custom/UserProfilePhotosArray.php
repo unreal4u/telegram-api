@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types\Custom;
+namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\Interfaces\CustomArrayType;
-use unreal4u\Telegram\Types\PhotoSize;
+use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
+use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
 use Psr\Log\LoggerInterface;
 
 /**

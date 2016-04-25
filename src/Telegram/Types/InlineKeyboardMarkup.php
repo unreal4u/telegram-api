@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
 /**
  * This object represents an inline keyboard that appears right next to the message it belongs to.

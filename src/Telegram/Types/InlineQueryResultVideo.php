@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
 /**
  * Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively,

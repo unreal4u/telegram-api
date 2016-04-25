@@ -1,8 +1,10 @@
 <?php
 
-namespace unreal4u\InternalFunctionality;
+declare(strict_types = 1);
 
-use unreal4u\Abstracts\TelegramMethods;
+namespace unreal4u\TelegramAPI\InternalFunctionality;
+
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 class FormConstructor
 {
@@ -48,7 +50,7 @@ class FormConstructor
 
         foreach ($method as $key => $value) {
             if (is_object($value)) {
-                if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                if (get_class($value) == 'unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\InputFile') {
                     // If we are about to send a file, we must use the multipart/form-data way
                     $this->formType = 'multipart/form-data';
                     $return = [

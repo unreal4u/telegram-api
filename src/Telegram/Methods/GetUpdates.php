@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Methods;
+namespace unreal4u\TelegramAPI\Telegram\Methods;
 
-use unreal4u\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
  * This will get the updates Telegram has for our bot

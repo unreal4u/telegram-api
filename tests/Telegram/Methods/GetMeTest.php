@@ -4,7 +4,7 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockClientException;
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\GetMe;
+use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
 
 class GetMeTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,7 +48,7 @@ class GetMeTest extends \PHPUnit_Framework_TestCase
         $getMe = new GetMe();
 
         $result = $this->tgLog->performApiRequest($getMe);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result);
         $this->assertNotEmpty($result->first_name);
         $this->assertNotEmpty($result->username);
 

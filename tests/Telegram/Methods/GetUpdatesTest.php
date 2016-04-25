@@ -3,8 +3,8 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\GetUpdates;
 use tests\Mock\MockClientException;
+use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
 
 class GetUpdatesTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,18 +50,18 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         $getUpdates = new GetUpdates();
 
         $result = $this->tgLog->performApiRequest($getUpdates);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Custom\\UpdatesArray', $result);
-        $this->assertContainsOnlyInstancesOf('unreal4u\\Telegram\\Types\\Update', $result->data);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\UpdatesArray', $result);
+        $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Update', $result->data);
         $this->assertCount(1, $result->data);
 
         foreach ($result->traverseObject() as $theUpdate) {
             $this->assertEquals(12345678, $theUpdate->update_id);
-            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $theUpdate->message);
+            $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $theUpdate->message);
 
             $theMessage = $theUpdate->message;
             $this->assertEquals(12, $theMessage->message_id);
-            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $theMessage->from);
-            $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $theMessage->chat);
+            $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $theMessage->from);
+            $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $theMessage->chat);
             $this->assertEquals('Hello bot', $theMessage->text);
             $this->assertEquals(12345678, $theMessage->from->id);
             $this->assertEquals('unreal4u', $theMessage->from->username);
@@ -81,7 +81,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
         $getUpdates->offset = 12345679;
         $result = $this->tgLog->performApiRequest($getUpdates);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Custom\\UpdatesArray', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\UpdatesArray', $result);
         $this->assertEquals(12345679, $getUpdates->offset);
         $this->assertCount(0, $result->data);
     }

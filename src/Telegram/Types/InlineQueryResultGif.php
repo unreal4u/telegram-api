@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
 /**
  * Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional

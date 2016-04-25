@@ -1,6 +1,6 @@
 <?php
 
-namespace unreal4u\Interfaces;
+namespace unreal4u\TelegramAPI\Interfaces;
 
 use Psr\Log\LoggerInterface;
 

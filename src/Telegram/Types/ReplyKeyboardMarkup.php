@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types;
 
-use unreal4u\Abstracts\KeyboardMethods;
+use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 
 /**
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).

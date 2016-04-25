@@ -3,8 +3,8 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\SendPhoto;
-use unreal4u\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Methods\SendPhoto;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 class SendPhotoTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,10 +52,10 @@ class SendPhotoTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->tgLog->performApiRequest($sendPhoto);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
         $this->assertEquals(19, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendPhoto->chat_id, $result->chat->id);
@@ -68,7 +68,7 @@ class SendPhotoTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($result->audio);
 
         $this->assertCount(3, $result->photo);
-        $this->assertContainsOnlyInstancesOf('unreal4u\\Telegram\\Types\\PhotoSize', $result->photo);
+        $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->photo);
         $i = 1;
         foreach ($result->photo as $photo) {
             $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);

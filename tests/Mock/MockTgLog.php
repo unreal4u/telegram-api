@@ -2,8 +2,8 @@
 
 namespace tests\Mock;
 
-use unreal4u\TgLog;
-use unreal4u\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\TgLog;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 class MockTgLog extends TgLog
 {

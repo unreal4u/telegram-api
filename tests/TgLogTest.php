@@ -31,9 +31,9 @@ class TgLogTest extends \PHPUnit_Framework_TestCase
 
     /*public function testBuildMultipartFormData(array $data, string $fileKeyName, $stream = null, array $expected = [])
     {
-        $call = new \ReflectionMethod('unreal4u\\TgLog', 'buildMultipartFormData');
+        $call = new \ReflectionMethod('unreal4u\\TelegramAPI\\TgLog', 'buildMultipartFormData');
         $call->setAccessible(true);
-        $result = $call->invokeArgs(new \unreal4u\TgLog('TEST-TEST'), [$data, $fileKeyName, $stream]);
+        $result = $call->invokeArgs(new \unreal4u\TelegramAPI\TgLog('TEST-TEST'), [$data, $fileKeyName, $stream]);
         $this->assertEquals($expected, $result);
     }*/
 

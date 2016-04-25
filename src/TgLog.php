@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u;
+namespace unreal4u\TelegramAPI;
 
 use GuzzleHttp\Client;
-use unreal4u\Abstracts\TelegramTypes;
-use unreal4u\InternalFunctionality\DummyLogger;
-use unreal4u\InternalFunctionality\TelegramDocument;
-use unreal4u\Abstracts\TelegramMethods;
-use unreal4u\Telegram\Types\File;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Telegram\Types\File;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -54,6 +54,7 @@ class TgLog
     /**
      * TelegramLog constructor.
      * @param string $botToken
+     * @param LoggerInterface $logger
      */
     public function __construct(string $botToken, LoggerInterface $logger = null)
     {
@@ -79,7 +80,7 @@ class TgLog
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
-        $returnObject = 'unreal4u\\Telegram\\Types\\' . $method::bindToObjectType();
+        $returnObject = 'unreal4u\\TelegramAPI\\Telegram\\Types\\' . $method::bindToObjectType();
         $this->logger->debug(sprintf('Decoded response from server, instantiating new %s class', $returnObject));
         return new $returnObject($jsonDecoded['result'], $this->logger);
     }
@@ -178,7 +179,7 @@ class TgLog
 
         foreach ($method as $key => $value) {
             if (is_object($value)) {
-                if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                if (get_class($value) == 'unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\InputFile') {
                     $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                     // If we are about to send a file, we must use the multipart/form-data way
                     $this->formType = 'multipart/form-data';

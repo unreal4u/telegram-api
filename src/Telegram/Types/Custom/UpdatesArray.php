@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Types\Custom;
+namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\Abstracts\TelegramTypes;
-use unreal4u\Interfaces\CustomArrayType;
-use unreal4u\Telegram\Types\Update;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
+use unreal4u\TelegramAPI\Telegram\Types\Update;
 use Psr\Log\LoggerInterface;
 
 /**

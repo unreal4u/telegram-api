@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\InternalFunctionality;
+namespace unreal4u\TelegramAPI\InternalFunctionality;
 
 use GuzzleHttp\Psr7\Response;
 

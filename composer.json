@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "unreal4u\\": "src"
+      "unreal4u\\TelegramAPI\\": "src"
     }
   },
   "autoload-dev": {

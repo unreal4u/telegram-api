@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Abstracts;
+namespace unreal4u\TelegramAPI\Abstracts;
 
 use Psr\Log\LoggerInterface;
-use unreal4u\InternalFunctionality\DummyLogger;
+use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 
 abstract class TelegramTypes
 {
@@ -34,7 +34,7 @@ abstract class TelegramTypes
             $subObjects = $this->mapSubObjects();
             foreach ($data as $key => $value) {
                 if (!empty($subObjects) && array_key_exists($key, $subObjects)) {
-                    $className = 'unreal4u\\Telegram\\Types\\' . $subObjects[$key];
+                    $className = 'unreal4u\\TelegramAPI\\Telegram\\Types\\' . $subObjects[$key];
                     $this->logger->debug(sprintf('Subobject detected, creating new instance of %s', $className));
                     $candidateKey = new $className($value, $this->logger);
                     if (isset($candidateKey->data)) {

@@ -3,8 +3,8 @@
 namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
-use unreal4u\Telegram\Methods\SendVideo;
-use unreal4u\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 class SendVideoTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,10 +52,10 @@ class SendVideoTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->tgLog->performApiRequest($sendVideo);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
         $this->assertEquals(20, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendVideo->chat_id, $result->chat->id);
@@ -66,7 +66,7 @@ class SendVideoTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($result->voice);
         $this->assertNull($result->audio);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\Video', $result->video);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Video', $result->video);
         $this->assertEquals('XXX-YYY-ZZZ-01', $result->video->file_id);
         $this->assertEquals($sendVideo->caption, $result->caption);
     }

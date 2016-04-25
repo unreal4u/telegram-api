@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Abstracts;
+namespace unreal4u\TelegramAPI\Abstracts;
 
-use unreal4u\Interfaces\TelegramMethodDefinitions;
+use unreal4u\TelegramAPI\Interfaces\TelegramMethodDefinitions;
 
 /**
  * Contains methods that all Telegram methods should implement

@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\Telegram\Methods;
+namespace unreal4u\TelegramAPI\Telegram\Methods;
 
-use unreal4u\Abstracts\TelegramMethods;
-use unreal4u\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On
@@ -25,7 +25,7 @@ class SendVideo extends TelegramMethods
     /**
      * Video to send. You can either pass a file_id as String to resend a video that is already on the Telegram servers,
      * or upload a new video file using the InputFile class
-     * @see unreal4u\Telegram\Types\Custom\InputFile
+     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile
      * @var InputFile
      */
     public $video = null;

@@ -4,7 +4,7 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
 use tests\Mock\MockClientException;
-use unreal4u\Telegram\Methods\GetUserProfilePhotos;
+use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
 
 class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,8 +50,8 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         $getUserProfilePhotos = new GetUserProfilePhotos();
 
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\UserProfilePhotos', $result);
-        $this->assertContainsOnlyInstancesOf('unreal4u\\Telegram\\Types\\PhotoSize', $result->photos[0]);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->photos[0]);
         $this->assertCount(3, $result->photos[0]);
         $this->assertEquals(1, $result->total_count);
 
@@ -69,7 +69,7 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         $getUserProfilePhotos = new GetUserProfilePhotos();
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
         $this->assertCount(2, $result->photos);
         $this->assertCount(4, $result->photos[0]);
         $this->assertCount(3, $result->photos[1]);
@@ -82,7 +82,7 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         $getUserProfilePhotos = new GetUserProfilePhotos();
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
-        $this->assertInstanceOf('unreal4u\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
         $this->assertCount(0, $result->photos);
     }
 
