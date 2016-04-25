@@ -24,7 +24,7 @@ abstract class TelegramTypes
     /**
      * Fills the class with the data passed on through the constructor
      *
-     * @param \stdClass $data
+     * @param array $data
      * @return TelegramTypes
      */
     final protected function populateObject(array $data = null): TelegramTypes

@@ -3,9 +3,15 @@
 namespace unreal4u\InternalFunctionality;
 
 use unreal4u\Abstracts\TelegramMethods;
+use unreal4u\Telegram\Types\Custom\InputFile;
 
 class FormConstructor
 {
+    /**
+     * @var string
+     */
+    protected $formType = '';
+
     /**
      * @param TelegramMethods $method
      * @return mixed
@@ -48,7 +54,7 @@ class FormConstructor
 
         foreach ($method as $key => $value) {
             if (is_object($value)) {
-                if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                if ($value instanceof InputFile) {
                     // If we are about to send a file, we must use the multipart/form-data way
                     $this->formType = 'multipart/form-data';
                     $return = [

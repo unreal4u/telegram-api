@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\Telegram\Types;
 
 use unreal4u\Abstracts\TelegramTypes;
-use unreal4u\Telegram\Types\Custom\UserProfilePhotosArray;
 
 /**
  * This object represent a user's profile pictures.
