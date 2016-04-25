@@ -10,6 +10,7 @@ use unreal4u\Abstracts\TelegramTypes;
 use unreal4u\InternalFunctionality\DummyLogger;
 use unreal4u\InternalFunctionality\TelegramDocument;
 use unreal4u\Abstracts\TelegramMethods;
+use unreal4u\Telegram\Types\Custom\InputFile;
 use unreal4u\Telegram\Types\File;
 use Psr\Log\LoggerInterface;
 
@@ -60,6 +61,7 @@ class TgLog
     /**
      * TelegramLog constructor.
      * @param string $botToken
+     * @param LoggerInterface $logger
      */
     public function __construct(string $botToken, LoggerInterface $logger = null)
     {
@@ -183,7 +185,7 @@ class TgLog
 
         foreach ($method as $key => $value) {
             if (is_object($value)) {
-                if (get_class($value) == 'unreal4u\\Telegram\\Types\\Custom\\InputFile') {
+                if ($value instanceof InputFile) {
                     $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                     // If we are about to send a file, we must use the multipart/form-data way
                     $this->formType = 'multipart/form-data';

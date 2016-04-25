@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\InternalFunctionality;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Used when we download a file from Telegram, contains some important headers information that else would be lost
@@ -32,9 +32,9 @@ class TelegramDocument
     /**
      * Constructs a representable document
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         $headers = $response->getHeaders();
         // What better to get the mime type than what the Telegram servers already send us?
