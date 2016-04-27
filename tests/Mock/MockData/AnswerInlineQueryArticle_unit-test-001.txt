@@ -1,1 +1,1 @@
-[{"type":"article","title":"The title","message_text":"The message text","parse_mode":"","disable_web_page_preview":true,"url":"https:\/\/unreal4u.com\/","hide_url":false,"description":"","thumb_url":"","thumb_width":0,"thumb_height":0,"id":"unit-test-001"}]
+[{"type":"article","title":"The title","message_text":"The message text","parse_mode":"","disable_web_page_preview":true,"url":"https:\/\/unreal4u.com\/","hide_url":false,"description":"","thumb_url":"","thumb_width":0,"thumb_height":0,"id":"unit-test-001","reply_markup":null}]
