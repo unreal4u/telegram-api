@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Location;
 
 /**
  * This object represents an incoming inline query. When the user sends an empty query, your bot could return some
@@ -29,6 +30,12 @@ class Query extends TelegramTypes
     public $from = null;
 
     /**
+     * Optional. Sender location, only for bots that request user location
+     * @var Location
+     */
+    public $location = null;
+
+    /**
      * Text of the query
      * @var string
      */
@@ -44,6 +51,7 @@ class Query extends TelegramTypes
     {
         return [
             'from' => 'User',
+            'location' => 'Location',
         ];
     }
 }
