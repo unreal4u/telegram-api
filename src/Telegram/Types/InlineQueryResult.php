@@ -7,16 +7,30 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
 /**
- * This object represents one result of an inline query. Telegram clients currently support results of the following 5
+ * This object represents one result of an inline query. Telegram clients currently support results of the following
  * types:
  *
+ * InlineQueryResultCachedAudio
+ * InlineQueryResultCachedDocument
+ * InlineQueryResultCachedGif
+ * InlineQueryResultCachedMpeg4Gif
+ * InlineQueryResultCachedPhoto
+ * InlineQueryResultCachedSticker
+ * InlineQueryResultCachedVideo
+ * InlineQueryResultCachedVoice
  * InlineQueryResultArticle
- * InlineQueryResultPhoto
+ * InlineQueryResultAudio
+ * InlineQueryResultContact
+ * InlineQueryResultDocument
  * InlineQueryResultGif
+ * InlineQueryResultLocation
  * InlineQueryResultMpeg4Gif
+ * InlineQueryResultPhoto
+ * InlineQueryResultVenue
  * InlineQueryResultVideo
+ * InlineQueryResultVoice
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is april 2016
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresult
  */
@@ -33,4 +47,17 @@ abstract class InlineQueryResult extends TelegramTypes
      * @var string
      */
     public $id = '';
+
+    /**
+     * Optional. Inline keyboard attached to the message
+     * @var InlineKeyboardMarkup
+     */
+    public $reply_markup = null;
+
+    protected function mapSubObjects(): array
+    {
+        return [
+            'reply_markup' => 'InlineKeyboardMarkup',
+        ];
+    }
 }

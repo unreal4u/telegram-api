@@ -135,6 +135,11 @@ class TgLog
         return json_decode((string)$response->getBody(), true);
     }
 
+    /**
+     * Resets everything to the default values
+     *
+     * @return TgLog
+     */
     private function resetObjectValues(): TgLog
     {
         $this->formType = 'application/x-www-form-urlencoded';
@@ -143,6 +148,14 @@ class TgLog
         return $this;
     }
 
+    /**
+     * Builds up the form elements to be sent to Telegram
+     *
+     * @TODO Move this to apart function
+     *
+     * @param TelegramMethods $method
+     * @return array
+     */
     private function constructFormData(TelegramMethods $method): array
     {
         $result = $this->checkSpecialConditions($method);

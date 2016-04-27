@@ -7,11 +7,11 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
- * Object that resembles a message object in Telegram
+ * Use this method to send information about a venue. On success, the sent Message is returned.
  *
- * @see https://core.telegram.org/bots/api#sendlocation
+ * @see https://core.telegram.org/bots/api#sendvenue
  */
-class SendLocation extends TelegramMethods
+class SendVenue extends TelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -30,6 +30,24 @@ class SendLocation extends TelegramMethods
      * @var float
      */
     public $longitude = 0.0;
+
+    /**
+     * Name of the venue
+     * @var string
+     */
+    public $title = '';
+
+    /**
+     * Address of the venue
+     * @var string
+     */
+    public $address = '';
+
+    /**
+     * Optional. Foursquare identifier of the venue
+     * @var string
+     */
+    public $foursquare_id = '';
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

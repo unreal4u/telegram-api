@@ -7,11 +7,11 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
- * Object that resembles a message object in Telegram
+ * Use this method to send phone contacts. On success, the sent Message is returned.
  *
- * @see https://core.telegram.org/bots/api#sendlocation
+ * @see https://core.telegram.org/bots/api#sendcontact
  */
-class SendLocation extends TelegramMethods
+class SendContact extends TelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -20,16 +20,22 @@ class SendLocation extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * Latitude of location
-     * @var float
+     * Contact's phone number
+     * @var string
      */
-    public $latitude = 0.0;
+    public $phone_number = '';
 
     /**
-     * Longitude of location
-     * @var float
+     * Contact's first name
+     * @var string
      */
-    public $longitude = 0.0;
+    public $first_name = '';
+
+    /**
+     * Contact's last name
+     * @var string
+     */
+    public $last_name = '';
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

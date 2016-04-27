@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace unreal4u\TelegramAPI\Telegram\Methods;
+
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+
+/**
+ * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the
+ * user as a notification at the top of the chat screen or as an alert. On success, True is returned.
+ *
+ * @see https://core.telegram.org/bots/api#answercallbackquery
+ */
+class AnswerCallbackQuery extends TelegramMethods
+{
+    /**
+     * Unique identifier for the query to be answered
+     * @var string
+     */
+    public $callback_query_id = '';
+
+    /**
+     * Optional. Text of the notification. If not specified, nothing will be shown to the user
+     * @var string
+     */
+    public $text = '';
+
+    /**
+     * Optional. If true, an alert will be shown by the client instead of a notification at the top of the chat screen.
+     * Defaults to false.
+     * @var boolean
+     */
+    public $show_alert = false;
+
+    public static function bindToObjectType(): string
+    {
+        return 'Custom\\ResultBoolean';
+    }
+}

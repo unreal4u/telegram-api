@@ -17,13 +17,7 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 class ReplyKeyboardMarkup extends KeyboardMethods
 {
     /**
-     * Array of button rows, each represented by an Array of Strings
-     *
-     * Example:
-     *
-     * $keyboard = [['a', 'b',], ['c', 'd', 'e',], ['f', 'g', ],
-     * Will represent three rows displaying a,b in the first, c, d and e in the second and f and g in the third.
-     *
+     * Array of button rows, each represented by an Array of KeyboardButton objects
      * @var array
      */
     public $keyboard = [];
@@ -41,4 +35,11 @@ class ReplyKeyboardMarkup extends KeyboardMethods
      * @var bool
      */
     public $one_time_keyboard = false;
+
+    public function mapSubObjects(): array
+    {
+        return [
+            'keyboard' => 'Custom\\KeyboardButtonArray',
+        ];
+    }
 }
