@@ -40,6 +40,14 @@ class SendMessage extends TelegramMethods
     public $disable_web_page_preview = false;
 
     /**
+     * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
+     * notification with no sound.
+     * @see https://telegram.org/blog/channels-2-0#silent-messages
+     * @var bool
+     */
+    public $disable_notification = false;
+
+    /**
      * Optional. If the message is a reply, ID of the original message
      * @var int
      */

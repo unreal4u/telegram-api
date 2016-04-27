@@ -37,10 +37,30 @@ class SendVideo extends TelegramMethods
     public $duration = 0;
 
     /**
+     * Video width
+     * @var int
+     */
+    public $width = 0;
+
+    /**
+     * Video height
+     * @var int
+     */
+    public $height = 0;
+
+    /**
      * Video caption (may also be used when resending videos by file_id).
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
+     * notification with no sound.
+     * @see https://telegram.org/blog/channels-2-0#silent-messages
+     * @var bool
+     */
+    public $disable_notification = false;
 
     /**
      * Optional. If the message is a reply, ID of the original message
