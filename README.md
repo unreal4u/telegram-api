@@ -53,7 +53,7 @@ Don't forget to update your code!
 Telegram objects are a bit different. Some backwards incompatible changes are:
 
 - The `ReplyKeyboardMarkup` object no longer is an array of strings, but an array of `KeyboardButton`.
-- The `AnswerInlineQuery` object now includes a new `reply_markup` field, which is an optional inline keyboard attached
+- The `AnswerInlineQuery` object now includes a new `reply_markup` and a `input_message_content` field, which is an optional inline keyboard attached
 to the message
 
 ## Installation
