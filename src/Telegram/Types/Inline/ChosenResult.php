@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\Inline;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
@@ -13,7 +13,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  *
  * @see https://core.telegram.org/bots/api#choseninlineresult
  */
-class ChosenInlineResult extends TelegramTypes
+class ChosenResult extends TelegramTypes
 {
     /**
      * The unique identifier for the result that was chosen

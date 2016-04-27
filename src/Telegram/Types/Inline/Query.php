@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\Inline;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
@@ -14,7 +14,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  *
  * @see https://core.telegram.org/bots/api#inlinequery
  */
-class InlineQuery extends TelegramTypes
+class Query extends TelegramTypes
 {
     /**
      * Unique identifier for this query

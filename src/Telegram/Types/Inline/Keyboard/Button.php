@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
 
 /**
  * This object represents one button of an inline keyboard. You must use exactly one of the optional fields
@@ -14,7 +14,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#inlinekeyboardbutton
  */
-class InlineKeyboardButton
+class Button
 {
     /**
      * Label text on the button

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
 
 /**
  * This object represents an inline keyboard that appears right next to the message it belongs to.
@@ -17,7 +17,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#replykeyboardhide
  */
-class InlineKeyboardMarkup
+class Markup
 {
     /**
      * Array of button rows, each represented by an Array of InlineKeyboardButton objects

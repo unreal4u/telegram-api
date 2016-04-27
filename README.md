@@ -49,18 +49,19 @@ unreal4u\TelegramAPI\
 The other big change is that InlineQueryResult* classes now have their own namespace. So, it used to be:
 
 ```php
-$inlineQueryResultArticle = new unreal4u\Telegram\Types\InlineQueryResultArticle()
+$inlineQueryResultArticle = new unreal4u\Telegram\Types\InlineQueryResultArticle();
 ```
 
 Now it is:
 ```php
-$inlineQueryResultArticle = new unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult\Article()
+$inlineQueryResultArticle = new unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article();
 ```
 
-Please note the extra backslash between InlineQueryResult and Article.
+Please note the extra backslash between Inline, query, result and Article.
 
-The same is true for the other 18 new InlineQueryResults.
-This change was introduced to get a better file organization. It is not pleasant to have to scroll through 50 files.
+The same is true for the other 18 new Inline\Query\Results.
+
+Other changes include `ChosenInlineResult` (now `Inline\ChosenResult`) and `InlineQuery` (now `Inline\Query`).
 
 ### External changes:
 

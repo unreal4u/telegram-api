@@ -41,7 +41,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $updateObject = new Update($this->dataProvider['inlineQuery']);
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Update', $updateObject);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\InlineQuery', $updateObject->inline_query);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Inline\\Query', $updateObject->inline_query);
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $updateObject->inline_query->from);
         $this->assertNull($updateObject->message);
         $this->assertNull($updateObject->chosen_inline_result);
@@ -52,7 +52,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $updateObject = new Update($this->dataProvider['inlineResult']);
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Update', $updateObject);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\ChosenInlineResult', $updateObject->chosen_inline_result);
+        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Inline\\ChosenResult', $updateObject->chosen_inline_result);
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $updateObject->chosen_inline_result->from);
         $this->assertNull($updateObject->message);
         $this->assertNull($updateObject->inline_query);

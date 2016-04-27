@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
-use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file
@@ -15,7 +15,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
  */
-class Mpeg4Gif extends InlineQueryResult
+class Mpeg4Gif extends Result
 {
     /**
      * Type of the result, must be mpeg4_gif
