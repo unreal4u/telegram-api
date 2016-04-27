@@ -67,9 +67,11 @@ Other changes include `ChosenInlineResult` (now `Inline\ChosenResult`) and `Inli
 
 Telegram objects are a bit different. Some backwards incompatible changes are:
 
-- The `ReplyKeyboardMarkup` object no longer is an array of strings, but an array of `KeyboardButton`.
-- The `AnswerInlineQuery` object now includes a new `reply_markup` and a `input_message_content` field, which is an optional inline keyboard attached
-to the message
+- The `ReplyKeyboardMarkup` object no longer is an array of strings, but an array of `KeyboardButton`
+- The `AnswerInlineQuery` object now includes a new `reply_markup` and a `input_message_content` field, which is an
+optional inline keyboard attached to the message
+- The `InlineQueryResult` objects had a major revamp, so many options were replaced with others. Please consult the
+documentation regarding these objects
 
 ## Installation
 

@@ -37,7 +37,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 abstract class Result extends TelegramTypes
 {
     /**
-     * Represents a link to an article or web page
+     * The type of InlineQueryResult we sent. Is automatically pre-filled by the child
      * @var string
      */
     public $type = '';

@@ -8,10 +8,10 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file
- * will be sent by the user with optional caption. Alternatively, you can provide message_text to send it instead of the
- * animation.
+ * will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message
+ * with the specified content instead of the animation.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is april 2016
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
  */
@@ -58,22 +58,4 @@ class Mpeg4Gif extends Result
      * @var string
      */
     public $caption = '';
-
-    /**
-     * Optional. Text of a message to be sent instead of the photo, 1-512 characters
-     * @var string
-     */
-    public $message_text = '';
-
-    /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message
-     * @var string
-     */
-    public $parse_mode = '';
-
-    /**
-     * Optional. Disables link previews for links in the sent message
-     * @var bool
-     */
-    public $disable_web_page_preview = false;
 }

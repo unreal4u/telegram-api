@@ -26,10 +26,4 @@ class Audio extends Result
      * @var string
      */
     public $audio_file_id = '';
-
-    /**
-     * Optional. Content of the message to be sent instead of the audio
-     * @var InputMessageContent
-     */
-    public $input_message_content = null;
 }

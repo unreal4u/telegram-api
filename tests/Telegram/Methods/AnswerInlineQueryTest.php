@@ -48,6 +48,7 @@ class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
         $inlineQueryResultArticle = new Article();
         $inlineQueryResultArticle->url = 'https://unreal4u.com/';
         $inlineQueryResultArticle->title = 'The title';
+        // @TODO rewrite this to the new code
         $inlineQueryResultArticle->message_text = 'The message text';
         $inlineQueryResultArticle->disable_web_page_preview = true;
         $inlineQueryResultArticle->id = 'unit-test-001';

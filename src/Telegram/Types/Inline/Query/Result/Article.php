@@ -28,24 +28,6 @@ class Article extends Result
     public $title = '';
 
     /**
-     * Text of the message to be sent
-     * @var string
-     */
-    public $message_text = '';
-
-    /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message
-     * @var string
-     */
-    public $parse_mode = '';
-
-    /**
-     * Optional. Disables link previews for links in the sent message
-     * @var bool
-     */
-    public $disable_web_page_preview = false;
-
-    /**
      * Optional. URL of the result
      * @var string
      */

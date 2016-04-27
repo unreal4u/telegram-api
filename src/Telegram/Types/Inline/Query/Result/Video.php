@@ -7,10 +7,11 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 /**
- * Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively,
- * you can provide message_text to send it instead of photo.
+ * Represents a link to a page containing an embedded video player or a video file. By default, this video file will be
+ * sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with
+ * the specified content instead of the video.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is april 2016
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultvideo
  */
@@ -35,22 +36,22 @@ class Video extends Result
     public $mime_type = '';
 
     /**
-     * Optional. Text of a message to be sent instead of the photo, 1-512 characters
+     * URL of the thumbnail (jpeg only) for the video
      * @var string
      */
-    public $message_text = '';
+    public $thumb_url = '';
 
     /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message
+     * Title for the result
      * @var string
      */
-    public $parse_mode = '';
+    public $title = '';
 
     /**
-     * Optional. Disables link previews for links in the sent message
-     * @var bool
+     * Optional. Caption of the video to be sent, 0-200 characters
+     * @var string
      */
-    public $disable_web_page_preview = false;
+    public $caption = '';
 
     /**
      * Optional. Video width
@@ -69,18 +70,6 @@ class Video extends Result
      * @var int
      */
     public $video_duration = 0;
-
-    /**
-     * URL of the thumbnail (jpeg only) for the video
-     * @var string
-     */
-    public $thumb_url = '';
-
-    /**
-     * Title for the result
-     * @var string
-     */
-    public $title = '';
 
     /**
      * Optional. Short description of the result
