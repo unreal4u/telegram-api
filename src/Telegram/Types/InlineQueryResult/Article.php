@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
 
 /**
  * Represents a link to an article or web page
@@ -11,7 +13,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultarticle
  */
-class InlineQueryResultArticle extends InlineQueryResult
+class Article extends InlineQueryResult
 {
     /**
      * Type of the result, must be article

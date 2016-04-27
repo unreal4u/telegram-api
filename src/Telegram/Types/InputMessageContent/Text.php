@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
@@ -14,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
  *
  * @see https://core.telegram.org/bots/api#inputmessagecontent
  */
-class InputTextMessageContent extends InputMessageContent
+class Text extends InputMessageContent
 {
     /**
      * Text of the message to be sent, 1-4096 characters

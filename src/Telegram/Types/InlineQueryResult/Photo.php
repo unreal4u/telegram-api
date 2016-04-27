@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
 
 /**
  * Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively,
@@ -12,7 +14,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultphoto
  */
-class InlineQueryResultPhoto extends InlineQueryResult
+class Photo extends InlineQueryResult
 {
     /**
      * Type of the result, must be photo

@@ -4,7 +4,7 @@ namespace tests\Telegram\Methods;
 
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
-use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResultArticle;
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult\Article;
 
 class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +45,7 @@ class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAnswerInlineQuery()
     {
-        $inlineQueryResultArticle = new InlineQueryResultArticle();
+        $inlineQueryResultArticle = new Article();
         $inlineQueryResultArticle->url = 'https://unreal4u.com/';
         $inlineQueryResultArticle->title = 'The title';
         $inlineQueryResultArticle->message_text = 'The message text';

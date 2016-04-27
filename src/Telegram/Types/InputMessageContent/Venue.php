@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
@@ -14,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
  *
  * @see https://core.telegram.org/bots/api#inputvenuemessagecontent
  */
-class InputVenueMessageContent extends InputMessageContent
+class Venue extends InputMessageContent
 {
     /**
      * Latitude of the venue in degrees

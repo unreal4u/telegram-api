@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
 
 /**
  * Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional
@@ -12,7 +14,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultgif
  */
-class InlineQueryResultGif extends InlineQueryResult
+class Gif extends InlineQueryResult
 {
     /**
      * Type of the result, must be gif

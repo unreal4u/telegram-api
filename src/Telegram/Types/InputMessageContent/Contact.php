@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
@@ -14,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
  *
  * @see https://core.telegram.org/bots/api#inputcontactmessagecontent
  */
-class InputContactMessageContent extends InputMessageContent
+class Contact extends InputMessageContent
 {
     /**
      * Contact's phone number

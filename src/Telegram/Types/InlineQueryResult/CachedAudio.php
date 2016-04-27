@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace unreal4u\TelegramAPI\Telegram\Types;
+namespace unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
+
+use unreal4u\TelegramAPI\Telegram\Types\InlineQueryResult;
 
 /**
  * Represents a link to an mp3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
@@ -11,7 +13,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
  */
-class InlineQueryResultCachedAudio extends InlineQueryResult
+class Audio extends InlineQueryResult
 {
     /**
      * Type of the result, must be audio

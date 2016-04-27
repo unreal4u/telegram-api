@@ -28,6 +28,19 @@ class ChosenInlineResult extends TelegramTypes
     public $from = null;
 
     /**
+     * Optional. Sender location, only for bots that require user location
+     * @var Location
+     */
+    public $location = null;
+
+    /**
+     * Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the
+     * message. Will be also received in callback queries and can be used to edit the message.
+     * @var string
+     */
+    public $inline_message_id = '';
+
+    /**
      * Text of the query
      * @var string
      */
@@ -37,6 +50,7 @@ class ChosenInlineResult extends TelegramTypes
     {
         return [
             'from' => 'User',
+            'location' => 'Location',
         ];
     }
 }
