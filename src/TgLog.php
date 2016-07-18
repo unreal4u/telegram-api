@@ -61,16 +61,23 @@ class TgLog
      * TelegramLog constructor.
      * @param string $botToken
      * @param LoggerInterface $logger
+     * @param Client $client Optional Guzzle object
      */
-    public function __construct(string $botToken, LoggerInterface $logger = null)
+    public function __construct(string $botToken, LoggerInterface $logger = null, Client $client = null)
     {
         $this->botToken = $botToken;
 
+        // Initialize new logger (PSR-3 compatible) if not injected
         if (is_null($logger)) {
             $logger = new DummyLogger();
         }
         $this->logger = $logger;
-        $this->httpClient = new Client();
+
+        // Initialize new Guzzle client if not injected
+        if (is_null($client)) {
+            $client = new Client();
+        }
+        $this->httpClient = $client;
 
         $this->constructApiUrl();
     }

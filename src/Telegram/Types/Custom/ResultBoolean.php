@@ -18,4 +18,17 @@ class ResultBoolean extends TelegramTypes
         $this->logger = $logger;
         $this->data = $result;
     }
+
+    /**
+     * I don't really use this function, but I can imagine it can come in handy when PHP handles the casting internally
+     * @return string
+     */
+    public function __toString()
+    {
+        if ($this->data === true) {
+            return '1';
+        } else {
+            return '0';
+        }
+    }
 }

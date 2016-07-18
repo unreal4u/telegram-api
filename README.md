@@ -6,7 +6,7 @@
 
 # Telegram API
 
-This is a complete PHP7 bot API implementation for Telegram.
+This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.1
 
 ## About this class
 

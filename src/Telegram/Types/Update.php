@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
  * This object represents an incoming update.
@@ -32,6 +31,12 @@ class Update extends TelegramTypes
     public $message = null;
 
     /**
+     * Optional. New version of a message that is known to the bot and was edited
+     * @var Message
+     */
+    public $edited_message = null;
+
+    /**
      * Optional. New incoming inline query
      * @var null
      */
@@ -43,12 +48,20 @@ class Update extends TelegramTypes
      */
     public $chosen_inline_result = null;
 
+    /**
+     * Optional. New incoming callback query
+     * @var CallbackQuery
+     */
+    public $callback_query = null;
+
     protected function mapSubObjects(): array
     {
         return [
             'message' => 'Message',
+            'edited_message' => 'Message',
             'inline_query' => 'Inline\\Query',
             'chosen_inline_result' => 'Inline\\ChosenResult',
+            'callback_query' => 'CallbackQuery',
         ];
     }
 }

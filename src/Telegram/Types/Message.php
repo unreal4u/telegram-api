@@ -47,6 +47,12 @@ class Message extends TelegramTypes
     public $forward_from = null;
 
     /**
+     * Optional. For messages forwarded from a channel, information about the original channel
+     * @var Chat
+     */
+    public $forward_from_chat = null;
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      * @var int
      */
@@ -60,10 +66,22 @@ class Message extends TelegramTypes
     public $reply_to_message = null;
 
     /**
-     * Optional. For text messages, the actual UTF-8 text of the message
+     * Optional. Date the message was last edited in Unix time
+     * @var int
+     */
+    public $edit_date = 0;
+
+    /**
+     * Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters
      * @var string
      */
     public $text = '';
+
+    /**
+     * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
+     * @var array
+     */
+    public $entities = [];
 
     /**
      * Optional. Message is an audio file, information about the file
@@ -120,6 +138,12 @@ class Message extends TelegramTypes
     public $location = null;
 
     /**
+     * Optional. Message is a venue, information about the venue
+     * @var Venue
+     */
+    public $venue = null;
+
+    /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      * @var User
      */
@@ -156,30 +180,43 @@ class Message extends TelegramTypes
     public $group_chat_created = false;
 
     /**
-     * Optional. Service message: the supergroup has been created
+     * Optional. Service message: the supergroup has been created. This field can‘t be received in a message coming
+     * through updates, because bot can’t be a member of a supergroup when it is created. It can only be found in
+     * reply_to_message if someone replies to a very first message in a directly created supergroup
      * @var bool
      */
     public $supergroup_chat_created = false;
 
     /**
-     * Optional. Service message: the channel has been created
+     * Optional. Service message: the channel has been created. This field can‘t be received in a message coming through
+     * updates, because bot can’t be a member of a channel when it is created. It can only be found in reply_to_message
+     * if someone replies to a very first message in a channel
      * @var bool
      */
     public $channel_chat_created = false;
 
     /**
-     * Optional. The group has been migrated to a supergroup with the specified identifier, not exceeding 1e13 by
-     * absolute value
+     * Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater
+     * than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it smaller
+     * than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier
      * @var int
      */
     public $migrate_to_chat_id = 0;
 
     /**
-     * Optional. The supergroup has been migrated from a group with the specified identifier, not exceeding 1e13 by
-     * absolute value
+     * Optional. The supergroup has been migrated from a group with the specified identifier. This number may be greater
+     * than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it smaller
+     * than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier
      * @var int
      */
     public $migrate_from_chat_id = 0;
+
+    /**
+     * Optional. Specified message was pinned. Note that the Message object in this field will not contain further
+     * reply_to_message fields even if it is itself a reply.
+     * @var Message
+     */
+    public $pinned_message = null;
 
     /**
      * A message contains several subobjects, map them in this function
@@ -192,7 +229,9 @@ class Message extends TelegramTypes
             'from' => 'User',
             'chat' => 'Chat',
             'forward_from' => 'User',
+            'forward_from_chat' => 'Chat',
             'reply_to_message' => 'Message',
+            'entities' => 'Custom\\MessageEntityArray',
             'audio' => 'Audio',
             'document' => 'Document',
             'photo' => 'Custom\\PhotoSizeArray',
@@ -201,9 +240,11 @@ class Message extends TelegramTypes
             'voice' => 'Voice',
             'contact' => 'Contact',
             'location' => 'Location',
+            'venue' => 'Venue',
             'new_chat_participant' => 'User',
             'left_chat_participant' => 'User',
             'new_chat_photo' => 'Custom\\PhotoSizeArray',
+            'pinned_message' => 'Message',
         ];
     }
 }

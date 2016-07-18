@@ -9,14 +9,16 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#chat
  */
 class Chat extends TelegramTypes
 {
     /**
-     * Unique identifier for this chat, not exceeding 1e13 by absolute value
+     * Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have
+     * difficulty/silent defects in interpreting it. But it smaller than 52 bits, so a signed 64 bit integer or
+     * double-precision float type are safe for storing this identifier
      * @var int
      */
     public $id = 0;
@@ -34,7 +36,7 @@ class Chat extends TelegramTypes
     public $title = '';
 
     /**
-     * Optional. Title, for channels and group chats
+     * Optional. Username, for private chats, supergroups and channels if available
      * @var string
      */
     public $username = '';
