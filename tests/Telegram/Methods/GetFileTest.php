@@ -2,11 +2,12 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockClientException;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\GetFile;
 
-class GetFileTest extends \PHPUnit_Framework_TestCase
+class GetFileTest extends TestCase
 {
     /**
      * @var MockTgLog
@@ -55,7 +56,7 @@ class GetFileTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(400, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time
-            $this->setExpectedException('tests\\Mock\\MockClientException');
+            $this->expectException(MockClientException::class);
             throw $e;
         }
     }

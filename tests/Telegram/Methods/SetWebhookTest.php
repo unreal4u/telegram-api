@@ -2,10 +2,11 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
 
-class SetWebhookTest extends \PHPUnit_Framework_TestCase
+class SetWebhookTest extends TestCase
 {
     /**
      * @var MockTgLog

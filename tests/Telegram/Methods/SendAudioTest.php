@@ -2,11 +2,12 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendAudio;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
-class SendAudioTest extends \PHPUnit_Framework_TestCase
+class SendAudioTest extends TestCase
 {
     /**
      * @var MockTgLog

@@ -2,11 +2,12 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
-class SendVideoTest extends \PHPUnit_Framework_TestCase
+class SendVideoTest extends TestCase
 {
     /**
      * @var MockTgLog

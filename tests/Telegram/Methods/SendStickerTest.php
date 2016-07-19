@@ -2,10 +2,11 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 
-class SendStickerTest extends \PHPUnit_Framework_TestCase
+class SendStickerTest extends TestCase
 {
     /**
      * @var MockTgLog

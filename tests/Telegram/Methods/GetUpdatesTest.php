@@ -2,11 +2,12 @@
 
 namespace tests\Telegram\Methods;
 
+use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 use tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
 
-class GetUpdatesTest extends \PHPUnit_Framework_TestCase
+class GetUpdatesTest extends TestCase
 {
     /**
      * @var MockTgLog
@@ -88,7 +89,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(409, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time
-            $this->setExpectedException('tests\\Mock\\MockClientException');
+            $this->expectException(MockClientException::class);
             throw $e;
         }
 

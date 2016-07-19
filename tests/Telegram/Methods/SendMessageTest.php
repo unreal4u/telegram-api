@@ -6,8 +6,9 @@ use tests\Mock\MockTgLog;
 use tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
+use PHPUnit\Framework\TestCase;
 
-class SendMessageTest extends \PHPUnit_Framework_TestCase
+class SendMessageTest extends TestCase
 {
     /**
      * @var MockTgLog
@@ -106,7 +107,7 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(400, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time
-            $this->setExpectedException('tests\\Mock\\MockClientException');
+            $this->expectException(MockClientException::class);
             throw $e;
         }
     }

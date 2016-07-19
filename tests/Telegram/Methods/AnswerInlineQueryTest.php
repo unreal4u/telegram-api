@@ -5,8 +5,9 @@ namespace tests\Telegram\Methods;
 use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article;
+use PHPUnit\Framework\TestCase;
 
-class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
+class AnswerInlineQueryTest extends TestCase
 {
     /**
      * @var MockTgLog
