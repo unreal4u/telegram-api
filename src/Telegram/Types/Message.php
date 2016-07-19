@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
 /**
  * This object represents a message.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is december 2015
  *
  * @see https://core.telegram.org/bots/api#message
  */
