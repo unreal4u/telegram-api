@@ -36,7 +36,7 @@ Telegram API as well.
 
 ### Internal changes:
 
-The most important change is that the package has a different namespace now. It used to be:
+The most important change is that **the package has a different namespace** now! It used to be:
 ```
 unreal4u\
 ```
@@ -46,20 +46,20 @@ Now it is:
 unreal4u\TelegramAPI\
 ```
 
-The other big change is that InlineQueryResult* classes now have their own namespace. So, it used to be:
+The other big change is that InlineQueryResult* classes now have their own namespace. So, what used to be:
 
 ```php
 $inlineQueryResultArticle = new unreal4u\Telegram\Types\InlineQueryResultArticle();
 ```
 
-Now it is:
+Is now:
 ```php
 $inlineQueryResultArticle = new unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article();
 ```
 
 Please note the extra backslash between Inline, query, result and Article.
 
-The same is true for the other 18 new Inline\Query\Results.
+The same is true for the other 18 **new** Inline\Query\Results.
 
 Other changes include `ChosenInlineResult` (now `Inline\ChosenResult`) and `InlineQuery` (now `Inline\Query`).
 
@@ -80,12 +80,12 @@ The preferred method is composer, so add the following to your composer.json:
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~1.0"
+    "unreal4u/telegram-api": "~2.0"
   }
 }
 ```
 
-## Basic usage
+## (Very) basic usage
 
 ```php
 use \unreal4u\TelegramAPI\TgLog;
@@ -104,7 +104,10 @@ All other functionality is based upon this behaviour, so every other method is v
 pass that object to TelegramLog->performApiRequest() and you'll get the native Telegram response back as an object. 
 Different methods return different object types. 
 
-Please refer to the examples directory to view examples of all implemented methods.
+Please refer to the [examples directory](https://github.com/unreal4u/telegram-api/tree/master/examples) to view examples 
+of some of the implemented methods, including inline bots. 
+
+For examples of actual code that works in a production environment, please refer to my other repo: https://github.com/unreal4u/tg-timebot
 
 ## Getting updates via Webhook
 
@@ -144,7 +147,8 @@ There are some pretty good alternatives around there, such as:
 [The (unofficial) SDK](https://github.com/irazasyed/telegram-bot-sdk)  
 [akalongman's approach](https://github.com/akalongman/php-telegram-bot)
 
-But I wanted to study a bunch of new concepts for me and make a standalone client that doesn't require Laravel or MySQL: 
+But I wanted to study a bunch of new concepts for me and make a standalone client that doesn't require me to be running
+either Laravel or MySQL: 
 
 * Telegram API
 * PHP7

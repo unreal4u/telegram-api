@@ -24,4 +24,3 @@ try {
     echo '</pre>';
     die();
 }
-

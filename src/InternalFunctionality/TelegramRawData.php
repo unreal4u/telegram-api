@@ -7,7 +7,7 @@ namespace unreal4u\TelegramAPI\InternalFunctionality;
 class TelegramRawData
 {
     /**
-     * Nothing is done so far with this
+     * Nothing is done so far with this, but it's always a good idea to have the original around
      * @var string
      */
     private $rawData = '';
@@ -16,7 +16,7 @@ class TelegramRawData
      * The actual representation of the decoded data
      * @var array
      */
-    public $decodedData = [];
+    private $decodedData = [];
 
     public function __construct(string $rawData)
     {
@@ -47,7 +47,7 @@ class TelegramRawData
     }
 
     /**
-     * Hack: for most of the requests Telegram sends back an array, so send the response back as an array
+     * Most of the requests Telegram sends, come as an array, so send the response back as an array by default
      *
      * @return array
      */
@@ -57,7 +57,7 @@ class TelegramRawData
     }
 
     /**
-     * Hack: for some requests Telegram sends back an array, integer or a boolean value, convert it to boolean
+     * Hack: for some requests Telegram sends back an array, integer or a boolean value, convert it to boolean here
      * @return bool
      */
     public function getResultBoolean(): bool
@@ -66,7 +66,7 @@ class TelegramRawData
     }
 
     /**
-     * Hack: for some requests Telegram send back an array, integer or a boolean value, convert it to int
+     * Hack: for some requests Telegram send back an array, integer or a boolean value, convert it to int here
      * @return int
      */
     public function getResultInt(): int

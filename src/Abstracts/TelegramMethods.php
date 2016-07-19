@@ -15,9 +15,15 @@ use unreal4u\TelegramAPI\Telegram\Types\Message;
 abstract class TelegramMethods implements TelegramMethodDefinitions
 {
     /**
-     * Most of the methods will return a Message object on success, so set that as default.
+     * Most of the methods will return a Message object on success, so set that as the default.
      *
-     * @param array $data
+     * This function may however be overwritten if the method uses another object, there are many examples of this, so
+     * just check out the rest of the code. A good place to start is GetUserProfilePhotos or LeaveChat
+     *
+     * @see unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos
+     * @see unreal4u\TelegramAPI\Telegram\Methods\LeaveChat
+     *
+     * @param TelegramRawData $data
      * @param LoggerInterface $logger
      *
      * @return TelegramTypes
@@ -30,8 +36,8 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
     /**
      * Before making the actual request this method will be called
      *
-     * It must be used to json_encode stuff, or do other changes in the internal class representation before sending it
-     * to the Telegram servers
+     * It must be used to json_encode stuff, or do other changes in the internal class representation _before_ sending
+     * it to the Telegram servers
      *
      * @return TelegramMethods
      */

@@ -101,17 +101,17 @@ class TgLog
     /**
      * Will download a file from the Telegram server. Before calling this function, you have to call the getFile method!
      *
-     * @see unreal4u\Telegram\Types\File
-     * @see unreal4u\Telegram\Methods\GetFile
+     * @see unreal4u\TelegramAPI\Telegram\Types\File
+     * @see unreal4u\TelegramAPI\Telegram\Methods\GetFile
      *
      * @param File $file
      * @return TelegramDocument
      */
     public function downloadFile(File $file): TelegramDocument
     {
-        $this->logger->debug('Downloading file from Telegram, creating URI');
+        $this->logger->debug('Downloading file from Telegram, creating URL');
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
-        $this->logger->debug('About to perform request');
+        $this->logger->debug('About to perform request to begin downloading file');
         return new TelegramDocument($this->httpClient->get($url));
     }
 
