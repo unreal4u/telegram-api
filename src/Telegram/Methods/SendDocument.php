@@ -11,6 +11,8 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any
  * type of up to 50 MB in size, this limit may be changed in the future.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#senddocument
  */
 class SendDocument extends TelegramMethods
@@ -30,6 +32,12 @@ class SendDocument extends TelegramMethods
      * @var InputFile
      */
     public $document = null;
+
+    /**
+     * Optional. Document caption (may also be used when resending documents by file_id), 0-200 characters
+     * @var string
+     */
+    public $caption = '';
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

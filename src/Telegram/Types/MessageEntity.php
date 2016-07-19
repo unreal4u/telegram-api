@@ -7,9 +7,9 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
 /**
- * This object represents a general file (as opposed to photos, voice messages and audio files).
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#messageentity
  */
@@ -47,10 +47,13 @@ class MessageEntity extends TelegramTypes
      */
     public $user = null;
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'user' => 'User',
-        ];
+        switch ($key) {
+            case 'user':
+                return new User($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

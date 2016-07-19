@@ -24,28 +24,32 @@ abstract class TelegramTypes
     /**
      * Fills the class with the data passed on through the constructor
      *
-     * @param \stdClass $data
+     * @param array $data
      * @return TelegramTypes
      */
     final protected function populateObject(array $data = null): TelegramTypes
     {
         if (!is_null($data)) {
-            $this->logger->debug('Detected data, mapping subobjects');
-            $subObjects = $this->mapSubObjects();
+            $this->logger->debug('Detected incoming data on object, foreaching the general data', [
+                'object' => get_class($this)
+            ]);
             foreach ($data as $key => $value) {
-                if (!empty($subObjects) && array_key_exists($key, $subObjects)) {
-                    $className = 'unreal4u\\TelegramAPI\\Telegram\\Types\\' . $subObjects[$key];
-                    $this->logger->debug(sprintf('Subobject detected, creating new instance of %s', $className));
-                    $candidateKey = new $className($value, $this->logger);
-                    if (isset($candidateKey->data)) {
-                        $this->logger->debug('Injecting custom data type to class');
+                $candidateKey = null;
+                if (is_array($value)) {
+                    $this->logger->debug('Array detected, mapping subobjects for key', ['key' => $key]);
+                    $candidateKey = $this->mapSubObjects($key, $value);
+                }
+
+                if (!empty($candidateKey)) {
+                    if ($candidateKey instanceof CustomType) {
+                        $this->logger->debug('Done with mapping, injecting custom data type to class', ['key' => $key]);
                         $this->$key = $candidateKey->data;
                     } else {
-                        $this->logger->debug('Injecting instance to class');
+                        $this->logger->debug('Done with mapping, injecting native data type to class', ['key' => $key]);
                         $this->$key = $candidateKey;
                     }
                 } else {
-                    $this->logger->debug(sprintf('Direct assign: key: %s', $key));
+                    $this->logger->debug('Performing direct assign for key', ['key' => $key]);
                     $this->$key = $value;
                 }
             }
@@ -55,12 +59,15 @@ abstract class TelegramTypes
     }
 
     /**
-     * The default is that we have no subobjects at all
+     * The default is that we have no subobjects at all, so this function will return nothing
      *
-     * @return array
+     * @param string $key
+     * @param array $data
+     *
+     * @return TelegramTypes
      */
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [];
+        return null;
     }
 }

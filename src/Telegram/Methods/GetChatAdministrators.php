@@ -11,6 +11,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  * contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no
  * administrators were appointed, only the creator will be returned.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getchat
  */
 class GetChatAdministrators extends TelegramMethods

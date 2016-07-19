@@ -9,6 +9,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 /**
  * Use this method to get information about a member of a chat. Returns a ChatMember object on success
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getchatmember
  */
 class GetChatMember extends TelegramMethods

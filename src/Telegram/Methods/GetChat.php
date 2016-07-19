@@ -10,6 +10,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  * Use this method to get up to date information about the chat (current name of the user for one-on-one conversations,
  * current username of a user, group or channel, etc.). Returns a Chat object on success.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getchat
  */
 class GetChat extends TelegramMethods

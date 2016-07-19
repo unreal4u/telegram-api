@@ -11,7 +11,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  * Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016.
  * Older clients will ignore them.
  *
- * Objects defined as-is April 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#keyboardbutton
  */

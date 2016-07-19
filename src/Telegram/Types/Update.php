@@ -5,12 +5,14 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\ChosenResult;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 
 /**
  * This object represents an incoming update.
  * Only one of the optional parameters can be present in any given update.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#update
  */
@@ -54,14 +56,20 @@ class Update extends TelegramTypes
      */
     public $callback_query = null;
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'message' => 'Message',
-            'edited_message' => 'Message',
-            'inline_query' => 'Inline\\Query',
-            'chosen_inline_result' => 'Inline\\ChosenResult',
-            'callback_query' => 'CallbackQuery',
-        ];
+        switch ($key) {
+            case 'message':
+            case 'edited_message':
+                return new Message($data, $this->logger);
+            case 'inline_query':
+                return new Query($data, $this->logger);
+            case 'chosen_inline_result':
+                return new ChosenResult($data, $this->logger);
+            case 'callback_query':
+                return new CallbackQuery($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

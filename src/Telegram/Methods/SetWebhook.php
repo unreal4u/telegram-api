@@ -22,6 +22,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  *  <li>Ports currently supported for Webhooks: 443, 80, 88, 8443.</li>
  * </ul>
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#setwebhook
  */
 class SetWebhook extends TelegramMethods

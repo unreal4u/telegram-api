@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
  * exception is made for one-time keyboards that are hidden immediately after the user presses a button (see
  * ReplyKeyboardMarkup).
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#replykeyboardhide
  */

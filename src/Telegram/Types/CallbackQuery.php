@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  * originated the query was attached to a message sent by the bot, the field message will be presented. If the button
  * was attached to a message sent via the bot (in inline mode), the field inline_message_id will be presented.
  *
- * Objects defined as-is april 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#callbackquery
  */
@@ -48,11 +48,15 @@ class CallbackQuery extends TelegramTypes
      */
     public $data = '';
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'from' => 'User',
-            'message' => 'Message',
-        ];
+        switch ($key) {
+            case 'from':
+                return new User($data, $this->logger);
+            case 'message':
+                return new Message($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

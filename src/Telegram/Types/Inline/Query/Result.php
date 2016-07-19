@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * This object represents one result of an inline query. Telegram clients currently support results of the following
@@ -50,7 +52,7 @@ abstract class Result extends TelegramTypes
 
     /**
      * Optional. Inline keyboard attached to the message
-     * @var InlineKeyboardMarkup
+     * @var Markup
      */
     public $reply_markup = null;
 
@@ -60,10 +62,13 @@ abstract class Result extends TelegramTypes
      */
     public $input_message_content = null;
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'reply_markup' => 'InlineKeyboardMarkup',
-        ];
+        switch ($key) {
+            case 'reply_markup':
+                return new Markup($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

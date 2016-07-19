@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a phone contact
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#contact
  */

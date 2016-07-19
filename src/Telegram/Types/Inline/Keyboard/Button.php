@@ -10,7 +10,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
  * Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported
  * message.
  *
- * Objects defined as-is April 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#inlinekeyboardbutton
  */

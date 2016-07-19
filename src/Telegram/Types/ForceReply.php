@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
  * user has selected the bot‘s message and tapped ’Reply'). This can be extremely useful if you want to create
  * user-friendly step-by-step interfaces without having to sacrifice privacy mode.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#forcereply
  * @see https://core.telegram.org/bots#privacy-mode

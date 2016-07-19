@@ -45,7 +45,7 @@ class TgLog
      * With this flag we'll know what type of request to send to Telegram
      *
      * 'application/x-www-form-urlencoded' is the "normal" one, which is simpler and quicker.
-     * 'multipart/form-data' should be used only to upload documents, photos, etc.
+     * 'multipart/form-data' should be used only when you upload documents, photos, etc.
      *
      * @var string
      */
@@ -67,7 +67,7 @@ class TgLog
     {
         $this->botToken = $botToken;
 
-        // Initialize new logger (PSR-3 compatible) if not injected
+        // Initialize new dummy logger (PSR-3 compatible) if not injected
         if (is_null($logger)) {
             $logger = new DummyLogger();
         }
@@ -90,12 +90,12 @@ class TgLog
      */
     public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
-        $this->logger->debug('Going to perform API request, resetting internal class values');
+        $this->logger->debug('Request for API call, resetting internal values', [get_class($method)]);
         $this->resetObjectValues();
         $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
         $returnObject = 'unreal4u\\TelegramAPI\\Telegram\\Types\\' . $method::bindToObjectType();
-        $this->logger->debug(sprintf('Decoded response from server, instantiating new %s class', $returnObject));
+        $this->logger->debug('Decoded response from server, instantiating new class', [$returnObject]);
         return new $returnObject($jsonDecoded['result'], $this->logger);
     }
 
@@ -136,7 +136,7 @@ class TgLog
      */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
     {
-        $this->logger->debug('About to instantiate HTTP Client');
+        $this->logger->debug('About to call HTTP Client');
         $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
         return json_decode((string)$response->getBody(), true);
@@ -169,7 +169,7 @@ class TgLog
 
         switch ($this->formType) {
             case 'application/x-www-form-urlencoded':
-                $this->logger->debug('Creating x-www-form-urlencoded form');
+                $this->logger->debug('Creating x-www-form-urlencoded form (fast way)');
                 $formData = [
                     'form_params' => get_object_vars($method),
                 ];
@@ -249,7 +249,7 @@ class TgLog
      */
     private function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {
-        $this->logger->debug('Creating multi-part form array data');
+        $this->logger->debug('Creating multi-part form array data (complex and expensive)');
         $formData = [
             'multipart' => [],
         ];

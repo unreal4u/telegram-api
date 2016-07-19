@@ -10,7 +10,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\UserProfilePhotosArray;
 /**
  * This object represent a user's profile pictures.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#userprofilephotos
  */
@@ -30,10 +30,13 @@ class UserProfilePhotos extends TelegramTypes
      */
     public $photos = [];
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'photos' => 'Custom\\UserProfilePhotosArray',
-        ];
+        switch ($key) {
+            case 'photos':
+                return new UserProfilePhotosArray($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

@@ -15,7 +15,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  * InputVenueMessageContent
  * InputContactMessageContent
  *
- * Objects defined as-is april 2015
+ * Objects defined as-is july 2015
  *
  * @see https://core.telegram.org/bots/api#inputmessagecontent
  */

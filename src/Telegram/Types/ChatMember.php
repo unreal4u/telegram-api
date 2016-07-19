@@ -27,10 +27,13 @@ class ChatMember extends TelegramTypes
      */
     public $status = '';
 
-    public function mapSubObjects(): array
+    public function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'user' => 'User',
-        ];
+        switch ($key) {
+            case 'user':
+                return new User($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

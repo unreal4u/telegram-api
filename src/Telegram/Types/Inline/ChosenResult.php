@@ -5,11 +5,13 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\User;
+use unreal4u\TelegramAPI\Telegram\Types\Location;
 
 /**
  * This object represents a result of an inline query that was chosen by the user and sent to their chat partner.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#choseninlineresult
  */
@@ -46,11 +48,15 @@ class ChosenResult extends TelegramTypes
      */
     public $query = '';
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'from' => 'User',
-            'location' => 'Location',
-        ];
+        switch ($key) {
+            case 'from':
+                return new User($data, $this->logger);
+            case 'location':
+                return new Location($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
+use unreal4u\TelegramAPI\Abstracts\CustomType;
 use unreal4u\TelegramAPI\Telegram\Types\ChatMember;
 use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
 use Psr\Log\LoggerInterface;
@@ -11,7 +12,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Mockup class to generate a real telegram update representation
  */
-class ChatMembersArray implements CustomArrayType
+class ChatMembersArray extends CustomType implements CustomArrayType
 {
     public $data = [];
 

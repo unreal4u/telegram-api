@@ -7,7 +7,9 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
- * Object that resembles a message object in Telegram
+ * Use this method to send point on the map. On success, the sent Message is returned.
+ *
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#sendlocation
  */

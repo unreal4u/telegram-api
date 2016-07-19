@@ -19,6 +19,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  *
  * You can use this method to get the channel id the bot has to send messages to
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getupdates
  */
 class GetUpdates extends TelegramMethods

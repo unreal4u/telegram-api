@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Abstracts\CustomType;
 use Psr\Log\LoggerInterface;
 
 /**
  * Some APIs (mainly inline bots) respond with boolean types
  */
-class ResultBoolean extends TelegramTypes
+class ResultBoolean extends CustomType
 {
     public $data = false;
 

@@ -9,6 +9,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 /**
  * Use this method to send photos. On success, the sent Message is returned
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#sendphoto
  */
 class SendPhoto extends TelegramMethods

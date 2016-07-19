@@ -5,11 +5,13 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\KeyboardButtonArray;
 
 /**
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#replykeyboardmarkup
  * @see https://core.telegram.org/bots#keyboards
@@ -31,15 +33,20 @@ class ReplyKeyboardMarkup extends KeyboardMethods
     public $resize_keyboard = false;
 
     /**
-     * Optional. Requests clients to hide the keyboard as soon as it's been used. Defaults to false.
+     * Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available,
+     * but clients will automatically display the usual letter-keyboard in the chat – the user can press a special
+     * button in the input field to see the custom keyboard again. Defaults to false.
      * @var bool
      */
     public $one_time_keyboard = false;
 
-    public function mapSubObjects(): array
+    public function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'keyboard' => 'Custom\\KeyboardButtonArray',
-        ];
+        switch ($key) {
+            case 'keyboard':
+                return new KeyboardButtonArray($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

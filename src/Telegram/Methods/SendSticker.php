@@ -10,6 +10,8 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 /**
  * Use this method to send .webp stickers. On success, the sent Message is returned.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#sendsticker
  */
 class SendSticker extends TelegramMethods

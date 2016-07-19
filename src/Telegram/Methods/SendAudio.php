@@ -17,6 +17,8 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * .ogg file encoded with OPUS. This behavior will be phased out in the future. For sending voice messages, use the
  * sendVoice method instead.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#sendaudio
  */
 class SendAudio extends TelegramMethods

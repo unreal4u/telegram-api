@@ -9,6 +9,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 /**
  * Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getuserprofilephotos
  */
 class GetUserProfilePhotos extends TelegramMethods

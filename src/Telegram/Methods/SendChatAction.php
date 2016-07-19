@@ -15,6 +15,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  * The user will see a “sending photo” status for the bot.
  * We only recommend using this method when a response from the bot will take a noticeable amount of time to arrive.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#sendchataction
  */
 class SendChatAction extends TelegramMethods

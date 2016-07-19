@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents an audio file to be treated as music by the Telegram clients
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#audio
  */

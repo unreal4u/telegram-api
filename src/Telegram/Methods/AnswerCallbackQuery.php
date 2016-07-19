@@ -10,6 +10,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the
  * user as a notification at the top of the chat screen or as an alert. On success, True is returned.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#answercallbackquery
  */
 class AnswerCallbackQuery extends TelegramMethods

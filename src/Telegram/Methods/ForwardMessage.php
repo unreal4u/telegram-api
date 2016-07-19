@@ -9,6 +9,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 /**
  * Object that resembles a message object in Telegram
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#forwardmessage
  */
 class ForwardMessage extends TelegramMethods

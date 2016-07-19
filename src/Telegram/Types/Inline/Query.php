@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Inline;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Telegram\Types\Location;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 
 /**
  * This object represents an incoming inline query. When the user sends an empty query, your bot could return some
@@ -47,11 +48,15 @@ class Query extends TelegramTypes
      */
     public $offset = '';
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'from' => 'User',
-            'location' => 'Location',
-        ];
+        switch ($key) {
+            case 'from':
+                return new User($data, $this->logger);
+            case 'location':
+                return new Location($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

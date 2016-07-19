@@ -6,11 +6,12 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
 
 /**
  * This object represents a message.
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#message
  */
@@ -219,32 +220,48 @@ class Message extends TelegramTypes
     public $pinned_message = null;
 
     /**
-     * A message contains several subobjects, map them in this function
+     * A message may contain one or more subobjects, map them always in this function
      *
-     * @return array
+     * @return TelegramTypes
      */
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'from' => 'User',
-            'chat' => 'Chat',
-            'forward_from' => 'User',
-            'forward_from_chat' => 'Chat',
-            'reply_to_message' => 'Message',
-            'entities' => 'Custom\\MessageEntityArray',
-            'audio' => 'Audio',
-            'document' => 'Document',
-            'photo' => 'Custom\\PhotoSizeArray',
-            'sticker' => 'Sticker',
-            'video' => 'Video',
-            'voice' => 'Voice',
-            'contact' => 'Contact',
-            'location' => 'Location',
-            'venue' => 'Venue',
-            'new_chat_participant' => 'User',
-            'left_chat_participant' => 'User',
-            'new_chat_photo' => 'Custom\\PhotoSizeArray',
-            'pinned_message' => 'Message',
-        ];
+        switch ($key) {
+            case 'from':
+            case 'forward_from':
+            case 'new_chat_participant':
+            case 'left_chat_participant':
+                return new User($data, $this->logger);
+            case 'photo':
+            case 'new_chat_photo':
+                return new PhotoSizeArray($data, $this->logger);
+            case 'chat':
+            case 'forward_from_chat':
+                return new Chat($data, $this->logger);
+            case 'reply_to_message':
+            case 'pinned_message':
+                return new Message($data, $this->logger);
+            case 'entities':
+                return new MessageEntityArray($data, $this->logger);
+            case 'audio':
+                return new Audio($data, $this->logger);
+            case 'document':
+                return new Document($data, $this->logger);
+            case 'sticker':
+                return new Sticker($data, $this->logger);
+            case 'video':
+                return new Video($data, $this->logger);
+            case 'voice':
+                return new Voice($data, $this->logger);
+            case 'contact':
+                return new Contact($data, $this->logger);
+            case 'location':
+                return new Location($data, $this->logger);
+            case 'venue':
+                return new Venue($data, $this->logger);
+        }
+
+        // Return always null if none of the objects above matches
+        return parent::mapSubObjects($key, $data);
     }
 }

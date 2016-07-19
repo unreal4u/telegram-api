@@ -5,11 +5,12 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 
 /**
  * This object represents a video file
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#video
  */
@@ -57,10 +58,13 @@ class Video extends TelegramTypes
      */
     public $file_size = 0;
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'thumb' => 'Custom\\PhotoSize',
-        ];
+        switch ($key) {
+            case 'thumb':
+                return new PhotoSizeArray($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

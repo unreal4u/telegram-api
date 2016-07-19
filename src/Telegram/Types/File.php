@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  * hour. When the link expires, a new one can be requested by calling getFile.
  * <blockquote>Maximum file size to download is 20 MB</blockquote>
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#file
  */

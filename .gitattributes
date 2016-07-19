@@ -1,6 +1,8 @@
 # To test this: git archive --format zip -v -o telegram-api.zip HEAD
 tests/ export-ignore
 vendor/ export-ignore
+logs/ export-ignore
+.vagrant/ export-ignore
 
 .git* export-ignore
 .*.yml export-ignore

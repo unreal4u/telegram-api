@@ -5,11 +5,12 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Cached\Photo;
 
 /**
  * This object represents a sticker
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#sticker
  */
@@ -40,15 +41,24 @@ class Sticker extends TelegramTypes
     public $thumb = null;
 
     /**
+     * Optional. Emoji associated with the sticker
+     * @var string
+     */
+    public $emoji = '';
+
+    /**
      * Optional. File size
      * @var int
      */
     public $file_size = 0;
 
-    protected function mapSubObjects(): array
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return [
-            'thumb' => 'PhotoSize',
-        ];
+        switch ($key) {
+            case 'thumb':
+                return new PhotoSize($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
     }
 }

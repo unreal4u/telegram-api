@@ -7,12 +7,14 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
- * Use this method to kick a user from a group or a supergroup. In the case of supergroups, the user will not be able to 
- * return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in 
+ * Use this method to kick a user from a group or a supergroup. In the case of supergroups, the user will not be able to
+ * return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in
  * the group for this to work. Returns True on success.
- * 
- * Note: This will method only work if the ‘All Members Are Admins’ setting is off in the target group. Otherwise 
+ *
+ * Note: This will method only work if the ‘All Members Are Admins’ setting is off in the target group. Otherwise
  * members may only be removed by the group's creator or by the member that added them.
+ *
+ * Objects defined as-is july 2016
  *
  * @see https://core.telegram.org/bots/api#kickchatmember
  */

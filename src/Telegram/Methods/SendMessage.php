@@ -10,6 +10,8 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 /**
  * Object that resembles a message object in Telegram
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#sendmessage
  */
 class SendMessage extends TelegramMethods

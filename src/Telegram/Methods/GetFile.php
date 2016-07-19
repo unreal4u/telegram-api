@@ -13,6 +13,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  * that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile
  * again.
  *
+ * Objects defined as-is july 2016
+ *
  * @see https://core.telegram.org/bots/api#getfile
  */
 class GetFile extends TelegramMethods
