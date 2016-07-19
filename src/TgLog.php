@@ -10,6 +10,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\File;
 use Psr\Log\LoggerInterface;
 
@@ -92,11 +93,9 @@ class TgLog
     {
         $this->logger->debug('Request for API call, resetting internal values', [get_class($method)]);
         $this->resetObjectValues();
-        $jsonDecoded = $this->sendRequestToTelegram($method, $this->constructFormData($method));
+        $rawData = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
-        $returnObject = 'unreal4u\\TelegramAPI\\Telegram\\Types\\' . $method::bindToObjectType();
-        $this->logger->debug('Decoded response from server, instantiating new class', [$returnObject]);
-        return new $returnObject($jsonDecoded['result'], $this->logger);
+        return $method::bindToObject($rawData, $this->logger);
     }
 
     /**
@@ -132,14 +131,14 @@ class TgLog
      *
      * @param TelegramMethods $method
      * @param array $formData
-     * @return array
+     * @return TelegramRawData
      */
-    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
         $this->logger->debug('About to call HTTP Client');
         $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
-        return json_decode((string)$response->getBody(), true);
+        return new TelegramRawData((string)$response->getBody());
     }
 
     /**
@@ -169,7 +168,7 @@ class TgLog
 
         switch ($this->formType) {
             case 'application/x-www-form-urlencoded':
-                $this->logger->debug('Creating x-www-form-urlencoded form (fast way)');
+                $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
                     'form_params' => get_object_vars($method),
                 ];
@@ -178,7 +177,9 @@ class TgLog
                 $formData = $this->buildMultipartFormData(get_object_vars($method), $result['id'], $result['stream']);
                 break;
             default:
-                $this->logger->critical('Invalid form-type detected');
+                $this->logger->critical(
+                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to a bug. Please report at https://github.com/unreal4u/telegram-api/issues'
+                );
                 $formData = [];
                 break;
         }
@@ -197,22 +198,20 @@ class TgLog
      */
     private function checkSpecialConditions(TelegramMethods $method): array
     {
-        $this->logger->debug('Checking special conditions');
+        $this->logger->debug('Checking whether to apply special conditions to this request');
         $method->performSpecialConditions();
 
         $return = [false];
 
         foreach ($method as $key => $value) {
-            if (is_object($value)) {
-                if (get_class($value) == 'unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\InputFile') {
-                    $this->logger->debug('About to send a file, so changing request to use multi-part instead');
-                    // If we are about to send a file, we must use the multipart/form-data way
-                    $this->formType = 'multipart/form-data';
-                    $return = [
-                        'id' => $key,
-                        'stream' => $value->getStream(),
-                    ];
-                }
+            if (is_object($value) && get_class($value) == 'unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\InputFile') {
+                $this->logger->debug('About to send a file, so changing request to use multi-part instead');
+                // If we are about to send a file, we must use the multipart/form-data way
+                $this->formType = 'multipart/form-data';
+                $return = [
+                    'id' => $key,
+                    'stream' => $value->getStream(),
+                ];
             }
         }
 

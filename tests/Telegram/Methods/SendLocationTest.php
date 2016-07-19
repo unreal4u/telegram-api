@@ -30,18 +30,6 @@ class SendLocationTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = SendLocation::bindToObjectType();
-        $this->assertEquals('Message', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testSendLocation()
     {
         $sendLocation = new SendLocation();

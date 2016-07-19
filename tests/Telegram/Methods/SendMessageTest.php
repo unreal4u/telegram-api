@@ -32,18 +32,6 @@ class SendMessageTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = SendMessage::bindToObjectType();
-        $this->assertEquals('Message', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testSendMessage()
     {
         $sendMessage = new SendMessage();

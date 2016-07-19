@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
 
 /**
  * This will get the updates Telegram has for our bot
@@ -48,10 +52,12 @@ class GetUpdates extends TelegramMethods
     /**
      * This call will return an array with updates, so call up a custom type to do this
      *
-     * @return string
+     * @param array $data
+     * @param LoggerInterface $logger
+     * @return TelegramTypes
      */
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Custom\\UpdatesArray';
+        return new UpdatesArray($data->getResult(), $logger);
     }
 }

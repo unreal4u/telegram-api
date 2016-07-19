@@ -32,18 +32,7 @@ class GetUserProfilePhotosTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = GetUserProfilePhotos::bindToObjectType();
-        $this->assertEquals('UserProfilePhotos', $type);
-    }
-
-    /**
      * Tests a private message "Hello bot" to the bot
-     *
-     * @depends testBindToObjectType
      */
     public function testGetUserProfilePhotos()
     {

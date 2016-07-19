@@ -31,18 +31,6 @@ class GetFileTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = GetFile::bindToObjectType();
-        $this->assertEquals('File', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testGetFile()
     {
         $getFile = new GetFile();

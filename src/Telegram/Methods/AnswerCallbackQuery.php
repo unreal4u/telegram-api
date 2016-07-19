@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
  * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the
@@ -35,8 +39,8 @@ class AnswerCallbackQuery extends TelegramMethods
      */
     public $show_alert = false;
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Custom\\ResultBoolean';
+        return new ResultBoolean($data->getResultBoolean(), $logger);
     }
 }

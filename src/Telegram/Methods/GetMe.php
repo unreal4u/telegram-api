@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 
 /**
  * A simple method for testing your bot's auth token. Requires no parameters. Returns basic information about the bot in
@@ -16,8 +20,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
  */
 class GetMe extends TelegramMethods
 {
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'User';
+        return new User($data->getResult(), $logger);
     }
 }

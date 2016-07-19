@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
  * Use this method to unban a previously kicked user in a supergroup. The user will not return to the group
@@ -29,8 +33,8 @@ class UnbanChatMember extends TelegramMethods
      */
     public $user_id = 0;
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Custom\\ResultBoolean';
+        return new ResultBoolean($data->getResultBoolean(), $logger);
     }
 }

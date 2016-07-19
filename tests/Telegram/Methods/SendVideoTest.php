@@ -31,18 +31,6 @@ class SendVideoTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = SendVideo::bindToObjectType();
-        $this->assertEquals('Message', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testSendVideo()
     {
         $sendVideo = new SendVideo();

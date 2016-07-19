@@ -2,6 +2,7 @@
 
 namespace tests\Mock;
 
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\TgLog;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
@@ -19,7 +20,7 @@ class MockTgLog extends TgLog
      */
     public $mockException = false;
 
-    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): array
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
         $this->composeApiMethodUrl($method);
 
@@ -39,6 +40,6 @@ class MockTgLog extends TgLog
             throw new MockClientException(file_get_contents($filename));
         }
 
-        return json_decode(file_get_contents($filename), true);
+        return new TelegramRawData(file_get_contents($filename), true);
     }
 }

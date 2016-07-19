@@ -32,18 +32,7 @@ class GetUpdatesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = GetUpdates::bindToObjectType();
-        $this->assertEquals('Custom\\UpdatesArray', $type);
-    }
-
-    /**
      * Tests a private message "Hello bot" to the bot
-     *
-     * @depends testBindToObjectType
      */
     public function testGetUpdatesMessageIncoming()
     {

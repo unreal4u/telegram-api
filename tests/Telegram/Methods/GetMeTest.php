@@ -31,18 +31,6 @@ class GetMeTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = GetMe::bindToObjectType();
-        $this->assertEquals('User', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testGetMe()
     {
         $getMe = new GetMe();

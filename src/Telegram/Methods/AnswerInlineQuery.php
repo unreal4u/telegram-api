@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
  * Use this method to send answers to an inline query. On success, True is returned.
@@ -71,9 +75,9 @@ class AnswerInlineQuery extends TelegramMethods
      */
     public $switch_pm_parameter = '';
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Custom\\ResultBoolean';
+        return new ResultBoolean($data->getResultBoolean(), $logger);
     }
 
     public function performSpecialConditions(): TelegramMethods

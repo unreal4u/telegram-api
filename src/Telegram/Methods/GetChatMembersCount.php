@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultInt;
 
 /**
  * Use this method to get the number of members in a chat. Returns Int on success
@@ -22,8 +26,8 @@ class GetChatMembersCount extends TelegramMethods
      */
     public $chat_id = '';
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Custom\\ResultInt';
+        return new ResultInt($data->getResultInt(), $logger);
     }
 }

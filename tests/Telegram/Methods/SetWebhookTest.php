@@ -30,18 +30,6 @@ class SetWebhookTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = SetWebhook::bindToObjectType();
-        $this->assertEquals('Custom\\ResultBoolean', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testSetWebhook()
     {
         $setWebhook = new SetWebhook();

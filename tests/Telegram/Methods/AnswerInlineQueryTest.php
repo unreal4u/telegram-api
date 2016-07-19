@@ -31,18 +31,6 @@ class AnswerInlineQueryTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Asserts that the GetMe method ALWAYS load in a user type
-     */
-    public function testBindToObjectType()
-    {
-        $type = AnswerInlineQuery::bindToObjectType();
-        $this->assertEquals('Custom\\ResultBoolean', $type);
-    }
-
-    /**
-     * @depends testBindToObjectType
-     */
     public function testAnswerInlineQuery()
     {
         $inlineQueryResultArticle = new Article();

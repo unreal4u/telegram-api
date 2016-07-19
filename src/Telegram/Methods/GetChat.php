@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
 
 /**
  * Use this method to get up to date information about the chat (current name of the user for one-on-one conversations,
@@ -23,8 +27,8 @@ class GetChat extends TelegramMethods
      */
     public $chat_id = '';
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'Chat';
+        return new Chat($data->getResult(), $logger);
     }
 }

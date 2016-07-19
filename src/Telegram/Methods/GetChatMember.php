@@ -4,7 +4,11 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\ChatMember;
 
 /**
  * Use this method to get information about a member of a chat. Returns a ChatMember object on success
@@ -28,8 +32,8 @@ class GetChatMember extends TelegramMethods
      */
     public $user_id = 0;
 
-    public static function bindToObjectType(): string
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        return 'ChatMember';
+        return new ChatMember($data->getResult(), $logger);
     }
 }
