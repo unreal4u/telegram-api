@@ -20,7 +20,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InlineKeyboardButtonArray;
  *
  * @see https://core.telegram.org/bots/api#replykeyboardhide
  */
-class Markup
+class Markup extends TelegramTypes
 {
     /**
      * Array of button rows, each represented by an Array of InlineKeyboardButton objects
