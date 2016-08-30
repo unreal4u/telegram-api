@@ -9,7 +9,7 @@ matrix:
 before_script:
   - "mkdir -p ~/.composer"
   - composer self-update
-  - composer install -o
+  - composer install -o --ignore-platform-reqs
 script:
   - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
   - vendor/bin/phpcs src/ --standard=psr2 -sp
