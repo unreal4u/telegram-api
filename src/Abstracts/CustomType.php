@@ -10,6 +10,7 @@ namespace unreal4u\TelegramAPI\Abstracts;
  * Most of the custom ones do need some work after they have been set, so this will be an easy way to distinguish
  * between the two.
  */
-abstract class CustomType extends TelegramTypes {
+abstract class CustomType extends TelegramTypes
+{
     public $data = null;
 }

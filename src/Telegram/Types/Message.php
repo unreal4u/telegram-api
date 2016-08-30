@@ -189,9 +189,9 @@ class Message extends TelegramTypes
     public $supergroup_chat_created = false;
 
     /**
-     * Optional. Service message: the channel has been created. This field can‘t be received in a message coming through
-     * updates, because bot can’t be a member of a channel when it is created. It can only be found in reply_to_message
-     * if someone replies to a very first message in a channel
+     * Optional. Service message: the channel has been created. This field can‘t be received in a message coming
+     * through updates, because bot can’t be a member of a channel when it is created. It can only be found in
+     * reply_to_message if someone replies to a very first message in a channel
      * @var bool
      */
     public $channel_chat_created = false;

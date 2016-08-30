@@ -38,8 +38,8 @@ class Button extends TelegramTypes
 
     /**
      * Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and
-     * insert the bot‘s username and the specified inline query in the input field. Can be empty, in which case just the
-     * bot’s username will be inserted.
+     * insert the bot‘s username and the specified inline query in the input field. Can be empty, in which case just
+     * the bot’s username will be inserted.
      *
      * Note: This offers an easy way for users to start using your bot in inline mode when they are currently in a
      * private chat with it. Especially useful when combined with switch_pm… actions – in this case the user will be

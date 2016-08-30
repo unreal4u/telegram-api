@@ -179,7 +179,8 @@ class TgLog
                 break;
             default:
                 $this->logger->critical(
-                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to a bug. Please report at https://github.com/unreal4u/telegram-api/issues'
+                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to '.
+                    'a bug. Please report at https://github.com/unreal4u/telegram-api/issues'
                 );
                 $formData = [];
                 break;

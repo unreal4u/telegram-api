@@ -22,7 +22,8 @@ class ChatMember extends TelegramTypes
     public $user = null;
 
     /**
-     * The member's status in the chat. Can be “creator”, “administrator”, “member”, “left” or “kicked”
+     * The member's status in the chat. Can be “creator”, “administrator”, “member”, “left” or
+     * “kicked”
      * @var string
      */
     public $status = '';
