@@ -1,12 +1,14 @@
 language: php
 php:
   - 7.0
+  - 7.1
 before_script:
   - "mkdir -p ~/.composer"
   - composer self-update
   - composer install -o
 script:
   - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
+  - vendor/bin/phpcs src/ --standard=psr2 -sp
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
