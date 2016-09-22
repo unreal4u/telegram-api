@@ -39,5 +39,4 @@ class GetChatAdministrators extends TelegramMethods
             'chat_id',
         ];
     }
-
 }

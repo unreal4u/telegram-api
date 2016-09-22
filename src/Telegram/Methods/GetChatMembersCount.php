@@ -37,5 +37,4 @@ class GetChatMembersCount extends TelegramMethods
             'chat_id',
         ];
     }
-
 }

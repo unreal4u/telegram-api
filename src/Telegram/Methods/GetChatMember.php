@@ -44,5 +44,4 @@ class GetChatMember extends TelegramMethods
             'user_id',
         ];
     }
-
 }
