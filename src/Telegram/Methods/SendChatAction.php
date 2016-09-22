@@ -34,4 +34,12 @@ class SendChatAction extends TelegramMethods
      * @var string
      */
     public $action = '';
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'action',
+        ];
+    }
 }

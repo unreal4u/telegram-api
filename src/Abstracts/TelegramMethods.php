@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Abstracts;
 
 use Psr\Log\LoggerInterface;
+use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Interfaces\TelegramMethodDefinitions;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
@@ -48,5 +49,27 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         }
 
         return $this;
+    }
+
+    public function export(): array
+    {
+        $finalArray = [];
+        $objectProspect = get_object_vars($this);
+        $cleanObject = new $this();
+        foreach ($objectProspect as $fieldId => $value) {
+            // Strict comparison, type checking!
+            if ($objectProspect[$fieldId] === $cleanObject->$fieldId) {
+                if (in_array($fieldId, $this->getMandatoryFields())) {
+                    throw new MissingMandatoryField(sprintf(
+                        'The field "%s" is mandatory and empty, please correct',
+                        $fieldId
+                    ));
+                }
+            } else {
+                $finalArray[$fieldId] = $value;
+            }
+        }
+
+        return $finalArray;
     }
 }

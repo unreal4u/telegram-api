@@ -222,6 +222,8 @@ class Message extends TelegramTypes
     /**
      * A message may contain one or more subobjects, map them always in this function
      *
+     * @param string $key
+     * @param array $data
      * @return TelegramTypes
      */
     protected function mapSubObjects(string $key, array $data): TelegramTypes

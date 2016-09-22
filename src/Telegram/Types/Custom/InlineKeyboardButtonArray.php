@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Mockup class to generate a real telegram update representation
+ *
+ * @TODO Test this, it may not work as expected!
  */
 class InlineKeyboardButtonArray extends CustomType implements CustomArrayType
 {

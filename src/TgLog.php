@@ -171,11 +171,11 @@ class TgLog
             case 'application/x-www-form-urlencoded':
                 $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
-                    'form_params' => get_object_vars($method),
+                    'form_params' => $method->export(),
                 ];
                 break;
             case 'multipart/form-data':
-                $formData = $this->buildMultipartFormData(get_object_vars($method), $result['id'], $result['stream']);
+                $formData = $this->buildMultipartFormData($method->export(), $result['id'], $result['stream']);
                 break;
             default:
                 $this->logger->critical(

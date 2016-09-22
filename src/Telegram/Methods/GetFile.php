@@ -40,4 +40,11 @@ class GetFile extends TelegramMethods
     {
         return new File($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'file_id',
+        ];
+    }
 }

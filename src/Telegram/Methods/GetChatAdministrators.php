@@ -32,4 +32,12 @@ class GetChatAdministrators extends TelegramMethods
     {
         return new ChatMembersArray($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+        ];
+    }
+
 }

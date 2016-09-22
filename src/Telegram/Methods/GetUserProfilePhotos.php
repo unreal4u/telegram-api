@@ -48,4 +48,11 @@ class GetUserProfilePhotos extends TelegramMethods
     {
         return new UserProfilePhotos($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'user_id',
+        ];
+    }
 }

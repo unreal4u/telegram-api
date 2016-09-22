@@ -41,4 +41,13 @@ class ForwardMessage extends TelegramMethods
      * @var int
      */
     public $message_id = 0;
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'from_chat_id',
+            'message_id',
+        ];
+    }
 }

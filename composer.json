@@ -21,6 +21,7 @@
   "require-dev": {
     "monolog/monolog": "~1.17",
     "squizlabs/php_codesniffer": "@stable",
+    "jakub-onderka/php-parallel-lint": "^0.9.0",
     "phpmd/phpmd": "@stable",
     "phpunit/phpunit": "@stable"
   },

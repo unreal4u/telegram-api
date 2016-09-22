@@ -59,4 +59,12 @@ class SendDocument extends TelegramMethods
      * @var null
      */
     public $reply_markup = null;
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'document',
+        ];
+    }
 }

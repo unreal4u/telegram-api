@@ -60,4 +60,11 @@ class EditMessageText extends TelegramMethods
      * @var Markup
      */
     public $reply_markup = null;
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'text',
+        ];
+    }
 }

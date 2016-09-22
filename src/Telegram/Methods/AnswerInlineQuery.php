@@ -86,4 +86,12 @@ class AnswerInlineQuery extends TelegramMethods
 
         return parent::performSpecialConditions();
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'inline_query_id',
+            'results',
+        ];
+    }
 }

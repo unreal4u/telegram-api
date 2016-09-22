@@ -61,4 +61,12 @@ class SendMessage extends TelegramMethods
      * @var KeyboardMethods
      */
     public $reply_markup = null;
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'text',
+        ];
+    }
 }

@@ -54,6 +54,13 @@ class DummyLogger implements LoggerInterface
         return $this->log(LogLevel::DEBUG, $message, $context);
     }
 
+    /**
+     * @SuppressWarnings("unused")
+     * @param mixed $level
+     * @param string $message
+     * @param array $context
+     * @return bool
+     */
     public function log($level, $message, array $context = array()): bool
     {
         return false;

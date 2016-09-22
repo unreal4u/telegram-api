@@ -36,4 +36,13 @@ class GetChatMember extends TelegramMethods
     {
         return new ChatMember($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'user_id',
+        ];
+    }
+
 }

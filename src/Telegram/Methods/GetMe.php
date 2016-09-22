@@ -24,4 +24,9 @@ class GetMe extends TelegramMethods
     {
         return new User($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [];
+    }
 }

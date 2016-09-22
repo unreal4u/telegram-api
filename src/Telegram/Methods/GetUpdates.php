@@ -60,4 +60,9 @@ class GetUpdates extends TelegramMethods
     {
         return new UpdatesArray($data->getResult(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [];
+    }
 }

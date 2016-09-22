@@ -40,4 +40,12 @@ class KickChatMember extends TelegramMethods
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+            'user_id',
+        ];
+    }
 }

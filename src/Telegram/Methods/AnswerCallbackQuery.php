@@ -43,4 +43,11 @@ class AnswerCallbackQuery extends TelegramMethods
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'callback_query_id',
+        ];
+    }
 }

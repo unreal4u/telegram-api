@@ -30,4 +30,12 @@ class GetChatMembersCount extends TelegramMethods
     {
         return new ResultInt($data->getResultInt(), $logger);
     }
+
+    public function getMandatoryFields(): array
+    {
+        return [
+            'chat_id',
+        ];
+    }
+
 }
