@@ -40,7 +40,7 @@ class TelegramDocument
         // What better to get the mime type than what the Telegram servers already send us?
         $this->mime_type = $headers['Content-Type'][0];
         // Same with file length
-        $this->file_size = $headers['Content-Length'][0];
+        $this->file_size = (int)$headers['Content-Length'][0];
         $this->contents = (string)$response->getBody();
     }
 
