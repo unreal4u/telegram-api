@@ -2,10 +2,6 @@ language: php
 php:
   - 7.0
   - 7.1
-  - hhvm
-matrix:
-  allow_failures:
-    - php: hhvm
 before_script:
   - "mkdir -p ~/.composer"
   - composer self-update
