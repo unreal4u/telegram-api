@@ -38,6 +38,7 @@ class GetUserProfilePhotosTest extends TestCase
     public function testGetUserProfilePhotos()
     {
         $getUserProfilePhotos = new GetUserProfilePhotos();
+        $getUserProfilePhotos->user_id = 123456789;
 
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
@@ -57,6 +58,7 @@ class GetUserProfilePhotosTest extends TestCase
         $this->tgLog->specificTest = 'multiplePhotos';
 
         $getUserProfilePhotos = new GetUserProfilePhotos();
+        $getUserProfilePhotos->user_id = 123456789;
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
@@ -70,6 +72,7 @@ class GetUserProfilePhotosTest extends TestCase
         $this->tgLog->specificTest = 'noPhotos';
 
         $getUserProfilePhotos = new GetUserProfilePhotos();
+        $getUserProfilePhotos->user_id = 123456789;
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
@@ -83,6 +86,7 @@ class GetUserProfilePhotosTest extends TestCase
 
         try {
             $getUserProfilePhotos = new GetUserProfilePhotos();
+            $getUserProfilePhotos->user_id = 123456789;
             $this->tgLog->performApiRequest($getUserProfilePhotos);
         } catch (MockClientException $e) {
             $this->assertInstanceOf('\\stdClass', $e->decodedResponse);

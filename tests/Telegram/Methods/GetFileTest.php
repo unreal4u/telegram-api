@@ -35,6 +35,7 @@ class GetFileTest extends TestCase
     public function testGetFile()
     {
         $getFile = new GetFile();
+        $getFile->file_id = 'XXXYYYZZZ';
 
         $result = $this->tgLog->performApiRequest($getFile);
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\File', $result);
@@ -45,6 +46,7 @@ class GetFileTest extends TestCase
     public function testGetFileInvalidFileId()
     {
         $getFile = new GetFile();
+        $getFile->file_id = 'XYZ';
 
         $this->tgLog->specificTest = 'invalidFileId';
         $this->tgLog->mockException = true;
