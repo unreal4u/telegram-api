@@ -18,7 +18,7 @@ use unreal4u\TelegramAPI\Telegram\Types\WebhookInfo;
  *
  * @see https://core.telegram.org/bots/api/#getwebhookinfo
  */
-class getWebhookInfo extends TelegramMethods
+class GetWebhookInfo extends TelegramMethods
 {
     public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
