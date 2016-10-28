@@ -34,6 +34,12 @@ class SendVoice extends TelegramMethods
     public $voice = null;
 
     /**
+     * Optional. Audio caption, 0-200 characters
+     * @var string
+     */
+    public $caption = '';
+
+    /**
      * Optional. Duration of sent video in seconds
      * @var int
      */

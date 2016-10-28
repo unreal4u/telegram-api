@@ -38,6 +38,12 @@ class SendAudio extends TelegramMethods
     public $audio = null;
 
     /**
+     * Optional. Audio caption, 0-200 characters
+     * @var string
+     */
+    public $caption = '';
+
+    /**
      * Optional. Duration of the audio in seconds
      * @var int
      */

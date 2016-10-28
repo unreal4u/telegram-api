@@ -34,4 +34,10 @@ class Voice extends Result
      * @var string
      */
     public $title = '';
+
+    /**
+     * Optional. Audio caption, 0-200 characters
+     * @var string
+     */
+    public $caption = '';
 }

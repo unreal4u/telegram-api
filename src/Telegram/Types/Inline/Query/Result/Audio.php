@@ -35,6 +35,12 @@ class Audio extends Result
     public $title = '';
 
     /**
+     * Optional. Audio caption, 0-200 characters
+     * @var string
+     */
+    public $caption = '';
+
+    /**
      * Optional. Performer
      * @var string
      */

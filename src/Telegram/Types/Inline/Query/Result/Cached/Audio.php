@@ -28,4 +28,10 @@ class Audio extends Result
      * @var string
      */
     public $audio_file_id = '';
+
+    /**
+     * Optional. Audio caption, 0-200 characters
+     * @var string
+     */
+    public $caption = '';
 }
