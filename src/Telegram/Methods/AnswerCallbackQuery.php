@@ -39,6 +39,17 @@ class AnswerCallbackQuery extends TelegramMethods
      */
     public $show_alert = false;
 
+    /**
+     * URL that will be opened by the user's client. If you have created a Game and accepted the conditions via
+     * @Botfather, specify the URL that opens your game – note that this will only work if the query comes from a
+     * callback_game button.
+     *
+     * Otherwise, you may use links like telegram.me/your_bot?start=XXXX that open your bot with a parameter.
+     *
+     * @var string
+     */
+    public $url = '';
+
     public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
