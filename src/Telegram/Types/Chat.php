@@ -52,4 +52,10 @@ class Chat extends TelegramTypes
      * @var string
      */
     public $last_name = '';
+
+    /**
+     * Optional. True if a group has ‘All Members Are Admins’ enabled.
+     * @var bool
+     */
+    public $all_members_are_administrators = false;
 }
