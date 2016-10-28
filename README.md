@@ -8,6 +8,16 @@
 
 This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.1
 
+## Current status
+
+The current version (v2.0.0) is currently almost ready, with some methods still to be implemented. These methods are:
+
+- Parsing correctly answer we get from Telegram of certain inline responses.
+- Some new methods added on October 2016, [please check this link](https://core.telegram.org/bots/api/#recent-changes).
+
+If you are sure that you'll not use these capabilities, feel free to test it out, the basics should all be working
+correctly at all times. If not, [let me know](https://github.com/unreal4u/telegram-api/issues)! 
+
 ## About this class
 
 * Enables you to send messages, stickers, location and other methods via PHP a Telegram user (or group).

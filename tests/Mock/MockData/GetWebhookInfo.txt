@@ -1,0 +1,1 @@
+{"ok":true,"result":{"url":"https:\/\/telegram.unreal4u.com\/XXXYYYZZZ","has_custom_certificate":false,"pending_update_count":0}}

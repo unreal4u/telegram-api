@@ -36,8 +36,10 @@ yum install -q -y \
   php${PHP_VERSION}-php-xml \
   php${PHP_VERSION}-php-process \
   php${PHP_VERSION}-php-pecl-xdebug \
-  php${PHP_VERSION}-php-pecl-zip
+  php${PHP_VERSION}-php-pecl-zip \
+  php${PHP_VERSION}-php-dbg
 ln -s /usr/bin/php70 /usr/bin/php
+ln -s /usr/bin/php70-phpdbg /usr/bin/phpdbg
 
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/

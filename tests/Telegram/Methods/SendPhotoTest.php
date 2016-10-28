@@ -32,7 +32,7 @@ class SendPhotoTest extends TestCase
         parent::tearDown();
     }
 
-    public function testSendAudio()
+    public function testSendPhoto()
     {
         $sendPhoto = new SendPhoto();
         $sendPhoto->chat_id = 12341234;
