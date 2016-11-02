@@ -4,7 +4,6 @@ namespace tests\InternalFunctionality;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 
 class TelegramRawDataTest extends TestCase

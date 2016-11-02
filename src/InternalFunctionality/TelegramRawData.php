@@ -41,12 +41,10 @@ class TelegramRawData
             case 'integer':
             case 'boolean':
                 return gettype($this->decodedData['result']);
-            break;
             default:
                 throw new InvalidResultType(
                     sprintf('The passed data type ("%s") is not supported', gettype($this->decodedData['result']))
                 );
-            break;
         }
     }
 
