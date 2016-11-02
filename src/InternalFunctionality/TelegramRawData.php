@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
+use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
+
 class TelegramRawData
 {
     /**
@@ -30,19 +32,21 @@ class TelegramRawData
      * Unused so far
      *
      * @return string
+     * @throws InvalidResultType
      */
     public function getTypeOfResult(): string
     {
-        if (is_array($this->decodedData['result'])) {
-            return 'array';
-        }
-
-        if (is_integer($this->decodedData['result'])) {
-            return 'int';
-        }
-
-        if (is_bool($this->decodedData['result'])) {
-            return 'bool';
+        switch (gettype($this->decodedData['result'])) {
+            case 'array':
+            case 'integer':
+            case 'boolean':
+                return gettype($this->decodedData['result']);
+            break;
+            default:
+                throw new InvalidResultType(
+                    sprintf('The passed data type ("%s") is not supported', gettype($this->decodedData['result']))
+                );
+            break;
         }
     }
 

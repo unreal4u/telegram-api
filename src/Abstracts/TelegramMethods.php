@@ -51,7 +51,12 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         return $this;
     }
 
-    public function export(): array
+    /**
+     * Exports the class to an array in order to send it to the Telegram servers
+     *
+     * @return array
+     */
+    final public function export(): array
     {
         $finalArray = [];
         $objectProspect = get_object_vars($this);

@@ -2,9 +2,11 @@
 
 namespace tests;
 
+use PHPUnit_Framework_TestCase as TestCase;
+#use PHPUnit\Framework\TestCase;
 use tests\Mock\MockTgLog;
 
-class TgLogTest extends \PHPUnit_Framework_TestCase
+class TgLogTest extends TestCase
 {
     /**
      * @var MockTgLog

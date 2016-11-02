@@ -40,13 +40,13 @@ class Update extends TelegramTypes
 
     /**
      * Optional. New incoming inline query
-     * @var null
+     * @var Query
      */
     public $inline_query = null;
 
     /**
      * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
-     * @var null
+     * @var ChosenResult
      */
     public $chosen_inline_result = null;
 

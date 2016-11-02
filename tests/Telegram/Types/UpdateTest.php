@@ -2,9 +2,11 @@
 
 namespace tests\Telegram\Types;
 
+use PHPUnit_Framework_TestCase as TestCase;
+#use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Types\Update;
 
-class UpdateTest extends \PHPUnit_Framework_TestCase
+class UpdateTest extends TestCase
 {
     private $dataProvider = [
         'inlineQuery' => [
@@ -51,9 +53,11 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $updateObject = new Update($this->dataProvider['inlineResult']);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Update', $updateObject);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Inline\\ChosenResult', $updateObject->chosen_inline_result);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $updateObject->chosen_inline_result->from);
+        $mainNamespace = 'unreal4u\\TelegramAPI\\Telegram\\Types\\';
+
+        $this->assertInstanceOf($mainNamespace.'Update', $updateObject);
+        $this->assertInstanceOf($mainNamespace.'Inline\\ChosenResult', $updateObject->chosen_inline_result);
+        $this->assertInstanceOf($mainNamespace.'User', $updateObject->chosen_inline_result->from);
         $this->assertNull($updateObject->message);
         $this->assertNull($updateObject->inline_query);
         $this->assertNotEmpty($updateObject->chosen_inline_result->query);

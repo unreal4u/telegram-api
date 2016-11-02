@@ -2,9 +2,11 @@
 
 namespace tests\InternalFunctionality;
 
+use PHPUnit_Framework_TestCase as TestCase;
+#use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 
-class DummyLoggerTest extends \PHPUnit_Framework_TestCase
+class DummyLoggerTest extends TestCase
 {
     /**
      * @var DummyLogger
