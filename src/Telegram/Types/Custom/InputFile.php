@@ -22,7 +22,7 @@ class InputFile
 
     /**
      * The actual stream to the file
-     * @var int
+     * @var resource
      */
     private $stream = null;
 
