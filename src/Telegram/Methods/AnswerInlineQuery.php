@@ -9,6 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 /**
  * Use this method to send answers to an inline query. On success, True is returned.
@@ -30,7 +31,7 @@ class AnswerInlineQuery extends TelegramMethods
      * A JSON-serialized array (of InlineQueryResult) of results for the inline query
      * @var array
      */
-    public $results = [];
+    protected $results = [];
 
     /**
      * Optional. The maximum amount of time in seconds that the result of the inline query may be cached on the server.
@@ -93,5 +94,22 @@ class AnswerInlineQuery extends TelegramMethods
             'inline_query_id',
             'results',
         ];
+    }
+
+    /**
+     * Use this method to add a result, this will delete all additional unneeded information from the subclass
+     *
+     * @param Result $result
+     * @return AnswerInlineQuery
+     */
+    public function addResult(Result $result)
+    {
+        $this->results[] = $result->export();
+        return $this;
+    }
+
+    public function getResults()
+    {
+        return $this->results;
     }
 }

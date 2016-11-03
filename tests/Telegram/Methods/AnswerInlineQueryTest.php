@@ -6,6 +6,8 @@ use tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article;
 use PHPUnit_Framework_TestCase as TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent\Text;
+
 #use PHPUnit\Framework\TestCase;
 
 class AnswerInlineQueryTest extends TestCase
@@ -38,20 +40,24 @@ class AnswerInlineQueryTest extends TestCase
         $inlineQueryResultArticle = new Article();
         $inlineQueryResultArticle->url = 'https://unreal4u.com/';
         $inlineQueryResultArticle->title = 'The title';
-        // @TODO rewrite this to the new code
-        $inlineQueryResultArticle->message_text = 'The message text';
-        $inlineQueryResultArticle->disable_web_page_preview = true;
+
+        $inputMessageContentText = new Text();
+        $inputMessageContentText->message_text = 'The message text';
+        $inputMessageContentText->disable_web_page_preview = true;
         $inlineQueryResultArticle->id = 'unit-test-001';
+
+        $inlineQueryResultArticle->input_message_content = $inputMessageContentText;
+        $inlineQueryResultArticle->id = md5(json_encode(['uid' => '111', 'iqid' => '222', 'rid' => '33']));
 
         $answerInlineQuery = new AnswerInlineQuery();
         $answerInlineQuery->inline_query_id = 123412341234;
-        $answerInlineQuery->results[] = $inlineQueryResultArticle;
+        $answerInlineQuery->addResult($inlineQueryResultArticle);
 
         $result = $this->tgLog->performApiRequest($answerInlineQuery);
 
         $this->assertEquals(
             trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.txt')),
-            $answerInlineQuery->results
+            $answerInlineQuery->getResults()
         );
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\ResultBoolean', $result);
