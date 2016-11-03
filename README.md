@@ -7,18 +7,18 @@
 # Telegram API
 
 This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.1 (And up
-until the vast mayority of October 2016)
+until the vast mayority of October 2016, please check [the open issues](https://github.com/unreal4u/telegram-api/issues/12))
 
 ## Current status
 
-The current version (v2.0.0) is currently almost ready, with some methods still to be implemented. These methods are:
+The current version is stable enough to be used in production, with some methods still to be implemented. These missing
+methods are:
 
-- Parsing correctly answer we get from Telegram of certain inline responses.
-- Some new methods related to games added on October 2016, [please check this link](https://core.telegram.org/bots/api/#recent-changes).
+- Some new methods related to games added on October 2016, [please check this link](https://core.telegram.org/bots/api/#recent-changes) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
 - Ability to pass on an url as InputFile, there is barely any documentation on this subject.
 
 If you are sure that you'll not use these capabilities, feel free to test it out, the basics should all be working
-correctly at all times. If not, [let me know](https://github.com/unreal4u/telegram-api/issues)! 
+correctly at all times. If not, [let me know](https://github.com/unreal4u/telegram-api/issues) or send out a PR!
 
 ## About this class
 
@@ -170,7 +170,7 @@ either Laravel or MySQL:
 * PHP-CS
 
 I had heard of all these great tools previously but I didn't have a nice project to work on and learn properly. So this
-project was born. 
+project was born.
 
 At the same time, I wanted an API that did respect Telegram's API model as much as possible, while being friendly to a
 developer as well. The result of that is this package, check the examples for usage.

@@ -42,7 +42,7 @@ class InputFile
         if (is_readable($this->path)) {
             $this->stream = fopen($this->path, 'r');
         } else {
-            throw new FileNotReadable(sprintf('Can not read %s, please check', $this->path));
+            throw new FileNotReadable(sprintf('Can not read local file "%s", please check', $this->path));
         }
 
         return $this;
