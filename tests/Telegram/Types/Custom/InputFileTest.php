@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Telegram\Types\Custom;
+namespace unreal4u\TelegramAPI\tests\Telegram\Types\Custom;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
@@ -13,7 +13,6 @@ class InputFileTest extends TestCase
      */
     public function testInvalidFile()
     {
-        #$this->setExpectedException('unreal4u\\TelegramAPI\\Exceptions\\FileNotReadable');
         new InputFile('non-existant-file.txt');
     }
 }

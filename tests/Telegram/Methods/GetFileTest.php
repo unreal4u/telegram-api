@@ -1,11 +1,11 @@
 <?php
 
-namespace tests\Telegram\Methods;
+namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
-use tests\Mock\MockClientException;
-use tests\Mock\MockTgLog;
+use unreal4u\TelegramAPI\tests\Mock\MockClientException;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\GetFile;
 
 class GetFileTest extends TestCase

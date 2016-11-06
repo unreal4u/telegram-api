@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\InternalFunctionality;
+namespace unreal4u\TelegramAPI\tests\InternalFunctionality;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;

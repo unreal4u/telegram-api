@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Mock;
+namespace unreal4u\TelegramAPI\tests\Mock;
 
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\TgLog;

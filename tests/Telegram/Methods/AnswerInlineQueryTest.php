@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Telegram\Methods;
+namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
-use tests\Mock\MockTgLog;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article;
 use PHPUnit_Framework_TestCase as TestCase;

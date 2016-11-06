@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\Telegram\Methods;
+namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
-use tests\Mock\MockTgLog;
-use tests\Mock\MockClientException;
-use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
-use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
+use unreal4u\TelegramAPI\tests\Mock\MockClientException;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 
 class SendMessageTest extends TestCase
 {
