@@ -20,10 +20,8 @@
   },
   "require-dev": {
     "monolog/monolog": "~1.17",
-    "squizlabs/php_codesniffer": "@stable",
-    "jakub-onderka/php-parallel-lint": "^0.9.0",
-    "phpmd/phpmd": "@stable",
-    "phpunit/phpunit": "@stable",
+    "squizlabs/php_codesniffer": "~2.3",
+    "phpunit/phpunit": ">=5.2",
     "phpunit/php-code-coverage": "~3.3"
   },
   "autoload": {
@@ -33,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "tests\\": "tests"
+      "unreal4u\\TelegramAPI\\tests\\": "tests"
     }
   },
   "license": "MIT"
