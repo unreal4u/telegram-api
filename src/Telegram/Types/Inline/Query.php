@@ -26,7 +26,7 @@ class Query extends TelegramTypes
 
     /**
      * User‘s or bot’s first name
-     * @var string
+     * @var User
      */
     public $from = null;
 
