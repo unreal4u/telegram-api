@@ -22,68 +22,28 @@ correctly at all times. If not, [let me know](https://github.com/unreal4u/telegr
 
 ## About this class
 
-* Enables you to send messages, stickers, location and other methods via PHP a Telegram user (or group).
-* Respects and implements the default types and methods made by Telegram itself.
-* Doesn't need any dependency, except for Guzzle. I'm working on an implementation that doesn't require Guzzle as well.
+* Enables you to send messages, stickers, location and other methods via PHP to a Telegram user (either direct conversation, channel or group).
+* Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
+* Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
 * **Full** inline bots support!
 
 ## Detailed description
 
 This project was born to study the new concepts of PHP7 and to integrate some other knowledge I had previously heard
 about but didn't have the time to play with them. The idea behind was to create a simple to use class which could
-play nicely with the Telegram API. The end result however ended up being a complete bot API implementation, which can be
-used very easily.
+play nicely with the Telegram API. The end result however ended up being a complete bot API implementation.
 
 ## Why PHP7 only?
 
-Mainly because PHP7 is a fantastic release and I wanted to release some new software based solely on this new version. 
+Mainly because PHP7 is a fantastic release and I wanted to make some new software based solely on this new version. 
 If however there is a lot of interest from the community to get a PHP5.6 or PHP5.5 compatible version, I could make one.
 You are free as well to contribute with a PHP-earlier branch. Just send in a pull request. However, take into 
 consideration that the master branch will be PHP7 only.
 
 ## Upgrading v1.x to v2
 
-If you used v1.x of this package before, be aware of the v2 changes! There are changes in this package as well as in the
-Telegram API as well.
-
-### Internal changes:
-
-The most important change is that **the package has a different namespace** now! It used to be:
-```
-unreal4u\
-```
-
-Now it is:
-```
-unreal4u\TelegramAPI\
-```
-
-The other big change is that InlineQueryResult* classes now have their own namespace. So, what used to be:
-
-```php
-$inlineQueryResultArticle = new unreal4u\Telegram\Types\InlineQueryResultArticle();
-```
-
-Is now:
-```php
-$inlineQueryResultArticle = new unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article();
-```
-
-Please note the extra backslash between Inline, query, result and Article.
-
-The same is true for the other 18 **new** Inline\Query\Results.
-
-Other changes include `ChosenInlineResult` (now `Inline\ChosenResult`) and `InlineQuery` (now `Inline\Query`).
-
-### External changes:
-
-Telegram objects are a bit different. Some backwards incompatible changes are:
-
-- The `ReplyKeyboardMarkup` object no longer is an array of strings, but an array of `KeyboardButton`
-- The `AnswerInlineQuery` object now includes a new `reply_markup` and a `input_message_content` field, which is an
-optional inline keyboard attached to the message
-- The `InlineQueryResult` objects had a major revamp, so many options were replaced with others. Please consult the
-documentation regarding these objects
+Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
+have to upgrade from v1 to v2.
 
 ## Installation
 
@@ -111,7 +71,7 @@ $tgLog = new TgLog(BOT_TOKEN);
 $message = $tgLog->performApiRequest($sendMessage);
 ```
 
-With the SendMessage() object, you can create a message to be sent through the TelegramLog object.  
+With the SendMessage() object, you can create a message to be sent through the TgLog object.  
 All other functionality is based upon this behaviour, so every other method is very similar: you instantiate an object, 
 pass that object to TelegramLog->performApiRequest() and you'll get the native Telegram response back as an object. 
 Different methods return different object types. 
@@ -150,7 +110,9 @@ More information on this? You can check [how I implemented](https://github.com/u
 [timeBot](https://telegram.me/TheTimeBot). Take however into account that the cited repo is only a playground (for now), 
 so it can happen that things in that repository may or may not work as expected.
 
-## [Inline bots](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots)
+## Inline bots
+
+Please checkout the [special wiki page](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots) about Inline bots.
 
 ## Why this class?
 
@@ -175,7 +137,11 @@ project was born.
 At the same time, I wanted an API that did respect Telegram's API model as much as possible, while being friendly to a
 developer as well. The result of that is this package, check the examples for usage.
 
-## [Extra requirements](https://github.com/unreal4u/telegram-api/wiki/Creating-a-bot)
+## Extra requirements
+
+If you want to use this package, you'll need a bot API key. Check 
+[the following documentation](https://github.com/unreal4u/telegram-api/wiki/Creating-a-bot) for more instructions 
+on that.
 
 ## Getting everything started up
 
