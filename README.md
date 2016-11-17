@@ -155,4 +155,7 @@ I will try my best to respect [Semantic Versioning](http://semver.org).
 That being said, the first stable release is v1.0.0, from there on no mayor BC changes will occur unless we update
 the major.
 
-## [Want to colaborate?](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F)
+## Want to colaborate?
+
+Colaborations are **very** welcome! [Check this Wiki page out](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F) 
+for more information that will make the development easier!
