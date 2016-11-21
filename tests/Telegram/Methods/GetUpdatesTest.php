@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
@@ -93,7 +94,23 @@ class GetUpdatesTest extends TestCase
             $this->expectException(MockClientException::class);
             throw $e;
         }
+    }
 
+    /**
+     * Sometimes new API changes do break existing functionality. Assert this can't happen with new unknown types
+     */
+    public function testNewBotApiImplementation()
+    {
+        $this->tgLog->specificTest = 'newApiVersion';
 
+        $getUpdates = new GetUpdates();
+        /** @var UpdatesArray $updatesArray */
+        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
+        foreach ($updatesArray->traverseObject() as $update) {
+            $this->assertStringStartsWith('{"Unknown_Field":"This is an unknown field",', $update->array_unknown_field);
+            $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
+            $this->assertFalse($update->boolean_unknown_field);
+            $this->assertSame(42, $update->integer_unknown_field);
+        }
     }
 }

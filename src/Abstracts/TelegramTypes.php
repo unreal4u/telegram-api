@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Abstracts;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultArray;
 
 abstract class TelegramTypes
 {
@@ -68,6 +69,16 @@ abstract class TelegramTypes
      */
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
-        return null;
+        if (!isset($this->$key)) {
+            $this->logger->error(sprintf(
+                'The key "%s" does not exist in the class! Maybe a recent Telegram update causing this? If this seems '.
+                'to be the case (Please check %s), please submit an issue at %s',
+                $key,
+                'https://core.telegram.org/bots/api-changelog',
+                'https://github.com/unreal4u/telegram-api/issues'
+            ));
+        }
+
+        return new ResultArray($data);
     }
 }

@@ -1,0 +1,2 @@
+{"ok":true,"result":[{"update_id":12345678,
+"message":{"message_id":12,"from":{"id":12345678,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u"},"chat":{"id":98765432,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u","type":"private"},"date":1452120442,"text":"Hello bot"},"array_unknown_field":{"Unknown_Field":"This is an unknown field","Another_Unknown_Field":true},"string_unknown_field":"A special new string","boolean_unknown_field":false,"integer_unknown_field":42}]}
