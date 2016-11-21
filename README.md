@@ -119,4 +119,4 @@ Another great way to help is to simply [create an issue](https://github.com/unre
 
 ### Special thanks to
 
-- Intensify for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
+- **Intensify** for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
