@@ -154,13 +154,13 @@ class Message extends TelegramTypes
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      * @var User
      */
-    public $new_chat_participant = null;
+    public $new_chat_member = null;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be the bot itself)
      * @var User
      */
-    public $left_chat_participant = null;
+    public $left_chat_member = null;
 
     /**
      * Optional. A chat title was changed to this value
@@ -237,8 +237,8 @@ class Message extends TelegramTypes
         switch ($key) {
             case 'from':
             case 'forward_from':
-            case 'new_chat_participant':
-            case 'left_chat_participant':
+            case 'new_chat_member':
+            case 'left_chat_member':
                 return new User($data, $this->logger);
             case 'photo':
             case 'new_chat_photo':

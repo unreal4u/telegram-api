@@ -5,6 +5,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
@@ -111,6 +112,21 @@ class GetUpdatesTest extends TestCase
             $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
             $this->assertFalse($update->boolean_unknown_field);
             $this->assertSame(42, $update->integer_unknown_field);
+        }
+    }
+
+    /**
+     * new_chat_participant changed to new_chat_member. Validate this
+     */
+    public function testNewChatMemberInUpdate()
+    {
+        $this->tgLog->specificTest = 'newChatMember';
+
+        $getUpdates = new GetUpdates();
+        /** @var UpdatesArray $updatesArray */
+        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
+        foreach ($updatesArray->traverseObject() as $update) {
+            $this->assertInstanceOf(User::class, $update->message->new_chat_member);
         }
     }
 }

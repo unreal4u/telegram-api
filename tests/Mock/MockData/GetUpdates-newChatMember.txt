@@ -1,0 +1,2 @@
+{"ok":true,"result":[{"update_id":12345678,
+"message":{"message_id":12,"from":{"id":12345678,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u"},"chat":{"id":98765432,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u","type":"private"},"date":1452120442,"text":"Hello bot","new_chat_member":{"id":12345678,"first_name":"Camilo","last_name":"Sperberg","username":"unreal4u"}}}]}
