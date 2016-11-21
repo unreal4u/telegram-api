@@ -15,36 +15,24 @@ for more details)
 The current version is stable enough to be used in production, with some methods still to be implemented. These missing
 methods are:
 
-- Some new methods related to games added on October 2016, [please check this link](https://core.telegram.org/bots/api-changelog#october-3-2016) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
+- Some new methods related to games added in October 2016, [please check this link](https://core.telegram.org/bots/api-changelog#october-3-2016) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
 - Ability to pass on an url as InputFile, there is barely any documentation on this subject.
 
 If you are sure that you'll not use these capabilities, feel free to test it out, the basics should all be working
 correctly at all times. If not, [let me know](https://github.com/unreal4u/telegram-api/issues) or send out a PR!
 
-## About this class
+### About this class
 
 * Enables you to send messages, stickers, location and other methods via PHP to a Telegram user (either direct conversation, channel or group).
 * Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
 * Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
 * **Full** inline bots support!
 
-## Detailed description
+### Detailed description
 
 This project was born to study the new concepts of PHP7 and to integrate some other knowledge I had previously heard
 about but didn't have the time to play with them. The idea behind was to create a simple to use class which could
 play nicely with the Telegram API. The end result however ended up being a complete bot API implementation.
-
-## Why PHP7 only?
-
-Mainly because PHP7 is a fantastic release and I wanted to make some new software based solely on this new version. 
-If however there is a lot of interest from the community to get a PHP5.6 or PHP5.5 compatible version, I could make one.
-You are free as well to contribute with a PHP-earlier branch. Just send in a pull request. However, take into 
-consideration that the master branch will be PHP7 only.
-
-## Upgrading v1.x to v2
-
-Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
-have to upgrade from v1 to v2.
 
 ## Installation
 
@@ -53,12 +41,19 @@ The preferred method is composer, so add the following to your composer.json:
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.0"
+    "unreal4u/telegram-api": "~2.1"
   }
 }
 ```
 
-## (Very) basic usage
+### Upgrading v1.x to v2
+
+Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
+have to upgrade from v1 to v2.
+
+## General usage
+
+### Basic usage example:
 
 ```php
 use \unreal4u\TelegramAPI\TgLog;
@@ -72,7 +67,7 @@ $tgLog = new TgLog(BOT_TOKEN);
 $message = $tgLog->performApiRequest($sendMessage);
 ```
 
-With the SendMessage() object, you can create a message to be sent through the TgLog object.  
+With the `SendMessage()` object, you can create a message to be sent through the TgLog object.  
 All other functionality is based upon this behaviour, so every other method is very similar: you instantiate an object, 
 pass that object to TelegramLog->performApiRequest() and you'll get the native Telegram response back as an object. 
 Different methods return different object types. 
@@ -82,81 +77,46 @@ of some of the implemented methods, including inline bots.
 
 For examples of actual code that works in a production environment, please refer to my other repo: https://github.com/unreal4u/tg-timebot
 
-## Getting updates via Webhook
+### Getting updates via Webhook
 
-The first thing you'll have to do is register a webhook with Telegram via the SetWebhook method:
+Please check [the following wiki section](https://github.com/unreal4u/telegram-api/wiki/Getting-updates-via-Webhook) for
+more information on this.
 
-```php
-use \unreal4u\TelegramAPI\TgLog;
-use \unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
-
-$setWebhook = new SetWebhook();
-$setWebhook->url = '[YOUR HTTPS URL]';
-
-$tgLog = new TgLog(BOT_TOKEN);
-$tgLog->performApiRequest($setWebhook);
-```
-
-This will leave you prepared to start receiving updates on the chosen URL: 
-
-```php
-use \unreal4u\TelegramAPI\Telegram\Types\Update;
-
-$update = new Update($_POST);
-```
-
-Now <code>$update</code> will contain the actual Update object. Hope that wasn't too difficult :)
-
-More information on this? You can check [how I implemented](https://github.com/unreal4u/tg-timebot) my 
-[timeBot](https://telegram.me/TheTimeBot). Take however into account that the cited repo is only a playground (for now), 
-so it can happen that things in that repository may or may not work as expected.
-
-## Inline bots
+### Inline bots
 
 Please checkout the [special wiki page](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots) about Inline bots.
 
-## Why this class?
-
-There are some pretty good alternatives around there, such as: 
-
-[The (unofficial) SDK](https://github.com/irazasyed/telegram-bot-sdk)  
-[akalongman's approach](https://github.com/akalongman/php-telegram-bot)
-
-But I wanted to study a bunch of new concepts for me and make a standalone client that doesn't require me to be running
-either Laravel or MySQL: 
-
-* Telegram API
-* PHP7
-* Vagrant
-* Monolog
-* Guzzle
-* PHP-CS
-
-I had heard of all these great tools previously but I didn't have a nice project to work on and learn properly. So this
-project was born.
-
-At the same time, I wanted an API that did respect Telegram's API model as much as possible, while being friendly to a
-developer as well. The result of that is this package, check the examples for usage.
-
-## Extra requirements
+### Extra requirements
 
 If you want to use this package, you'll need a bot API key. Check 
 [the following documentation](https://github.com/unreal4u/telegram-api/wiki/Creating-a-bot) for more instructions 
 on that.
 
-## Getting everything started up
+### Getting everything started up
 
 The most difficult thing to do when performing an action with the Telegram API is to get the chat_id, which is the 
 actual conversation window the bot talks to. You can execute the GetUpdates() method in order to get this chatId. Note
 that there are some caveats on this, so you may be better out with the SetWebhook() method instead. 
 
-## Semver
+## Development
+
+### Semver
 
 I will try my best to respect [Semantic Versioning](http://semver.org).  
 That being said, the first stable release is v1.0.0, from there on no mayor BC changes will occur unless we update
 the major.
 
-## Want to colaborate?
+### Want to colaborate?
 
 Colaborations are **very** welcome! [Check this Wiki page out](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F) 
 for more information that will make the development easier!
+
+### Contact the author
+
+I actually don't use Telegram. Nah, kidding, you can contact me at [https://telegram.me/unreal4u](https://telegram.me/unreal4u).
+Another great way to help is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
+[pull request](https://github.com/unreal4u/telegram-api/pulls)!
+
+### Special thanks to
+
+- Intensify for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
