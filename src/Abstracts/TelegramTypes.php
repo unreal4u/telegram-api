@@ -19,7 +19,9 @@ abstract class TelegramTypes
         }
 
         $this->logger = $logger;
-        $this->populateObject($data);
+        if (!is_null($data)) {
+            $this->populateObject($data);
+        }
     }
 
     /**
@@ -28,31 +30,26 @@ abstract class TelegramTypes
      * @param array $data
      * @return TelegramTypes
      */
-    final protected function populateObject(array $data = null): TelegramTypes
+    final protected function populateObject(array $data = []): TelegramTypes
     {
-        if (!is_null($data)) {
-            $this->logger->debug('Detected incoming data on object, foreaching the general data', [
-                'object' => get_class($this)
-            ]);
-            foreach ($data as $key => $value) {
-                $candidateKey = null;
-                if (is_array($value)) {
-                    $this->logger->debug('Array detected, mapping subobjects for key', ['key' => $key]);
-                    $candidateKey = $this->mapSubObjects($key, $value);
-                }
+        foreach ($data as $key => $value) {
+            $candidateKey = null;
+            if (is_array($value)) {
+                $this->logger->debug('Array detected, mapping subobjects for key', ['key' => $key]);
+                $candidateKey = $this->mapSubObjects($key, $value);
+            }
 
-                if (!empty($candidateKey)) {
-                    if ($candidateKey instanceof CustomType) {
-                        $this->logger->debug('Done with mapping, injecting custom data type to class', ['key' => $key]);
-                        $this->$key = $candidateKey->data;
-                    } else {
-                        $this->logger->debug('Done with mapping, injecting native data type to class', ['key' => $key]);
-                        $this->$key = $candidateKey;
-                    }
+            if (!empty($candidateKey)) {
+                if ($candidateKey instanceof CustomType) {
+                    $this->logger->debug('Done with mapping, injecting custom data type to class', ['key' => $key]);
+                    $this->$key = $candidateKey->data;
                 } else {
-                    $this->logger->debug('Performing direct assign for key', ['key' => $key]);
-                    $this->$key = $value;
+                    $this->logger->debug('Done with mapping, injecting native data type to class', ['key' => $key]);
+                    $this->$key = $candidateKey;
                 }
+            } else {
+                $this->logger->debug('Performing direct assign for key', ['key' => $key]);
+                $this->$key = $value;
             }
         }
 
