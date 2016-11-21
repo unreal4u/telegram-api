@@ -6,15 +6,16 @@
 
 # Telegram API
 
-This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.1 (And up
-until the vast mayority of October 2016, please check [the open issues](https://github.com/unreal4u/telegram-api/issues/12))
+This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.3 (Except the
+gaming platform introduced in October 2016, please check [the open issues](https://github.com/unreal4u/telegram-api/issues/12)
+for more details)
 
 ## Current status
 
 The current version is stable enough to be used in production, with some methods still to be implemented. These missing
 methods are:
 
-- Some new methods related to games added on October 2016, [please check this link](https://core.telegram.org/bots/api/#recent-changes) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
+- Some new methods related to games added on October 2016, [please check this link](https://core.telegram.org/bots/api-changelog#october-3-2016) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
 - Ability to pass on an url as InputFile, there is barely any documentation on this subject.
 
 If you are sure that you'll not use these capabilities, feel free to test it out, the basics should all be working
