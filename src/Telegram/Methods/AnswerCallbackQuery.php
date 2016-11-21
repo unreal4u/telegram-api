@@ -50,6 +50,13 @@ class AnswerCallbackQuery extends TelegramMethods
      */
     public $url = '';
 
+    /**
+     * Optional. The maximum amount of time in seconds that the result of the callback query may be cached client-side.
+     * Telegram apps will support caching starting in version 3.14. Defaults to 0.
+     * @var int
+     */
+    public $cache_time = 0;
+
     public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
