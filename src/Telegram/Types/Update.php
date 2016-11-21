@@ -10,9 +10,9 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 
 /**
  * This object represents an incoming update.
- * Only one of the optional parameters can be present in any given update.
+ * At most one of the optional parameters can be present in any given update.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is november 2016
  *
  * @see https://core.telegram.org/bots/api#update
  */
@@ -39,6 +39,18 @@ class Update extends TelegramTypes
     public $edited_message = null;
 
     /**
+     * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
+     * @var Message
+     */
+    public $channel_post = null;
+
+    /**
+     * Optional. New version of a channel post that is known to the bot and was edited
+     * @var Message
+     */
+    public $edited_channel_post = null;
+
+    /**
      * Optional. New incoming inline query
      * @var Query
      */
@@ -61,6 +73,8 @@ class Update extends TelegramTypes
         switch ($key) {
             case 'message':
             case 'edited_message':
+            case 'channel_post':
+            case 'edited_channel_post':
                 return new Message($data, $this->logger);
             case 'inline_query':
                 return new Query($data, $this->logger);

@@ -136,7 +136,7 @@ class TgLog
      */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
-        $this->logger->debug('About to call HTTP Client');
+        $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
         return new TelegramRawData((string)$response->getBody());

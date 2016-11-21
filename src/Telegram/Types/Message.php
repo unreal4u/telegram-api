@@ -54,6 +54,12 @@ class Message extends TelegramTypes
     public $forward_from_chat = null;
 
     /**
+     * Optional. For forwarded channel posts, identifier of the original message in the channel
+     * @var int
+     */
+    public $forward_from_message_id = 0;
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      * @var int
      */
