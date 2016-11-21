@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
@@ -111,5 +112,17 @@ class SendMessageTest extends TestCase
             $this->expectException(MockClientException::class);
             throw $e;
         }
+    }
+
+    /**
+     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
+     * @expectedExceptionMessage chat_id
+     */
+    public function testSendIncompleteMessage()
+    {
+        $sendMessage = new SendMessage();
+        $sendMessage->text = 'Hello world!';
+
+        $this->tgLog->performApiRequest($sendMessage);
     }
 }

@@ -178,10 +178,13 @@ class TgLog
                 $formData = $this->buildMultipartFormData($method->export(), $result['id'], $result['stream']);
                 break;
             default:
-                $this->logger->critical(
+                $this->logger->critical(sprintf(
                     'Invalid form-type detected, if you incur in such a situation, this is most likely a product to '.
-                    'a bug. Please report at https://github.com/unreal4u/telegram-api/issues'
-                );
+                    'a bug. Please copy entire line and report at %s',
+                    'https://github.com/unreal4u/telegram-api/issues'
+                ), [
+                    'formType' => $this->formType
+                ]);
                 $formData = [];
                 break;
         }

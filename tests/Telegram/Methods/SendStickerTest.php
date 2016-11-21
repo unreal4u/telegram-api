@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 
@@ -38,6 +39,7 @@ class SendStickerTest extends TestCase
         $sendSticker->chat_id = 12341234;
         $sendSticker->sticker = 'BQADBAADsgUAApv7sgABW0IQT2B3WekC';
 
+        /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendSticker);
 
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
@@ -58,5 +60,7 @@ class SendStickerTest extends TestCase
         $this->assertEquals($sendSticker->sticker, $result->sticker->file_id);
         $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->sticker->thumb);
         $this->assertEquals(128, $result->sticker->thumb->height);
+
+        $this->assertSame('{"key":"value"}', $result->sticker->unknown_field);
     }
 }

@@ -2,6 +2,10 @@
 
 namespace unreal4u\TelegramAPI\tests\Mock;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\TgLog;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
@@ -36,10 +40,21 @@ class MockTgLog extends TgLog
             $this->specificTest
         );
 
+        // TODO Convert this to the MockHandler here below
         if ($this->mockException) {
             throw new MockClientException(file_get_contents($filename));
         }
 
-        return new TelegramRawData(file_get_contents($filename), true);
+        $guzzleMocker = new MockHandler([new Response(200, [], file_get_contents($filename))]);
+        $handler = HandlerStack::create($guzzleMocker);
+
+        $this->httpClient = new Client(['handler' => $handler]);
+
+        return parent::sendRequestToTelegram($method, $formData);
+    }
+
+    public function composeApiMethodUrl(TelegramMethods $call): string
+    {
+        return parent::composeApiMethodUrl($call);
     }
 }
