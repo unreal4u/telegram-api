@@ -52,7 +52,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
     }
 
     /**
-     * Exports the class to an array in order to send it to the Telegram servers
+     * Exports the class to an array in order to send it to the Telegram servers without extra fields that we don't need
      *
      * @return array
      */
@@ -62,12 +62,14 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         $mandatoryFields = $this->getMandatoryFields();
 
         $cleanObject = new $this();
-        foreach ($mandatoryFields as $fieldId) {
+        foreach ($cleanObject as $fieldId => $value) {
             if ($this->$fieldId === $cleanObject->$fieldId) {
-                throw new MissingMandatoryField(sprintf(
-                    'The field "%s" is mandatory and empty, please correct',
-                    $fieldId
-                ));
+                if (in_array($fieldId, $mandatoryFields)) {
+                    throw new MissingMandatoryField(sprintf(
+                        'The field "%s" is mandatory and empty, please correct',
+                        $fieldId
+                    ));
+                }
             } else {
                 $finalArray[$fieldId] = $this->$fieldId;
             }

@@ -87,18 +87,20 @@ abstract class Result extends TelegramTypes
      * This method is a bit different from the one in TelegramMethods because of mainly 2 reasons:
      *   1- This is not a telegram method
      *   2- This will ignore the "type" field, mandatory for this type of result
+     *   3- This must return all fields, so the actual check is actually turned backwards
      *
+     * @see TelegramMethods::export
      * @return array
      */
     public function export(): array
     {
         $finalArray = [];
-        $objectProspect = get_object_vars($this);
+        $mandatoryFields = $this->getMandatoryFields();
+
         $cleanObject = new $this();
-        foreach ($objectProspect as $fieldId => $value) {
-            // Strict comparison, type checking!
-            if ($fieldId !== 'type' && $objectProspect[$fieldId] === $cleanObject->$fieldId) {
-                if (in_array($fieldId, $this->getMandatoryFields())) {
+        foreach ($cleanObject as $fieldId => $value) {
+            if ($fieldId !== 'type' && $this->$fieldId === $cleanObject->$fieldId) {
+                if (in_array($fieldId, $mandatoryFields)) {
                     throw new MissingMandatoryField(sprintf(
                         'The field "%s" is mandatory and empty, please correct',
                         $fieldId
@@ -106,7 +108,7 @@ abstract class Result extends TelegramTypes
                 }
             } else {
                 if ($fieldId !== 'logger') {
-                    $finalArray[$fieldId] = $value;
+                    $finalArray[$fieldId] = $this->$fieldId;
                 }
             }
         }
