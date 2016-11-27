@@ -15,13 +15,4 @@ class ResultNull extends CustomType
     {
         $this->logger = $logger;
     }
-
-    /**
-     * I don't really use this function, but I can imagine it can come in handy when PHP handles the casting internally
-     * @return string
-     */
-    public function __toString()
-    {
-        return null;
-    }
 }
