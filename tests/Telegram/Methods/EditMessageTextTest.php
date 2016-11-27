@@ -5,10 +5,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Methods\EditMessageText;
-use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\SendAudio;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 class EditMessageTextTest extends TestCase
 {
@@ -74,5 +71,4 @@ class EditMessageTextTest extends TestCase
 
         $this->assertContains('inline_message_id', $editMessageText->getMandatoryFields());
     }
-
 }
