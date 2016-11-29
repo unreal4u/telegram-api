@@ -34,7 +34,7 @@ class MockTgLog extends TgLog
         }
 
         $filename = sprintf(
-            'tests/Mock/MockData/%s%s%s.txt',
+            'tests/Mock/MockData/%s%s%s.json',
             $this->methodName,
             $connector,
             $this->specificTest
@@ -56,5 +56,21 @@ class MockTgLog extends TgLog
     public function composeApiMethodUrl(TelegramMethods $call): string
     {
         return parent::composeApiMethodUrl($call);
+    }
+
+    public function getTestTypeResponse(string $name): array
+    {
+        $returnData = [];
+        $filename = sprintf('tests/Mock/MockData/Types/%s.json', $name);
+
+        if (file_exists($filename)) {
+            $returnData = json_decode(file_get_contents($filename), true);
+        }
+
+        if (empty($returnData)) {
+            throw new \Exception('Empty returnData, please fix your test');
+        }
+
+        return $returnData;
     }
 }

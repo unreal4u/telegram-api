@@ -2,6 +2,7 @@
 
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\AnswerInlineQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article;
@@ -53,14 +54,15 @@ class AnswerInlineQueryTest extends TestCase
         $answerInlineQuery->inline_query_id = 123412341234;
         $answerInlineQuery->addResult($inlineQueryResultArticle);
 
+        /** @var ResultBoolean $result */
         $result = $this->tgLog->performApiRequest($answerInlineQuery);
 
         $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.txt')),
+            trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.json')),
             $answerInlineQuery->getResults()
         );
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\ResultBoolean', $result);
+        $this->assertInstanceOf(ResultBoolean::class, $result);
         $this->assertTrue($result->data);
     }
 }

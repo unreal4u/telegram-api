@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
 
@@ -36,9 +37,10 @@ class SetWebhookTest extends TestCase
     {
         $setWebhook = new SetWebhook();
 
+        /** @var ResultBoolean $result */
         $result = $this->tgLog->performApiRequest($setWebhook);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Custom\\ResultBoolean', $result);
+        $this->assertInstanceOf(ResultBoolean::class, $result);
         $this->assertTrue($result->data);
     }
 }

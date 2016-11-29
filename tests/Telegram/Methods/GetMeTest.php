@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
@@ -37,8 +38,9 @@ class GetMeTest extends TestCase
     {
         $getMe = new GetMe();
 
+        /** @var User $result */
         $result = $this->tgLog->performApiRequest($getMe);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result);
+        $this->assertInstanceOf(User::class, $result);
         $this->assertNotEmpty($result->first_name);
         $this->assertNotEmpty($result->username);
 
@@ -55,7 +57,7 @@ class GetMeTest extends TestCase
         try {
             $this->tgLog->performApiRequest($getMe);
         } catch (MockClientException $e) {
-            $this->assertInstanceOf('\\stdClass', $e->decodedResponse);
+            $this->assertInstanceOf(\stdClass::class, $e->decodedResponse);
             $this->assertEquals(401, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time

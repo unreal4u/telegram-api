@@ -4,7 +4,9 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
@@ -40,12 +42,13 @@ class SendMessageTest extends TestCase
         $sendMessage = new SendMessage();
         $sendMessage->chat_id = 12341234;
         $sendMessage->text = 'Hello world';
+        /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendMessage);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf(Message::class, $result);
         $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf(User::class, $result->from);
+        $this->assertInstanceOf(Chat::class, $result->chat);
         $this->assertEquals(123456789, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendMessage->chat_id, $result->chat->id);
@@ -70,18 +73,19 @@ class SendMessageTest extends TestCase
         $sendMessage->text = 'Hello world';
         $sendMessage->reply_markup = new ReplyKeyboardMarkup();
         $sendMessage->reply_markup->keyboard = [['Yes', 'No']];
+        /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendMessage);
 
         // Important assert: ensure we send a serialized object to Telegram
         $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/SendMessage-replyKeyboardMarkup.txt')),
+            trim(file_get_contents('tests/Mock/MockData/SendMessage-replyKeyboardMarkup.json')),
             $sendMessage->reply_markup
         );
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf(Message::class, $result);
         $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf(User::class, $result->from);
+        $this->assertInstanceOf(Chat::class, $result->chat);
         $this->assertEquals(123456789, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendMessage->chat_id, $result->chat->id);
@@ -105,7 +109,7 @@ class SendMessageTest extends TestCase
         try {
             $this->tgLog->performApiRequest($sendMessage);
         } catch (MockClientException $e) {
-            $this->assertInstanceOf('\\stdClass', $e->decodedResponse);
+            $this->assertInstanceOf(\stdClass::class, $e->decodedResponse);
             $this->assertEquals(400, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time

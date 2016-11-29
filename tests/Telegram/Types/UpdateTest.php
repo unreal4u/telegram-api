@@ -4,7 +4,10 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Types;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\ChosenResult;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 use unreal4u\TelegramAPI\Telegram\Types\Update;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 
 class UpdateTest extends TestCase
 {
@@ -42,9 +45,9 @@ class UpdateTest extends TestCase
     {
         $updateObject = new Update($this->dataProvider['inlineQuery']);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Update', $updateObject);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Inline\\Query', $updateObject->inline_query);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $updateObject->inline_query->from);
+        $this->assertInstanceOf(Update::class, $updateObject);
+        $this->assertInstanceOf(Query::class, $updateObject->inline_query);
+        $this->assertInstanceOf(User::class, $updateObject->inline_query->from);
         $this->assertNull($updateObject->message);
         $this->assertNull($updateObject->chosen_inline_result);
     }
@@ -53,11 +56,9 @@ class UpdateTest extends TestCase
     {
         $updateObject = new Update($this->dataProvider['inlineResult']);
 
-        $mainNamespace = 'unreal4u\\TelegramAPI\\Telegram\\Types\\';
-
-        $this->assertInstanceOf($mainNamespace.'Update', $updateObject);
-        $this->assertInstanceOf($mainNamespace.'Inline\\ChosenResult', $updateObject->chosen_inline_result);
-        $this->assertInstanceOf($mainNamespace.'User', $updateObject->chosen_inline_result->from);
+        $this->assertInstanceOf(Update::class, $updateObject);
+        $this->assertInstanceOf(ChosenResult::class, $updateObject->chosen_inline_result);
+        $this->assertInstanceOf(User::class, $updateObject->chosen_inline_result->from);
         $this->assertNull($updateObject->message);
         $this->assertNull($updateObject->inline_query);
         $this->assertNotEmpty($updateObject->chosen_inline_result->query);

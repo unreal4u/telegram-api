@@ -6,6 +6,10 @@ use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendDocument;
+use unreal4u\TelegramAPI\Telegram\Types\Document;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 class SendDocumentTest extends TestCase
@@ -39,12 +43,13 @@ class SendDocumentTest extends TestCase
         $sendDocument->chat_id = 12341234;
         $sendDocument->document = new InputFile(__FILE__);
 
+        /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendDocument);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf(Message::class, $result);
         $this->assertEquals(18, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf(User::class, $result->from);
+        $this->assertInstanceOf(Chat::class, $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendDocument->chat_id, $result->chat->id);
@@ -55,7 +60,7 @@ class SendDocumentTest extends TestCase
         $this->assertNull($result->voice);
         $this->assertNull($result->video);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Document', $result->document);
+        $this->assertInstanceOf(Document::class, $result->document);
         $this->assertEquals('XXX-YYY-ZZZ-01', $result->document->file_id);
         $this->assertNull($result->document->thumb);
     }

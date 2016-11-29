@@ -4,7 +4,10 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Audio;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendAudio;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -44,10 +47,10 @@ class SendAudioTest extends TestCase
         /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendAudio);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf(Message::class, $result);
         $this->assertEquals(16, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf(User::class, $result->from);
+        $this->assertInstanceOf(Chat::class, $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendAudio->chat_id, $result->chat->id);
@@ -58,7 +61,7 @@ class SendAudioTest extends TestCase
         $this->assertNull($result->voice);
         $this->assertNull($result->video);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Audio', $result->audio);
+        $this->assertInstanceOf(Audio::class, $result->audio);
         $this->assertEquals('XXX-YYY-ZZZ-01', $result->audio->file_id);
         $this->assertEquals($sendAudio->title, $result->audio->title);
     }

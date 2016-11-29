@@ -7,6 +7,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
+use unreal4u\TelegramAPI\Telegram\Types\UserProfilePhotos;
+use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
 
 class GetUserProfilePhotosTest extends TestCase
 {
@@ -41,9 +43,10 @@ class GetUserProfilePhotosTest extends TestCase
         $getUserProfilePhotos = new GetUserProfilePhotos();
         $getUserProfilePhotos->user_id = 123456789;
 
+        /** @var UserProfilePhotos $result */
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
-        $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->photos[0]);
+        $this->assertInstanceOf(UserProfilePhotos::class, $result);
+        $this->assertContainsOnlyInstancesOf(PhotoSize::class, $result->photos[0]);
         $this->assertCount(3, $result->photos[0]);
         $this->assertEquals(1, $result->total_count);
 
@@ -62,7 +65,7 @@ class GetUserProfilePhotosTest extends TestCase
         $getUserProfilePhotos->user_id = 123456789;
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertInstanceOf(UserProfilePhotos::class, $result);
         $this->assertCount(2, $result->photos);
         $this->assertCount(4, $result->photos[0]);
         $this->assertCount(3, $result->photos[1]);
@@ -76,7 +79,7 @@ class GetUserProfilePhotosTest extends TestCase
         $getUserProfilePhotos->user_id = 123456789;
         $result = $this->tgLog->performApiRequest($getUserProfilePhotos);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\UserProfilePhotos', $result);
+        $this->assertInstanceOf(UserProfilePhotos::class, $result);
         $this->assertCount(0, $result->photos);
     }
 
@@ -90,7 +93,7 @@ class GetUserProfilePhotosTest extends TestCase
             $getUserProfilePhotos->user_id = 123456789;
             $this->tgLog->performApiRequest($getUserProfilePhotos);
         } catch (MockClientException $e) {
-            $this->assertInstanceOf('\\stdClass', $e->decodedResponse);
+            $this->assertInstanceOf(\stdClass::class, $e->decodedResponse);
             $this->assertEquals(400, $e->decodedResponse->error_code);
 
             // Rethrow and set the expected exception this time

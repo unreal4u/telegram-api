@@ -4,7 +4,11 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Telegram\Types\Sticker;
+use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
+use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 
@@ -42,10 +46,10 @@ class SendStickerTest extends TestCase
         /** @var Message $result */
         $result = $this->tgLog->performApiRequest($sendSticker);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Message', $result);
+        $this->assertInstanceOf(Message::class, $result);
         $this->assertEquals(17, $result->message_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\User', $result->from);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Chat', $result->chat);
+        $this->assertInstanceOf(User::class, $result->from);
+        $this->assertInstanceOf(Chat::class, $result->chat);
         $this->assertEquals(12345678, $result->from->id);
         $this->assertEquals('unreal4uBot', $result->from->username);
         $this->assertEquals($sendSticker->chat_id, $result->chat->id);
@@ -56,9 +60,9 @@ class SendStickerTest extends TestCase
         $this->assertNull($result->voice);
         $this->assertNull($result->video);
 
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\Sticker', $result->sticker);
+        $this->assertInstanceOf(Sticker::class, $result->sticker);
         $this->assertEquals($sendSticker->sticker, $result->sticker->file_id);
-        $this->assertInstanceOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->sticker->thumb);
+        $this->assertInstanceOf(PhotoSize::class, $result->sticker->thumb);
         $this->assertEquals(128, $result->sticker->thumb->height);
 
         $this->assertSame('{"key":"value"}', $result->sticker->unknown_field);
