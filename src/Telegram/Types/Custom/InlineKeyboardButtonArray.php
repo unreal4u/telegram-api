@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use unreal4u\TelegramAPI\Abstracts\CustomType;
-use unreal4u\TelegramAPI\Telegram\Types\InlineKeyboardButton;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Button;
 use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
 use Psr\Log\LoggerInterface;
 
@@ -22,7 +22,7 @@ class InlineKeyboardButtonArray extends CustomType implements CustomArrayType
     {
         if (!empty($data)) {
             foreach ($data as $id => $photo) {
-                $this->data[$id] = new InlineKeyboardButton();
+                $this->data[$id] = new Button();
             }
         }
     }
@@ -30,7 +30,7 @@ class InlineKeyboardButtonArray extends CustomType implements CustomArrayType
     /**
      * Traverses through our $data, yielding the result set
      *
-     * @return \Generator
+     * @return Button[]
      */
     public function traverseObject()
     {

@@ -29,7 +29,7 @@ class UpdatesArray extends CustomType implements CustomArrayType
     /**
      * Traverses through our $data, yielding the result set
      *
-     * @return \Generator
+     * @return Update[]
      */
     public function traverseObject()
     {

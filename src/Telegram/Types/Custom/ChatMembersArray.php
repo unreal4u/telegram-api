@@ -28,7 +28,7 @@ class ChatMembersArray extends CustomType implements CustomArrayType
     /**
      * Traverses through our $data, yielding the result set
      *
-     * @return \Generator
+     * @return ChatMember[]
      */
     public function traverseObject()
     {

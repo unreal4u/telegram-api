@@ -28,7 +28,7 @@ class MessageEntityArray extends CustomType implements CustomArrayType
     /**
      * Traverses through our $data, yielding the result set
      *
-     * @return \Generator
+     * @return MessageEntity[]
      */
     public function traverseObject()
     {
