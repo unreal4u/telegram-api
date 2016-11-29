@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  * originated the query was attached to a message sent by the bot, the field message will be presented. If the button
  * was attached to a message sent via the bot (in inline mode), the field inline_message_id will be presented.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is november 2016
  *
  * @see https://core.telegram.org/bots/api#callbackquery
  */
@@ -41,6 +41,15 @@ class CallbackQuery extends TelegramTypes
      * @var string
      */
     public $inline_message_id = '';
+
+    /**
+     * Optional. Global identifier, uniquely corresponding to the chat to which the message with the callback button was
+     * sent. Useful for high scores in games
+     *
+     * @see https://core.telegram.org/bots/api#games
+     * @var string
+     */
+    public $chat_instance = '';
 
     /**
      * Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field
