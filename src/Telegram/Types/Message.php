@@ -86,7 +86,7 @@ class Message extends TelegramTypes
 
     /**
      * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
-     * @var array
+     * @var MessageEntityArray
      */
     public $entities = [];
 
@@ -104,7 +104,7 @@ class Message extends TelegramTypes
 
     /**
      * Optional. Message is a photo, available sizes of the photo
-     * @var array
+     * @var PhotoSizeArray
      */
     public $photo = [];
 
@@ -170,7 +170,7 @@ class Message extends TelegramTypes
 
     /**
      * Optional. A chat photo was change to this value
-     * @var array
+     * @var PhotoSizeArray
      */
     public $new_chat_photo = [];
 
