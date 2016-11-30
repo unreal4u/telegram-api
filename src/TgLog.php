@@ -6,12 +6,15 @@ namespace unreal4u\TelegramAPI;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Exceptions\ClientException as CustomClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UnsuccessfulRequest;
 use unreal4u\TelegramAPI\Telegram\Types\File;
 use Psr\Log\LoggerInterface;
 
@@ -94,9 +97,12 @@ class TgLog
     {
         $this->logger->debug('Request for API call, resetting internal values', [get_class($method)]);
         $this->resetObjectValues();
-        $rawData = $this->sendRequestToTelegram($method, $this->constructFormData($method));
+        $telegramRawData = $this->sendRequestToTelegram($method, $this->constructFormData($method));
+        if ($telegramRawData->isError()) {
+            $this->handleOffErrorRequest($telegramRawData);
+        }
 
-        return $method::bindToObject($rawData, $this->logger);
+        return $method::bindToObject($telegramRawData, $this->logger);
     }
 
     /**
@@ -136,10 +142,20 @@ class TgLog
      */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
+        $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
-        $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
-        $this->logger->debug('Got response back from Telegram, applying json_decode');
-        return new TelegramRawData((string)$response->getBody());
+        try {
+            $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
+            $this->logger->debug('Got response back from Telegram, applying json_decode');
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            // It can happen that we have a network problem, in such case, we can't do nothing about it, so rethrow
+            if (empty($response)) {
+                throw $e;
+            }
+        } finally {
+            return new TelegramRawData((string)$response->getBody(), $e);
+        }
     }
 
     /**
@@ -275,5 +291,23 @@ class TgLog
         }
 
         return $formData;
+    }
+
+    /**
+     * @param TelegramRawData $telegramRawData
+     * @return TgLog
+     * @throws CustomClientException
+     */
+    private function handleOffErrorRequest(TelegramRawData $telegramRawData): TgLog
+    {
+        $errorRequest = new UnsuccessfulRequest($telegramRawData->getErrorData(), $this->logger);
+
+        $clientException = new CustomClientException(
+            $errorRequest->description,
+            $errorRequest->error_code,
+            $telegramRawData->getException()
+        );
+        $clientException->setParameters($errorRequest->parameters);
+        throw $clientException;
     }
 }
