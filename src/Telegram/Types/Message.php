@@ -103,6 +103,13 @@ class Message extends TelegramTypes
     public $document = null;
 
     /**
+     * Optional. Message is a game, information about the game
+     * @see https://core.telegram.org/bots/api#games
+     * @var null
+     */
+    public $game = null;
+
+    /**
      * Optional. Message is a photo, available sizes of the photo
      * @var PhotoSizeArray
      */
@@ -255,6 +262,8 @@ class Message extends TelegramTypes
                 return new Audio($data, $this->logger);
             case 'document':
                 return new Document($data, $this->logger);
+            case 'game':
+                return new Game($data, $this->logger);
             case 'sticker':
                 return new Sticker($data, $this->logger);
             case 'video':
