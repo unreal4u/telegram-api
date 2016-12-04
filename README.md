@@ -6,7 +6,7 @@
 
 # Telegram API
 
-This is a complete PHP7 bot API implementation for Telegram implementing the totality of Bot API version 2.3 (Except the
+This is a complete PHP7 bot API implementation for Telegram implementing the totality of [Bot API v2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016) (Except the
 gaming platform introduced in October 2016, please check [the open issues](https://github.com/unreal4u/telegram-api/issues/12)
 for more details)
 

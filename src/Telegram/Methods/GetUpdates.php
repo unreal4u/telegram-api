@@ -23,7 +23,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
  *
  * You can use this method to get the channel id the bot has to send messages to
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is December 2016
  *
  * @see https://core.telegram.org/bots/api#getupdates
  */
@@ -50,9 +50,22 @@ class GetUpdates extends TelegramMethods
     public $timeout = 0;
 
     /**
+     * List the types of updates you want your bot to receive. For example, specify [“message”, “edited_channel_post”,
+     * “callback_query”] to only receive updates of these types. See Update for a complete list of available update
+     * types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous
+     * setting will be used.
+     *
+     * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted
+     * updates may be received for a short period of time.
+     * @see Update
+     * @var string[]
+     */
+    public $allowed_updates = [];
+
+    /**
      * This call will return an array with updates, so call up a custom type to do this
      *
-     * @param array $data
+     * @param TelegramRawData $data
      * @param LoggerInterface $logger
      * @return TelegramTypes
      */
