@@ -65,4 +65,9 @@ class DummyLogger implements LoggerInterface
     {
         return false;
     }
+
+    public function withName(): DummyLogger
+    {
+        return $this;
+    }
 }

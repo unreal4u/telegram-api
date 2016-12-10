@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Monolog\Logger;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
@@ -32,10 +33,10 @@ class TgLog
     private $botToken = '';
 
     /**
-     * Contains an instance to a PSR-3 compatible logger
-     * @var LoggerInterface
+     * Contains an instance to Monolog
+     * @var Logger
      */
-    protected $logger = null;
+    protected $logger;
 
     /**
      * Stores the API URL from Telegram
@@ -65,15 +66,15 @@ class TgLog
      * @param LoggerInterface $logger
      * @param Client $client Optional Guzzle object
      */
-    public function __construct(string $botToken, LoggerInterface $logger = null, Client $client = null)
+    public function __construct(string $botToken, Logger $logger = null, Client $client = null)
     {
         $this->botToken = $botToken;
 
-        // Initialize new dummy logger (PSR-3 compatible) if not injected
+        // Initialize new dummy logger (Monolog compatible) if not injected
         if (is_null($logger)) {
             $logger = new DummyLogger();
         }
-        $this->logger = $logger;
+        $this->logger = $logger->withName('TelegramAPI');
 
         // Initialize new Guzzle client if not injected
         if (is_null($client)) {
