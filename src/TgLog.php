@@ -188,6 +188,7 @@ class TgLog
                 $formData = [];
                 break;
         }
+        $this->logger->debug('About to send following data', $formData);
 
         return $formData;
     }
