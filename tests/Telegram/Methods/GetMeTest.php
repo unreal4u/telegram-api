@@ -65,4 +65,12 @@ class GetMeTest extends TestCase
             throw $e;
         }
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new GetMe();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('getMe', $return);
+    }
 }

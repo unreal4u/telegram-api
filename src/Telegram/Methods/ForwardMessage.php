@@ -50,4 +50,9 @@ class ForwardMessage extends TelegramMethods
             'message_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'forwardMessage';
+    }
 }

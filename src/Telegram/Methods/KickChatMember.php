@@ -48,4 +48,9 @@ class KickChatMember extends TelegramMethods
             'user_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'kickChatMember';
+    }
 }

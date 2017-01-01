@@ -62,4 +62,9 @@ class SendLocation extends TelegramMethods
             'longitude',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendLocation';
+    }
 }

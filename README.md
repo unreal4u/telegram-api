@@ -17,7 +17,6 @@ implemented. These are:
 
 - Add gaming capability (Added in Bot API 2.2). [Please check this link](https://core.telegram.org/bots/api-changelog#october-3-2016) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
 - Ability to pass on an url as InputFile, there is barely any documentation on this subject. [Please check this link](https://github.com/unreal4u/telegram-api/issues/17).
-- `EditMessageCaption` may return a boolean value (true) OR a Message object. [Check how to solve this](https://github.com/unreal4u/telegram-api/issues/18).
 
 If you happen to know how to solve these or if you find any bug at all, feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls)
 or [create an issue](https://github.com/unreal4u/telegram-api/issues)!
@@ -52,13 +51,20 @@ The preferred method is composer, so add the following to your composer.json:
 Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
 have to upgrade from v1 to v2.
 
+### Upgrading v2.x to v3
+
+- EditMessageCaption, EditMessageReplyMarkup and EditMessageText are now in a new namespace: EditMessage\Caption, 
+EditMessage\ReplyMarkup and EditMessage\Text respectively.
+- Errors will now be assigned a "custom" exception: the type ResponseParameters. See [the following link](https://core.telegram.org/bots/api#responseparameters)
+for more information about this.
+
 ## General usage
 
 ### Basic usage example:
 
 ```php
-use \unreal4u\TelegramAPI\TgLog;
-use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\TgLog;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;

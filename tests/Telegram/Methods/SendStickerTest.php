@@ -67,4 +67,12 @@ class SendStickerTest extends TestCase
 
         $this->assertSame('{"key":"value"}', $result->sticker->unknown_field);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendSticker();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendSticker', $return);
+    }
 }

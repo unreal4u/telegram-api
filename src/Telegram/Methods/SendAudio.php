@@ -89,4 +89,9 @@ class SendAudio extends TelegramMethods
             'audio',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendAudio';
+    }
 }

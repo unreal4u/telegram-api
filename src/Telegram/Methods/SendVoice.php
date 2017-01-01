@@ -73,4 +73,9 @@ class SendVoice extends TelegramMethods
             'voice',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendVoice';
+    }
 }

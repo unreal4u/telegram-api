@@ -35,7 +35,7 @@ class TgLogTest extends TestCase
     public function testComposeApiMethodUrl()
     {
         $this->assertSame(
-            'https://api.telegram.org/botTEST-TEST/GetMe',
+            'https://api.telegram.org/botTEST-TEST/getMe',
             $this->tgLog->composeApiMethodUrl(new GetMe())
         );
     }

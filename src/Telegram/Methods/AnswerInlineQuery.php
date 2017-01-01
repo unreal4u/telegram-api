@@ -96,6 +96,11 @@ class AnswerInlineQuery extends TelegramMethods
         ];
     }
 
+    public function getMethodName(): string
+    {
+        return 'answerInlineQuery';
+    }
+
     /**
      * Use this method to add a result, this will delete all additional unneeded information from the subclass
      *

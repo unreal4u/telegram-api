@@ -63,4 +63,9 @@ class SendPhoto extends TelegramMethods
             'photo',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendPhoto';
+    }
 }

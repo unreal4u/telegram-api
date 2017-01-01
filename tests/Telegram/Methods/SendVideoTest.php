@@ -65,4 +65,12 @@ class SendVideoTest extends TestCase
         $this->assertEquals('XXX-YYY-ZZZ-01', $result->video->file_id);
         $this->assertEquals($sendVideo->caption, $result->caption);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendVideo();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendVideo', $return);
+    }
 }

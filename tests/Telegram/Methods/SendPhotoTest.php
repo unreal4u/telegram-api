@@ -69,4 +69,12 @@ class SendPhotoTest extends TestCase
             $i++;
         }
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendPhoto();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendPhoto', $return);
+    }
 }

@@ -134,4 +134,12 @@ class GetUpdatesTest extends TestCase
             $this->assertInstanceOf(User::class, $update->message->new_chat_member);
         }
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new GetUpdates();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('getUpdates', $return);
+    }
 }

@@ -68,4 +68,9 @@ class AnswerCallbackQuery extends TelegramMethods
             'callback_query_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'answerCallbackQuery';
+    }
 }

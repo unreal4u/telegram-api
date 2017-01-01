@@ -139,7 +139,9 @@ class TgLog
     {
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
-        $this->logger->debug('Got response back from Telegram, applying json_decode');
+        $this->logger->debug('Got response back from Telegram, applying json_decode', [
+            'rawData' => (string)$response->getBody(),
+        ]);
         return new TelegramRawData((string)$response->getBody());
     }
 
@@ -238,8 +240,7 @@ class TgLog
      */
     protected function composeApiMethodUrl(TelegramMethods $call): string
     {
-        $completeClassName = get_class($call);
-        $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
+        $this->methodName = $call->getMethodName();
         $this->logger->info('About to perform API request', ['method' => $this->methodName]);
 
         return $this->apiUrl . $this->methodName;

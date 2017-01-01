@@ -68,4 +68,9 @@ class SendContact extends TelegramMethods
             'first_name',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendContact';
+    }
 }

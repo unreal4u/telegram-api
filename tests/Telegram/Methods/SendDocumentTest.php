@@ -64,4 +64,12 @@ class SendDocumentTest extends TestCase
         $this->assertEquals('XXX-YYY-ZZZ-01', $result->document->file_id);
         $this->assertNull($result->document->thumb);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendDocument();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendDocument', $return);
+    }
 }

@@ -58,4 +58,9 @@ class SendSticker extends TelegramMethods
             'sticker',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendSticker';
+    }
 }

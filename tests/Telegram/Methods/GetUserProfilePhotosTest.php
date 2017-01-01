@@ -101,4 +101,12 @@ class GetUserProfilePhotosTest extends TestCase
             throw $e;
         }
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new GetUserProfilePhotos();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('getUserProfilePhotos', $return);
+    }
 }

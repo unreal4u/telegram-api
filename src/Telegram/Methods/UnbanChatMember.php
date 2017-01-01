@@ -45,4 +45,9 @@ class UnbanChatMember extends TelegramMethods
             'user_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'unbanChatMember';
+    }
 }

@@ -63,4 +63,12 @@ class SendLocationTest extends TestCase
         $this->assertEquals(round($sendLocation->latitude, 6), round($result->location->latitude, 6));
         $this->assertEquals(round($sendLocation->longitude, 6), round($result->location->longitude, 6));
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendLocation();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendLocation', $return);
+    }
 }

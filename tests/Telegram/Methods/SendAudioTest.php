@@ -99,4 +99,12 @@ class SendAudioTest extends TestCase
         $this->assertCount(3, $export);
         $this->assertSame('My special caption', $export['caption']);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendAudio();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendAudio', $return);
+    }
 }

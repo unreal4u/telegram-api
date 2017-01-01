@@ -67,4 +67,9 @@ class SendDocument extends TelegramMethods
             'document',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendDocument';
+    }
 }

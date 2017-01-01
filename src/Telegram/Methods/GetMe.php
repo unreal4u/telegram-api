@@ -29,4 +29,9 @@ class GetMe extends TelegramMethods
     {
         return [];
     }
+
+    public function getMethodName(): string
+    {
+        return 'getMe';
+    }
 }

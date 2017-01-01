@@ -47,4 +47,9 @@ class GetFile extends TelegramMethods
             'file_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'getFile';
+    }
 }

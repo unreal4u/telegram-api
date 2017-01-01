@@ -82,4 +82,9 @@ class SendVenue extends TelegramMethods
             'address',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendVenue';
+    }
 }

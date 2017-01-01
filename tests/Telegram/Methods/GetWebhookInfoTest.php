@@ -60,4 +60,12 @@ class GetWebhookInfoTest extends TestCase
         $this->assertFalse($result->has_custom_certificate);
         $this->assertEmpty($result->pending_update_count);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new GetWebhookInfo();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('getWebhookInfo', $return);
+    }
 }

@@ -84,4 +84,9 @@ class SendVideo extends TelegramMethods
             'video',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendVideo';
+    }
 }

@@ -79,4 +79,9 @@ class GetUpdates extends TelegramMethods
     {
         return [];
     }
+
+    public function getMethodName(): string
+    {
+        return 'getUpdates';
+    }
 }

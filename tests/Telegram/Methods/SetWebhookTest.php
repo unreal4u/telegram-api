@@ -43,4 +43,12 @@ class SetWebhookTest extends TestCase
         $this->assertInstanceOf(ResultBoolean::class, $result);
         $this->assertTrue($result->data);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SetWebhook();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('setWebhook', $return);
+    }
 }

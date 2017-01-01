@@ -4,10 +4,10 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit_Framework_TestCase as TestCase;
 #use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\Telegram\Methods\EditMessage\Text;
+use unreal4u\TelegramAPI\Telegram\Methods\EditMessage\Caption;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
-class EditMessageTextTest extends TestCase
+class EditMessageCaptionTest extends TestCase
 {
     /**
      * @var MockTgLog
@@ -34,22 +34,11 @@ class EditMessageTextTest extends TestCase
 
     /**
      * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage "text"
+     * @expectedExceptionMessage chat_id
      */
     public function testMissingMandatoryExportField()
     {
-        $editMessageText = new Text();
-        $editMessageText->export();
-    }
-
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage text
-     */
-    public function testMissingMandatoryTextField()
-    {
-        $editMessageText = new Text();
-        $editMessageText->inline_message_id = 12341234;
+        $editMessageText = new Caption();
         $editMessageText->export();
     }
 
@@ -59,24 +48,36 @@ class EditMessageTextTest extends TestCase
      */
     public function testMissingMandatoryMessageIdField()
     {
-        $editMessageText = new Text();
+        $editMessageText = new Caption();
         $editMessageText->chat_id = 12341234;
-        $editMessageText->text = 'Hello world';
+        $editMessageText->caption = 'Hello world';
         $editMessageText->export();
     }
 
     public function testMissingMandatoryInlineMessageIdField()
     {
-        $editMessageText = new Text();
+        $editMessageText = new Caption();
 
         $this->assertContains('inline_message_id', $editMessageText->getMandatoryFields());
     }
 
     public function testCorrectMethodNameReturned()
     {
-        $telegramMethod = new Text();
+        $telegramMethod = new Caption();
         $return = $telegramMethod->getMethodName();
 
-        $this->assertSame('editMessageText', $return);
+        $this->assertSame('editMessageCaption', $return);
+    }
+
+    public function testHandleResponseSuccessful()
+    {
+        // TODO
+        $this->assertTrue(true);
+    }
+
+    public function testHandleNonSuccessfulResponse()
+    {
+        // TODO
+        $this->assertTrue(true);
     }
 }

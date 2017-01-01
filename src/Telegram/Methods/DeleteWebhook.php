@@ -31,4 +31,9 @@ class DeleteWebhook extends TelegramMethods
     {
         return [];
     }
+
+    public function getMethodName(): string
+    {
+        return 'deleteWebhook';
+    }
 }

@@ -42,4 +42,9 @@ class SendChatAction extends TelegramMethods
             'action',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendChatAction';
+    }
 }

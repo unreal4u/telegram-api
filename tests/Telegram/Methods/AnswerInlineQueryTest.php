@@ -65,4 +65,12 @@ class AnswerInlineQueryTest extends TestCase
         $this->assertInstanceOf(ResultBoolean::class, $result);
         $this->assertTrue($result->data);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new AnswerInlineQuery();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('answerInlineQuery', $return);
+    }
 }

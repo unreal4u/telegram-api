@@ -7,15 +7,7 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 
-/**
- * Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots). On
- * success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
- *
- * Objects defined as-is july 2016
- *
- * @see https://core.telegram.org/bots/api#editmessagereplymarkup
- */
-class EditMessageReplyMarkup extends TelegramMethods
+abstract class EditMessage extends TelegramMethods
 {
     /**
      * Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target
@@ -44,6 +36,24 @@ class EditMessageReplyMarkup extends TelegramMethods
 
     public function getMandatoryFields(): array
     {
-        return [];
+        $returnValue = [];
+        // Inline_message_id is mandatory if no chat_id and message_id are filled in
+        if (empty($this->chat_id) && empty($this->message_id)) {
+            $returnValue[] = 'inline_message_id';
+        }
+
+        // On the other hand, chat_id and message_id are mandatory if inline_message_id is not filled in
+        if (empty($this->inline_message_id)) {
+            $returnValue[] = 'chat_id';
+            $returnValue[] = 'message_id';
+        }
+
+        return $returnValue;
+    }
+
+    public function getMethodName(): string
+    {
+        $completeClassName = get_class($this);
+        return 'editMessage'.substr($completeClassName, strrpos($completeClassName, '\\') + 1);
     }
 }

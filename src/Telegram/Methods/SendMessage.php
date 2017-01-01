@@ -69,4 +69,9 @@ class SendMessage extends TelegramMethods
             'text',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'sendMessage';
+    }
 }

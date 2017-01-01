@@ -44,4 +44,10 @@ interface TelegramMethodDefinitions
      * @return array
      */
     public function getMandatoryFields(): array;
+
+    /**
+     * Gets the name of the method we have to post to. Is most of the time the same as the class' name
+     * @return string
+     */
+    public function getMethodName(): string;
 }

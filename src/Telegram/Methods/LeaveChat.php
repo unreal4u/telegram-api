@@ -36,4 +36,9 @@ class LeaveChat extends TelegramMethods
             'chat_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'leaveChat';
+    }
 }

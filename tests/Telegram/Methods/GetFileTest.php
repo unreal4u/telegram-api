@@ -65,4 +65,12 @@ class GetFileTest extends TestCase
             throw $e;
         }
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new GetFile();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('getFile', $return);
+    }
 }

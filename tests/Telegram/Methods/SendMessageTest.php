@@ -129,4 +129,12 @@ class SendMessageTest extends TestCase
 
         $this->tgLog->performApiRequest($sendMessage);
     }
+
+    public function testCorrectMethodNameReturned()
+    {
+        $telegramMethod = new SendMessage();
+        $return = $telegramMethod->getMethodName();
+
+        $this->assertSame('sendMessage', $return);
+    }
 }

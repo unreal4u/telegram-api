@@ -39,4 +39,9 @@ class GetChatAdministrators extends TelegramMethods
             'chat_id',
         ];
     }
+
+    public function getMethodName(): string
+    {
+        return 'getChatAdministrators';
+    }
 }

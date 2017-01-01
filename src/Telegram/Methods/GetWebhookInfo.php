@@ -29,4 +29,9 @@ class GetWebhookInfo extends TelegramMethods
     {
         return [];
     }
+
+    public function getMethodName(): string
+    {
+        return 'getWebhookInfo';
+    }
 }
