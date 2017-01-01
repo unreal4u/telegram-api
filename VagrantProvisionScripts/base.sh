@@ -19,7 +19,7 @@ systemctl start firewalld
 # Set the correct time
 ntpdate -u pool.ntp.org
 
-PHP_VERSION="70"
+PHP_VERSION="71"
 # PHP 7.0.x install:
 yum install -q -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum install -q -y \
@@ -38,8 +38,8 @@ yum install -q -y \
   php${PHP_VERSION}-php-pecl-xdebug \
   php${PHP_VERSION}-php-pecl-zip \
   php${PHP_VERSION}-php-dbg
-ln -s /usr/bin/php70 /usr/bin/php
-ln -s /usr/bin/php70-phpdbg /usr/bin/phpdbg
+ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
+ln -s /usr/bin/php${PHP_VERSION}-phpdbg /usr/bin/phpdbg
 
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/
