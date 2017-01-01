@@ -21,6 +21,8 @@ use Psr\Log\LoggerInterface;
  */
 class TgLog
 {
+    const TELEGRAM_BASE_URL = 'https://api.telegram.org/';
+
     /**
      * @var ClientInterface
      */
@@ -112,7 +114,7 @@ class TgLog
     public function downloadFile(File $file): TelegramDocument
     {
         $this->logger->debug('Downloading file from Telegram, creating URL');
-        $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
+        $url = self::TELEGRAM_BASE_URL . 'file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
         return new TelegramDocument($this->httpClient->get($url));
     }
@@ -123,7 +125,7 @@ class TgLog
      */
     final private function constructApiUrl(): TgLog
     {
-        $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken . '/';
+        $this->apiUrl = self::TELEGRAM_BASE_URL . 'bot' . $this->botToken . '/';
         $this->logger->debug('Built up the API URL');
         return $this;
     }
