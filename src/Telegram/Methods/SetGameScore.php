@@ -94,17 +94,6 @@ class SetGameScore extends TelegramMethods
         // user_id and score are always mandatory
         $returnValue[] = 'user_id';
         $returnValue[] = 'score';
-
-        if (empty($this->chat_id) && empty($this->message_id)) {
-            $returnValue[] = 'inline_message_id';
-        }
-
-        // On the other hand, chat_id and message_id are mandatory if inline_message_id is not filled in
-        if (empty($this->inline_message_id)) {
-            $returnValue[] = 'chat_id';
-            $returnValue[] = 'message_id';
-        }
-
-        return $returnValue;
+        return $this->mandatoryUserOrInlineMessageId($returnValue);
     }
 }
