@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file
@@ -58,4 +59,10 @@ class Mpeg4Gif extends Result
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
+     * @var InputMessageContent
+     */
+    public $input_message_content = null;
 }

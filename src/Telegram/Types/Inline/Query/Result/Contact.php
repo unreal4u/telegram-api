@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can
@@ -57,4 +58,10 @@ class Contact extends Result
      * @var int
      */
     public $thumb_height = 0;
+
+    /**
+     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
+     * @var InputMessageContent
+     */
+    public $input_message_content = null;
 }

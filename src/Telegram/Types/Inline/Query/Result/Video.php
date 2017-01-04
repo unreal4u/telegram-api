@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * Represents a link to a page containing an embedded video player or a video file. By default, this video file will be
@@ -76,4 +77,10 @@ class Video extends Result
      * @var string
      */
     public $description = '';
+
+    /**
+     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
+     * @var InputMessageContent
+     */
+    public $input_message_content = null;
 }

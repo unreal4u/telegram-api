@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional
@@ -58,4 +59,10 @@ class Gif extends Result
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
+     * @var InputMessageContent
+     */
+    public $input_message_content = null;
 }

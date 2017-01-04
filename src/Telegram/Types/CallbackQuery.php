@@ -52,10 +52,18 @@ class CallbackQuery extends TelegramTypes
     public $chat_instance = '';
 
     /**
-     * Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field
+     * Optional. Data associated with the callback button. Be aware that a bad client can send arbitrary data in this
+     * field
      * @var string
      */
     public $data = '';
+
+    /**
+     * Optional. Short name of a Game to be returned, serves as the unique identifier for the game
+     * @see https://core.telegram.org/bots/api#games
+     * @var string
+     */
+    public $game_short_name = '';
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {

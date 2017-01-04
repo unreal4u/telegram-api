@@ -7,7 +7,6 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
-use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * This object represents one result of an inline query. Telegram clients currently support results of the following
@@ -56,12 +55,6 @@ abstract class Result extends TelegramTypes
      * @var Markup
      */
     public $reply_markup = null;
-
-    /**
-     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
-     * @var InputMessageContent
-     */
-    public $input_message_content = null;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {

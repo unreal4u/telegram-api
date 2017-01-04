@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
+use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
 
 /**
  * Represents a link to a voice recording in an .ogg container encoded with OPUS. By default, this voice recording will
@@ -46,4 +47,10 @@ class Voice extends Result
      * @var int
      */
     public $voice_duration = 0;
+
+    /**
+     * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
+     * @var InputMessageContent
+     */
+    public $input_message_content = null;
 }

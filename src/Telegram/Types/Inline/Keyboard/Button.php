@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\CallbackGame;
 
 /**
  * This object represents one button of an inline keyboard. You must use exactly one of the optional fields
@@ -59,4 +60,23 @@ class Button extends TelegramTypes
      * @var string
      */
     public $switch_inline_query_current_chat = '';
+
+    /**
+     * Optional. Description of the game that will be launched when the user presses the button.
+     *
+     * NOTE: This type of button must always be the first button in the first row.
+     *
+     * @var CallbackGame
+     */
+    public $callback_game;
+
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
+    {
+        switch ($key) {
+            case 'callback_game':
+                return new CallbackGame($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
+    }
 }
