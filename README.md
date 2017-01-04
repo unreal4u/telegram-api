@@ -119,6 +119,11 @@ I actually don't use Telegram. Nah, kidding, you can contact me at [https://tele
 Another great way to help is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
 [pull request](https://github.com/unreal4u/telegram-api/pulls)!
 
+### Bugs related with security
+
+Please handle these responsibly! If you happen to find one, please
+[contact the author privately](https://telegram.me/unreal4u).
+
 ### Special thanks to
 
 - **Intensify** for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
