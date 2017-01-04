@@ -50,6 +50,7 @@ class EditMessageCaption extends TelegramMethods
 
     public function getMandatoryFields(): array
     {
-        return [];
+        $returnValue = [];
+        return $this->mandatoryUserOrInlineMessageId($returnValue);
     }
 }
