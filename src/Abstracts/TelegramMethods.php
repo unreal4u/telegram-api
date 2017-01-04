@@ -77,4 +77,27 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
 
         return $finalArray;
     }
+
+    /**
+     * Will resolve the dependency of a mandatory inline_message_id OR a chat_id + message_id
+     *
+     * NOTE: This will use pass by reference instead of copy on write as the use-case for this functions allows this
+     *
+     * @param array $return
+     * @return array
+     */
+    final protected function mandatoryUserOrInlineMessageId(array &$return): array
+    {
+        if (empty($this->chat_id) && empty($this->message_id)) {
+            $return[] = 'inline_message_id';
+        }
+
+        // On the other hand, chat_id and message_id are mandatory if inline_message_id is not filled in
+        if (empty($this->inline_message_id)) {
+            $return[] = 'chat_id';
+            $return[] = 'message_id';
+        }
+
+        return $return;
+    }
 }

@@ -64,17 +64,7 @@ class EditMessageText extends TelegramMethods
     public function getMandatoryFields(): array
     {
         $returnValue[] = 'text';
-        // Inline_message_id is mandatory if no chat_id and message_id are filled in
-        if (empty($this->chat_id) && empty($this->message_id)) {
-            $returnValue[] = 'inline_message_id';
-        }
-
-        // On the other hand, chat_id and message_id are mandatory if inline_message_id is not filled in
-        if (empty($this->inline_message_id)) {
-            $returnValue[] = 'chat_id';
-            $returnValue[] = 'message_id';
-        }
-
+        $this->mandatoryUserOrInlineMessageId($returnValue);
         return $returnValue;
     }
 }
