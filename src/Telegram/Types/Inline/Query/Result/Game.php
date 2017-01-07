@@ -18,7 +18,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result;
 class Game extends Result
 {
     /**
-     * Type of the result, must be gif
+     * Type of the result, must be game
      * @var string
      */
     public $type = 'game';

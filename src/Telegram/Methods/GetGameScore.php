@@ -9,43 +9,29 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\GameHighScoreArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
- * Use this method to set the score of the specified user in a game. On success, if the message was sent by the bot,
- * returns the edited Message, otherwise returns True. Returns an error, if the new score is not greater than the user's
- * current score in the chat and force is False
+ * Use this method to get data for high score tables. Will return the score of the specified user and several of his
+ * neighbors in a game. On success, returns an Array of GameHighScore objects.
+ *
+ * This method will currently return scores for the target user, plus two of his closest neighbors on each side. Will
+ * also return the top three users if the user and his neighbors are not among them. Please note that this behavior is
+ * subject to change.
  *
  * Objects defined as-is January 2017
  *
- * @see https://core.telegram.org/bots/api#setgamescore
+ * @see https://core.telegram.org/bots/api#getgamescore
  */
-class SetGameScore extends TelegramMethods
+class GetGameScore extends TelegramMethods
 {
     /**
-     * User identifier
+     * Target user id
      * @var int
      */
     public $user_id = 0;
-
-    /**
-     * New score, must be non-negative
-     * @var int
-     */
-    public $score = 0;
-
-    /**
-     * Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
-     * @var boolean
-     */
-    public $force = false;
-
-    /**
-     * Pass True, if the game message should not be automatically edited to include the current scoreboard
-     * @var boolean
-     */
-    public $disable_edit_message = false;
 
     /**
      * Required if inline_message_id is not specified. Unique identifier for the target chat
@@ -67,22 +53,13 @@ class SetGameScore extends TelegramMethods
 
     public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
-        $typeOfResult = $data->getTypeOfResult();
-        switch ($typeOfResult) {
-            case 'array':
-                return new Message($data->getResult(), $logger);
-            case 'boolean':
-                return new ResultBoolean($data->getResultBoolean(), $logger);
-            default:
-                throw new InvalidResultType('Result is of type: %s. Expecting one of array or boolean');
-        }
+        return new GameHighScoreArray($data->getResult(), $logger);
     }
 
     public function getMandatoryFields(): array
     {
         // user_id and score are always mandatory
         $returnValue[] = 'user_id';
-        $returnValue[] = 'score';
         return $this->mandatoryUserOrInlineMessageId($returnValue);
     }
 }
