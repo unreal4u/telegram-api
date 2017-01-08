@@ -27,12 +27,12 @@ class GameHighScoreArray extends CustomType implements CustomArrayType
     /**
      * Traverses through our $data, yielding the result set
      *
-     * @return ChatMember[]
+     * @return GameHighScore[]
      */
     public function traverseObject()
     {
-        foreach ($this->data as $chatMember) {
-            yield $chatMember;
+        foreach ($this->data as $gameHighScore) {
+            yield $gameHighScore;
         }
     }
 }

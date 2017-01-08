@@ -6,22 +6,12 @@
 
 # Telegram API
 
-This is a complete PHP7 bot API implementation for Telegram implementing the totality of [Bot API v2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016) (Except the
-gaming platform introduced in October 2016, please check [the open issues](https://github.com/unreal4u/telegram-api/issues/12)
-for more details)
+This is a complete PHP7 bot API implementation for Telegram implementing the totality of [Bot API v2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016)
 
 ## Known bugs / Open issues
 
-The current version is stable enough to be used in production, however, there are some known bugs or stuff to be
-implemented. These are:
-
-- Add gaming capability (Added in Bot API 2.2). [Please check this link](https://core.telegram.org/bots/api-changelog#october-3-2016) and [the following issue](https://github.com/unreal4u/telegram-api/issues/12).
-- Ability to pass on an url as InputFile, there is barely any documentation on this subject. [Please check this link](https://github.com/unreal4u/telegram-api/issues/17).
-- `EditMessageCaption` may return a boolean value (true) OR a Message object. [Check how to solve this](https://github.com/unreal4u/telegram-api/issues/18).
-- Gaming platform: Implement mandatory fields for types as well
-
-If you happen to know how to solve these or if you find any bug at all, feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls)
-or [create an issue](https://github.com/unreal4u/telegram-api/issues)!
+None at the moment. If you find any, feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
+[create an issue](https://github.com/unreal4u/telegram-api/issues)!
 
 ### About this class
 
