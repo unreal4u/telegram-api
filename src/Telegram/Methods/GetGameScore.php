@@ -7,11 +7,8 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\GameHighScoreArray;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
-use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
  * Use this method to get data for high score tables. Will return the score of the specified user and several of his

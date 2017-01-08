@@ -47,7 +47,7 @@ class SendGame extends TelegramMethods
      * hide keyboard or to force a reply from the user.
      * @var Markup
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

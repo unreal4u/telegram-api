@@ -15,11 +15,9 @@ use unreal4u\TelegramAPI\Telegram\Types\GameHighScore;
  */
 class GameHighScoreArray extends CustomType implements CustomArrayType
 {
-    public $data = [];
-
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (!empty($data)) {
+        if (count($data) !== 0) {
             foreach ($data as $id => $gameHighScore) {
                 $this->data[$id] = new GameHighScore($gameHighScore, $logger);
             }

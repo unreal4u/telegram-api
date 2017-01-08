@@ -14,12 +14,11 @@ use Psr\Log\LoggerInterface;
  */
 class UserProfilePhotosArray extends CustomType implements CustomArrayType
 {
-    public $data = [];
-
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (!empty($data)) {
+        if (count($data) !== 0) {
             $i = 0;
+            /** @var array $telegramResponse */
             foreach ($data as $telegramResponse) {
                 foreach ($telegramResponse as $photoSize) {
                     // Create an actual PhotoSize object and fill the array

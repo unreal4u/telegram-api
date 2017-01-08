@@ -24,7 +24,7 @@ class InputFile
      * The actual stream to the file
      * @var resource
      */
-    private $stream = null;
+    private $stream;
 
     public function __construct(string $path)
     {
@@ -36,6 +36,7 @@ class InputFile
      * Will setup the stream
      *
      * @return InputFile
+     * @throws FileNotReadable
      */
     private function setStream(): InputFile
     {

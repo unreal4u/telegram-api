@@ -9,7 +9,6 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
-use unreal4u\TelegramAPI\Telegram\Types\User;
 
 /**
  * Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success.

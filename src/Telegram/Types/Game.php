@@ -54,7 +54,7 @@ class Game extends TelegramTypes
      * Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
      * @var Animation
      */
-    public $animation = null;
+    public $animation;
 
     public function mapSubObjects(string $key, array $data): TelegramTypes
     {

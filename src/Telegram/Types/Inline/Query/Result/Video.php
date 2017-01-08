@@ -82,5 +82,5 @@ class Video extends Result
      * Optional. Content of the message to be sent instead of the audio/document/voice message/video/sticker/etc.
      * @var InputMessageContent
      */
-    public $input_message_content = null;
+    public $input_message_content;
 }

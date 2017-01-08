@@ -55,7 +55,7 @@ abstract class Result extends TelegramTypes
      * Optional. Inline keyboard attached to the message
      * @var Markup
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
@@ -85,6 +85,7 @@ abstract class Result extends TelegramTypes
      *
      * @see TelegramMethods::export
      * @return array
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     public function export(): array
     {
@@ -94,7 +95,7 @@ abstract class Result extends TelegramTypes
         $cleanObject = new $this();
         foreach ($cleanObject as $fieldId => $value) {
             if ($fieldId !== 'type' && $this->$fieldId === $cleanObject->$fieldId) {
-                if (in_array($fieldId, $mandatoryFields)) {
+                if (in_array($fieldId, $mandatoryFields, true)) {
                     throw new MissingMandatoryField(sprintf(
                         'The field "%s" is mandatory and empty, please correct',
                         $fieldId

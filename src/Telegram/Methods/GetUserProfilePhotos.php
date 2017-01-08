@@ -40,7 +40,7 @@ class GetUserProfilePhotos extends TelegramMethods
     /**
      * This call will return an array with updates, so call up a custom type to do this
      *
-     * @param array $data
+     * @param TelegramRawData $data
      * @param LoggerInterface $logger
      * @return TelegramTypes
      */

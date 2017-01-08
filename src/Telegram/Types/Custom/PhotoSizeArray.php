@@ -14,11 +14,9 @@ use Psr\Log\LoggerInterface;
  */
 class PhotoSizeArray extends CustomType implements CustomArrayType
 {
-    public $data = [];
-
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (!empty($data)) {
+        if (count($data) !== 0) {
             foreach ($data as $id => $photo) {
                 $this->data[$id] = new PhotoSize($photo, $logger);
             }

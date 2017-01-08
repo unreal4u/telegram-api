@@ -35,7 +35,7 @@ class TgLog
      * Contains an instance to a PSR-3 compatible logger
      * @var LoggerInterface
      */
-    protected $logger = null;
+    protected $logger;
 
     /**
      * Stores the API URL from Telegram
@@ -137,6 +137,7 @@ class TgLog
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
+        /** @noinspection PhpMethodParametersCountMismatchInspection */
         $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
         $this->logger->debug('Got response back from Telegram, applying json_decode');
         return new TelegramRawData((string)$response->getBody());
@@ -162,6 +163,7 @@ class TgLog
      *
      * @param TelegramMethods $method
      * @return array
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     private function constructFormData(TelegramMethods $method): array
     {

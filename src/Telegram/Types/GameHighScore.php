@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 
 /**
  * This object represents one row of the high scores table for a game
@@ -25,7 +23,7 @@ class GameHighScore extends TelegramTypes
 
     /**
      * User
-     * @var string
+     * @var User
      */
     public $user;
 

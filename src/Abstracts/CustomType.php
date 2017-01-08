@@ -12,5 +12,5 @@ namespace unreal4u\TelegramAPI\Abstracts;
  */
 abstract class CustomType extends TelegramTypes
 {
-    public $data = null;
+    public $data = [];
 }

@@ -14,11 +14,9 @@ use Psr\Log\LoggerInterface;
  */
 class UpdatesArray extends CustomType implements CustomArrayType
 {
-    public $data = [];
-
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (!empty($data)) {
+        if (count($data) !== 0) {
             foreach ($data as $telegramResponse) {
                 // Create an actual Update object and fill the array
                 $this->data[] = new Update($telegramResponse, $logger);
