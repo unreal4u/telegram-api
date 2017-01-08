@@ -15,16 +15,10 @@ None at the moment. If you find any, feel free to [submit a PR](https://github.c
 
 ### About this class
 
-* Enables you to send messages, stickers, location and other methods via PHP to a Telegram user (either direct conversation, channel or group).
+* Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
 * Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
 * Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
 * **Full** inline bots support!
-
-### Detailed description
-
-This project was born to study the new concepts of PHP7 and to integrate some other knowledge I had previously heard
-about but didn't have the time to play with them. The idea behind was to create a simple to use class which could
-play nicely with the Telegram API. The end result however ended up being a complete bot API implementation.
 
 ## Installation
 
@@ -33,7 +27,7 @@ The preferred method is composer, so add the following to your composer.json:
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.1"
+    "unreal4u/telegram-api": "~2.3"
   }
 }
 ```
@@ -67,7 +61,7 @@ Different methods return different object types.
 Please refer to the [examples directory](https://github.com/unreal4u/telegram-api/tree/master/examples) to view examples 
 of some of the implemented methods, including inline bots. 
 
-For examples of actual code that works in a production environment, please refer to my other repo: https://github.com/unreal4u/tg-timebot
+For examples of actual code that works in a production environment, please refer to my other repo: https://github.com/unreal4u/telegram-bots
 
 ### Getting updates via Webhook
 
@@ -76,7 +70,7 @@ more information on this.
 
 ### Inline bots
 
-Please checkout the [special wiki page](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots) about Inline bots.
+Please checkout the [special wiki page](https://github.com/unreal4u/telegram-api/wiki/Inline-Bots) about inline bots.
 
 ### Extra requirements
 
