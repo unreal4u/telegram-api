@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Location;
 /**
  * This object represents a result of an inline query that was chosen by the user and sent to their chat partner.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#choseninlineresult
  */
@@ -27,13 +27,13 @@ class ChosenResult extends TelegramTypes
      * The user that chose the result
      * @var User
      */
-    public $from = null;
+    public $from;
 
     /**
      * Optional. Sender location, only for bots that require user location
      * @var Location
      */
-    public $location = null;
+    public $location;
 
     /**
      * Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the
@@ -43,7 +43,7 @@ class ChosenResult extends TelegramTypes
     public $inline_message_id = '';
 
     /**
-     * Text of the query
+     * The query that was used to obtain the result
      * @var string
      */
     public $query = '';

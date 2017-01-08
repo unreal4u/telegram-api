@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
  * This object represents an incoming update.
  * At most one of the optional parameters can be present in any given update.
  *
- * Objects defined as-is november 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#update
  */
@@ -30,43 +30,43 @@ class Update extends TelegramTypes
      * Optional. New incoming message of any kind — text, photo, sticker, etc.
      * @var Message
      */
-    public $message = null;
+    public $message;
 
     /**
      * Optional. New version of a message that is known to the bot and was edited
      * @var Message
      */
-    public $edited_message = null;
+    public $edited_message;
 
     /**
      * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
      * @var Message
      */
-    public $channel_post = null;
+    public $channel_post;
 
     /**
      * Optional. New version of a channel post that is known to the bot and was edited
      * @var Message
      */
-    public $edited_channel_post = null;
+    public $edited_channel_post;
 
     /**
      * Optional. New incoming inline query
      * @var Query
      */
-    public $inline_query = null;
+    public $inline_query;
 
     /**
      * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
      * @var ChosenResult
      */
-    public $chosen_inline_result = null;
+    public $chosen_inline_result;
 
     /**
      * Optional. New incoming callback query
      * @var CallbackQuery
      */
-    public $callback_query = null;
+    public $callback_query;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {

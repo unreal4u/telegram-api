@@ -45,7 +45,7 @@ class MessageEntity extends TelegramTypes
      * Optional. For “text_mention” only, the mentioned user
      * @var User
      */
-    public $user = null;
+    public $user;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {

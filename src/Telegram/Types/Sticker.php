@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Cached\Photo;
 
 /**
  * This object represents a sticker
@@ -38,7 +37,7 @@ class Sticker extends TelegramTypes
      * Optional. Sticker thumbnail in .webp or .jpg format
      * @var PhotoSize
      */
-    public $thumb = null;
+    public $thumb;
 
     /**
      * Optional. Emoji associated with the sticker

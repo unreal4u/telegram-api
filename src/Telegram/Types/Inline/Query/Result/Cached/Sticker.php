@@ -24,7 +24,7 @@ class Sticker extends Result
     public $type = 'sticker';
 
     /**
-     * A valid file identifier for the audio file
+     * A valid file identifier for the sticker
      * @var string
      */
     public $sticker_file_id = '';

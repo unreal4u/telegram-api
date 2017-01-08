@@ -10,16 +10,16 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultArray;
 
 abstract class TelegramTypes
 {
-    protected $logger = null;
+    protected $logger;
 
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (is_null($logger)) {
+        if ($logger === null) {
             $logger = new DummyLogger();
         }
 
         $this->logger = $logger;
-        if (!is_null($data)) {
+        if ($data !== null) {
             $this->populateObject($data);
         }
     }

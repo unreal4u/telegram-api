@@ -26,7 +26,7 @@ class UserProfilePhotos extends TelegramTypes
      * Requested profile pictures (in up to 4 sizes each)
      * NOTE: Is an array of an array of PhotoSize objects
      *
-     * @var array
+     * @var UserProfilePhotosArray[]
      */
     public $photos = [];
 

@@ -60,7 +60,7 @@ class SendMessage extends TelegramMethods
      * hide keyboard or to force a reply from the user
      * @var KeyboardMethods
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

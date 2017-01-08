@@ -5,11 +5,12 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 /**
  * Use this method to send photos. On success, the sent Message is returned
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#sendphoto
  */
@@ -22,12 +23,13 @@ class SendPhoto extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * Photo to send. You can either pass a file_id as String to resend a photo that is already on the Telegram servers,
-     * or upload a new photo using the InputFile class
-     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile
-     * @var string
+     * Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass
+     * an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using the InputFile
+     * class.
+     * @see InputFile
+     * @var string|InputFile
      */
-    public $photo = null;
+    public $photo = '';
 
     /**
      * Optional. Photo caption (may also be used when resending photos by file_id)
@@ -54,7 +56,7 @@ class SendPhoto extends TelegramMethods
      * hide keyboard or to force a reply from the user
      * @var null
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

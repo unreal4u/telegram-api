@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Telegram\Types\User;
  * This object represents an incoming inline query. When the user sends an empty query, your bot could return some
  * default or trending results.
  *
- * Objects defined as-is january 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#inlinequery
  */
@@ -28,16 +28,16 @@ class Query extends TelegramTypes
      * User‘s or bot’s first name
      * @var User
      */
-    public $from = null;
+    public $from;
 
     /**
      * Optional. Sender location, only for bots that request user location
      * @var Location
      */
-    public $location = null;
+    public $location;
 
     /**
-     * Text of the query
+     * Text of the query (up to 512 characters)
      * @var string
      */
     public $query = '';

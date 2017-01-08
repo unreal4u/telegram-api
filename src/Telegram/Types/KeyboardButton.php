@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+
 /**
  * This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this
  * object to specify text of the button. Optional fields are mutually exclusive.
@@ -15,7 +17,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
  *
  * @see https://core.telegram.org/bots/api#keyboardbutton
  */
-class KeyboardButton
+class KeyboardButton extends TelegramTypes
 {
     /**
      * Text of the button. If none of the optional fields are used, it will be sent to the bot as a message when the

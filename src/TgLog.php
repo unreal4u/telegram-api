@@ -70,13 +70,13 @@ class TgLog
         $this->botToken = $botToken;
 
         // Initialize new dummy logger (PSR-3 compatible) if not injected
-        if (is_null($logger)) {
+        if ($logger === null) {
             $logger = new DummyLogger();
         }
         $this->logger = $logger;
 
         // Initialize new Guzzle client if not injected
-        if (is_null($client)) {
+        if ($client === null) {
             $client = new Client();
         }
         $this->httpClient = $client;

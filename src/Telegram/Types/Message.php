@@ -27,7 +27,7 @@ class Message extends TelegramTypes
      * Optional. Sender, can be empty for messages sent to channels
      * @var User
      */
-    public $from = null;
+    public $from;
 
     /**
      * Date the message was sent in Unix time
@@ -39,19 +39,19 @@ class Message extends TelegramTypes
      * Conversation the message belongs to
      * @var Chat
      */
-    public $chat = null;
+    public $chat;
 
     /**
      * Optional. For forwarded messages, sender of the original message
      * @var User
      */
-    public $forward_from = null;
+    public $forward_from;
 
     /**
      * Optional. For messages forwarded from a channel, information about the original channel
      * @var Chat
      */
-    public $forward_from_chat = null;
+    public $forward_from_chat;
 
     /**
      * Optional. For forwarded channel posts, identifier of the original message in the channel
@@ -70,7 +70,7 @@ class Message extends TelegramTypes
      * reply_to_message fields even if it itself is a reply.
      * @var Message
      */
-    public $reply_to_message = null;
+    public $reply_to_message;
 
     /**
      * Optional. Date the message was last edited in Unix time
@@ -94,20 +94,20 @@ class Message extends TelegramTypes
      * Optional. Message is an audio file, information about the file
      * @var Audio
      */
-    public $audio = null;
+    public $audio;
 
     /**
      * Optional. Message is a general file, information about the file
      * @var Document
      */
-    public $document = null;
+    public $document;
 
     /**
      * Optional. Message is a game, information about the game
      * @see https://core.telegram.org/bots/api#games
-     * @var null
+     * @var Game
      */
-    public $game = null;
+    public $game;
 
     /**
      * Optional. Message is a photo, available sizes of the photo
@@ -119,19 +119,19 @@ class Message extends TelegramTypes
      * Optional. Message is a sticker, information about the sticker
      * @var Sticker
      */
-    public $sticker = null;
+    public $sticker;
 
     /**
      * Optional. Message is a video, information about the video
      * @var Video
      */
-    public $video = null;
+    public $video;
 
     /**
      * Optional. Message is a voice message, information about the file
      * @var Voice
      */
-    public $voice = null;
+    public $voice;
 
     /**
      * Optional. Caption for the photo or video
@@ -143,31 +143,31 @@ class Message extends TelegramTypes
      * Optional. Message is a shared contact, information about the contact
      * @var Contact
      */
-    public $contact = null;
+    public $contact;
 
     /**
      * Optional. Message is a shared location, information about the location
      * @var Location
      */
-    public $location = null;
+    public $location;
 
     /**
      * Optional. Message is a venue, information about the venue
      * @var Venue
      */
-    public $venue = null;
+    public $venue;
 
     /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      * @var User
      */
-    public $new_chat_member = null;
+    public $new_chat_member;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be the bot itself)
      * @var User
      */
-    public $left_chat_member = null;
+    public $left_chat_member;
 
     /**
      * Optional. A chat title was changed to this value
@@ -230,7 +230,7 @@ class Message extends TelegramTypes
      * reply_to_message fields even if it is itself a reply.
      * @var Message
      */
-    public $pinned_message = null;
+    public $pinned_message;
 
     /**
      * A message may contain one or more subobjects, map them always in this function

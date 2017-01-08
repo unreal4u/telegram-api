@@ -25,7 +25,7 @@ class Document extends TelegramTypes
      * Optional. Document thumbnail as defined by sender
      * @var PhotoSize
      */
-    public $thumb = null;
+    public $thumb;
 
     /**
      * Optional. Original filename as defined by sender

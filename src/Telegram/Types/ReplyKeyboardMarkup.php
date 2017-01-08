@@ -20,7 +20,7 @@ class ReplyKeyboardMarkup extends KeyboardMethods
 {
     /**
      * Array of button rows, each represented by an Array of KeyboardButton objects
-     * @var array
+     * @var KeyboardButton[]
      */
     public $keyboard = [];
 

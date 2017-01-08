@@ -4,8 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
  * Use this method to edit text messages sent by the bot or via the bot (for inline bots). On success, if edited message
@@ -59,12 +65,25 @@ class EditMessageText extends TelegramMethods
      * Optional. A JSON-serialized object for an inline keyboard.
      * @var Markup
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {
         $returnValue[] = 'text';
         $this->mandatoryUserOrInlineMessageId($returnValue);
         return $returnValue;
+    }
+
+    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
+    {
+        $typeOfResult = $data->getTypeOfResult();
+        switch ($typeOfResult) {
+            case 'array':
+                return new Message($data->getResult(), $logger);
+            case 'boolean':
+                return new ResultBoolean($data->getResultBoolean(), $logger);
+            default:
+                throw new InvalidResultType('Result is of type: %s. Expecting one of array or boolean');
+        }
     }
 }

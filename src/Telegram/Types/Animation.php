@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 
 /**
  * You can provide an animation for your game so that it looks stylish in chats (check out Lumberjack for an example).
@@ -28,7 +26,7 @@ class Animation extends TelegramTypes
      * Optional. Animation thumbnail as defined by sender
      * @var PhotoSize
      */
-    public $thumb = null;
+    public $thumb;
 
     /**
      * Optional. Original animation filename as defined by sender

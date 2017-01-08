@@ -45,4 +45,16 @@ class WebhookInfo extends TelegramTypes
      * @var int
      */
     public $last_error_message = '';
+
+    /**
+     * Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
+     * @var int
+     */
+    public $max_connections;
+
+    /**
+     * Optional. A list of update types the bot is subscribed to. Defaults to all update types
+     * @var string[]
+     */
+    public $allowed_updates = [];
 }

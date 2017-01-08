@@ -11,19 +11,9 @@ use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
 
 /**
- * This will get the updates Telegram has for our bot
+ * Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned
  *
- * This will work under 3 conditions:
- *
- * <ul>
- *  <li>No more than 24 hours has passed since the last update</li>
- *  <li>No webhooks are configured</li>
- *  <li>There are available updates (doh)</li>
- * </ul>
- *
- * You can use this method to get the channel id the bot has to send messages to
- *
- * Objects defined as-is December 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#getupdates
  */
@@ -32,7 +22,9 @@ class GetUpdates extends TelegramMethods
     /**
      * Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of
      * previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An
-     * update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id.
+     * update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The
+     * negative offset can be specified to retrieve updates starting from -offset update from the end of the updates
+     * queue. All previous updates will forgotten
      * @var int
      */
     public $offset = 0;

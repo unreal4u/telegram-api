@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 
 /**
- * This object represents one result of an inline query. Telegram clients currently support results of the following
+ * This object represents one result of an inline query. Telegram clients currently support results of the following 20
  * types:
  *
  * InlineQueryResultCachedAudio
@@ -23,6 +23,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
  * InlineQueryResultArticle
  * InlineQueryResultAudio
  * InlineQueryResultContact
+ * InlineQueryResultGame
  * InlineQueryResultDocument
  * InlineQueryResultGif
  * InlineQueryResultLocation
@@ -32,7 +33,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
  * InlineQueryResultVideo
  * InlineQueryResultVoice
  *
- * Objects defined as-is april 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresult
  */

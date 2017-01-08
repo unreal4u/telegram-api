@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
@@ -23,12 +24,13 @@ class SendSticker extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * Sticker to send. You can either pass a file_id as String to resend a sticker that is already on the Telegram
-     * servers, or upload a new sticker using the InputFile class
-     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile.
-     * @var InputFile
+     * Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass
+     * an HTTP URL as a String for Telegram to get a .webp file from the Internet, or upload a new one using the
+     * InputFile class
+     * @see InputFile
+     * @var string|InputFile
      */
-    public $sticker = null;
+    public $sticker = '';
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
@@ -47,9 +49,9 @@ class SendSticker extends TelegramMethods
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
-     * @var null
+     * @var KeyboardMethods
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

@@ -11,7 +11,11 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  * originated the query was attached to a message sent by the bot, the field message will be presented. If the button
  * was attached to a message sent via the bot (in inline mode), the field inline_message_id will be presented.
  *
- * Objects defined as-is november 2016
+ * NOTE: After the user presses an inline button, Telegram clients will display a progress bar until you call
+ * answerCallbackQuery. It is, therefore, necessary to react by calling answerCallbackQuery even if no notification to
+ * the user is needed (e.g., without specifying any of the optional parameters).
+ *
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#callbackquery
  */
@@ -27,14 +31,14 @@ class CallbackQuery extends TelegramTypes
      * The user that chose the result
      * @var User
      */
-    public $from = null;
+    public $from;
 
     /**
      * Optional. Message with the callback button that originated the query. Note that message content and message date
      * will not be available if the message is too old
      * @var Message
      */
-    public $message = null;
+    public $message;
 
     /**
      * Optional. Identifier of the message sent via the bot in inline mode, that originated the query

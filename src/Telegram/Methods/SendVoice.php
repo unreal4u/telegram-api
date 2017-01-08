@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
@@ -26,12 +27,13 @@ class SendVoice extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * Audio file to send. You can either pass a file_id as String to resend an audio that is already on the Telegram
-     * servers, or upload a new audio file using the InputFile class
-     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile
-     * @var InputFile
+     * Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended),
+     * pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using the
+     * InputFile class
+     * @see InputFile
+     * @var string|InputFile
      */
-    public $voice = null;
+    public $voice = '';
 
     /**
      * Optional. Audio caption, 0-200 characters
@@ -40,7 +42,7 @@ class SendVoice extends TelegramMethods
     public $caption = '';
 
     /**
-     * Optional. Duration of sent video in seconds
+     * Optional. Duration of sent voice message in seconds
      * @var int
      */
     public $duration = 0;
@@ -62,9 +64,9 @@ class SendVoice extends TelegramMethods
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
-     * @var null
+     * @var KeyboardMethods
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

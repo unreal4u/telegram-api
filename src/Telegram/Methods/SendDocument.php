@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
@@ -11,7 +12,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any
  * type of up to 50 MB in size, this limit may be changed in the future.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#senddocument
  */
@@ -24,14 +25,13 @@ class SendDocument extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * File to send. You can either pass a file_id as String to resend a file that is already on the Telegram servers,
-     * or upload a new file using the InputFile class
+     * File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an
+     * HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using the InputFile class
      *
-     * @see unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile
-     *
-     * @var InputFile
+     * @see InputFile
+     * @var string|InputFile
      */
-    public $document = null;
+    public $document = '';
 
     /**
      * Optional. Document caption (may also be used when resending documents by file_id), 0-200 characters
@@ -56,9 +56,9 @@ class SendDocument extends TelegramMethods
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
-     * @var null
+     * @var KeyboardMethods
      */
-    public $reply_markup = null;
+    public $reply_markup;
 
     public function getMandatoryFields(): array
     {

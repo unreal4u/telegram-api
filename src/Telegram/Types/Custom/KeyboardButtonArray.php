@@ -11,8 +11,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Mockup class to generate a real telegram update representation
- *
- * @TODO Test this, it may not work as expected!
  */
 class KeyboardButtonArray extends CustomType implements CustomArrayType
 {
@@ -21,8 +19,8 @@ class KeyboardButtonArray extends CustomType implements CustomArrayType
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (!empty($data)) {
-            foreach ($data as $id => $photo) {
-                $this->data[$id] = new KeyboardButton();
+            foreach ($data as $rowId => $button) {
+                $this->data[$rowId][] = new KeyboardButton($data, $logger);
             }
         }
     }

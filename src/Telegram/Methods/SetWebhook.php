@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
@@ -26,7 +27,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  *  <li>Ports currently supported for Webhooks: 443, 80, 88, 8443.</li>
  * </ul>
  *
- * Objects defined as-is December 2016
+ * Objects defined as-is January 2017
  *
  * @see https://core.telegram.org/bots/api#setwebhook
  */
@@ -41,9 +42,10 @@ class SetWebhook extends TelegramMethods
     /**
      * Optional. Upload your public key certificate so that the root certificate in use can be checked. See our
      * self-signed guide for details.
-     * @var string
+     * @see https://core.telegram.org/bots/self-signed
+     * @var InputFile
      */
-    public $certificate = '';
+    public $certificate;
 
     /**
      * Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to
@@ -74,6 +76,8 @@ class SetWebhook extends TelegramMethods
 
     public function getMandatoryFields(): array
     {
-        return [];
+        return [
+            'url',
+        ];
     }
 }

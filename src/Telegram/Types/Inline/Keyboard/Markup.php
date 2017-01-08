@@ -24,7 +24,7 @@ class Markup extends TelegramTypes
 {
     /**
      * Array of button rows, each represented by an Array of InlineKeyboardButton objects
-     * @var array
+     * @var Button[]
      */
     public $inline_keyboard = [];
 

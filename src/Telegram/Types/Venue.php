@@ -19,7 +19,7 @@ class Venue extends TelegramTypes
      * Venue location
      * @var Location
      */
-    public $location = null;
+    public $location;
 
     /**
      * Name of the venue

@@ -33,9 +33,20 @@ class SetWebhookTest extends TestCase
         parent::tearDown();
     }
 
+    /**
+     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
+     * @expectedExceptionMessage url
+     */
+    public function testMandatoryFields()
+    {
+        $setWebhook = new SetWebhook();
+        $this->tgLog->performApiRequest($setWebhook);
+    }
+
     public function testSetWebhook()
     {
         $setWebhook = new SetWebhook();
+        $setWebhook->url = 'https://example.com/';
 
         /** @var ResultBoolean $result */
         $result = $this->tgLog->performApiRequest($setWebhook);
