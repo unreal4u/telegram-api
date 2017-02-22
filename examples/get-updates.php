@@ -1,6 +1,8 @@
 <?php
 
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
@@ -13,6 +15,7 @@ $getUpdates = new GetUpdates();
 echo '<pre>';
 try {
     $updates = $tgLog->performApiRequest($getUpdates);
+    /* @var \unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray $updates */
     foreach ($updates->traverseObject() as $update) {
         var_dump($update);
         #var_dump(sprintf('Chat id is #%d', $update->message->chat->id));

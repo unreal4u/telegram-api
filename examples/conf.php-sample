@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 define('BOT_TOKEN', 'XXXXXXXXX:YYYYYYY-YYYYYYYYYYYYYYYYY_YY');
 
 define('A_USER_CHAT_ID', 'XXXXXXXXX');

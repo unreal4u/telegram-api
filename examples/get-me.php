@@ -1,6 +1,8 @@
 <?php
 
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\TgLog;

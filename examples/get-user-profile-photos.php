@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
+include 'basics.php';
+
 use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
 use unreal4u\TelegramAPI\TgLog;
-
-include('basics.php');
 
 $userProfilePhotos = new GetUserProfilePhotos();
 $tgLog = new TgLog(BOT_TOKEN);

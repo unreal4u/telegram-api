@@ -1,6 +1,8 @@
 <?php
 
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use unreal4u\TelegramAPI\Telegram\Methods\SendDocument;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;

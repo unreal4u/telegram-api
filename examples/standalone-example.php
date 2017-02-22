@@ -1,6 +1,8 @@
 <?php
 
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use \unreal4u\TelegramAPI\TgLog;
 // @TODO Change to use \unreal4u\Telegram\Methods\{GetMe, SendMessage}; once PSR-12 is definitive

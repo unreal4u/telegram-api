@@ -10,7 +10,9 @@
  * composer update -o
  * php examples/standalone-example-with-logger.php
  */
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

@@ -1,6 +1,8 @@
 <?php
 
-include('basics.php');
+declare(strict_types = 1);
+
+include 'basics.php';
 
 use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 use unreal4u\TelegramAPI\TgLog;
