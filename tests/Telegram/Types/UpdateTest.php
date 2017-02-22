@@ -2,8 +2,7 @@
 
 namespace unreal4u\TelegramAPI\tests\Telegram\Types;
 
-use PHPUnit_Framework_TestCase as TestCase;
-#use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\ChosenResult;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
 use unreal4u\TelegramAPI\Telegram\Types\Update;

@@ -2,8 +2,7 @@
 
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
-use PHPUnit_Framework_TestCase as TestCase;
-#use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Types\Audio;
 use unreal4u\TelegramAPI\Telegram\Types\Chat;
 use unreal4u\TelegramAPI\Telegram\Types\Message;

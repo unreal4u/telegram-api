@@ -2,8 +2,7 @@
 
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
-use PHPUnit_Framework_TestCase as TestCase;
-#use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Methods\EditMessageText;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 

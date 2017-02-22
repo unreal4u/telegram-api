@@ -2,8 +2,7 @@
 
 namespace unreal4u\TelegramAPI\tests\InternalFunctionality;
 
-use PHPUnit_Framework_TestCase as TestCase;
-#use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\InternalFunctionality\FormConstructor;
 
 class FormConstructorTest extends TestCase
