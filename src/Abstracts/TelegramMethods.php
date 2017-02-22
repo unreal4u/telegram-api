@@ -46,7 +46,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      */
     public function performSpecialConditions(): TelegramMethods
     {
-        if ($this->reply_markup !== null) {
+        if (!empty($this->reply_markup)) {
             $this->reply_markup = json_encode($this->formatReplyMarkup($this->reply_markup));
         }
 
