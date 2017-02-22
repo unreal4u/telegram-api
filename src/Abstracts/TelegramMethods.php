@@ -8,7 +8,9 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Interfaces\TelegramMethodDefinitions;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 
 /**
  * Contains methods that all Telegram methods should implement
@@ -44,8 +46,8 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      */
     public function performSpecialConditions(): TelegramMethods
     {
-        if (!empty($this->reply_markup)) {
-            $this->reply_markup = json_encode($this->reply_markup);
+        if ($this->reply_markup !== null) {
+            $this->reply_markup = json_encode($this->formatReplyMarkup($this->reply_markup));
         }
 
         // Several classes may send a parse mode, so check before sending
@@ -113,5 +115,66 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         }
 
         return $return;
+    }
+
+    /**
+     * ReplyMarkup fields require a bit of work before sending them
+     *
+     * This happens because reply markup are a type thus they don't have an export mechanism to do the job
+     *
+     * @param TelegramTypes $replyMarkup
+     * @return TelegramTypes
+     */
+    final private function formatReplyMarkup(TelegramTypes $replyMarkup): TelegramTypes
+    {
+        if ($replyMarkup instanceof Markup) {
+            $replyMarkup->inline_keyboard = $this->getArrayFromKeyboard($replyMarkup->inline_keyboard);
+        } elseif ($replyMarkup instanceof ReplyKeyboardMarkup) {
+            $replyMarkup->keyboard = $this->getArrayFromKeyboard($replyMarkup->keyboard);
+        }
+
+        return $replyMarkup;
+    }
+
+    final private function getArrayFromKeyboard(array $keyboardArray): array
+    {
+        $finalCleanArray = [];
+
+        // A keyboard is an array of an array of objects or strings
+        foreach ($keyboardArray as $rowItems) {
+            $elements = [];
+            foreach ($rowItems as $rowItem) {
+                if (is_object($rowItem)) {
+                    // Button is effectively an object
+                    $elements[] = $this->exportReplyMarkupItem($rowItem);
+                } else {
+                    // Add support for old style simple text buttons
+                    $elements[] = $rowItem;
+                }
+            }
+
+            $finalCleanArray[] = $elements;
+        }
+
+        return $finalCleanArray;
+    }
+
+    /**
+     * Does the definitive export of those fields in a reply markup item that are filled in
+     *
+     * @param TelegramTypes $markupItem
+     * @return array
+     */
+    final private function exportReplyMarkupItem(TelegramTypes $markupItem): array
+    {
+        $finalArray = [];
+        $cleanObject = new $markupItem;
+        foreach ($markupItem as $fieldId => $value) {
+            if ($markupItem->$fieldId !== $cleanObject->$fieldId) {
+                $finalArray[$fieldId] = $markupItem->$fieldId;
+            }
+        }
+
+        return $finalArray;
     }
 }

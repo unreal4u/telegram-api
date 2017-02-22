@@ -89,6 +89,7 @@ class TgLog
      *
      * @param TelegramMethods $method
      * @return TelegramTypes
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
