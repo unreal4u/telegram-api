@@ -34,5 +34,9 @@
       "unreal4u\\TelegramAPI\\tests\\": "tests"
     }
   },
+  "support" : {
+    "issues" : "https://github.com/unreal4u/telegram-api/issues",
+    "source" : "https://github.com/unreal4u/telegram-api"
+  },
   "license": "MIT"
 }
