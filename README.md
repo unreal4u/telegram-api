@@ -22,7 +22,8 @@ None at the moment. If you find any, feel free to [submit a PR](https://github.c
 
 ## Installation
 
-The preferred method is composer, so add the following to your composer.json:
+Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.
+The preferred (and only for now) installation method is Composer, so add the following to your composer.json:
 
 ```json
 {
@@ -31,6 +32,8 @@ The preferred method is composer, so add the following to your composer.json:
   }
 }
 ```
+
+If you are not familiar with it, I suggest reading the basic usage manual [located here](https://getcomposer.org/doc/01-basic-usage.md).
 
 ### Upgrading v1.x to v2
 
