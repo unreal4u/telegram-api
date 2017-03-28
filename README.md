@@ -22,7 +22,7 @@ None at the moment. If you find any, feel free to [submit a PR](https://github.c
 
 ## Installation
 
-Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.
+Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. [Read this for installation instructions](https://getcomposer.org/doc/00-intro.md).  
 The preferred (and only for now) installation method is Composer, so add the following to your composer.json:
 
 ```json
