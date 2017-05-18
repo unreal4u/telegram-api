@@ -7,6 +7,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UserArray;
 
 /**
  * This object represents a message.
@@ -140,6 +141,13 @@ class Message extends TelegramTypes
     public $video_note;
 
     /**
+     * Optional. New members that were added to the group or supergroup and information about them (the bot itself may
+     * be one of these members)
+     * @var User[]
+     */
+    public $new_chat_members;
+
+    /**
      * Optional. Caption for the photo or video
      * @var string
      */
@@ -266,6 +274,8 @@ class Message extends TelegramTypes
             case 'new_chat_member':
             case 'left_chat_member':
                 return new User($data, $this->logger);
+            case 'new_chat_members':
+                return new UserArray($data, $this->logger);
             case 'photo':
             case 'new_chat_photo':
                 return new PhotoSizeArray($data, $this->logger);
