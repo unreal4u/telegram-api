@@ -233,6 +233,19 @@ class Message extends TelegramTypes
     public $pinned_message;
 
     /**
+     * Optional. Message is an invoice for a payment, information about the invoice
+     * @see https://core.telegram.org/bots/api#payments
+     * @var Invoice
+     */
+    public $invoice;
+
+    /**
+     * Optional. Message is a service message about a successful payment, information about the payment
+     * @var SuccessfulPayment
+     */
+    public $successful_payment;
+
+    /**
      * A message may contain one or more subobjects, map them always in this function
      *
      * @param string $key
@@ -276,6 +289,10 @@ class Message extends TelegramTypes
                 return new Location($data, $this->logger);
             case 'venue':
                 return new Venue($data, $this->logger);
+            case 'invoice':
+                return new Invoice($data, $this->logger);
+            case 'successful_payment':
+                return new SuccessFulPayment($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches

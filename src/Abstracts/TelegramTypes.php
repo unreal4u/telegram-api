@@ -68,7 +68,7 @@ abstract class TelegramTypes
     {
         if (!isset($this->$key)) {
             $this->logger->error(sprintf(
-                'The key "%s" does not exist in the class! Maybe a recent Telegram Bot API update? In any way, please'.
+                'The key "%s" does not exist in the class! Maybe a recent Telegram Bot API update? In any way, please '.
                 'submit an issue (bug report) at %s with this complete log line',
                 $key,
                 'https://core.telegram.org/bots/api-changelog',

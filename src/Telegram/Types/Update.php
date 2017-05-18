@@ -1,4 +1,4 @@
-<?php
+¡¡<?php
 
 declare(strict_types = 1);
 
@@ -68,6 +68,18 @@ class Update extends TelegramTypes
      */
     public $callback_query;
 
+    /**
+     * Optional. New incoming shipping query. Only for invoices with flexible price
+     * @var ShippingQuery
+     */
+    public $shipping_query;
+
+    /**
+     * Optional. New incoming pre-checkout query. Contains full information about checkout
+     * @var PreCheckoutQuery
+     */
+    public $pre_checkout_query;
+
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
@@ -82,6 +94,10 @@ class Update extends TelegramTypes
                 return new ChosenResult($data, $this->logger);
             case 'callback_query':
                 return new CallbackQuery($data, $this->logger);
+            case 'shipping_query':
+                return new ShippingQuery($data, $this->logger);
+            case 'pre_checkout_query':
+                return new PreCheckoutQuery($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);
