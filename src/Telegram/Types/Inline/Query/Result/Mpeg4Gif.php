@@ -43,6 +43,12 @@ class Mpeg4Gif extends Result
     public $mpeg4_height = 0;
 
     /**
+     * Optional. Video duration
+     * @var int
+     */
+    public $mpeg4_duration = 0;
+
+    /**
      * URL of the thumbnail for the photo
      * @var string
      */

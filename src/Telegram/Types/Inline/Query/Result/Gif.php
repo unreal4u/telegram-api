@@ -43,6 +43,12 @@ class Gif extends Result
     public $gif_height = 0;
 
     /**
+     * Optional. Duration of the GIF
+     * @var int
+     */
+    public $gif_duration = 0;
+
+    /**
      * URL of the static thumbnail for the result (jpeg or gif)
      * @var string
      */
