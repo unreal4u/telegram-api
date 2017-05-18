@@ -134,6 +134,12 @@ class Message extends TelegramTypes
     public $voice;
 
     /**
+     * Optional. Message is a video note, information about the video message
+     * @var VideoNote
+     */
+    public $video_note;
+
+    /**
      * Optional. Caption for the photo or video
      * @var string
      */
@@ -283,6 +289,8 @@ class Message extends TelegramTypes
                 return new Video($data, $this->logger);
             case 'voice':
                 return new Voice($data, $this->logger);
+            case 'video_note':
+                return new VideoNote($data, $this->logger);
             case 'contact':
                 return new Contact($data, $this->logger);
             case 'location':
