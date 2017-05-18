@@ -70,6 +70,14 @@ class Button extends TelegramTypes
      */
     public $callback_game;
 
+    /**
+     * Optional. Specify True, to send a Pay button.
+     *
+     * NOTE: This type of button must always be the first button in the first row.
+     * @var bool
+     */
+    public $pay = false;
+
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
