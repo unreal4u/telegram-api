@@ -38,4 +38,11 @@ class User extends TelegramTypes
      * @var string
      */
     public $username = '';
+
+    /**
+     * Optional. IETF language tag of the user's language
+     * @see https://en.wikipedia.org/wiki/IETF_language_tag
+     * @var string
+     */
+    public $language_code = '';
 }
