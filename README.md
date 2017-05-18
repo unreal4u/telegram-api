@@ -6,7 +6,7 @@
 
 # Telegram API
 
-This is a complete PHP7 bot API implementation for Telegram implementing the totality of [Bot API v2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016)
+This is a complete PHP7 bot API implementation for Telegram implementing the totality of [Bot API v3.0](https://core.telegram.org/bots/api-changelog#may-18-2017)
 
 ## Known bugs / Open issues
 
@@ -28,7 +28,7 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.3"
+    "unreal4u/telegram-api": "~2.4"
   }
 }
 ```
