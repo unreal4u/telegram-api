@@ -111,8 +111,8 @@ Another great way to help is to simply [create an issue](https://github.com/unre
 
 ### Bugs related with security
 
-Please handle these responsibly! If you happen to find one, please
-[contact the author privately](https://telegram.me/unreal4u).
+I would appreciate it if you could handle these responsibly. If you happen to find a security issue relating to this 
+Telegram Bot API client, please ask me to contact you privately [over here](https://t.me/PHPBotAPI).
 
 ### Special thanks to
 
