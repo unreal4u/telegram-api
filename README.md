@@ -105,7 +105,7 @@ for more information that will make the development easier!
 
 ### Contact the author
 
-I actually don't use Telegram. Nah, kidding, you can contact me at [t.me/unreal4u](https://telegram.me/unreal4u).
+I actually don't use Telegram. Nah, kidding, I created a group where you can contact me at [https://t.me/PHPBotAPI](https://t.me/PHPBotAPI).
 Another great way to help is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
 [pull request](https://github.com/unreal4u/telegram-api/pulls)!
 
