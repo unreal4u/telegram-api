@@ -17,8 +17,12 @@ class InlineKeyboardButtonArray extends CustomType implements CustomArrayType
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (count($data) !== 0) {
-            foreach ($data as $rowId => $button) {
-                $this->data[$rowId][] = new Button($data, $logger);
+            foreach ($data as $rowId => $buttons) {
+                $rowButtons = [];
+                foreach ($buttons as $button) {
+                    $rowButtons[] = new Button($button, $logger);
+                }
+                $this->data[$rowId] = $rowButtons;
             }
         }
     }
