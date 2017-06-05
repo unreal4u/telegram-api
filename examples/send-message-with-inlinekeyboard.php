@@ -20,6 +20,35 @@ $sendMessage->text = 'Hi, this an inline keyboard example';
 //   0
 $row = null;
 
+// Choose one of the following 2 methods:
+
+// METHOD 1: all in once with an array construction
+$inlineKeyboard = new Markup([
+    'inline_keyboard' => [
+        [
+            ['text' => '1', 'callback_data' => 'k=1'],
+            ['text' => '2', 'callback_data' => 'k=2'],
+            ['text' => '3', 'callback_data' => 'k=3'],
+        ],
+        [
+            ['text' => '4', 'callback_data' => 'k=4'],
+            ['text' => '5', 'callback_data' => 'k=5'],
+            ['text' => '6', 'callback_data' => 'k=6'],
+        ],
+        [
+            ['text' => '7', 'callback_data' => 'k=7'],
+            ['text' => '8', 'callback_data' => 'k=8'],
+            ['text' => '9', 'callback_data' => 'k=9'],
+        ],
+        [
+            ['text' => '0', 'callback_data' => 'k=0'],
+        ],
+    ]
+]);
+
+
+// METHOD 2: in parts, working directly with the object
+/*
 $inlineKeyboard = new Markup();
 for ($i = 1; $i < 10; $i++) {
     $inlineKeyboardButton = new Button();
@@ -37,7 +66,7 @@ $inlineKeyboardButton = new Button();
 $inlineKeyboardButton->text = '0';
 $inlineKeyboardButton->callback_data = 'k=0';
 $inlineKeyboard->inline_keyboard[][] = $inlineKeyboardButton;
-
+*/
 $sendMessage->disable_web_page_preview = true;
 $sendMessage->parse_mode = 'Markdown';
 $sendMessage->reply_markup = $inlineKeyboard;
