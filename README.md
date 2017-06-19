@@ -1,16 +1,19 @@
-[![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
+![PHP7 Bot API](https://github.com/unreal4u/telegram-api/blob/master/examples/binary-test-data/logo-php7-telegram-bot-api.png?raw=true)
 
-[![Latest Stable Version](https://poser.pugx.org/unreal4u/telegram-api/v/stable)](https://packagist.org/packages/unreal4u/telegram-api) [![Total Downloads](https://poser.pugx.org/unreal4u/telegram-api/downloads)](https://packagist.org/packages/unreal4u/telegram-api) 
+# Telegram API
+
+[![Latest Stable Version](https://poser.pugx.org/unreal4u/telegram-api/v/stable)](https://packagist.org/packages/unreal4u/telegram-api)
+[![Total Downloads](https://poser.pugx.org/unreal4u/telegram-api/downloads)](https://packagist.org/packages/unreal4u/telegram-api)
 [![Build Status](https://travis-ci.org/unreal4u/telegram-api.svg)](https://travis-ci.org/unreal4u/telegram-api)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-# Telegram API
-
 This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.0](https://core.telegram.org/bots/api-changelog#may-18-2017)
 
 ## Known bugs
+
+[![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
 
 All known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
 [create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
@@ -25,6 +28,8 @@ in the [special group](https://t.me/PHPBotAPI) :)
 * **Full** support for payment system.
 
 ## Installation
+
+[![Total Downloads](https://poser.pugx.org/unreal4u/telegram-api/downloads)](https://packagist.org/packages/unreal4u/telegram-api)
 
 Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. [Read this for installation instructions](https://getcomposer.org/doc/00-intro.md).  
 The preferred (and only for now) installation method is Composer, so add the following to your composer.json:
@@ -106,6 +111,8 @@ for more information that will make the development easier!
 
 ### Contact the author
 
+[![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
+
 I actually don't use Telegram. Nah, kidding, I created a group where you can contact me at [https://t.me/PHPBotAPI](https://t.me/PHPBotAPI).
 Another great way to help is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
 [pull request](https://github.com/unreal4u/telegram-api/pulls)!
@@ -117,4 +124,5 @@ Telegram Bot API client, please ask me to contact you privately [over here](http
 
 ### Special thanks to
 
-- **Intensify** for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
+- :+1: **Intensify** for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
+- :+1: All the amazing people who make [issues](https://github.com/unreal4u/telegram-api/issues) and [pull requests](https://github.com/unreal4u/telegram-api/pulls)!
