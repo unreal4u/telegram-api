@@ -10,7 +10,7 @@
 
 This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.0](https://core.telegram.org/bots/api-changelog#may-18-2017)
 
-## Known bugs / Open issues
+## Known bugs
 
 None at the moment. If you find any, feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
 [create an issue](https://github.com/unreal4u/telegram-api/issues)!
