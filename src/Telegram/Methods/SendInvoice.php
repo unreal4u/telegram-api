@@ -140,6 +140,21 @@ class SendInvoice extends TelegramMethods
      */
     public $reply_markup;
 
+    /**
+     * Prices must be an array of objects, so json_encode() them
+     *
+     * @see https://github.com/unreal4u/telegram-api/issues/32
+     * @return TelegramMethods
+     */
+    public function performSpecialConditions(): TelegramMethods
+    {
+        if (!empty($this->prices)) {
+            $this->prices = json_encode($this->prices);
+        }
+
+        return parent::performSpecialConditions();
+    }
+
     public function getMandatoryFields(): array
     {
         return [

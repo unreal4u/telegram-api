@@ -29,7 +29,7 @@ class TgLog
      * Stores the token
      * @var string
      */
-    private $botToken = '';
+    private $botToken;
 
     /**
      * Contains an instance to a PSR-3 compatible logger
