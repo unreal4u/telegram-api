@@ -4,6 +4,7 @@ namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
+use unreal4u\TelegramAPI\Telegram\Types\PreCheckoutQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Update;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\User;
@@ -131,6 +132,24 @@ class GetUpdatesTest extends TestCase
         $updatesArray = $this->tgLog->performApiRequest($getUpdates);
         foreach ($updatesArray->traverseObject() as $update) {
             $this->assertInstanceOf(User::class, $update->message->new_chat_member);
+        }
+    }
+
+    public function testPreCheckoutQuery()
+    {
+        $this->tgLog->specificTest = 'preCheckoutQuery';
+
+        $getUpdates = new GetUpdates();
+
+        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
+        /** @var Update $update */
+        foreach ($updatesArray->traverseObject() as $update) {
+            $this->assertInstanceOf(Update::class, $update);
+            $this->assertInstanceOf(PreCheckoutQuery::class, $update->pre_checkout_query);
+            $this->assertInstanceOf(User::class, $update->pre_checkout_query->from);
+            $this->assertNull($update->pre_checkout_query->order_info);
+            $this->assertSame(975, $update->pre_checkout_query->total_amount);
+            $this->assertSame('EUR', $update->pre_checkout_query->currency);
         }
     }
 }

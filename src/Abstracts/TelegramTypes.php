@@ -71,11 +71,10 @@ abstract class TelegramTypes
                 'The key "%s" does not exist in the class! Maybe a recent Telegram Bot API update? In any way, please '.
                 'submit an issue (bug report) at %s with this complete log line',
                 $key,
-                'https://core.telegram.org/bots/api-changelog',
                 'https://github.com/unreal4u/telegram-api/issues'
             ), [
                 'object' => get_class($this),
-                'data' => $data
+                'data' => $data,
             ]);
         }
 

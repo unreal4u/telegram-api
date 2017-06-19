@@ -66,6 +66,8 @@ class PreCheckoutQuery extends TelegramTypes
         switch ($key) {
             case 'order_info':
                 return new OrderInfo($data, $this->logger);
+            case 'from':
+                return new User($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);
