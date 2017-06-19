@@ -12,8 +12,9 @@ This is a PHP7 bot API implementation for Telegram implementing the **totality**
 
 ## Known bugs
 
-None at the moment. If you find any, feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
-[create an issue](https://github.com/unreal4u/telegram-api/issues)!
+All known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
+[create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
+in the [special group](https://t.me/PHPBotAPI) :)
 
 ### About this class
 
