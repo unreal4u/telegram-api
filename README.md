@@ -1,4 +1,4 @@
-![PHP7 Bot API](https://github.com/unreal4u/telegram-api/blob/master/examples/binary-test-data/logo-php7-telegram-bot-api.png?raw=true)
+[![PHP 7 Telegram Bot API](https://github.com/unreal4u/telegram-api/blob/master/examples/binary-test-data/logo-php7-telegram-bot-api-small.png?raw=true)](https://github.com/unreal4u/telegram-api/wiki/100-stars!)
 
 # Telegram API
 
