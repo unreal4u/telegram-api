@@ -310,7 +310,7 @@ class Message extends TelegramTypes
             case 'invoice':
                 return new Invoice($data, $this->logger);
             case 'successful_payment':
-                return new SuccessFulPayment($data, $this->logger);
+                return new SuccessfulPayment($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches
