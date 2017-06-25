@@ -37,7 +37,7 @@ class SetWebhook extends TelegramMethods
      * Optional. HTTPS url to send updates to. Use an empty string to remove webhook integration
      * @var string
      */
-    public $url = '';
+    public $url;
 
     /**
      * Optional. Upload your public key certificate so that the root certificate in use can be checked. See our

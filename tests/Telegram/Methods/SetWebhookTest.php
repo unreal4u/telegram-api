@@ -53,4 +53,18 @@ class SetWebhookTest extends TestCase
         $this->assertInstanceOf(ResultBoolean::class, $result);
         $this->assertTrue($result->data);
     }
+
+    public function testUnsetWebhook()
+    {
+        $this->tgLog->specificTest = 'unset';
+
+        $setWebhook = new SetWebhook();
+        $setWebhook->url = '';
+
+        /** @var ResultBoolean $result */
+        $result = $this->tgLog->performApiRequest($setWebhook);
+
+        $this->assertInstanceOf(ResultBoolean::class, $result);
+        $this->assertTrue($result->data);
+    }
 }
