@@ -59,7 +59,7 @@ class TelegramRawData
     }
 
     /**
-     * Hack: for some requests Telegram sends back an array, integer or a boolean value, convert it to boolean here
+     * Hack: for some requests Telegram sends back an array, integer, string or a boolean value, convert it to boolean here
      * @return bool
      */
     public function getResultBoolean(): bool
@@ -68,11 +68,20 @@ class TelegramRawData
     }
 
     /**
-     * Hack: for some requests Telegram send back an array, integer or a boolean value, convert it to int here
+     * Hack: for some requests Telegram send back an array, integer, string or a boolean value, convert it to int here
      * @return int
      */
     public function getResultInt(): int
     {
         return (int)$this->decodedData['result'];
+    }
+
+    /**
+     * Hack: for some requests Telegram send back an array, integer, string or a boolean value, convert it to string here
+     * @return string
+     */
+    public function getResultString(): string
+    {
+        return (string)$this->decodedData['result'];
     }
 }
