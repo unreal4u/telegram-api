@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is july 2017
  *
  * @see https://core.telegram.org/bots/api#chat
  */
@@ -58,4 +58,30 @@ class Chat extends TelegramTypes
      * @var bool
      */
     public $all_members_are_administrators = false;
+
+    /**
+     * Optional. Chat photo. Returned only in getChat
+     * @var ChatPhoto
+     */
+    public $photo;
+
+    /**
+     * Optional. Description, for supergroups and channel chats. Returned only in getChat
+     * @var string
+     */
+    public $description = '';
+
+    /**
+     * Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat
+     * @var string
+     */
+    public $invite_link = '';
+
+    public function mapSubObjects(string $key, array $data): TelegramTypes {
+        switch ($key) {
+            case 'photo':
+                return new ChatPhoto($data, $this->logger);
+        }
+        return parent::mapSubObjects($key, $data);
+    }
 }
