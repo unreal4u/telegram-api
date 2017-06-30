@@ -77,7 +77,8 @@ class Chat extends TelegramTypes
      */
     public $invite_link = '';
 
-    public function mapSubObjects(string $key, array $data): TelegramTypes {
+    public function mapSubObjects(string $key, array $data): TelegramTypes
+    {
         switch ($key) {
             case 'photo':
                 return new ChatPhoto($data, $this->logger);

@@ -18,7 +18,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  * Note: This will method only work if the ‘All Members Are Admins’ setting is off in the target group. Otherwise
  * members may only be removed by the group's creator or by the member that added them.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is july 2017
  *
  * @see https://core.telegram.org/bots/api#kickchatmember
  */
@@ -35,6 +35,13 @@ class KickChatMember extends TelegramMethods
      * @var int
      */
     public $user_id = 0;
+
+    /**
+     * Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds
+     * from the current time they are considered to be banned forever
+     * @var int
+     */
+    public $until_date = 0;
 
     public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
     {
