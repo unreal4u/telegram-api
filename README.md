@@ -37,7 +37,7 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.4"
+    "unreal4u/telegram-api": "~2.5"
   }
 }
 ```
