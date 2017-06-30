@@ -9,7 +9,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.0](https://core.telegram.org/bots/api-changelog#may-18-2017)
+This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.1](https://core.telegram.org/bots/api#june-30-2017)
 
 ## Known bugs
 
