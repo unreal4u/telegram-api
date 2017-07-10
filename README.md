@@ -11,14 +11,6 @@
 
 This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.1](https://core.telegram.org/bots/api#june-30-2017)
 
-## Known bugs
-
-[![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
-
-All known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
-[create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
-in the [special group](https://t.me/PHPBotAPI) :)
-
 ### About this class
 
 * Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
@@ -26,6 +18,14 @@ in the [special group](https://t.me/PHPBotAPI) :)
 * Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
 * **Full** inline bots support.
 * **Full** support for payment system.
+
+## Known bugs
+
+[![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
+
+All known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
+[create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
+in the [special group](https://t.me/PHPBotAPI) :)
 
 ## Installation
 
