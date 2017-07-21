@@ -43,7 +43,7 @@ class StickerSet extends TelegramTypes
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
-            case 'shipping_address':
+            case 'stickers':
                 return new StickerSetArray($data, $this->logger);
         }
 
