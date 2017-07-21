@@ -46,6 +46,18 @@ class Sticker extends TelegramTypes
     public $emoji = '';
 
     /**
+     * Optional. Name of the sticker set to which the sticker belongs
+     * @var string
+     */
+    public $set_name = '';
+
+    /**
+     * Optional. For mask stickers, the position where the mask should be placed
+     * @var MaskPosition
+     */
+    public $mask_position;
+
+    /**
      * Optional. File size
      * @var int
      */
@@ -56,6 +68,8 @@ class Sticker extends TelegramTypes
         switch ($key) {
             case 'thumb':
                 return new PhotoSize($data, $this->logger);
+            case 'mask_position':
+                return new MaskPosition($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);
