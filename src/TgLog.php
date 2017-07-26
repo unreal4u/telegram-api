@@ -146,7 +146,7 @@ class TgLog
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
-	        /** @noinspection PhpMethodParametersCountMismatchInspection */
+            /** @noinspection PhpMethodParametersCountMismatchInspection */
             $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
             $this->logger->debug('Got response back from Telegram, applying json_decode');
         } catch (ClientException $e) {
