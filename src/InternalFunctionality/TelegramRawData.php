@@ -20,10 +20,50 @@ class TelegramRawData
      */
     private $decodedData = [];
 
-    public function __construct(string $rawData)
+    /**
+     * @var \Exception
+     */
+    private $exception = null;
+
+    /**
+     * Marks the actual response as an error
+     * @var bool
+     */
+    private $isError = false;
+
+    public function __construct(string $rawData = '', \Exception $e = null)
+    {
+        if (!empty($rawData)) {
+            $this->fillRawData($rawData);
+        }
+
+        if (!is_null($e)) {
+            $this->exception = $e;
+            $this->isError = true;
+        }
+    }
+
+    /**
+     * Will return true if the request was an unsuccessful one, false otherwise
+     * @return bool
+     */
+    public function isError(): bool
+    {
+        return $this->isError;
+    }
+
+    /**
+     * Fills in the raw data
+     *
+     * @param string $rawData
+     * @return TelegramRawData
+     */
+    public function fillRawData(string $rawData): TelegramRawData
     {
         $this->rawData = $rawData;
         $this->decodedData = json_decode($this->rawData, true);
+
+        return $this;
     }
 
     /**
@@ -85,5 +125,22 @@ class TelegramRawData
     public function getResultString(): string
     {
         return (string)$this->decodedData['result'];
+    }
+
+    /**
+     * Returns the raw error data
+     * @return array
+     */
+    public function getErrorData(): array
+    {
+        return $this->decodedData;
+    }
+
+    /**
+     * @return \Exception
+     */
+    public function getException(): \Exception
+    {
+        return $this->exception;
     }
 }
