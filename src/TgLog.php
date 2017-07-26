@@ -110,16 +110,16 @@ class TgLog
         return $method::bindToObject($telegramRawData, $this->logger);
     }
 
-	/**
-	 * @param TelegramMethods $method
-	 *
-	 * @return PromiseInterface
-	 */
-	public function performAsyncApiRequest(TelegramMethods $method)
-	{
-		$this->logger->debug('Request for async API call, resetting internal values', [get_class($method)]);
-		$this->resetObjectValues();
-		return $this->sendAsyncRequestToTelegram($method, $this->constructFormData($method));
+    /**
+     * @param TelegramMethods $method
+     *
+     * @return PromiseInterface
+     */
+    public function performAsyncApiRequest(TelegramMethods $method)
+    {
+        $this->logger->debug('Request for async API call, resetting internal values', [get_class($method)]);
+        $this->resetObjectValues();
+        return $this->sendAsyncRequestToTelegram($method, $this->constructFormData($method));
     }
 
     /**
@@ -139,30 +139,30 @@ class TgLog
         return new TelegramDocument($this->httpClient->get($url));
     }
 
-	/**
-	 * @param File $file
-	 *
-	 * @return PromiseInterface
-	 */
-	public function downloadFileAsync(File $file): PromiseInterface
-	{
-		$this->logger->debug('Downloading file async from Telegram, creating URL');
-		$url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
-		$this->logger->debug('About to perform request to begin downloading file');
-		
-		$deferred = new Promise();
-		
-		return $this->httpClient->getAsync($url)->then(function (ResponseInterface $response) use ($deferred)
-		{
-			$deferred->resolve(new TelegramDocument($response));
-		},
-		function (RequestException $exception) use ($deferred)
-		{
-			if (!empty($exception->getResponse()->getBody()))
-				$deferred->resolve(new TelegramDocument($exception->getResponse()));
-			else
-				$deferred->reject($exception);
-		});
+    /**
+     * @param File $file
+     *
+     * @return PromiseInterface
+     */
+    public function downloadFileAsync(File $file): PromiseInterface
+    {
+        $this->logger->debug('Downloading file async from Telegram, creating URL');
+        $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
+        $this->logger->debug('About to perform request to begin downloading file');
+        
+        $deferred = new Promise();
+        
+        return $this->httpClient->getAsync($url)->then(function (ResponseInterface $response) use ($deferred)
+        {
+            $deferred->resolve(new TelegramDocument($response));
+        },
+        function (RequestException $exception) use ($deferred)
+        {
+            if (!empty($exception->getResponse()->getBody()))
+                $deferred->resolve(new TelegramDocument($exception->getResponse()));
+            else
+                $deferred->reject($exception);
+        });
     }
 
     /**
@@ -202,31 +202,31 @@ class TgLog
         }
     }
 
-	/**
-	 * @param TelegramMethods $method
-	 * @param array $formData
-	 *
-	 * @return PromiseInterface
-	 */
-	protected function sendAsyncRequestToTelegram(TelegramMethods $method, array $formData): PromiseInterface
-	{
-		$this->logger->debug('About to perform async HTTP call to Telegram\'s API');
-		$deferred = new Promise();
-		
-		$promise = $this->httpClient->postAsync($this->composeApiMethodUrl($method), $formData);
-		$promise->then(function (ResponseInterface $response) use ($deferred)
-		{
-			$deferred->resolve(new TelegramRawData((string) $response->getBody()));
-		},
-		function (RequestException $exception) use ($deferred)
-		{
-			if (!empty($exception->getResponse()->getBody()))
-				$deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-			else
-				$deferred->reject($exception);
-		});
-		
-		return $deferred;
+    /**
+     * @param TelegramMethods $method
+     * @param array $formData
+     *
+     * @return PromiseInterface
+     */
+    protected function sendAsyncRequestToTelegram(TelegramMethods $method, array $formData): PromiseInterface
+    {
+        $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
+        $deferred = new Promise();
+        
+        $promise = $this->httpClient->postAsync($this->composeApiMethodUrl($method), $formData);
+        $promise->then(function (ResponseInterface $response) use ($deferred)
+        {
+            $deferred->resolve(new TelegramRawData((string) $response->getBody()));
+        },
+        function (RequestException $exception) use ($deferred)
+        {
+            if (!empty($exception->getResponse()->getBody()))
+                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
+            else
+                $deferred->reject($exception);
+        });
+        
+        return $deferred;
     }
 
     /**
