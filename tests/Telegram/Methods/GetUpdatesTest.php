@@ -51,7 +51,7 @@ class GetUpdatesTest extends TestCase
         $this->assertContainsOnlyInstancesOf(Update::class, $result->data);
         $this->assertCount(1, $result->data);
 
-        foreach ($result->traverseObject() as $theUpdate) {
+        foreach ($result->getIterator() as $theUpdate) {
             $this->assertEquals(12345678, $theUpdate->update_id);
             $this->assertInstanceOf(Message::class, $theUpdate->message);
 
@@ -112,7 +112,7 @@ class GetUpdatesTest extends TestCase
         $getUpdates = new GetUpdates();
         /** @var UpdatesArray $updatesArray */
         $updatesArray = $this->tgLog->performApiRequest($getUpdates);
-        foreach ($updatesArray->traverseObject() as $update) {
+        foreach ($updatesArray->getIterator() as $update) {
             $this->assertStringStartsWith('{"Unknown_Field":"This is an unknown field",', $update->array_unknown_field);
             $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
             $this->assertFalse($update->boolean_unknown_field);
@@ -130,7 +130,7 @@ class GetUpdatesTest extends TestCase
         $getUpdates = new GetUpdates();
         /** @var UpdatesArray $updatesArray */
         $updatesArray = $this->tgLog->performApiRequest($getUpdates);
-        foreach ($updatesArray->traverseObject() as $update) {
+        foreach ($updatesArray->getIterator() as $update) {
             $this->assertInstanceOf(User::class, $update->message->new_chat_member);
         }
     }
@@ -143,7 +143,8 @@ class GetUpdatesTest extends TestCase
 
         $updatesArray = $this->tgLog->performApiRequest($getUpdates);
         /** @var Update $update */
-        foreach ($updatesArray->traverseObject() as $update) {
+        /** @var UpdatesArray $updatesArray */
+	    foreach ($updatesArray->getIterator() as $update) {
             $this->assertInstanceOf(Update::class, $update);
             $this->assertInstanceOf(PreCheckoutQuery::class, $update->pre_checkout_query);
             $this->assertInstanceOf(User::class, $update->pre_checkout_query->from);
