@@ -5,10 +5,9 @@ declare(strict_types = 1);
 include 'basics.php';
 
 use GuzzleHttp\Exception\ClientException;
-use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Button;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\TgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $tgLog = new TgLog(BOT_TOKEN);
 $sendMessage = new SendMessage();

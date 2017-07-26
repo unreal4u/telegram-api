@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
+use unreal4u\TelegramAPI\Telegram\Types\LabeledPrice;
 
 /**
  * Use this method to send invoices. On success, the sent Message is returned.

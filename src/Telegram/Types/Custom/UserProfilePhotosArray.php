@@ -4,11 +4,9 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\TelegramAPI\Abstracts\CustomType;
-use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
-use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
-use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
 use Psr\Log\LoggerInterface;
+use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
+use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
 
 /**
  * Mockup class to generate a real telegram update representation

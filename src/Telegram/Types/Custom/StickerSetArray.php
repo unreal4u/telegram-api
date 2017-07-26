@@ -4,11 +4,9 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\TelegramAPI\Abstracts\CustomType;
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
 use unreal4u\TelegramAPI\Telegram\Types\Sticker;
-use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
-use Psr\Log\LoggerInterface;
 
 /**
  * Mockup class to generate a real telegram update representation

@@ -7,16 +7,16 @@ namespace unreal4u\TelegramAPI;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use Psr\Log\LoggerInterface;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Exceptions\ClientException as CustomClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
-use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UnsuccessfulRequest;
 use unreal4u\TelegramAPI\Telegram\Types\File;
-use Psr\Log\LoggerInterface;
 
 /**
  * The main API which does it all
@@ -109,8 +109,8 @@ class TgLog
     /**
      * Will download a file from the Telegram server. Before calling this function, you have to call the getFile method!
      *
-     * @see unreal4u\TelegramAPI\Telegram\Types\File
-     * @see unreal4u\TelegramAPI\Telegram\Methods\GetFile
+     * @see \unreal4u\TelegramAPI\Telegram\Types\File
+     * @see \unreal4u\TelegramAPI\Telegram\Methods\GetFile
      *
      * @param File $file
      * @return TelegramDocument
@@ -146,7 +146,7 @@ class TgLog
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
-	        /** @noinspection PhpMethodParametersCountMismatchInspection */
+            /** @noinspection PhpMethodParametersCountMismatchInspection */
             $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
             $this->logger->debug('Got response back from Telegram, applying json_decode');
         } catch (ClientException $e) {
