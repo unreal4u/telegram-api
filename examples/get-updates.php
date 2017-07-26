@@ -16,11 +16,11 @@ echo '<pre>';
 try {
     $updates = $tgLog->performApiRequest($getUpdates);
     /* @var \unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray $updates */
-    foreach ($updates->traverseObject() as $update) {
+    foreach ($updates->getIterator() as $update) {
         var_dump($update);
         #var_dump(sprintf('Chat id is #%d', $update->message->chat->id));
     }
-} catch (\Exception $e) {
+} catch (\GuzzleHttp\Exception\ClientException $e) {
     $actualProblem = json_decode((string)$e->getResponse()->getBody());
     print_r('[EXCEPTION] '.$actualProblem->description.'; original response:');
     print_r($actualProblem);
