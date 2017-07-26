@@ -5,11 +5,12 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use unreal4u\TelegramAPI\Abstracts\CustomType;
 use Psr\Log\LoggerInterface;
+use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
 
 /**
  * Mainly used if we have no clue what type of (new?) object the API is returning us
  */
-class ResultArray extends CustomType
+class ResultArray extends TraversableCustomType
 {
     /**
      * @var string
@@ -19,7 +20,7 @@ class ResultArray extends CustomType
     public function __construct(array $result, LoggerInterface $logger = null)
     {
         $this->logger = $logger;
-        $this->data = json_encode($result);
+        $this->data = $result;
     }
 
     /**
@@ -28,6 +29,6 @@ class ResultArray extends CustomType
      */
     public function __toString()
     {
-        return $this->data;
+        return json_encode($this->data);
     }
 }
