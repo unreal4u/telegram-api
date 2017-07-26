@@ -7,6 +7,10 @@ namespace unreal4u\TelegramAPI;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\PromiseInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
@@ -106,6 +110,12 @@ class TgLog
         return $method::bindToObject($telegramRawData, $this->logger);
     }
 
+	public function performAsyncApiRequest()
+	{
+		$this->logger->debug('Request for async API call');
+		$this->resetObjectValues();
+    }
+
     /**
      * Will download a file from the Telegram server. Before calling this function, you have to call the getFile method!
      *
@@ -158,6 +168,25 @@ class TgLog
         } finally {
             return new TelegramRawData((string)$response->getBody(), $e);
         }
+    }
+
+	protected function sendAsyncRequestToTelegram(TelegramMethods $method, array $formData): PromiseInterface
+	{
+		$e = null;
+		$this->logger->debug('About to perform async HTTP call to Telegram\'s API');
+		$deferred = new Promise();
+		
+		$promise = $this->httpClient->postAsync($this->composeApiMethodUrl($method), $formData);
+		$promise->then(function (ResponseInterface $response) use ($deferred)
+		{
+			$deferred->resolve(new TelegramRawData((string) $response->getBody()));
+		},
+		function (RequestException $exception) use ($deferred)
+		{
+			$deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
+		});
+		
+		return $deferred;
     }
 
     /**
