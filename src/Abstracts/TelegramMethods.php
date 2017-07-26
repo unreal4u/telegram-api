@@ -23,8 +23,8 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      * This function may however be overwritten if the method uses another object, there are many examples of this, so
      * just check out the rest of the code. A good place to start is GetUserProfilePhotos or LeaveChat
      *
-     * @see unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos
-     * @see unreal4u\TelegramAPI\Telegram\Methods\LeaveChat
+     * @see \unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos
+     * @see \unreal4u\TelegramAPI\Telegram\Methods\LeaveChat
      *
      * @param TelegramRawData $data
      * @param LoggerInterface $logger

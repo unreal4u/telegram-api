@@ -43,7 +43,7 @@ class TelegramRawDataTest extends TestCase
     /**
      * @dataProvider providerGetInvalidTypeOfResult
      * @param $data
-     * @expectedException unreal4u\TelegramAPI\Exceptions\InvalidResultType
+     * @expectedException \unreal4u\TelegramAPI\Exceptions\InvalidResultType
      */
     public function testGetInvalidTypeOfResult($data)
     {

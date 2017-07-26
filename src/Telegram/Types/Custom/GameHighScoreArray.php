@@ -4,11 +4,8 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\TelegramAPI\Abstracts\CustomType;
-use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
-use unreal4u\TelegramAPI\Telegram\Types\ChatMember;
-use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
 use Psr\Log\LoggerInterface;
+use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
 use unreal4u\TelegramAPI\Telegram\Types\GameHighScore;
 
 /**
