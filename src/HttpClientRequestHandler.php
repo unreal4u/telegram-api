@@ -80,9 +80,7 @@ class HttpClientRequestHandler implements RequestHandlerInterface
             $deferred->reject(new TelegramResponse($receivedData, [], $exception));
         });
 
-        if (!empty($data)) {
-            $request->write($data);
-        }
+        $request->end($data);
 
         return $deferred->promise();
     }
