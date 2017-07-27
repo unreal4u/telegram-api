@@ -3,13 +3,13 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\Telegram\Types\Message;
-use unreal4u\TelegramAPI\Telegram\Types\Chat;
-use unreal4u\TelegramAPI\Telegram\Types\User;
-use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
+use unreal4u\TelegramAPI\Telegram\Types\User;
+use unreal4u\TelegramAPI\tests\Mock\MockClientException;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
 class SendMessageTest extends TestCase
 {
@@ -41,22 +41,24 @@ class SendMessageTest extends TestCase
         $sendMessage = new SendMessage();
         $sendMessage->chat_id = 12341234;
         $sendMessage->text = 'Hello world';
-        /** @var Message $result */
-        $result = $this->tgLog->performApiRequest($sendMessage);
 
-        $this->assertInstanceOf(Message::class, $result);
-        $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf(User::class, $result->from);
-        $this->assertInstanceOf(Chat::class, $result->chat);
-        $this->assertEquals(123456789, $result->from->id);
-        $this->assertEquals('unreal4uBot', $result->from->username);
-        $this->assertEquals($sendMessage->chat_id, $result->chat->id);
-        $this->assertEquals('unreal4u', $result->chat->username);
+        $promise = $this->tgLog->performApiRequest($sendMessage);
 
-        $this->assertEquals(1452254253, $result->date);
-        $this->assertNull($result->audio);
+        $promise->then(function (Message $result) use ($sendMessage) {
+            $this->assertInstanceOf(Message::class, $result);
+            $this->assertEquals(14, $result->message_id);
+            $this->assertInstanceOf(User::class, $result->from);
+            $this->assertInstanceOf(Chat::class, $result->chat);
+            $this->assertEquals(123456789, $result->from->id);
+            $this->assertEquals('unreal4uBot', $result->from->username);
+            $this->assertEquals($sendMessage->chat_id, $result->chat->id);
+            $this->assertEquals('unreal4u', $result->chat->username);
 
-        $this->assertEquals($sendMessage->text, $result->text);
+            $this->assertEquals(1452254253, $result->date);
+            $this->assertNull($result->audio);
+
+            $this->assertEquals($sendMessage->text, $result->text);
+        });
     }
 
 
@@ -72,28 +74,30 @@ class SendMessageTest extends TestCase
         $sendMessage->text = 'Hello world';
         $sendMessage->reply_markup = new ReplyKeyboardMarkup();
         $sendMessage->reply_markup->keyboard = [['Yes', 'No']];
-        /** @var Message $result */
-        $result = $this->tgLog->performApiRequest($sendMessage);
 
         // Important assert: ensure we send a serialized object to Telegram
         $this->assertEquals(
             trim(file_get_contents('tests/Mock/MockData/SendMessage-replyKeyboardMarkup.json')),
-            $sendMessage->reply_markup
+            json_encode($sendMessage->reply_markup)
         );
 
-        $this->assertInstanceOf(Message::class, $result);
-        $this->assertEquals(14, $result->message_id);
-        $this->assertInstanceOf(User::class, $result->from);
-        $this->assertInstanceOf(Chat::class, $result->chat);
-        $this->assertEquals(123456789, $result->from->id);
-        $this->assertEquals('unreal4uBot', $result->from->username);
-        $this->assertEquals($sendMessage->chat_id, $result->chat->id);
-        $this->assertEquals('unreal4u', $result->chat->username);
+        $promise = $this->tgLog->performApiRequest($sendMessage);
 
-        $this->assertEquals(1452254253, $result->date);
-        $this->assertNull($result->audio);
+        $promise->then(function (Message $result) use ($sendMessage) {
+            $this->assertInstanceOf(Message::class, $result);
+            $this->assertEquals(14, $result->message_id);
+            $this->assertInstanceOf(User::class, $result->from);
+            $this->assertInstanceOf(Chat::class, $result->chat);
+            $this->assertEquals(123456789, $result->from->id);
+            $this->assertEquals('unreal4uBot', $result->from->username);
+            $this->assertEquals($sendMessage->chat_id, $result->chat->id);
+            $this->assertEquals('unreal4u', $result->chat->username);
 
-        $this->assertEquals($sendMessage->text, $result->text);
+            $this->assertEquals(1452254253, $result->date);
+            $this->assertNull($result->audio);
+
+            $this->assertEquals($sendMessage->text, $result->text);
+        });
     }
 
     public function testSendMessageChatNotFound()

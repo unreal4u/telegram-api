@@ -6,8 +6,8 @@ use PHPUnit\Framework\TestCase;
 use unreal4u\TelegramAPI\Telegram\Methods\SendInvoice;
 use unreal4u\TelegramAPI\Telegram\Types\Invoice;
 use unreal4u\TelegramAPI\Telegram\Types\LabeledPrice;
-use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
 class SendInvoiceTest extends TestCase
 {
@@ -46,12 +46,14 @@ class SendInvoiceTest extends TestCase
         $sendInvoice->currency = 'EUR';
         $sendInvoice->prices = [ new LabeledPrice(['amount' => 975, 'label' => 'That special item']) ];
 
-        /** @var Message $result */
-        $result = $this->tgLog->performApiRequest($sendInvoice);
-        $this->assertInstanceOf(Message::class, $result);
-        $this->assertInstanceOf(Invoice::class, $result->invoice);
-        $this->assertSame(975, $result->invoice->total_amount);
-        $this->assertSame('EUR', $result->invoice->currency);
-        $this->assertSame('u4u-invoice-0001', $result->invoice->start_parameter);
+        $promise = $this->tgLog->performApiRequest($sendInvoice);
+
+        $promise->then(function (Message $result) {
+            $this->assertInstanceOf(Message::class, $result);
+            $this->assertInstanceOf(Invoice::class, $result->invoice);
+            $this->assertSame(975, $result->invoice->total_amount);
+            $this->assertSame('EUR', $result->invoice->currency);
+            $this->assertSame('u4u-invoice-0001', $result->invoice->start_parameter);
+        });
     }
 }

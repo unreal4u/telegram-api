@@ -6,13 +6,22 @@ namespace unreal4u\TelegramAPI\Abstracts;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultArray;
 
 abstract class TelegramTypes
 {
+    /**
+     * @var TelegramResponse|null
+     */
+    public $response;
+
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
-    public function __construct(array $data = null, LoggerInterface $logger = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null, TelegramResponse $response = null)
     {
         if ($logger === null) {
             $logger = new DummyLogger();
@@ -22,6 +31,8 @@ abstract class TelegramTypes
         if ($data !== null) {
             $this->populateObject($data);
         }
+
+        $this->response = $response;
     }
 
     /**
@@ -78,6 +89,6 @@ abstract class TelegramTypes
             ]);
         }
 
-        return new ResultArray($data);
+        return new ResultArray($data, $this->logger, $this->response);
     }
 }

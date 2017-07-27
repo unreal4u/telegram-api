@@ -3,9 +3,9 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Methods\GetWebhookInfo;
 use unreal4u\TelegramAPI\Telegram\Types\WebhookInfo;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\GetWebhookInfo;
 
 class GetWebhookInfoTest extends TestCase
 {
@@ -36,13 +36,14 @@ class GetWebhookInfoTest extends TestCase
     {
         $getWebhookInfo = new GetWebhookInfo();
 
-        /** @var WebhookInfo $result */
-        $result = $this->tgLog->performApiRequest($getWebhookInfo);
+        $promise = $this->tgLog->performApiRequest($getWebhookInfo);
 
-        $this->assertInstanceOf(WebhookInfo::class, $result);
-        $this->assertSame('https://telegram.unreal4u.com/XXXYYYZZZ', $result->url);
-        $this->assertFalse($result->has_custom_certificate);
-        $this->assertEmpty($result->pending_update_count);
+        $promise->then(function (WebhookInfo $result) {
+            $this->assertInstanceOf(WebhookInfo::class, $result);
+            $this->assertSame('https://telegram.unreal4u.com/XXXYYYZZZ', $result->url);
+            $this->assertFalse($result->has_custom_certificate);
+            $this->assertEmpty($result->pending_update_count);
+        });
     }
 
     public function testGetWebhookInfoNotSet()
@@ -51,12 +52,13 @@ class GetWebhookInfoTest extends TestCase
 
         $getWebhookInfo = new GetWebhookInfo();
 
-        /** @var WebhookInfo $result */
-        $result = $this->tgLog->performApiRequest($getWebhookInfo);
+        $promise = $this->tgLog->performApiRequest($getWebhookInfo);
 
-        $this->assertInstanceOf(WebhookInfo::class, $result);
-        $this->assertEmpty($result->url);
-        $this->assertFalse($result->has_custom_certificate);
-        $this->assertEmpty($result->pending_update_count);
+        $promise->then(function (WebhookInfo $result) {
+            $this->assertInstanceOf(WebhookInfo::class, $result);
+            $this->assertEmpty($result->url);
+            $this->assertFalse($result->has_custom_certificate);
+            $this->assertEmpty($result->pending_update_count);
+        });
     }
 }

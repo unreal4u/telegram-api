@@ -3,10 +3,10 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Methods\GetFile;
 use unreal4u\TelegramAPI\Telegram\Types\File;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\GetFile;
 
 class GetFileTest extends TestCase
 {
@@ -38,11 +38,15 @@ class GetFileTest extends TestCase
         $getFile = new GetFile();
         $getFile->file_id = 'XXXYYYZZZ';
 
-        /** @var File $result */
-        $result = $this->tgLog->performApiRequest($getFile);
-        $this->assertInstanceOf(File::class, $result);
-        $this->assertEquals('XXXYYYZZZ', $result->file_id);
-        $this->assertEquals('voice/file_8', $result->file_path);
+        $promise = $this->tgLog->performApiRequest($getFile);
+
+        $promise->then(function (File $result) {
+            {
+                $this->assertInstanceOf(File::class, $result);
+                $this->assertEquals('XXXYYYZZZ', $result->file_id);
+                $this->assertEquals('voice/file_8', $result->file_path);
+            }
+        });
     }
 
     public function testGetFileInvalidFileId()

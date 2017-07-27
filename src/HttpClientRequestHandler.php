@@ -1,0 +1,87 @@
+<?php
+
+declare(strict_types=1);
+
+namespace unreal4u\TelegramAPI;
+
+use React\EventLoop\LoopInterface;
+use React\HttpClient\Client;
+use React\HttpClient\Request;
+use React\HttpClient\Response;
+use React\Promise\Deferred;
+use React\Promise\PromiseInterface;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
+
+class HttpClientRequestHandler implements RequestHandlerInterface
+{
+    /**
+     * @var Client
+     */
+    protected $client;
+
+    /**
+     * HttpClientRequestHandler constructor.
+     * @param LoopInterface $loop
+     */
+    public function __construct(LoopInterface $loop)
+    {
+        $this->client = new Client($loop);
+    }
+
+    /**
+     * @param string $uri
+     * @return PromiseInterface
+     */
+    public function get(string $uri): PromiseInterface
+    {
+        $request = $this->client->request('GET', $uri);
+        return $this->processRequest($request);
+    }
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return PromiseInterface
+     */
+    public function post(string $uri, array $options): PromiseInterface
+    {
+        $headers = !empty($options['headers']) ? $options['headers'] : [];
+        $request = $this->client->request('POST', $uri, $headers);
+        return $this->processRequest($request, (!empty($options['body']) ? $options['body'] : null));
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed $data
+     * @return PromiseInterface
+     */
+    public function processRequest(Request $request, $data = null)
+    {
+        $deferred = new Deferred();
+
+        $receivedData = '';
+        $request->on('response', function (Response $response) use ($deferred, &$receivedData) {
+            $response->on('data', function ($chunk) use (&$receivedData) {
+                $receivedData .= $chunk;
+            });
+
+            $response->on('end', function () use (&$receivedData, $deferred, $response) {
+                $deferred->resolve(new TelegramResponse($receivedData, $response->getHeaders()));
+            });
+        });
+
+        $request->on('error', function (\Exception $exception) use ($deferred, $receivedData) {
+            // First check if the data we received thus far actually is valid.
+            // Else, wipe it.
+            if (!json_decode($receivedData)) {
+                $receivedData = '';
+            }
+
+            $deferred->reject(new TelegramResponse($receivedData, [], $exception));
+        });
+
+        $request->end($data);
+
+        return $deferred->promise();
+    }
+}

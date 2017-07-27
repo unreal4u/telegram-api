@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
-class FormConstructor
+class PostOptionsConstructor
 {
     /**
      * With this flag we'll know what type of request to send to Telegram
@@ -42,63 +42,34 @@ class FormConstructor
      * @return array
      * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
-    public function constructFormData(TelegramMethods $method): array
+    public function constructOptions(TelegramMethods $method): array
     {
-        $result = $this->checkSpecialConditions($method);
+        $result = $this->checkIsMultipart($method);
 
-        switch ($this->formType) {
-            case 'application/x-www-form-urlencoded':
-                $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
-                $formData = [
-                    'headers' => [
-                        'Content-Type' => 'application/x-www-form-urlencoded',
-                    ],
-                    'body' => http_build_query($method->export(), '', '&'),
-                ];
-                break;
-            case 'multipart/form-data':
-                $formData = [
-                    'headers' => [
-                        'Content-Type' => 'multipart/form-data',
-                    ],
-                    'body' => $this->buildMultipartFormData($method->export(), $result['id'], $result['stream'])
-                ];
-                break;
-            default:
-                $this->logger->critical(sprintf(
-                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to ' .
-                    'a bug. Please copy entire line and report at %s',
-                    'https://github.com/unreal4u/telegram-api/issues'
-                ), [
-                    $this->formType
-                ]);
-                $formData = [
-                    'headers' => [
-                        'Content-Type' => $this->formType
-                    ]
-                ];
-                break;
+        if (!empty($result)) {
+            return $this->constructMultipartOptions($method->export(), $result['id'], $result['stream']);
         }
-        $this->logger->debug('About to send following data', $formData);
 
-        return $formData;
+        return [
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ],
+            'body' => http_build_query($method->export(), '', '&')
+        ];
     }
 
     /**
-     * Can perform any special checks needed to be performed before sending the actual request to Telegram
-     *
-     * This will return an array with data that will be different in each case (for now). This can be changed in the
-     * future.
+     * Check if the given TelegramMethod should be handled as a multipart.
      *
      * @param TelegramMethods $method
      * @return array
      */
-    private function checkSpecialConditions(TelegramMethods $method): array
+    private function checkIsMultipart(TelegramMethods $method): array
     {
         $this->logger->debug('Checking whether to apply special conditions to this request');
         $method->performSpecialConditions();
 
-        $return = [false];
+        $return = [];
 
         foreach ($method as $key => $value) {
             if (is_object($value) && $value instanceof InputFile) {
@@ -123,7 +94,7 @@ class FormConstructor
      * @param resource $stream The actual file handler
      * @return array Returns the actual formdata to be sent
      */
-    public function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
+    public function constructMultipartOptions(array $data, string $fileKeyName, $stream): array
     {
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
 
@@ -143,6 +114,12 @@ class FormConstructor
 
             $multiPartArray[] = $multiPart;
         }
-        return $multiPartArray;
+
+        return [
+            'headers' => [
+                'Content-Type' => 'multipart/form-data'
+            ],
+            'body' => $multiPartArray
+        ];
     }
 }

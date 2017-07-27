@@ -15,8 +15,8 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "guzzlehttp/guzzle": "^6.0",
     "psr/log": "^1.0",
+    "react/http-client": "^0.5",
     "react/promise": "^2.5"
   },
   "require-dev": {

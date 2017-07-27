@@ -7,7 +7,7 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
@@ -39,9 +39,9 @@ class PinChatMessage extends TelegramMethods
      */
     public $disable_notification = false;
 
-    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
+    public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new ResultBoolean($data->getResultBoolean(), $logger);
+        return new ResultBoolean($data->getResultBoolean(), $logger, $data);
     }
 
     public function getMandatoryFields(): array

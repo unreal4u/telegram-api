@@ -6,7 +6,7 @@ namespace unreal4u\TelegramAPI\InternalFunctionality;
 
 use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
 
-class TelegramRawData
+class TelegramResponse
 {
     /**
      * Nothing is done so far with this, but it's always a good idea to have the original around
@@ -21,6 +21,12 @@ class TelegramRawData
     private $decodedData = [];
 
     /**
+     * The headers sent with the response.
+     * @var array
+     */
+    private $headers = [];
+
+    /**
      * @var \Exception
      */
     private $exception = null;
@@ -31,11 +37,10 @@ class TelegramRawData
      */
     private $isError = false;
 
-    public function __construct(string $rawData = '', \Exception $e = null)
+    public function __construct(string $rawData, array $headers = [], \Exception $e = null)
     {
-        if (!empty($rawData)) {
-            $this->fillRawData($rawData);
-        }
+        $this->fillRawData($rawData);
+        $this->headers = $headers;
 
         if (!is_null($e)) {
             $this->exception = $e;
@@ -56,9 +61,9 @@ class TelegramRawData
      * Fills in the raw data
      *
      * @param string $rawData
-     * @return TelegramRawData
+     * @return TelegramResponse
      */
-    public function fillRawData(string $rawData): TelegramRawData
+    public function fillRawData(string $rawData): TelegramResponse
     {
         $this->rawData = $rawData;
         $this->decodedData = json_decode($this->rawData, true);
@@ -95,7 +100,7 @@ class TelegramRawData
      */
     public function getResult(): array
     {
-        return (array)$this->decodedData['result'];
+        return array_key_exists('result', $this->decodedData) ? (array) $this->decodedData['result'] : [];
     }
 
     /**
@@ -105,7 +110,7 @@ class TelegramRawData
      */
     public function getResultBoolean(): bool
     {
-        return (bool)$this->decodedData['result'];
+        return array_key_exists('result', $this->decodedData) ? (bool) $this->decodedData['result'] : false;
     }
 
     /**
@@ -114,7 +119,7 @@ class TelegramRawData
      */
     public function getResultInt(): int
     {
-        return (int)$this->decodedData['result'];
+        return array_key_exists('result', $this->decodedData) ? (int)$this->decodedData['result'] : -1;
     }
 
     /**
@@ -124,7 +129,23 @@ class TelegramRawData
      */
     public function getResultString(): string
     {
-        return (string)$this->decodedData['result'];
+        return array_key_exists('result', $this->decodedData) ? (string)$this->decodedData['result'] : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawData()
+    {
+        return $this->rawData;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 
     /**

@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
 
 /**
@@ -13,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\PhotoSize;
  */
 class UserProfilePhotosArray extends TraversableCustomType
 {
-    public function __construct(array $data = null, LoggerInterface $logger = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null, TelegramResponse $response = null)
     {
         if (count($data) !== 0) {
             $i = 0;
@@ -26,5 +27,7 @@ class UserProfilePhotosArray extends TraversableCustomType
                 $i++;
             }
         }
+
+        parent::__construct(null, $logger, $response);
     }
 }

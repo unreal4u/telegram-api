@@ -7,7 +7,7 @@ namespace unreal4u\TelegramAPI\Interfaces;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 /**
  * Mandatory functions for Methods
@@ -19,11 +19,11 @@ interface TelegramMethodDefinitions
     /**
      * Most of the methods will instantiate a Message object, this method can override the default behaviour
      *
-     * @param TelegramRawData $data
+     * @param TelegramResponse $data
      * @param LoggerInterface $logger
      * @return TelegramTypes
      */
-    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes;
+    public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes;
 
     /**
      * Performs special work that needs to be done on the fields before sending it to Telegram
