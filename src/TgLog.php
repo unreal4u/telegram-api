@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Promise;
@@ -28,9 +26,9 @@ use unreal4u\TelegramAPI\Telegram\Types\File;
 class TgLog
 {
     /**
-     * @var ClientInterface
+     * @var RequestHandlerInterface
      */
-    protected $httpClient;
+    protected $requestHandler;
 
     /**
      * Stores the token
@@ -68,11 +66,12 @@ class TgLog
 
     /**
      * TelegramLog constructor.
+     *
      * @param string $botToken
      * @param LoggerInterface $logger
-     * @param Client $client Optional Guzzle object
+     * @param RequestHandlerInterface $handler
      */
-    public function __construct(string $botToken, LoggerInterface $logger = null, Client $client = null)
+    public function __construct(string $botToken, LoggerInterface $logger = null, RequestHandlerInterface $handler = null)
     {
         $this->botToken = $botToken;
 
@@ -83,10 +82,10 @@ class TgLog
         $this->logger = $logger;
 
         // Initialize new Guzzle client if not injected
-        if ($client === null) {
-            $client = new Client();
+        if ($handler === null) {
+            $handler = new GuzzleRequestHandler(null, $logger);
         }
-        $this->httpClient = $client;
+        $this->requestHandler = $handler;
 
         $this->constructApiUrl();
     }
@@ -136,7 +135,7 @@ class TgLog
         $this->logger->debug('Downloading file from Telegram, creating URL');
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
-        return new TelegramDocument($this->httpClient->get($url));
+        return new TelegramDocument($this->requestHandler->get($url));
     }
 
     /**
@@ -149,20 +148,20 @@ class TgLog
         $this->logger->debug('Downloading file async from Telegram, creating URL');
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
-        
+
         $deferred = new Promise();
-        
-        return $this->httpClient->getAsync($url)->then(function (ResponseInterface $response) use ($deferred)
+
+        return $this->requestHandler->requestAsync($url)->then(function (ResponseInterface $response) use ($deferred)
         {
             $deferred->resolve(new TelegramDocument($response));
         },
-        function (RequestException $exception) use ($deferred)
-        {
-            if (!empty($exception->getResponse()->getBody()))
-                $deferred->resolve(new TelegramDocument($exception->getResponse()));
-            else
-                $deferred->reject($exception);
-        });
+            function (RequestException $exception) use ($deferred)
+            {
+                if (!empty($exception->getResponse()->getBody()))
+                    $deferred->resolve(new TelegramDocument($exception->getResponse()));
+                else
+                    $deferred->reject($exception);
+            });
     }
 
     /**
@@ -189,7 +188,7 @@ class TgLog
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
             /** @noinspection PhpMethodParametersCountMismatchInspection */
-            $response = $this->httpClient->post($this->composeApiMethodUrl($method), $formData);
+            $response = $this->requestHandler->request($this->composeApiMethodUrl($method), $formData);
             $this->logger->debug('Got response back from Telegram, applying json_decode');
         } catch (ClientException $e) {
             $response = $e->getResponse();
@@ -212,20 +211,20 @@ class TgLog
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
         $deferred = new Promise();
-        
-        $promise = $this->httpClient->postAsync($this->composeApiMethodUrl($method), $formData);
+
+        $promise = $this->requestHandler->requestAsync($this->composeApiMethodUrl($method), $formData);
         $promise->then(function (ResponseInterface $response) use ($deferred)
         {
             $deferred->resolve(new TelegramRawData((string) $response->getBody()));
         },
-        function (RequestException $exception) use ($deferred)
-        {
-            if (!empty($exception->getResponse()->getBody()))
-                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-            else
-                $deferred->reject($exception);
-        });
-        
+            function (RequestException $exception) use ($deferred)
+            {
+                if (!empty($exception->getResponse()->getBody()))
+                    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
+                else
+                    $deferred->reject($exception);
+            });
+
         return $deferred;
     }
 
