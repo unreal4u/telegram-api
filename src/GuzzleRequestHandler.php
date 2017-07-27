@@ -49,6 +49,11 @@ class GuzzleRequestHandler implements RequestHandlerInterface
         $this->httpClient = $client;
     }
 
+	/**
+	 * @param string $uri
+	 *
+	 * @return ResponseInterface
+	 */
     public function get(string $uri): ResponseInterface
     {
         return $this->httpClient->get($uri);
@@ -62,7 +67,7 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      *
      * @return TelegramRawData
      */
-    public function request(string $uri, array $formData = []): TelegramRawData
+    public function post(string $uri, array $formData = []): TelegramRawData
     {
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
@@ -88,7 +93,7 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      *
      * @return PromiseInterface
      */
-    public function requestAsync(string $uri, array $formData = []): PromiseInterface
+    public function postAsync(string $uri, array $formData = []): PromiseInterface
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
         $deferred = new Deferred();
@@ -105,5 +110,29 @@ class GuzzleRequestHandler implements RequestHandlerInterface
             });
 
         return $deferred->promise();
+    }
+
+	/**
+	 * @param string $uri
+	 *
+	 * @return PromiseInterface
+	 */
+    public function getAsync(string $uri): PromiseInterface
+    {
+	    $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
+	    $deferred = new Deferred();
+
+	    $promise = $this->httpClient->getAsync($uri);
+	    $promise->then(function (ResponseInterface $response) use ($deferred) {
+		    $deferred->resolve(new TelegramRawData((string) $response->getBody()));
+	    },
+		    function (RequestException $exception) use ($deferred) {
+			    if (!empty($exception->getResponse()->getBody()))
+				    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
+			    else
+				    $deferred->reject($exception);
+		    });
+
+	    return $deferred->promise();
     }
 }
