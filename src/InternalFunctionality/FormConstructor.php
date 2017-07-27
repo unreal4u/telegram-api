@@ -4,19 +4,43 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
+use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 class FormConstructor
 {
     /**
+     * With this flag we'll know what type of request to send to Telegram
+     *
+     * 'application/x-www-form-urlencoded' is the "normal" one, which is simpler and quicker.
+     * 'multipart/form-data' should be used only when you upload documents, photos, etc.
+     *
      * @var string
      */
-    protected $formType = '';
+    public $formType = 'application/x-www-form-urlencoded';
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    public function __construct(LoggerInterface $logger = null)
+    {
+        if ($logger === null) {
+            $logger = new DummyLogger();
+        }
+        $this->logger = $logger;
+    }
+
+    /**
+     * Builds up the form elements to be sent to Telegram
+     *
+     * @TODO Move this to apart function
+     *
      * @param TelegramMethods $method
-     * @return mixed
+     * @return array
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     public function constructFormData(TelegramMethods $method): array
     {
@@ -24,17 +48,38 @@ class FormConstructor
 
         switch ($this->formType) {
             case 'application/x-www-form-urlencoded':
+                $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
-                    'form_params' => get_object_vars($method),
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
+                    'body' => http_build_query($method->export(), '', '&'),
                 ];
                 break;
             case 'multipart/form-data':
-                $formData = $this->buildMultipartFormData(get_object_vars($method), $result['id'], $result['stream']);
+                $formData = [
+                    'headers' => [
+                        'Content-Type' => 'multipart/form-data',
+                    ],
+                    'body' => $this->buildMultipartFormData($method->export(), $result['id'], $result['stream'])
+                ];
                 break;
             default:
-                $formData = [];
+                $this->logger->critical(sprintf(
+                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to ' .
+                    'a bug. Please copy entire line and report at %s',
+                    'https://github.com/unreal4u/telegram-api/issues'
+                ), [
+                    $this->formType
+                ]);
+                $formData = [
+                    'headers' => [
+                        'Content-Type' => $this->formType
+                    ]
+                ];
                 break;
         }
+        $this->logger->debug('About to send following data', $formData);
 
         return $formData;
     }
@@ -48,22 +93,22 @@ class FormConstructor
      * @param TelegramMethods $method
      * @return array
      */
-    public function checkSpecialConditions(TelegramMethods $method): array
+    private function checkSpecialConditions(TelegramMethods $method): array
     {
+        $this->logger->debug('Checking whether to apply special conditions to this request');
         $method->performSpecialConditions();
 
         $return = [false];
 
         foreach ($method as $key => $value) {
-            if (is_object($value)) {
-                if ($value instanceof InputFile) {
-                    // If we are about to send a file, we must use the multipart/form-data way
-                    $this->formType = 'multipart/form-data';
-                    $return = [
-                        'id' => $key,
-                        'stream' => $value->getStream(),
-                    ];
-                }
+            if (is_object($value) && $value instanceof InputFile) {
+                $this->logger->debug('About to send a file, so changing request to use multi-part instead');
+                // If we are about to send a file, we must use the multipart/form-data way
+                $this->formType = 'multipart/form-data';
+                $return = [
+                    'id' => $key,
+                    'stream' => $value->getStream(),
+                ];
             }
         }
 
@@ -80,10 +125,9 @@ class FormConstructor
      */
     public function buildMultipartFormData(array $data, string $fileKeyName, $stream): array
     {
-        $formData = [
-            'multipart' => [],
-        ];
+        $this->logger->debug('Creating multi-part form array data (complex and expensive)');
 
+        $multiPartArray = [];
         foreach ($data as $id => $value) {
             // Always send as a string unless it's a file
             $multiPart = [
@@ -97,9 +141,8 @@ class FormConstructor
                 $multiPart['contents'] = (string)$value;
             }
 
-            $formData['multipart'][] = $multiPart;
+            $multiPartArray[] = $multiPart;
         }
-
-        return $formData;
+        return $multiPartArray;
     }
 }

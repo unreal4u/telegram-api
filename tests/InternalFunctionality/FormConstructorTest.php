@@ -34,36 +34,37 @@ class FormConstructorTest extends TestCase
     {
         $mapValues[] = [
             [
-                'id' => 'lala',
-                'contents' => 'lolo',
+                'lala' => 'lolo',
             ],
             'non-existant',
             null,
             [
-                'multipart' => [
-                    0 => [
-                        'name' => 'id',
-                        'contents' => 'lala',
-                    ],
-                    1 => [
-                        'name' => 'contents',
-                        'contents' => 'lolo',
-                    ]
+                [
+                    'name' => 'lala',
+                    'contents' => 'lolo',
                 ]
-            ],
+            ]
         ];
 
-        $mapValues[] = [[], '', null, ['multipart' => [],]];
+        //$mapValues[] = [[], '', null, new MultipartStream([[]])];
 
         return $mapValues;
     }
 
     /**
      * @dataProvider providerBuildMultipartFormData
+     * @param array $data
+     * @param string $fileKeyName
+     * @param null $stream
+     * @param array $multiPartData
      */
-    public function testBuildMultipartFormData(array $data, string $fileKeyName, $stream = null, array $expected = [])
-    {
+    public function testBuildMultipartFormData(
+        array $data,
+        string $fileKeyName,
+        $stream = null,
+        array $multiPartData = []
+    ) {
         $result = $this->formConstructor->buildMultipartFormData($data, $fileKeyName, $stream);
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($multiPartData, $result);
     }
 }

@@ -8,10 +8,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use React\Promise\PromiseInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
+use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 
@@ -67,6 +67,12 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      */
     public function post(string $uri, array $formData = []): TelegramRawData
     {
+        if (!empty($formData['headers']['Content-Type']) &&
+            $formData['headers']['Content-Type'] == 'multipart/form-data') {
+            $formData = [
+                'multipart' => $formData['body']
+            ];
+        }
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
