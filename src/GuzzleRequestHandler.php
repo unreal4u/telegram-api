@@ -34,7 +34,7 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      * @param ClientInterface $client
      * @param LoggerInterface $logger
      */
-    public function __construct(?ClientInterface $client = null, LoggerInterface $logger = null)
+    public function __construct(ClientInterface $client = null, LoggerInterface $logger = null)
     {
         if ($logger === null) {
             $logger = new DummyLogger();
