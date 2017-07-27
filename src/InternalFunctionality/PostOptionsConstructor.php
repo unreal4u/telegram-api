@@ -50,11 +50,13 @@ class PostOptionsConstructor
             return $this->constructMultipartOptions($method->export(), $result['id'], $result['stream']);
         }
 
+        $body = http_build_query($method->export(), '', '&');
         return [
             'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded'
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Content-Length' => strlen($body)
             ],
-            'body' => http_build_query($method->export(), '', '&')
+            'body' => $body
         ];
     }
 
