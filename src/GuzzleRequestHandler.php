@@ -36,24 +36,22 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      */
     public function __construct(?ClientInterface $client = null, LoggerInterface $logger = null)
     {
-        if ($logger === null)
-        {
+        if ($logger === null) {
             $logger = new DummyLogger();
         }
         $this->logger = $logger;
 
-        if ($client === null)
-        {
+        if ($client === null) {
             $client = new Client();
         }
         $this->httpClient = $client;
     }
 
-	/**
-	 * @param string $uri
-	 *
-	 * @return ResponseInterface
-	 */
+    /**
+     * @param string $uri
+     *
+     * @return ResponseInterface
+     */
     public function get(string $uri): ResponseInterface
     {
         return $this->httpClient->get($uri);
@@ -103,36 +101,40 @@ class GuzzleRequestHandler implements RequestHandlerInterface
             $deferred->resolve(new TelegramRawData((string) $response->getBody()));
         },
             function (RequestException $exception) use ($deferred) {
-                if (!empty($exception->getResponse()->getBody()))
-                    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-                else
-                    $deferred->reject($exception);
+                if (!empty($exception->getResponse()->getBody())) {
+	                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()
+		                ->getBody(), $exception));
+                } else {
+	                $deferred->reject($exception);
+                }
             });
 
         return $deferred->promise();
     }
 
-	/**
-	 * @param string $uri
-	 *
-	 * @return PromiseInterface
-	 */
+    /**
+     * @param string $uri
+     *
+     * @return PromiseInterface
+     */
     public function getAsync(string $uri): PromiseInterface
     {
-	    $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
-	    $deferred = new Deferred();
+        $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
+        $deferred = new Deferred();
 
-	    $promise = $this->httpClient->getAsync($uri);
-	    $promise->then(function (ResponseInterface $response) use ($deferred) {
-		    $deferred->resolve(new TelegramRawData((string) $response->getBody()));
-	    },
-		    function (RequestException $exception) use ($deferred) {
-			    if (!empty($exception->getResponse()->getBody()))
-				    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-			    else
-				    $deferred->reject($exception);
-		    });
+        $promise = $this->httpClient->getAsync($uri);
+        $promise->then(function (ResponseInterface $response) use ($deferred) {
+            $deferred->resolve(new TelegramRawData((string) $response->getBody()));
+        },
+            function (RequestException $exception) use ($deferred) {
+                if (!empty($exception->getResponse()->getBody())) {
+	                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()
+		                ->getBody(), $exception));
+                } else {
+	                $deferred->reject($exception);
+                }
+            });
 
-	    return $deferred->promise();
+        return $deferred->promise();
     }
 }

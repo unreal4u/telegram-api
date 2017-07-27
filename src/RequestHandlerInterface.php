@@ -10,15 +10,15 @@ use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 
 interface RequestHandlerInterface
 {
-	/**
-	 * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
-	 *
-	 * @param string $uri
-	 * @param array $formFields
-	 *
-	 * @return TelegramRawData
-	 *
-	 */
+    /**
+     * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
+     *
+     * @param string $uri
+     * @param array $formFields
+     *
+     * @return TelegramRawData
+     *
+     */
     public function post(string $uri, array $formFields): TelegramRawData;
 
     /**
@@ -31,15 +31,15 @@ interface RequestHandlerInterface
     /**
      * @param string $uri
      * @param array $formFields
-     * 
+     *
      * @return PromiseInterface
      */
     public function postAsync(string $uri, array $formFields): PromiseInterface;
 
-	/**
-	 * @param string $uri
-	 *
-	 * @return PromiseInterface
-	 */
-	public function getAsync(string $uri): PromiseInterface;
+    /**
+     * @param string $uri
+     *
+     * @return PromiseInterface
+     */
+    public function getAsync(string $uri): PromiseInterface;
 }
