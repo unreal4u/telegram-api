@@ -54,7 +54,7 @@ class TgLog
     /**
      * @var string
      */
-    public $methodName = '';
+    protected $methodName = '';
 
     /**
      * TelegramLog constructor.
