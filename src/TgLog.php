@@ -150,17 +150,16 @@ class TgLog
 
         $deferred = new Deferred();
 
-        return $this->requestHandler->getAsync($url)->then(function (ResponseInterface $response) use ($deferred)
-        {
+        return $this->requestHandler->getAsync($url)->then(function (ResponseInterface $response) use ($deferred) {
             $deferred->resolve(new TelegramDocument($response));
         },
-            function (\Exception $exception) use ($deferred)
-            {
-                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody()))
-                    $deferred->resolve(new TelegramDocument($exception->getResponse()));
-                else
+        function (\Exception $exception) use ($deferred) {
+            if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
+                $deferred->resolve(new TelegramDocument($exception->getResponse()));
+            } else {
                     $deferred->reject($exception);
-            });
+            }
+        });
     }
 
     /**
@@ -174,15 +173,15 @@ class TgLog
         return $this;
     }
 
-	/**
-	 * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
-	 *
-	 * @param TelegramMethods $method
-	 * @param array $formData
-	 *
-	 * @return TelegramRawData
-	 * @throws \Exception
-	 */
+    /**
+     * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
+     *
+     * @param TelegramMethods $method
+     * @param array $formData
+     *
+     * @return TelegramRawData
+     * @throws \Exception
+     */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
         $e = null;
@@ -190,13 +189,13 @@ class TgLog
         try {
             $response = $this->requestHandler->post($this->composeApiMethodUrl($method), $formData);
             $this->logger->debug('Got response back from Telegram');
-	        return $response;
+            return $response;
         } catch (\Exception $e) {
             // It can happen that we have a network problem, in such case, we can't do nothing about it, so rethrow
             if (!method_exists($e, 'getResponse') || empty($e->getResponse())) {
                 throw $e;
             }
-	        return new TelegramRawData((string)$e->getResponse()->getBody(), $e);
+            return new TelegramRawData((string)$e->getResponse()->getBody(), $e);
         }
     }
 
@@ -216,13 +215,13 @@ class TgLog
         {
             $deferred->resolve(new TelegramRawData((string) $response->getBody()));
         },
-            function (\Exception $exception) use ($deferred)
-            {
-                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody()))
-                    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-                else
-                    $deferred->reject($exception);
-            });
+        function (\Exception $exception) use ($deferred) {
+            if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
+                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
+            } else {
+                $deferred->reject($exception);
+            }
+        });
 
         return $deferred->promise();
     }
@@ -257,9 +256,9 @@ class TgLog
             case 'application/x-www-form-urlencoded':
                 $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
-	                'headers' =>  [
-	                	'Content-Type' => 'application/x-www-form-urlencoded',
-	                ],
+                    'headers' =>  [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
                     'body' => http_build_query($method->export(), '', '&'),
                 ];
                 break;
@@ -275,8 +274,8 @@ class TgLog
                     $this->formType
                 ]);
                 $formData = [
-                	'headers' => [
-	                    'Content-Type' => $this->formType
+                    'headers' => [
+                        'Content-Type' => $this->formType
                     ]
                 ];
                 break;
@@ -349,7 +348,7 @@ class TgLog
     {
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
         $formData = [
-        	'body' => null
+            'body' => null
         ];
 
         $multiPartArray = [];
