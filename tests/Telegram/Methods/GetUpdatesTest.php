@@ -113,7 +113,7 @@ class GetUpdatesTest extends TestCase
         /** @var UpdatesArray $updatesArray */
         $updatesArray = $this->tgLog->performApiRequest($getUpdates);
         foreach ($updatesArray->getIterator() as $update) {
-            $this->assertStringStartsWith('{"Unknown_Field":"This is an unknown field",', $update->array_unknown_field);
+            $this->assertStringStartsWith('{"Unknown_Field":"This is an unknown field",', json_encode($update->array_unknown_field));
             $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
             $this->assertFalse($update->boolean_unknown_field);
             $this->assertSame(42, $update->integer_unknown_field);

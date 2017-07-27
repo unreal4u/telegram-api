@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI;
 
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7\MultipartStream;
+use React\Promise\Deferred;
+use React\Promise\PromiseInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
@@ -71,8 +70,11 @@ class TgLog
      * @param LoggerInterface $logger
      * @param RequestHandlerInterface $handler
      */
-    public function __construct(string $botToken, LoggerInterface $logger = null, RequestHandlerInterface $handler = null)
-    {
+    public function __construct(
+        string $botToken,
+        LoggerInterface $logger = null,
+        RequestHandlerInterface $handler = null
+    ) {
         $this->botToken = $botToken;
 
         // Initialize new dummy logger (PSR-3 compatible) if not injected
@@ -149,19 +151,20 @@ class TgLog
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
 
-        $deferred = new Promise();
+        $deferred = new Deferred();
 
-        return $this->requestHandler->requestAsync($url)->then(function (ResponseInterface $response) use ($deferred)
-        {
-            $deferred->resolve(new TelegramDocument($response));
-        },
-            function (RequestException $exception) use ($deferred)
-            {
-                if (!empty($exception->getResponse()->getBody()))
+        return $this->requestHandler->getAsync($url)->then(
+            function (ResponseInterface $response) use ($deferred) {
+                $deferred->resolve(new TelegramDocument($response));
+            },
+            function (\Exception $exception) use ($deferred) {
+                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
                     $deferred->resolve(new TelegramDocument($exception->getResponse()));
-                else
+                } else {
                     $deferred->reject($exception);
-            });
+                }
+            }
+        );
     }
 
     /**
@@ -180,24 +183,24 @@ class TgLog
      *
      * @param TelegramMethods $method
      * @param array $formData
+     *
      * @return TelegramRawData
+     * @throws \Exception
      */
     protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
     {
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
-            /** @noinspection PhpMethodParametersCountMismatchInspection */
-            $response = $this->requestHandler->request($this->composeApiMethodUrl($method), $formData);
-            $this->logger->debug('Got response back from Telegram, applying json_decode');
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
+            $response = $this->requestHandler->post($this->composeApiMethodUrl($method), $formData);
+            $this->logger->debug('Got response back from Telegram');
+            return $response;
+        } catch (\Exception $e) {
             // It can happen that we have a network problem, in such case, we can't do nothing about it, so rethrow
-            if (empty($response)) {
+            if (!method_exists($e, 'getResponse') || empty($e->getResponse())) {
                 throw $e;
             }
-        } finally {
-            return new TelegramRawData((string)$response->getBody(), $e);
+            return new TelegramRawData((string)$e->getResponse()->getBody(), $e);
         }
     }
 
@@ -210,22 +213,23 @@ class TgLog
     protected function sendAsyncRequestToTelegram(TelegramMethods $method, array $formData): PromiseInterface
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
-        $deferred = new Promise();
+        $deferred = new Deferred();
 
-        $promise = $this->requestHandler->requestAsync($this->composeApiMethodUrl($method), $formData);
-        $promise->then(function (ResponseInterface $response) use ($deferred)
-        {
-            $deferred->resolve(new TelegramRawData((string) $response->getBody()));
-        },
-            function (RequestException $exception) use ($deferred)
-            {
-                if (!empty($exception->getResponse()->getBody()))
-                    $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-                else
+        $promise = $this->requestHandler->postAsync($this->composeApiMethodUrl($method), $formData);
+        $promise->then(
+            function (ResponseInterface $response) use ($deferred) {
+                $deferred->resolve(new TelegramRawData((string)$response->getBody()));
+            },
+            function (\Exception $exception) use ($deferred) {
+                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
+                    $deferred->resolve(new TelegramRawData((string)$exception->getResponse()->getBody(), $exception));
+                } else {
                     $deferred->reject($exception);
-            });
+                }
+            }
+        );
 
-        return $deferred;
+        return $deferred->promise();
     }
 
     /**
@@ -258,7 +262,10 @@ class TgLog
             case 'application/x-www-form-urlencoded':
                 $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
-                    'form_params' => $method->export(),
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
+                    'body' => http_build_query($method->export(), '', '&'),
                 ];
                 break;
             case 'multipart/form-data':
@@ -266,13 +273,17 @@ class TgLog
                 break;
             default:
                 $this->logger->critical(sprintf(
-                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to '.
+                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to ' .
                     'a bug. Please copy entire line and report at %s',
                     'https://github.com/unreal4u/telegram-api/issues'
                 ), [
-                    'formType' => $this->formType
+                    $this->formType
                 ]);
-                $formData = [];
+                $formData = [
+                    'headers' => [
+                        'Content-Type' => $this->formType
+                    ]
+                ];
                 break;
         }
         $this->logger->debug('About to send following data', $formData);
@@ -343,9 +354,10 @@ class TgLog
     {
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
         $formData = [
-            'multipart' => [],
+            'body' => null
         ];
 
+        $multiPartArray = [];
         foreach ($data as $id => $value) {
             // Always send as a string unless it's a file
             $multiPart = [
@@ -359,9 +371,10 @@ class TgLog
                 $multiPart['contents'] = (string)$value;
             }
 
-            $formData['multipart'][] = $multiPart;
+            $multiPartArray[] = $multiPart;
         }
 
+        $formData['body'] = new MultipartStream($multiPartArray);
         return $formData;
     }
 

@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use unreal4u\TelegramAPI\GuzzleRequestHandler;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 use unreal4u\TelegramAPI\TgLog;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
@@ -48,7 +49,8 @@ class MockTgLog extends TgLog
         $guzzleMocker = new MockHandler([new Response(200, [], file_get_contents($filename))]);
         $handler = HandlerStack::create($guzzleMocker);
 
-        $this->httpClient = new Client(['handler' => $handler]);
+        $httpClient = new Client(['handler' => $handler]);
+        $this->requestHandler = new GuzzleRequestHandler($httpClient);
 
         return parent::sendRequestToTelegram($method, $formData);
     }

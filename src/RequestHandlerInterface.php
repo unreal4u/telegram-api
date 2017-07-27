@@ -14,11 +14,12 @@ interface RequestHandlerInterface
      * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
      *
      * @param string $uri
-     * @param array $formData
+     * @param array $formFields
      *
      * @return TelegramRawData
+     *
      */
-    public function request(string $uri, array $formData): TelegramRawData;
+    public function post(string $uri, array $formFields): TelegramRawData;
 
     /**
      * @param string $uri
@@ -29,9 +30,16 @@ interface RequestHandlerInterface
 
     /**
      * @param string $uri
-     * @param array $formData
-     * 
+     * @param array $formFields
+     *
      * @return PromiseInterface
      */
-    public function requestAsync(string $uri, array $formData): PromiseInterface;
+    public function postAsync(string $uri, array $formFields): PromiseInterface;
+
+    /**
+     * @param string $uri
+     *
+     * @return PromiseInterface
+     */
+    public function getAsync(string $uri): PromiseInterface;
 }
