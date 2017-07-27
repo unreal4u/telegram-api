@@ -7,7 +7,7 @@ namespace unreal4u\TelegramAPI\Abstracts;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Interfaces\TelegramMethodDefinitions;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
@@ -18,6 +18,11 @@ use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 abstract class TelegramMethods implements TelegramMethodDefinitions
 {
     /**
+     * @var TelegramResponse
+     */
+    protected $response;
+
+    /**
      * Most of the methods will return a Message object on success, so set that as the default.
      *
      * This function may however be overwritten if the method uses another object, there are many examples of this, so
@@ -26,14 +31,14 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      * @see \unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos
      * @see \unreal4u\TelegramAPI\Telegram\Methods\LeaveChat
      *
-     * @param TelegramRawData $data
+     * @param TelegramResponse $data
      * @param LoggerInterface $logger
      *
      * @return TelegramTypes
      */
-    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
+    public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new Message($data->getResult(), $logger);
+        return new Message($data->getResult(), $logger, $data);
     }
 
     /**

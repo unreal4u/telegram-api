@@ -3,15 +3,15 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
+use unreal4u\TelegramAPI\Telegram\Types\Chat;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
+use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\PreCheckoutQuery;
 use unreal4u\TelegramAPI\Telegram\Types\Update;
-use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\User;
-use unreal4u\TelegramAPI\Telegram\Types\Chat;
-use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
-use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
 class GetUpdatesTest extends TestCase
 {
@@ -46,28 +46,31 @@ class GetUpdatesTest extends TestCase
         $getUpdates = new GetUpdates();
 
         /** @var UpdatesArray $result */
-        $result = $this->tgLog->performApiRequest($getUpdates);
-        $this->assertInstanceOf(UpdatesArray::class, $result);
-        $this->assertContainsOnlyInstancesOf(Update::class, $result->data);
-        $this->assertCount(1, $result->data);
+        $promise = $this->tgLog->performApiRequest($getUpdates);
 
-        foreach ($result->getIterator() as $theUpdate) {
-            $this->assertEquals(12345678, $theUpdate->update_id);
-            $this->assertInstanceOf(Message::class, $theUpdate->message);
+        $promise->then(function (UpdatesArray $result) {
+            $this->assertInstanceOf(UpdatesArray::class, $result);
+            $this->assertContainsOnlyInstancesOf(Update::class, $result->data);
+            $this->assertCount(1, $result->data);
 
-            $theMessage = $theUpdate->message;
-            $this->assertEquals(12, $theMessage->message_id);
-            $this->assertInstanceOf(User::class, $theMessage->from);
-            $this->assertInstanceOf(Chat::class, $theMessage->chat);
-            $this->assertEquals('Hello bot', $theMessage->text);
-            $this->assertEquals(12345678, $theMessage->from->id);
-            $this->assertEquals('unreal4u', $theMessage->from->username);
-            $this->assertEquals(98765432, $theMessage->chat->id);
-            $this->assertEquals('unreal4u', $theMessage->chat->username);
+            foreach ($result->getIterator() as $theUpdate) {
+                $this->assertEquals(12345678, $theUpdate->update_id);
+                $this->assertInstanceOf(Message::class, $theUpdate->message);
 
-            $this->assertEquals(1452120442, $theMessage->date);
-            $this->assertNull($theMessage->audio);
-        }
+                $theMessage = $theUpdate->message;
+                $this->assertEquals(12, $theMessage->message_id);
+                $this->assertInstanceOf(User::class, $theMessage->from);
+                $this->assertInstanceOf(Chat::class, $theMessage->chat);
+                $this->assertEquals('Hello bot', $theMessage->text);
+                $this->assertEquals(12345678, $theMessage->from->id);
+                $this->assertEquals('unreal4u', $theMessage->from->username);
+                $this->assertEquals(98765432, $theMessage->chat->id);
+                $this->assertEquals('unreal4u', $theMessage->chat->username);
+
+                $this->assertEquals(1452120442, $theMessage->date);
+                $this->assertNull($theMessage->audio);
+            }
+        });
     }
 
     public function testEmptyUpdates()
@@ -76,12 +79,14 @@ class GetUpdatesTest extends TestCase
 
         $getUpdates = new GetUpdates();
         $getUpdates->offset = 12345679;
-        /** @var UpdatesArray $result */
-        $result = $this->tgLog->performApiRequest($getUpdates);
 
-        $this->assertInstanceOf(UpdatesArray::class, $result);
-        $this->assertEquals(12345679, $getUpdates->offset);
-        $this->assertCount(0, $result->data);
+        $promise = $this->tgLog->performApiRequest($getUpdates);
+
+        $promise->then(function (UpdatesArray $result) use ($getUpdates) {
+            $this->assertInstanceOf(UpdatesArray::class, $result);
+            $this->assertEquals(12345679, $getUpdates->offset);
+            $this->assertCount(0, $result->data);
+        });
     }
 
     public function testWebHookAlreadyActive()
@@ -110,14 +115,20 @@ class GetUpdatesTest extends TestCase
         $this->tgLog->specificTest = 'newApiVersion';
 
         $getUpdates = new GetUpdates();
-        /** @var UpdatesArray $updatesArray */
-        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
-        foreach ($updatesArray->getIterator() as $update) {
-            $this->assertStringStartsWith('{"Unknown_Field":"This is an unknown field",', json_encode($update->array_unknown_field));
-            $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
-            $this->assertFalse($update->boolean_unknown_field);
-            $this->assertSame(42, $update->integer_unknown_field);
-        }
+
+        $promise = $this->tgLog->performApiRequest($getUpdates);
+
+        $promise->then(function (UpdatesArray $updatesArray) {
+            foreach ($updatesArray->getIterator() as $update) {
+                $this->assertStringStartsWith(
+                    '{"Unknown_Field":"This is an unknown field",',
+                    json_encode($update->array_unknown_field)
+                );
+                $this->assertStringStartsWith('A special new string', $update->string_unknown_field);
+                $this->assertFalse($update->boolean_unknown_field);
+                $this->assertSame(42, $update->integer_unknown_field);
+            }
+        });
     }
 
     /**
@@ -128,11 +139,14 @@ class GetUpdatesTest extends TestCase
         $this->tgLog->specificTest = 'newChatMember';
 
         $getUpdates = new GetUpdates();
-        /** @var UpdatesArray $updatesArray */
-        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
-        foreach ($updatesArray->getIterator() as $update) {
-            $this->assertInstanceOf(User::class, $update->message->new_chat_member);
-        }
+
+        $promise = $this->tgLog->performApiRequest($getUpdates);
+
+        $promise->then(function (UpdatesArray $updatesArray) {
+            foreach ($updatesArray->getIterator() as $update) {
+                $this->assertInstanceOf(User::class, $update->message->new_chat_member);
+            }
+        });
     }
 
     public function testPreCheckoutQuery()
@@ -141,16 +155,18 @@ class GetUpdatesTest extends TestCase
 
         $getUpdates = new GetUpdates();
 
-        $updatesArray = $this->tgLog->performApiRequest($getUpdates);
+        $promise = $this->tgLog->performApiRequest($getUpdates);
+
         /** @var Update $update */
-        /** @var UpdatesArray $updatesArray */
-	    foreach ($updatesArray->getIterator() as $update) {
-            $this->assertInstanceOf(Update::class, $update);
-            $this->assertInstanceOf(PreCheckoutQuery::class, $update->pre_checkout_query);
-            $this->assertInstanceOf(User::class, $update->pre_checkout_query->from);
-            $this->assertNull($update->pre_checkout_query->order_info);
-            $this->assertSame(975, $update->pre_checkout_query->total_amount);
-            $this->assertSame('EUR', $update->pre_checkout_query->currency);
-        }
+        $promise->then(function (UpdatesArray $updatesArray) {
+            foreach ($updatesArray->getIterator() as $update) {
+                $this->assertInstanceOf(Update::class, $update);
+                $this->assertInstanceOf(PreCheckoutQuery::class, $update->pre_checkout_query);
+                $this->assertInstanceOf(User::class, $update->pre_checkout_query->from);
+                $this->assertNull($update->pre_checkout_query->order_info);
+                $this->assertSame(975, $update->pre_checkout_query->total_amount);
+                $this->assertSame('EUR', $update->pre_checkout_query->currency);
+            }
+        });
     }
 }

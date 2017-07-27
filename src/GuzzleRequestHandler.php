@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 class GuzzleRequestHandler implements RequestHandlerInterface
 {
@@ -48,54 +48,11 @@ class GuzzleRequestHandler implements RequestHandlerInterface
 
     /**
      * @param string $uri
-     *
-     * @return ResponseInterface
-     */
-    public function get(string $uri): ResponseInterface
-    {
-        return $this->httpClient->get($uri);
-    }
-
-    /**
-     * This is the method that actually makes the call,
-     * which can be easily overwritten so that our unit tests can work
-     *
-     * @param string $uri
-     * @param array $formData
-     *
-     * @return TelegramRawData
-     */
-    public function post(string $uri, array $formData = []): TelegramRawData
-    {
-        if (!empty($formData['headers']['Content-Type']) &&
-            $formData['headers']['Content-Type'] == 'multipart/form-data') {
-            $formData = [
-                'multipart' => $formData['body']
-            ];
-        }
-        $e = null;
-        $this->logger->debug('About to perform HTTP call to Telegram\'s API');
-        try {
-            $response = $this->httpClient->post($uri, $formData);
-            $this->logger->debug('Got response back from Telegram, applying json_decode');
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
-            // It can happen that we have a network problem, in such case, we can't do nothing about it, so rethrow
-            if (empty($response)) {
-                throw $e;
-            }
-        } finally {
-            return new TelegramRawData((string)$response->getBody(), $e);
-        }
-    }
-
-    /**
-     * @param string $uri
      * @param array $formData
      *
      * @return PromiseInterface
      */
-    public function postAsync(string $uri, array $formData = []): PromiseInterface
+    public function post(string $uri, array $formData = []): PromiseInterface
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
         $deferred = new Deferred();
@@ -103,11 +60,11 @@ class GuzzleRequestHandler implements RequestHandlerInterface
         $promise = $this->httpClient->postAsync($uri, $formData);
         $promise->then(
             function (ResponseInterface $response) use ($deferred) {
-                $deferred->resolve(new TelegramRawData((string)$response->getBody()));
+                $deferred->resolve(new TelegramResponse((string)$response->getBody()));
             },
             function (RequestException $exception) use ($deferred) {
                 if (!empty($exception->getResponse()->getBody())) {
-                    $deferred->resolve(new TelegramRawData((string)$exception->getResponse()
+                    $deferred->resolve(new TelegramResponse((string)$exception->getResponse()
                         ->getBody(), $exception));
                 } else {
                     $deferred->reject($exception);
@@ -123,7 +80,7 @@ class GuzzleRequestHandler implements RequestHandlerInterface
      *
      * @return PromiseInterface
      */
-    public function getAsync(string $uri): PromiseInterface
+    public function get(string $uri): PromiseInterface
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
         $deferred = new Deferred();
@@ -131,11 +88,11 @@ class GuzzleRequestHandler implements RequestHandlerInterface
         $promise = $this->httpClient->getAsync($uri);
         $promise->then(
             function (ResponseInterface $response) use ($deferred) {
-                $deferred->resolve(new TelegramRawData((string)$response->getBody()));
+                $deferred->resolve(new TelegramResponse((string)$response->getBody()));
             },
             function (RequestException $exception) use ($deferred) {
                 if (!empty($exception->getResponse()->getBody())) {
-                    $deferred->resolve(new TelegramRawData((string)$exception->getResponse()
+                    $deferred->resolve(new TelegramResponse((string)$exception->getResponse()
                         ->getBody(), $exception));
                 } else {
                     $deferred->reject($exception);

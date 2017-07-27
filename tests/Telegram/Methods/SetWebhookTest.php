@@ -3,9 +3,9 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\SetWebhook;
 
 class SetWebhookTest extends TestCase
 {
@@ -47,11 +47,12 @@ class SetWebhookTest extends TestCase
         $setWebhook = new SetWebhook();
         $setWebhook->url = 'https://example.com/';
 
-        /** @var ResultBoolean $result */
-        $result = $this->tgLog->performApiRequest($setWebhook);
+        $promise = $this->tgLog->performApiRequest($setWebhook);
 
-        $this->assertInstanceOf(ResultBoolean::class, $result);
-        $this->assertTrue($result->data);
+        $promise->then(function (ResultBoolean $result) {
+            $this->assertInstanceOf(ResultBoolean::class, $result);
+            $this->assertTrue($result->data);
+        });
     }
 
     public function testUnsetWebhook()
@@ -61,10 +62,11 @@ class SetWebhookTest extends TestCase
         $setWebhook = new SetWebhook();
         $setWebhook->url = '';
 
-        /** @var ResultBoolean $result */
-        $result = $this->tgLog->performApiRequest($setWebhook);
+        $promise = $this->tgLog->performApiRequest($setWebhook);
 
-        $this->assertInstanceOf(ResultBoolean::class, $result);
-        $this->assertTrue($result->data);
+        $promise->then(function (ResultBoolean $result) {
+            $this->assertInstanceOf(ResultBoolean::class, $result);
+            $this->assertTrue($result->data);
+        });
     }
 }

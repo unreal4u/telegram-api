@@ -3,10 +3,10 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
 use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\tests\Mock\MockClientException;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
 
 class GetMeTest extends TestCase
 {
@@ -37,13 +37,16 @@ class GetMeTest extends TestCase
     {
         $getMe = new GetMe();
 
-        /** @var User $result */
-        $result = $this->tgLog->performApiRequest($getMe);
-        $this->assertInstanceOf(User::class, $result);
-        $this->assertNotEmpty($result->first_name);
-        $this->assertNotEmpty($result->username);
+        $promise = $this->tgLog->performApiRequest($getMe);
 
-        $this->assertStringEndsWith('Bot', $result->username);
+        $promise->then(function (User $result)
+        {
+            $this->assertInstanceOf(User::class, $result);
+            $this->assertNotEmpty($result->first_name);
+            $this->assertNotEmpty($result->username);
+
+            $this->assertStringEndsWith('Bot', $result->username);
+        });
     }
 
     public function testGetMeInvalidBotToken()

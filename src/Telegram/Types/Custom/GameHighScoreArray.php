@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\GameHighScore;
 
 /**
@@ -13,12 +14,14 @@ use unreal4u\TelegramAPI\Telegram\Types\GameHighScore;
  */
 class GameHighScoreArray extends TraversableCustomType
 {
-    public function __construct(array $data = null, LoggerInterface $logger = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null, TelegramResponse $response = null)
     {
         if (count($data) !== 0) {
             foreach ($data as $id => $gameHighScore) {
                 $this->data[$id] = new GameHighScore($gameHighScore, $logger);
             }
         }
+
+        parent::__construct(null, $logger, $response);
     }
 }

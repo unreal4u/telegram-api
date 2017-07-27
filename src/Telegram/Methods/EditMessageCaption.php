@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
@@ -60,14 +60,14 @@ class EditMessageCaption extends TelegramMethods
         return $this->mandatoryUserOrInlineMessageId($returnValue);
     }
 
-    public static function bindToObject(TelegramRawData $data, LoggerInterface $logger): TelegramTypes
+    public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
         $typeOfResult = $data->getTypeOfResult();
         switch ($typeOfResult) {
             case 'array':
                 return new Message($data->getResult(), $logger);
             case 'boolean':
-                return new ResultBoolean($data->getResultBoolean(), $logger);
+                return new ResultBoolean($data->getResultBoolean(), $logger, $data);
             default:
                 throw new InvalidResultType('Result is of type: %s. Expecting one of array or boolean');
         }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
-use Psr\Http\Message\ResponseInterface;
+use React\HttpClient\Response;
 
 /**
  * Used when we download a file from Telegram, contains some important headers information that else would be lost
@@ -32,9 +32,9 @@ class TelegramDocument
     /**
      * Constructs a representable document
      *
-     * @param ResponseInterface $response
+     * @param Response $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(TelegramResponse $response)
     {
         $headers = $response->getHeaders();
         // What better to get the mime type than what the Telegram servers already send us?

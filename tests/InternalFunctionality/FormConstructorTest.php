@@ -3,12 +3,12 @@
 namespace unreal4u\TelegramAPI\tests\InternalFunctionality;
 
 use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\InternalFunctionality\FormConstructor;
+use unreal4u\TelegramAPI\InternalFunctionality\PostOptionsConstructor;
 
 class FormConstructorTest extends TestCase
 {
     /**
-     * @var FormConstructor
+     * @var PostOptionsConstructor
      */
     private $formConstructor;
 
@@ -18,7 +18,7 @@ class FormConstructorTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->formConstructor = new FormConstructor();
+        $this->formConstructor = new PostOptionsConstructor();
     }
 
     /**
@@ -39,9 +39,14 @@ class FormConstructorTest extends TestCase
             'non-existant',
             null,
             [
-                [
-                    'name' => 'lala',
-                    'contents' => 'lolo',
+                'headers' => [
+                    'Content-Type' => 'multipart/form-data'
+                ],
+                'body' => [
+                    [
+                        'name' => 'lala',
+                        'contents' => 'lolo',
+                    ]
                 ]
             ]
         ];
@@ -64,7 +69,7 @@ class FormConstructorTest extends TestCase
         $stream = null,
         array $multiPartData = []
     ) {
-        $result = $this->formConstructor->buildMultipartFormData($data, $fileKeyName, $stream);
+        $result = $this->formConstructor->constructMultipartOptions($data, $fileKeyName, $stream);
         $this->assertEquals($multiPartData, $result);
     }
 }

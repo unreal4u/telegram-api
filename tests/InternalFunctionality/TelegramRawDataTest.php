@@ -3,7 +3,7 @@
 namespace unreal4u\TelegramAPI\tests\InternalFunctionality;
 
 use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
+use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 class TelegramRawDataTest extends TestCase
 {
@@ -25,7 +25,7 @@ class TelegramRawDataTest extends TestCase
      */
     public function testGetTypeOfResult($data, $expectedResult)
     {
-        $tgRawData = new TelegramRawData($data);
+        $tgRawData = new TelegramResponse($data);
         $actualResult = $tgRawData->getTypeOfResult();
 
         $this->assertSame($expectedResult, $actualResult);
@@ -47,13 +47,13 @@ class TelegramRawDataTest extends TestCase
      */
     public function testGetInvalidTypeOfResult($data)
     {
-        $tgRawData = new TelegramRawData($data);
+        $tgRawData = new TelegramResponse($data);
         $tgRawData->getTypeOfResult();
     }
 
     public function testGetArrayBack()
     {
-        $tgRawData = new TelegramRawData('{"ok":true,"result":{"file_id":"XYZ","file_size":123,"file_path":"file_8"}}');
+        $tgRawData = new TelegramResponse('{"ok":true,"result":{"file_id":"XYZ","file_size":123,"file_path":"file_8"}}');
         $actualResult = $tgRawData->getResult();
 
         $this->assertEquals(['file_id' => 'XYZ', 'file_size' => 123, 'file_path' => 'file_8'], $actualResult);
@@ -61,7 +61,7 @@ class TelegramRawDataTest extends TestCase
 
     public function testGetIntBack()
     {
-        $tgRawData = new TelegramRawData('{"ok":true,"result":42}');
+        $tgRawData = new TelegramResponse('{"ok":true,"result":42}');
         $actualResult = $tgRawData->getResultInt();
 
         $this->assertSame(42, $actualResult);
@@ -69,7 +69,7 @@ class TelegramRawDataTest extends TestCase
 
     public function testGetBooleanFalseBack()
     {
-        $tgRawData = new TelegramRawData('{"ok":true,"result":false}');
+        $tgRawData = new TelegramResponse('{"ok":true,"result":false}');
         $actualResult = $tgRawData->getResultBoolean();
 
         $this->assertFalse($actualResult);
@@ -77,7 +77,7 @@ class TelegramRawDataTest extends TestCase
 
     public function testGetBooleanTrueBack()
     {
-        $tgRawData = new TelegramRawData('{"ok":true,"result":true}');
+        $tgRawData = new TelegramResponse('{"ok":true,"result":true}');
         $actualResult = $tgRawData->getResultBoolean();
 
         $this->assertTrue($actualResult);

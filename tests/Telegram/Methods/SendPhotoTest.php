@@ -3,12 +3,12 @@
 namespace unreal4u\TelegramAPI\tests\Telegram\Methods;
 
 use PHPUnit\Framework\TestCase;
-use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendPhoto;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Chat;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\User;
+use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
 class SendPhotoTest extends TestCase
 {
@@ -43,29 +43,31 @@ class SendPhotoTest extends TestCase
         $sendPhoto->caption = 'Not sure if sending image or image not arriving';
 
         /** @var Message $result */
-        $result = $this->tgLog->performApiRequest($sendPhoto);
+        $promise = $this->tgLog->performApiRequest($sendPhoto);
 
-        $this->assertInstanceOf(Message::class, $result);
-        $this->assertEquals(19, $result->message_id);
-        $this->assertInstanceOf(User::class, $result->from);
-        $this->assertInstanceOf(Chat::class, $result->chat);
-        $this->assertEquals(12345678, $result->from->id);
-        $this->assertEquals('unreal4uBot', $result->from->username);
-        $this->assertEquals($sendPhoto->chat_id, $result->chat->id);
-        $this->assertEquals('unreal4u', $result->chat->username);
+        $promise->then(function (Message $result) use ($sendPhoto) {
+            $this->assertInstanceOf(Message::class, $result);
+            $this->assertEquals(19, $result->message_id);
+            $this->assertInstanceOf(User::class, $result->from);
+            $this->assertInstanceOf(Chat::class, $result->chat);
+            $this->assertEquals(12345678, $result->from->id);
+            $this->assertEquals('unreal4uBot', $result->from->username);
+            $this->assertEquals($sendPhoto->chat_id, $result->chat->id);
+            $this->assertEquals('unreal4u', $result->chat->username);
 
-        $this->assertEquals(1452641442, $result->date);
-        $this->assertNull($result->document);
-        $this->assertNull($result->voice);
-        $this->assertNull($result->video);
-        $this->assertNull($result->audio);
+            $this->assertEquals(1452641442, $result->date);
+            $this->assertNull($result->document);
+            $this->assertNull($result->voice);
+            $this->assertNull($result->video);
+            $this->assertNull($result->audio);
 
-        $this->assertCount(3, $result->photo);
-        $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->photo);
-        $i = 1;
-        foreach ($result->photo as $photo) {
-            $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);
-            $i++;
-        }
+            $this->assertCount(3, $result->photo);
+            $this->assertContainsOnlyInstancesOf('unreal4u\\TelegramAPI\\Telegram\\Types\\PhotoSize', $result->photo);
+            $i = 1;
+            foreach ($result->photo as $photo) {
+                $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);
+                $i++;
+            }
+        });
     }
 }

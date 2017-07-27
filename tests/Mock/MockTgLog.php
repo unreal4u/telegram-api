@@ -5,11 +5,12 @@ namespace unreal4u\TelegramAPI\tests\Mock;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
-use unreal4u\TelegramAPI\GuzzleRequestHandler;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
-use unreal4u\TelegramAPI\TgLog;
+use GuzzleHttp\Promise\Promise;
+use Psr\Log\LoggerInterface;
+use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
+use unreal4u\TelegramAPI\TgLog;
+
 
 class MockTgLog extends TgLog
 {
@@ -25,7 +26,13 @@ class MockTgLog extends TgLog
      */
     public $mockException = false;
 
-    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): TelegramRawData
+    public function __construct($botToken, LoggerInterface $logger = null)
+    {
+        $handler = new MockRequestHandler();
+        parent::__construct($botToken, $handler, $logger);
+    }
+
+    protected function sendRequestToTelegram(TelegramMethods $method, array $formData): PromiseInterface
     {
         $this->composeApiMethodUrl($method);
 
@@ -46,13 +53,7 @@ class MockTgLog extends TgLog
             throw new MockClientException(file_get_contents($filename));
         }
 
-        $guzzleMocker = new MockHandler([new Response(200, [], file_get_contents($filename))]);
-        $handler = HandlerStack::create($guzzleMocker);
-
-        $httpClient = new Client(['handler' => $handler]);
-        $this->requestHandler = new GuzzleRequestHandler($httpClient);
-
-        return parent::sendRequestToTelegram($method, $formData);
+        return $this->requestHandler->post($filename, $formData);
     }
 
     public function composeApiMethodUrl(TelegramMethods $call): string
