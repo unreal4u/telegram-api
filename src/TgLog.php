@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI;
 
@@ -70,8 +70,11 @@ class TgLog
      * @param LoggerInterface $logger
      * @param RequestHandlerInterface $handler
      */
-    public function __construct(string $botToken, LoggerInterface $logger = null, RequestHandlerInterface $handler = null)
-    {
+    public function __construct(
+        string $botToken,
+        LoggerInterface $logger = null,
+        RequestHandlerInterface $handler = null
+    ) {
         $this->botToken = $botToken;
 
         // Initialize new dummy logger (PSR-3 compatible) if not injected
@@ -150,16 +153,18 @@ class TgLog
 
         $deferred = new Deferred();
 
-        return $this->requestHandler->getAsync($url)->then(function (ResponseInterface $response) use ($deferred) {
-            $deferred->resolve(new TelegramDocument($response));
-        },
-        function (\Exception $exception) use ($deferred) {
-            if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
-                $deferred->resolve(new TelegramDocument($exception->getResponse()));
-            } else {
+        return $this->requestHandler->getAsync($url)->then(
+            function (ResponseInterface $response) use ($deferred) {
+                $deferred->resolve(new TelegramDocument($response));
+            },
+            function (\Exception $exception) use ($deferred) {
+                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
+                    $deferred->resolve(new TelegramDocument($exception->getResponse()));
+                } else {
                     $deferred->reject($exception);
+                }
             }
-        });
+        );
     }
 
     /**
@@ -211,17 +216,18 @@ class TgLog
         $deferred = new Deferred();
 
         $promise = $this->requestHandler->postAsync($this->composeApiMethodUrl($method), $formData);
-        $promise->then(function (ResponseInterface $response) use ($deferred)
-        {
-            $deferred->resolve(new TelegramRawData((string) $response->getBody()));
-        },
-        function (\Exception $exception) use ($deferred) {
-            if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
-                $deferred->resolve(new TelegramRawData((string) $exception->getResponse()->getBody(), $exception));
-            } else {
-                $deferred->reject($exception);
+        $promise->then(
+            function (ResponseInterface $response) use ($deferred) {
+                $deferred->resolve(new TelegramRawData((string)$response->getBody()));
+            },
+            function (\Exception $exception) use ($deferred) {
+                if (method_exists($exception, 'getResponse') && !empty($exception->getResponse()->getBody())) {
+                    $deferred->resolve(new TelegramRawData((string)$exception->getResponse()->getBody(), $exception));
+                } else {
+                    $deferred->reject($exception);
+                }
             }
-        });
+        );
 
         return $deferred->promise();
     }
@@ -256,7 +262,7 @@ class TgLog
             case 'application/x-www-form-urlencoded':
                 $this->logger->debug('Creating x-www-form-urlencoded form (AKA fast request)');
                 $formData = [
-                    'headers' =>  [
+                    'headers' => [
                         'Content-Type' => 'application/x-www-form-urlencoded',
                     ],
                     'body' => http_build_query($method->export(), '', '&'),
@@ -267,7 +273,7 @@ class TgLog
                 break;
             default:
                 $this->logger->critical(sprintf(
-                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to '.
+                    'Invalid form-type detected, if you incur in such a situation, this is most likely a product to ' .
                     'a bug. Please copy entire line and report at %s',
                     'https://github.com/unreal4u/telegram-api/issues'
                 ), [
