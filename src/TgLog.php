@@ -150,7 +150,7 @@ class TgLog
 
         $deferred = new Deferred();
 
-        return $this->requestHandler->requestAsync($url)->then(function (ResponseInterface $response) use ($deferred)
+        return $this->requestHandler->getAsync($url)->then(function (ResponseInterface $response) use ($deferred)
         {
             $deferred->resolve(new TelegramDocument($response));
         },
@@ -188,7 +188,7 @@ class TgLog
         $e = null;
         $this->logger->debug('About to perform HTTP call to Telegram\'s API');
         try {
-            $response = $this->requestHandler->postAsync($this->composeApiMethodUrl($method), $formData);
+            $response = $this->requestHandler->post($this->composeApiMethodUrl($method), $formData);
             $this->logger->debug('Got response back from Telegram');
 	        return $response;
         } catch (\Exception $e) {
