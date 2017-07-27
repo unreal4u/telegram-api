@@ -9,10 +9,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
+use React\Promise\PromiseInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use React\Promise\Deferred;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
 
@@ -91,7 +91,7 @@ class GuzzleRequestHandler implements RequestHandlerInterface
     public function requestAsync(string $uri, array $formData = []): PromiseInterface
     {
         $this->logger->debug('About to perform async HTTP call to Telegram\'s API');
-        $deferred = new Promise();
+        $deferred = new Deferred();
 
         $promise = $this->httpClient->postAsync($uri, $formData);
         $promise->then(function (ResponseInterface $response) use ($deferred) {
@@ -104,6 +104,6 @@ class GuzzleRequestHandler implements RequestHandlerInterface
                     $deferred->reject($exception);
             });
 
-        return $deferred;
+        return $deferred->promise();
     }
 }
