@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI;
 
-
 use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
