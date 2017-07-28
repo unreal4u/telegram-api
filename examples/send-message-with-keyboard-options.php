@@ -5,12 +5,14 @@ declare(strict_types = 1);
 include 'basics.php';
 
 use GuzzleHttp\Exception\ClientException;
+use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\KeyboardButton;
 use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
 use unreal4u\TelegramAPI\TgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
-$tgLog = new TgLog(BOT_TOKEN);
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
@@ -35,12 +37,18 @@ $keyboardButton = new KeyboardButton();
 $keyboardButton->text = 'It\'s classified';
 $sendMessage->reply_markup->keyboard[2][] = $keyboardButton;
 
-try {
-    $tgLog->performApiRequest($sendMessage);
-    printf('Message "%s" sent!<br/>%s', $sendMessage->text, PHP_EOL);
-} catch (ClientException $e) {
-    echo '<pre>';
-    var_dump($e->getMessage());
-    echo '</pre>';
-    die();
-}
+$promise = $tgLog->performApiRequest($sendMessage);
+
+$promise->then(
+    function ($response) {
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    }
+);
+
+$loop->run();

@@ -6,8 +6,8 @@ include 'basics.php';
 
 use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendChatAction;
-use unreal4u\TelegramAPI\TgLog;
 use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+use unreal4u\TelegramAPI\TgLog;
 
 $tgLog = new TgLog(BOT_TOKEN);
 
@@ -26,12 +26,19 @@ sleep(2);
 
 $sendMessage->text = 'The second piece of text';
 
-try {
-    $tgLog->performApiRequest($sendMessage);
-    printf('Message "%s" sent!<br/>%s', $sendMessage->text, PHP_EOL);
-} catch (ClientException $e) {
-    echo 'Error detected trying to send message to user: <pre>';
-    var_dump($e->getRequest());
-    echo '</pre>';
-    die(1);
-}
+$promise = $tgLog->performApiRequest($sendMessage);
+
+$promise->then(
+    function ($response) {
+        echo '2nd message sent' . PHP_EOL;
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    }
+);
+
+$loop->run();

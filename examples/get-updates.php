@@ -4,26 +4,29 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
-use \unreal4u\TelegramAPI\TgLog;
-use \unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
+use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray;
+use unreal4u\TelegramAPI\TgLog;
 
-$tgLog = new TgLog(BOT_TOKEN);
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $getUpdates = new GetUpdates();
+
+// Always set the offset to avoid getting duplicate updates.
 #$getUpdates->offset = 328221148;
 
-echo '<pre>';
-try {
-    $updates = $tgLog->performApiRequest($getUpdates);
-    /* @var \unreal4u\TelegramAPI\Telegram\Types\Custom\UpdatesArray $updates */
-    foreach ($updates->getIterator() as $update) {
-        var_dump($update);
-        #var_dump(sprintf('Chat id is #%d', $update->message->chat->id));
+$promise->then(
+    function (UpdatesArray $response) {
+        echo '<pre>';
+        var_dump($response->getIterator());
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
-} catch (\GuzzleHttp\Exception\ClientException $e) {
-    $actualProblem = json_decode((string)$e->getResponse()->getBody());
-    print_r('[EXCEPTION] '.$actualProblem->description.'; original response:');
-    print_r($actualProblem);
-}
+);
 
-echo '</pre>';
+$loop->run();

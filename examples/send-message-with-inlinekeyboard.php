@@ -9,7 +9,10 @@ use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\TgLog;
 
-$tgLog = new TgLog(BOT_TOKEN);
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
+
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hi, this an inline keyboard example';
@@ -70,10 +73,18 @@ $sendMessage->disable_web_page_preview = true;
 $sendMessage->parse_mode = 'Markdown';
 $sendMessage->reply_markup = $inlineKeyboard;
 
-try {
-    $tgLog->performApiRequest($sendMessage);
-} catch (ClientException $e) {
-    echo '<pre>';
-    var_dump($e->getMessage());
-    echo '</pre>';
-}
+$promise = $tgLog->performApiRequest($sendMessage);
+
+$promise->then(
+    function ($response) {
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    }
+);
+
+$loop->run();
