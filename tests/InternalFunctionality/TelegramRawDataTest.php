@@ -51,6 +51,14 @@ class TelegramRawDataTest extends TestCase
         $tgRawData->getTypeOfResult();
     }
 
+    public function testGetStringBack()
+    {
+        $tgRawData = new TelegramResponse('{"ok":true,"result":"test"}');
+        $actualResult = $tgRawData->getResultString();
+
+        $this->assertSame('test', $actualResult);
+    }
+
     public function testGetArrayBack()
     {
         $tgRawData = new TelegramResponse('{"ok":true,"result":{"file_id":"XYZ","file_size":123,"file_path":"file_8"}}');
@@ -81,5 +89,35 @@ class TelegramRawDataTest extends TestCase
         $actualResult = $tgRawData->getResultBoolean();
 
         $this->assertTrue($actualResult);
+    }
+
+    public function testGetRawData()
+    {
+        $data = '{"ok":true,"result":true}';
+        $tgResponse = new TelegramResponse($data);
+        
+        $this->assertEquals($data, $tgResponse->getRawData());
+    }
+
+    public function testGetHeaders()
+    {
+        $headers = [
+            'Content-Type: test',
+        ];
+        $tgResponse = new TelegramResponse('{"ok":false,"result":true}', $headers);
+        
+        $this->assertEquals($headers, $tgResponse->getHeaders());
+    }
+
+    public function testWithException()
+    {
+        $tgResponse = new TelegramResponse('{"ok":false,"result":true}', [], new \Exception());
+        
+        $this->assertTrue($tgResponse->isError());
+        $this->assertEquals(new \Exception(), $tgResponse->getException());
+        $this->assertEquals([
+            'ok' => false,
+            'result' => true
+        ], $tgResponse->getErrorData());
     }
 }
