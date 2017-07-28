@@ -13,13 +13,12 @@ use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 class ResultArray extends TraversableCustomType
 {
     /**
-     * @var string
+     * @var array
      */
     public $data = '';
 
     public function __construct(array $result, LoggerInterface $logger = null, TelegramResponse $response = null)
     {
-        $this->logger = $logger;
         $this->data = $result;
 
         parent::__construct($result, $logger, $response);
