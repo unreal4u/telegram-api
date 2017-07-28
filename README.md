@@ -49,25 +49,36 @@ If you are not familiar with it, I suggest reading the basic usage manual [locat
 Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
 have to upgrade from v1 to v2.
 
+### Upgrading v2.x to v3
+
+Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v2-to-v3) if you 
+have to upgrade from v2 to v3.
+
 ## General usage
 
 ### Basic usage example:
 
 ```php
+<?php
+
 use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
+
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
 
-$tgLog = new TgLog(BOT_TOKEN);
-$message = $tgLog->performApiRequest($sendMessage);
+$tgLog->performApiRequest($sendMessage);
 ```
 
 With the `SendMessage()` object, you can create a message to be sent through the TgLog object.  
 All other functionality is based upon this behaviour, so every other method is very similar: you instantiate an object, 
-pass that object to TelegramLog->performApiRequest() and you'll get the native Telegram response back as an object. 
+pass that object to TelegramLog->performApiRequest(), which will return a Promise. If the method returns a reply, 
+pass a callback to its `onFulfilled` parameter and you'll get the native Telegram response back as an object. 
 Different methods return different object types. 
 
 Please refer to the [examples directory](https://github.com/unreal4u/telegram-api/tree/master/examples) to view examples 

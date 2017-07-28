@@ -8,19 +8,25 @@ use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
 use unreal4u\TelegramAPI\TgLog;
 
-$userProfilePhotos = new GetUserProfilePhotos();
-$tgLog = new TgLog(BOT_TOKEN);
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
 
+$userProfilePhotos = new GetUserProfilePhotos();
 $userProfilePhotos->user_id = A_USER_ID;
 
-try {
-    $userProfilePhotos = $tgLog->performApiRequest($userProfilePhotos);
-    echo '<pre>';
-    var_dump($userProfilePhotos);
-    echo '</pre>';
-} catch (ClientException $e) {
-    echo 'Error detected trying to get user profile photos, original response: <pre>';
-    print_r((string)$e->getResponse()->getBody());
-    echo '</pre>';
-    die();
-}
+$promise = $tgLog->performApiRequest($userProfilePhotos);
+
+$promise->then(
+    function ($response) {
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    }
+);
+
+$loop->run();

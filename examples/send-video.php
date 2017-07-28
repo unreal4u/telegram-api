@@ -4,13 +4,15 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
+use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendChatAction;
+use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\TgLog;
-use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
-use GuzzleHttp\Exception\ClientException;
 
-$tgLog = new TgLog(BOT_TOKEN);
+$loop = \React\EventLoop\Factory::create();
+$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$tgLog = new TgLog(BOT_TOKEN, $handler);
 
 // Let the user know we are doing some intensive stuff
 $sendChatAction = new SendChatAction();
@@ -23,15 +25,18 @@ $sendVideo->chat_id = A_USER_CHAT_ID;
 $sendVideo->video = new InputFile('examples/binary-test-data/demo-video.mp4');
 $sendVideo->caption = 'Example of a video file sent with Telegram';
 
-try {
-    $message = $tgLog->performApiRequest($sendVideo);
-    echo '<pre>';
-    var_dump($message);
-    echo '</pre>';
-} catch (ClientException $e) {
-    echo '<pre>';
-    var_dump($e->getMessage());
-    var_dump($e->getRequest());
-    var_dump($e->getTrace());
-    echo '</pre>';
-}
+$promise = $tgLog->performApiRequest($sendVideo);
+
+$promise->then(
+    function ($response) {
+        echo '<pre>';
+        var_dump($response);
+        echo '</pre>';
+    },
+    function (\Exception $exception) {
+        // Onoes, an exception occurred...
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    }
+);
+
+$loop->run();
