@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
-use React\HttpClient\Response;
-
 /**
  * Used when we download a file from Telegram, contains some important headers information that else would be lost
  */
@@ -32,7 +30,7 @@ class TelegramDocument
     /**
      * Constructs a representable document
      *
-     * @param Response $response
+     * @param TelegramResponse $response
      */
     public function __construct(TelegramResponse $response)
     {
@@ -41,7 +39,7 @@ class TelegramDocument
         $this->mime_type = $headers['Content-Type'][0];
         // Same with file length
         $this->file_size = (int)$headers['Content-Length'][0];
-        $this->contents = (string)$response->getBody();
+        $this->contents = (string)$response->getResultString();
     }
 
     /**
