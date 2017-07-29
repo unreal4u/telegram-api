@@ -21,6 +21,6 @@ class TelegramDocumentTest extends TestCase
         $tgResponse = new TelegramResponse('{"ok":true,"result":"test"}', $headers);
         $tgDocument = new TelegramDocument($tgResponse);
         
-        $this->assertEquals('test', (string) $tgDocument);
+        $this->assertEquals('{"ok":true,"result":"test"}', (string) $tgDocument);
     }
 }
