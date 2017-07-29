@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace unreal4u\TelegramAPI;
 
 use Psr\Log\LoggerInterface;
-use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
@@ -101,14 +100,9 @@ class TgLog
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
 
-        $deferred = new Deferred();
-
         return $this->requestHandler->get($url)->then(
-            function (TelegramResponse $rawData) use ($deferred) {
-                $deferred->resolve(new TelegramDocument($rawData));
-            },
-            function (\Exception $exception) use ($deferred) {
-                $deferred->reject($exception);
+            function (TelegramResponse $rawData) {
+                return new TelegramDocument($rawData);
             }
         );
     }

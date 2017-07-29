@@ -34,12 +34,15 @@ class TelegramDocument
      */
     public function __construct(TelegramResponse $response)
     {
-        $headers = $response->getHeaders();
+        $headers = (array) $response->getHeaders();
+
         // What better to get the mime type than what the Telegram servers already send us?
-        $this->mime_type = $headers['Content-Type'][0];
+        $this->mime_type = !empty($headers['Content-Type']) ? $headers['Content-Type'] : 'application/octet-stream';
+
         // Same with file length
-        $this->file_size = (int)$headers['Content-Length'][0];
-        $this->contents = (string)$response->getResultString();
+        $this->file_size = !empty($headers['Content-Length']) ? $headers['Content-Length']
+            : strlen($response->getRawData());
+        $this->contents = $response->getRawData();
     }
 
     /**
