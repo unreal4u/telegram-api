@@ -103,7 +103,7 @@ class TgLog
 
         $deferred = new Deferred();
 
-        return $this->requestHandler->get($url)->then(
+        $this->requestHandler->get($url)->then(
             function (TelegramResponse $rawData) use ($deferred) {
                 $deferred->resolve(new TelegramDocument($rawData));
             },
@@ -111,6 +111,8 @@ class TgLog
                 $deferred->reject($exception);
             }
         );
+        
+        return $deferred->promise();
     }
 
     /**
