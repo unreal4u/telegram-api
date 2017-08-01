@@ -28,7 +28,7 @@ class GetChatMembersCount extends TelegramMethods
 
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new ResultInt($data->getResultInt(), $logger, $data);
+        return new ResultInt($data->getResultInt(), $logger);
     }
 
     public function getMandatoryFields(): array

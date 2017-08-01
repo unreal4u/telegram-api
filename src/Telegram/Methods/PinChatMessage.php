@@ -41,7 +41,7 @@ class PinChatMessage extends TelegramMethods
 
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new ResultBoolean($data->getResultBoolean(), $logger, $data);
+        return new ResultBoolean($data->getResultBoolean(), $logger);
     }
 
     public function getMandatoryFields(): array
