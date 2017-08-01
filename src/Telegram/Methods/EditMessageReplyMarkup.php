@@ -61,7 +61,7 @@ class EditMessageReplyMarkup extends TelegramMethods
             case 'array':
                 return new Message($data->getResult(), $logger);
             case 'boolean':
-                return new ResultBoolean($data->getResultBoolean(), $logger, $data);
+                return new ResultBoolean($data->getResultBoolean(), $logger);
             default:
                 throw new InvalidResultType('Result is of type: %s. Expecting one of array or boolean');
         }

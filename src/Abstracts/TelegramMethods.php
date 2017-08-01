@@ -38,7 +38,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      */
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new Message($data->getResult(), $logger, $data);
+        return new Message($data->getResult(), $logger);
     }
 
     /**

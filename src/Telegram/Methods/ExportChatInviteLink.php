@@ -29,7 +29,7 @@ class ExportChatInviteLink extends TelegramMethods
 
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new ResultString($data->getResultString(), $logger, $data);
+        return new ResultString($data->getResultString(), $logger);
     }
 
     public function getMandatoryFields(): array

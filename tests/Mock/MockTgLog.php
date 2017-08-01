@@ -2,10 +2,6 @@
 
 namespace unreal4u\TelegramAPI\tests\Mock;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Promise\Promise;
 use Psr\Log\LoggerInterface;
 use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
