@@ -6,7 +6,6 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Sticker;
 
 /**
@@ -14,8 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Sticker;
  */
 class StickerSetArray extends TraversableCustomType
 {
-
-    public function __construct(array $result = null, LoggerInterface $logger = null, TelegramResponse $response = null)
+    public function __construct(array $result = null, LoggerInterface $logger = null)
     {
         if (count($result) !== 0) {
             foreach ($result as $id => $sticker) {
@@ -23,6 +21,6 @@ class StickerSetArray extends TraversableCustomType
             }
         }
 
-        parent::__construct(null, $logger, $response);
+        parent::__construct(null, $logger);
     }
 }

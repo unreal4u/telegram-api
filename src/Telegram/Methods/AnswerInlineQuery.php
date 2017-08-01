@@ -101,6 +101,7 @@ class AnswerInlineQuery extends TelegramMethods
      *
      * @param Result $result
      * @return AnswerInlineQuery
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     public function addResult(Result $result): AnswerInlineQuery
     {

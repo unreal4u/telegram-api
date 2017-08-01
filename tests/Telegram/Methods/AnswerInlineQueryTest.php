@@ -56,13 +56,14 @@ class AnswerInlineQueryTest extends TestCase
 
         $promise = $this->tgLog->performApiRequest($answerInlineQuery);
 
-        $promise->then(function (ResultBoolean $message) {
-            $this->assertEquals(
-                trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.json')),
-                $message->response->getResult()
-            );
+        $this->assertEquals(
+            trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.json')),
+            $answerInlineQuery->getResults()
+        );
 
-            $this->assertInstanceOf(ResultBoolean::class, $message->response->getResult());
+        $promise->then(function (ResultBoolean $message) {
+            $this->assertInstanceOf(ResultBoolean::class, $message->data);
+            $this->assertSame('1', $message);
         });
     }
 }

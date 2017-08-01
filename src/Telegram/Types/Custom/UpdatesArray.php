@@ -6,7 +6,6 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Update;
 
 /**
@@ -14,7 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Update;
  */
 class UpdatesArray extends TraversableCustomType
 {
-    public function __construct(array $data = null, LoggerInterface $logger = null, TelegramResponse $response = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (count($data) !== 0) {
             foreach ($data as $telegramResponse) {
@@ -22,7 +21,5 @@ class UpdatesArray extends TraversableCustomType
                 $this->data[] = new Update($telegramResponse, $logger);
             }
         }
-
-        parent::__construct(null, $logger, $response);
     }
 }

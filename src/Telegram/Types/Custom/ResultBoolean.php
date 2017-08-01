@@ -5,7 +5,6 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\CustomType;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 /**
  * Some APIs (mainly inline bots) respond with boolean types
@@ -14,10 +13,9 @@ class ResultBoolean extends CustomType
 {
     public $data = false;
 
-    public function __construct(bool $result, LoggerInterface $logger = null, TelegramResponse $response = null)
+    public function __construct(bool $result, LoggerInterface $logger = null)
     {
         $this->data = $result;
-        parent::__construct(null, $logger, $response);
     }
 
     /**

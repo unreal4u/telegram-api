@@ -6,7 +6,6 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
-use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Button;
 
 /**
@@ -14,7 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Button;
  */
 class InlineKeyboardButtonArray extends TraversableCustomType
 {
-    public function __construct(array $data = null, LoggerInterface $logger = null, TelegramResponse $response = null)
+    public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (count($data) !== 0) {
             foreach ($data as $rowId => $buttons) {
@@ -25,7 +24,5 @@ class InlineKeyboardButtonArray extends TraversableCustomType
                 $this->data[$rowId] = $rowButtons;
             }
         }
-
-        parent::__construct(null, $logger, $response);
     }
 }

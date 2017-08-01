@@ -15,7 +15,7 @@ This is a PHP7 bot API implementation for Telegram implementing the **totality**
 
 * Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
 * Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
-* Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
+* Doesn't need any mandatory dependencies, except for ReactPHP, which you can inject if you already use it elsewhere.
 * **Full** inline bots support.
 * **Full** support for payment system.
 
@@ -37,19 +37,19 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.6"
+    "unreal4u/telegram-api": "~3.0"
   }
 }
 ```
 
 If you are not familiar with it, I suggest reading the basic usage manual [located here](https://getcomposer.org/doc/01-basic-usage.md).
 
-### Upgrading v1.x to v2
-
-Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v1-to-v2) if you 
-have to upgrade from v1 to v2.
-
 ### Upgrading v2.x to v3
+
+A lot of backwards incompatibility changes, but in a nutshell: 
+* ReactPHP is the new Guzzle (Async requests!)
+* Changed parameter order when invoking the constructor of `TgLog`
+* Custom -Array types now implement IteratorAggregate (Solves #21 !)
 
 Please check [the following Wiki page](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v2-to-v3) if you 
 have to upgrade from v2 to v3.
@@ -61,11 +61,12 @@ have to upgrade from v2 to v3.
 ```php
 <?php
 
+use \unreal4u\TelegramAPI\HttpClientRequestHandler;
 use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $loop = \React\EventLoop\Factory::create();
-$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
+$handler = new HttpClientRequestHandler($loop);
 $tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $sendMessage = new SendMessage();
@@ -73,6 +74,7 @@ $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
 
 $tgLog->performApiRequest($sendMessage);
+$loop->run();
 ```
 
 With the `SendMessage()` object, you can create a message to be sent through the TgLog object.  
@@ -117,7 +119,7 @@ the major.
 
 ### Want to colaborate?
 
-Colaborations are **very** welcome! [Check this Wiki page out](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F) 
+Collaborations are **very** welcome! [Check this Wiki page out](https://github.com/unreal4u/telegram-api/wiki/Want-to-colaborate%3F) 
 for more information that will make the development easier!
 
 ### Contact the author
@@ -135,5 +137,6 @@ Telegram Bot API client, please ask me to contact you privately [over here](http
 
 ### Special thanks to
 
+- :+1: A VERY (!!) special thanks to **[NanoSector](https://github.com/Yoshi2889)** for making the entire API async worthy!
 - :+1: **Intensify** for reporting [this fatal error](https://github.com/unreal4u/telegram-api/issues/15).
 - :+1: All the amazing people who make [issues](https://github.com/unreal4u/telegram-api/issues) and [pull requests](https://github.com/unreal4u/telegram-api/pulls)!
