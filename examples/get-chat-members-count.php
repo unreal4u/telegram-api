@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
-use GuzzleHttp\Exception\ClientException;
+use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\GetChatMembersCount;
 use unreal4u\TelegramAPI\TgLog;
 
@@ -17,16 +17,18 @@ $getCMC->chat_id = A_GROUP_CHAT_ID;
 
 $promise = $tgLog->performApiRequest($getCMC);
 
-$promise->then(
-    function ($response) {
-        echo '<pre>';
-        var_dump($response);
-        echo '</pre>';
-    },
-    function (\Exception $exception) {
-        // Onoes, an exception occurred...
-        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
-    }
-);
+$promise
+    ->then(
+        function ($response) {
+            echo 'The number of participants in this chat are '.$response. ' members. Raw output as follows:'.PHP_EOL;
+            echo '<pre>';
+            var_dump($response);
+            echo '</pre>';
+        },
+        function (ClientException $e) {
+            var_dump('Captured ClientException', $e->getError());
+        }
+    )
+;
 
 $loop->run();

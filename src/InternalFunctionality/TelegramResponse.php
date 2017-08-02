@@ -4,12 +4,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
+use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\Exceptions\InvalidResultType;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\UnsuccessfulRequest;
 
 class TelegramResponse
 {
     /**
-     * Nothing is done so far with this, but it's always a good idea to have the original around
+     * Used in the TelegramDocument class, saves some processing
      * @var string
      */
     private $rawData = '';
@@ -24,37 +26,12 @@ class TelegramResponse
      * The headers sent with the response.
      * @var array
      */
-    private $headers = [];
+    private $headers;
 
-    /**
-     * @var \Exception
-     */
-    private $exception = null;
-
-    /**
-     * Marks the actual response as an error
-     * @var bool
-     */
-    private $isError = false;
-
-    public function __construct(string $rawData, array $headers = [], \Exception $e = null)
+    public function __construct(string $rawData, array $headers = [])
     {
         $this->fillRawData($rawData);
         $this->headers = $headers;
-
-        if (!is_null($e)) {
-            $this->exception = $e;
-            $this->isError = true;
-        }
-    }
-
-    /**
-     * Will return true if the request was an unsuccessful one, false otherwise
-     * @return bool
-     */
-    public function isError(): bool
-    {
-        return $this->isError;
     }
 
     /**
@@ -62,11 +39,18 @@ class TelegramResponse
      *
      * @param string $rawData
      * @return TelegramResponse
+     * @throws \unreal4u\TelegramAPI\Exceptions\ClientException
      */
     public function fillRawData(string $rawData): TelegramResponse
     {
         $this->rawData = $rawData;
         $this->decodedData = json_decode($this->rawData, true);
+
+        if ($this->decodedData['ok'] === false) {
+            $exception = new ClientException();
+            $exception->setError(new UnsuccessfulRequest($this->decodedData));
+            throw $exception;
+        }
 
         return $this;
     }
@@ -100,7 +84,7 @@ class TelegramResponse
      */
     public function getResult(): array
     {
-        return array_key_exists('result', $this->decodedData) ? (array) $this->decodedData['result'] : [];
+        return (array)$this->decodedData['result'];
     }
 
     /**
@@ -110,7 +94,7 @@ class TelegramResponse
      */
     public function getResultBoolean(): bool
     {
-        return array_key_exists('result', $this->decodedData) ? (bool) $this->decodedData['result'] : false;
+        return (bool)$this->decodedData['result'];
     }
 
     /**
@@ -119,7 +103,7 @@ class TelegramResponse
      */
     public function getResultInt(): int
     {
-        return array_key_exists('result', $this->decodedData) ? (int)$this->decodedData['result'] : -1;
+        return (int)$this->decodedData['result'];
     }
 
     /**
@@ -129,13 +113,13 @@ class TelegramResponse
      */
     public function getResultString(): string
     {
-        return array_key_exists('result', $this->decodedData) ? (string)$this->decodedData['result'] : '';
+        return (string)$this->decodedData['result'];
     }
 
     /**
      * @return string
      */
-    public function getRawData()
+    public function getRawData(): string
     {
         return $this->rawData;
     }
@@ -146,22 +130,5 @@ class TelegramResponse
     public function getHeaders(): array
     {
         return $this->headers;
-    }
-
-    /**
-     * Returns the raw error data
-     * @return array
-     */
-    public function getErrorData(): array
-    {
-        return $this->decodedData;
-    }
-
-    /**
-     * @return \Exception
-     */
-    public function getException(): \Exception
-    {
-        return $this->exception;
     }
 }

@@ -44,7 +44,7 @@ class TgLog
      * Stores the API URL from Telegram
      * @var string
      */
-    private $apiUrl = '';
+    private $apiUrl;
 
     /**
      * @var string
@@ -74,11 +74,14 @@ class TgLog
     }
 
     /**
+     * Performs the request to the Telegram servers
+     *
      * @param TelegramMethods $method
      *
      * @return PromiseInterface
+     * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
-    public function performApiRequest(TelegramMethods $method)
+    public function performApiRequest(TelegramMethods $method): PromiseInterface
     {
         $this->logger->debug('Request for async API call, resetting internal values', [get_class($method)]);
         $this->resetObjectValues();
@@ -96,7 +99,6 @@ class TgLog
      */
     public function downloadFile(File $file): PromiseInterface
     {
-        $this->logger->debug('Downloading file async from Telegram, creating URL');
         $url = 'https://api.telegram.org/file/bot' . $this->botToken . '/' . $file->file_path;
         $this->logger->debug('About to perform request to begin downloading file');
 
@@ -124,7 +126,7 @@ class TgLog
      *
      * @return TgLog
      */
-    private function resetObjectValues(): TgLog
+    final protected function resetObjectValues(): TgLog
     {
         $this->formConstructor->formType = 'application/x-www-form-urlencoded';
         return $this;

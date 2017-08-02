@@ -10,6 +10,7 @@ use React\HttpClient\Request;
 use React\HttpClient\Response;
 use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
+use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 class HttpClientRequestHandler implements RequestHandlerInterface
@@ -55,7 +56,7 @@ class HttpClientRequestHandler implements RequestHandlerInterface
      * @param mixed $data
      * @return PromiseInterface
      */
-    public function processRequest(Request $request, $data = null)
+    public function processRequest(Request $request, $data = null): PromiseInterface
     {
         $deferred = new Deferred();
 
@@ -66,18 +67,18 @@ class HttpClientRequestHandler implements RequestHandlerInterface
             });
 
             $response->on('end', function () use (&$receivedData, $deferred, $response) {
-                $deferred->resolve(new TelegramResponse($receivedData, $response->getHeaders()));
+                try {
+                    $endResponse = new TelegramResponse($receivedData, $response->getHeaders());
+                    $deferred->resolve($endResponse);
+                } catch (\Exception $e) {
+                    // Capture any exceptions thrown from TelegramResponse and reject the response
+                    $deferred->reject($e);
+                }
             });
         });
 
-        $request->on('error', function (\Exception $exception) use ($deferred, $receivedData) {
-            // First check if the data we received thus far actually is valid.
-            // Else, wipe it.
-            if (!json_decode($receivedData)) {
-                $receivedData = '';
-            }
-
-            $deferred->reject(new TelegramResponse($receivedData, [], $exception));
+        $request->on('error', function (\Exception $e) use ($deferred) {
+            $deferred->reject(new ClientException($e->getMessage(), $e->getCode(), $e));
         });
 
         $request->end($data);

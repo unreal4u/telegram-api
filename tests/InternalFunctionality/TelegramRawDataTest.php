@@ -3,6 +3,7 @@
 namespace unreal4u\TelegramAPI\tests\InternalFunctionality;
 
 use PHPUnit\Framework\TestCase;
+use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 class TelegramRawDataTest extends TestCase
@@ -104,20 +105,22 @@ class TelegramRawDataTest extends TestCase
         $headers = [
             'Content-Type: test',
         ];
-        $tgResponse = new TelegramResponse('{"ok":false,"result":true}', $headers);
-        
-        $this->assertEquals($headers, $tgResponse->getHeaders());
+        $tgResponse = new TelegramResponse('{"ok":true,"result":true}', $headers);
+        $this->assertSame($headers, $tgResponse->getHeaders());
     }
 
-    public function testWithException()
+    public function testEmptyResponse()
     {
-        $tgResponse = new TelegramResponse('{"ok":false,"result":true}', [], new \Exception());
-        
-        $this->assertTrue($tgResponse->isError());
-        $this->assertEquals(new \Exception(), $tgResponse->getException());
-        $this->assertEquals([
-            'ok' => false,
-            'result' => true
-        ], $tgResponse->getErrorData());
+        $this->expectException(ClientException::class);
+        $tgResponse = new TelegramResponse('{"ok":false}');
+    }
+
+    /**
+     * @TODO Test this better, with more options and things that could go wrong
+     */
+    public function testBadBotTokenResponse()
+    {
+        $this->expectException(ClientException::class);
+        $tgResponse = new TelegramResponse('{"ok":false,"error_code":401,"description":"Unauthorized"}');
     }
 }

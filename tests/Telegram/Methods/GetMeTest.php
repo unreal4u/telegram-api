@@ -51,13 +51,11 @@ class GetMeTest extends TestCase
 
     public function testGetMeInvalidBotToken()
     {
-        $getMe = new GetMe();
-
         $this->tgLog->specificTest = 'invalidBotToken';
         $this->tgLog->mockException = true;
 
         try {
-            $this->tgLog->performApiRequest($getMe);
+            $this->tgLog->performApiRequest(new GetMe());
         } catch (MockClientException $e) {
             $this->assertInstanceOf(\stdClass::class, $e->decodedResponse);
             $this->assertEquals(401, $e->decodedResponse->error_code);

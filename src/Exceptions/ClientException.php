@@ -4,36 +4,38 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Exceptions;
 
+use Throwable;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UnsuccessfulRequest;
-use unreal4u\TelegramAPI\Telegram\Types\ResponseParameters;
 
-class ClientException extends \Exception
+class ClientException extends \RuntimeException
 {
     /**
      * @var UnsuccessfulRequest
      */
     protected $errorRequest = null;
 
-    /**
-     * @var ResponseParameters
-     */
-    protected $parameters = null;
-
-    public function setParameters(ResponseParameters $responseParameters): ClientException
+    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
-        $this->parameters = $responseParameters;
-        return $this;
+        parent::__construct($message, $code, $previous);
+
+        if ($previous !== null) {
+            $this->file = $previous->getFile();
+            $this->line = $previous->getLine();
+
+            $this->setError(new UnsuccessfulRequest([
+                'description' => $previous->getMessage(),
+                'error_code' => $previous->getCode(),
+            ]));
+        }
     }
 
     public function setError(UnsuccessfulRequest $unsuccessfulRequest): ClientException
     {
         $this->errorRequest = $unsuccessfulRequest;
-        return $this;
-    }
 
-    public function getParameters(): ResponseParameters
-    {
-        return $this->parameters;
+        $this->message = $unsuccessfulRequest->description;
+        $this->code = $unsuccessfulRequest->error_code;
+        return $this;
     }
 
     public function getError(): UnsuccessfulRequest
