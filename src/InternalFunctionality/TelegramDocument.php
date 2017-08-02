@@ -34,7 +34,7 @@ class TelegramDocument
      */
     public function __construct(TelegramResponse $response)
     {
-        $headers = (array) $response->getHeaders();
+        $headers = $response->getHeaders();
 
         // What better to get the mime type than what the Telegram servers already send us?
         $this->mime_type = !empty($headers['Content-Type']) ? $headers['Content-Type'] : 'application/octet-stream';
