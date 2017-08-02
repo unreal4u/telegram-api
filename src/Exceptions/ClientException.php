@@ -12,7 +12,7 @@ class ClientException extends \RuntimeException
     /**
      * @var UnsuccessfulRequest
      */
-    protected $errorRequest = null;
+    protected $errorRequest;
 
     public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
