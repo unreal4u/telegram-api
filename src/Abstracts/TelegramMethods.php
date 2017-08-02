@@ -55,19 +55,6 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
             $this->reply_markup = json_encode($this->formatReplyMarkup($this->reply_markup));
         }
 
-        // Several classes may send a parse mode, so check before sending
-        // TODO Do I want to validate data in here? Should I?
-        /*
-         * if (!empty($this->parse_mode)) {
-            if (strtoupper($this->parse_mode) !== 'HTML' || strtoupper($this->parse_mode) !== 'MARKDOWN') {
-                throw new InvalidParseMode(sprintf(
-                    'An invalid value for parse_mode has been given. Please use HTML or Markdown. Provided: "%s"',
-                    $this->parse_mode
-                ));
-            }
-        }
-         */
-
         return $this;
     }
 
