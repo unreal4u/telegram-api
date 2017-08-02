@@ -2,22 +2,21 @@
 
 declare(strict_types = 1);
 
-include 'basics.php';
+include __DIR__.'/basics.php';
 
-use GuzzleHttp\Exception\ClientException;
+use React\EventLoop\Factory;
+use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = \React\EventLoop\Factory::create();
-$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
-$tgLog = new TgLog(BOT_TOKEN, $handler);
+$loop = Factory::create();
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 
 $userProfilePhotos = new GetUserProfilePhotos();
 $userProfilePhotos->user_id = A_USER_ID;
 
-$promise = $tgLog->performApiRequest($userProfilePhotos);
-
-$promise->then(
+$userProfilePhotosPromise = $tgLog->performApiRequest($userProfilePhotos);
+$userProfilePhotosPromise->then(
     function ($response) {
         echo '<pre>';
         var_dump($response);

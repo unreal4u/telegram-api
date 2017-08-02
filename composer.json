@@ -9,7 +9,7 @@
   "authors": [
     {
       "name": "Camilo Sperberg",
-      "email": "me@unreal4u.com",
+      "email": "me+tgapi@unreal4u.com",
       "homepage": "https://github.com/unreal4u/telegram-api/graphs/contributors"
     }
   ],
@@ -17,7 +17,8 @@
     "php": ">=7.0.0",
     "psr/log": "^1.0",
     "react/http-client": "^0.5",
-    "react/promise": "^2.5"
+    "react/promise": "^2.5",
+    "clue/block-react": "^1.1"
   },
   "require-dev": {
     "monolog/monolog": "^1.17",

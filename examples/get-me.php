@@ -2,29 +2,24 @@
 
 declare(strict_types = 1);
 
-include 'basics.php';
+include __DIR__.'/basics.php';
 
-use GuzzleHttp\Exception\ClientException;
+use React\EventLoop\Factory;
+use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
 use unreal4u\TelegramAPI\TgLog;
+use \unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
-$loop = \React\EventLoop\Factory::create();
-$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
-$tgLog = new TgLog(BOT_TOKEN, $handler);
+$loop = Factory::create();
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 
-$getMe = new GetMe();
-
-$promise = $tgLog->performApiRequest($getMe);
-
-$promise->then(
-    function ($response) {
-        echo '<pre>';
-        var_dump($response);
-        echo '</pre>';
+$getMePromise = $tgLog->performApiRequest(new GetMe());
+$getMePromise->then(
+    function(TelegramTypes $getMeResponse) {
+        var_dump($getMeResponse);
     },
-    function (\Exception $exception) {
-        // Onoes, an exception occurred...
-        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+    function(\Exception $e) {
+        var_dump($e);
     }
 );
 

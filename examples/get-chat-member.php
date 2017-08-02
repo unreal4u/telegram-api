@@ -2,22 +2,22 @@
 
 declare(strict_types = 1);
 
-include 'basics.php';
+include __DIR__.'/basics.php';
 
+use React\EventLoop\Factory;
+use \unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\GetChatMember;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = \React\EventLoop\Factory::create();
-$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
-$tgLog = new TgLog(BOT_TOKEN, $handler);
+$loop = Factory::create();
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 
-$getCM = new GetChatMember();
-$getCM->chat_id = A_GROUP_CHAT_ID;
-$getCM->user_id = A_USER_CHAT_ID;
+$getChatMember = new GetChatMember();
+$getChatMember->chat_id = A_GROUP_CHAT_ID;
+$getChatMember->user_id = A_USER_CHAT_ID;
 
-$promise = $tgLog->performApiRequest($getCM);
-
-$promise->then(
+$getChatMemberPromise = $tgLog->performApiRequest($getChatMember);
+$getChatMemberPromise->then(
     function ($response) {
         echo '<pre>';
         var_dump($response);
