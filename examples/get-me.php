@@ -15,10 +15,10 @@ $tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 
 $getMePromise = $tgLog->performApiRequest(new GetMe());
 $getMePromise->then(
-    function(TelegramTypes $getMeResponse) {
+    function (TelegramTypes $getMeResponse) {
         var_dump($getMeResponse);
     },
-    function(\Exception $e) {
+    function (\Exception $e) {
         var_dump($e);
     }
 );
