@@ -61,6 +61,12 @@ class Message extends TelegramTypes
     public $forward_from_message_id = 0;
 
     /**
+     * Optional. For messages forwarded from channels, signature of the post author if present
+     * @var string
+     */
+    public $forward_signature = '';
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      * @var int
      */
@@ -78,6 +84,12 @@ class Message extends TelegramTypes
      * @var int
      */
     public $edit_date = 0;
+
+    /**
+     * Optional. Signature of the post author for messages in channels
+     * @var string
+     */
+    public $author_signature = '';
 
     /**
      * Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters

@@ -22,6 +22,12 @@ class User extends TelegramTypes
     public $id = 0;
 
     /**
+     * True, if this user is a bot
+     * @var bool
+     */
+    public $is_bot = false;
+
+    /**
      * User‘s or bot’s first name
      * @var string
      */
