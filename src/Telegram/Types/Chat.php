@@ -77,11 +77,19 @@ class Chat extends TelegramTypes
      */
     public $invite_link = '';
 
+    /**
+     * Optional. Pinned message, for supergroups. Returned only in getChat
+     * @var Message
+     */
+    public $pinned_message;
+
     public function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
             case 'photo':
                 return new ChatPhoto($data, $this->logger);
+            case 'pinned_message':
+                return new Message($data, $this->logger);
         }
         return parent::mapSubObjects($key, $data);
     }
