@@ -114,9 +114,13 @@ class PostOptionsConstructor
 
         foreach ($data as $id => $value) {
             if ($id === $fileKeyName) {
-                $data = new MultipartData($id, stream_get_contents($stream), pathinfo($filename, PATHINFO_BASENAME));
+                $data = new MultipartData(
+                    (string) $id,
+                    stream_get_contents($stream),
+                    pathinfo($filename, PATHINFO_BASENAME)
+                );
             } else {
-                $data = new MultipartData($id, $value);
+                $data = new MultipartData((string) $id, $value);
             }
             
             $builder->append($data);
