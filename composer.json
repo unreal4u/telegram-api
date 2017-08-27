@@ -18,7 +18,8 @@
     "psr/log": "^1.0",
     "react/http-client": "^0.5",
     "react/promise": "^2.5",
-    "clue/block-react": "^1.1"
+    "clue/block-react": "^1.1",
+    "yoshi2889/multipart-builder": "^0.1"
   },
   "require-dev": {
     "monolog/monolog": "^1.17",

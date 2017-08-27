@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
-use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendChatAction;
 use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -22,7 +21,7 @@ $tgLog->performApiRequest($sendChatAction);
 
 $sendVideo = new SendVideo();
 $sendVideo->chat_id = A_USER_CHAT_ID;
-$sendVideo->video = new InputFile('examples/binary-test-data/demo-video.mp4');
+$sendVideo->video = new InputFile('binary-test-data/demo-video.mp4');
 $sendVideo->caption = 'Example of a video file sent with Telegram';
 
 $promise = $tgLog->performApiRequest($sendVideo);

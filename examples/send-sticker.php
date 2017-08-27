@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
-use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendSticker;
 use unreal4u\TelegramAPI\TgLog;
 
