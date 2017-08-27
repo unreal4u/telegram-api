@@ -120,7 +120,7 @@ class PostOptionsConstructor
                     pathinfo($filename, PATHINFO_BASENAME)
                 );
             } else {
-                $data = new MultipartData((string) $id, $value);
+                $data = new MultipartData((string) $id, (string) $value);
             }
             
             $builder->append($data);
