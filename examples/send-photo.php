@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 include 'basics.php';
 
-use GuzzleHttp\Exception\ClientException;
 use unreal4u\TelegramAPI\Telegram\Methods\SendPhoto;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\TgLog;
@@ -15,7 +14,7 @@ $tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $sendPhoto = new SendPhoto();
 $sendPhoto->chat_id = A_USER_CHAT_ID;
-$sendPhoto->photo = new InputFile('examples/binary-test-data/demo-photo.jpg');
+$sendPhoto->photo = new InputFile('binary-test-data/demo-photo.jpg');
 $sendPhoto->caption = 'Not sure if sending image or image not arriving';
 
 $promise = $tgLog->performApiRequest($sendPhoto);

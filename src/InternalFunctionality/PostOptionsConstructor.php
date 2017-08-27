@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
+use MultipartBuilder\Builder;
+use MultipartBuilder\MultipartData;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -47,10 +49,16 @@ class PostOptionsConstructor
         $result = $this->checkIsMultipart($method);
 
         if (!empty($result)) {
-            return $this->constructMultipartOptions($method->export(), $result['id'], $result['stream']);
+            return $this->constructMultipartOptions(
+                $method->export(),
+                $result['id'],
+                $result['stream'],
+                $result['filename']
+            );
         }
 
         $body = http_build_query($method->export(), '', '&');
+        
         return [
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
@@ -81,7 +89,8 @@ class PostOptionsConstructor
                 $this->formType = 'multipart/form-data';
                 $return = [
                     'id' => $key,
-                    'stream' => $value->getStream(),
+                    'filename' => $value->path,
+                    'stream' => $value->getStream()
                 ];
             }
         }
@@ -95,34 +104,32 @@ class PostOptionsConstructor
      * @param array $data The original object in array form
      * @param string $fileKeyName A file handler will be sent instead of a string, state here which field it is
      * @param resource $stream The actual file handler
+     * @param string $filename
      * @return array Returns the actual formdata to be sent
      */
-    public function constructMultipartOptions(array $data, string $fileKeyName, $stream): array
+    public function constructMultipartOptions(array $data, string $fileKeyName, $stream, string $filename): array
     {
+        $builder = new Builder();
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
 
-        $multiPartArray = [];
         foreach ($data as $id => $value) {
-            // Always send as a string unless it's a file
-            $multiPart = [
-                'name' => $id,
-                'contents' => null,
-            ];
-
             if ($id === $fileKeyName) {
-                $multiPart['contents'] = $stream;
+                $data = new MultipartData($id, stream_get_contents($stream), pathinfo($filename, PATHINFO_BASENAME));
             } else {
-                $multiPart['contents'] = (string)$value;
+                $data = new MultipartData($id, $value);
             }
-
-            $multiPartArray[] = $multiPart;
+            
+            $builder->append($data);
         }
 
-        return [
+        $body = $builder->buildAll();
+        $array = [
             'headers' => [
-                'Content-Type' => 'multipart/form-data'
+                'Content-Type' => 'multipart/form-data; boundary="' . $builder->getBoundary() . '"',
+                'Content-Length' => strlen($body)
             ],
-            'body' => $multiPartArray
+            'body' => $body
         ];
+        return $array;
     }
 }
