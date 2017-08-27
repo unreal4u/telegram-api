@@ -669,16 +669,16 @@
         },
         {
             "name": "yoshi2889/multipart-builder",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoshi2889/multipart-builder.git",
-                "reference": "ca7948771b723e628a6062805c868c23ac1ae05c"
+                "reference": "6b97bdfe0270d177dcd35370d5eea2c771198e31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yoshi2889/multipart-builder/zipball/ca7948771b723e628a6062805c868c23ac1ae05c",
-                "reference": "ca7948771b723e628a6062805c868c23ac1ae05c",
+                "url": "https://api.github.com/repos/Yoshi2889/multipart-builder/zipball/6b97bdfe0270d177dcd35370d5eea2c771198e31",
+                "reference": "6b97bdfe0270d177dcd35370d5eea2c771198e31",
                 "shasum": ""
             },
             "require": {
@@ -707,7 +707,7 @@
                 }
             ],
             "description": "Stream-independent RFC2388 compliant multipart form data builder.",
-            "time": "2017-08-27T20:03:42+00:00"
+            "time": "2017-08-27T20:19:33+00:00"
         }
     ],
     "packages-dev": [
