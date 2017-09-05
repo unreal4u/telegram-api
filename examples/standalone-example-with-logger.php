@@ -12,8 +12,10 @@
  */
 declare(strict_types = 1);
 
-include 'basics.php';
+include __DIR__.'/basics.php';
 
+use React\EventLoop\Factory;
+use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
@@ -23,9 +25,8 @@ use unreal4u\TelegramAPI\TgLog;
 $logger = new Logger('CUSTOM-EXAMPLE');
 $logger->pushHandler(new StreamHandler('logs/custom-example.log'));
 
-$loop = \React\EventLoop\Factory::create();
-$handler = new \unreal4u\TelegramAPI\HttpClientRequestHandler($loop);
-$tgLog = new TgLog(BOT_TOKEN, $handler, $logger);
+$loop = Factory::create();
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop), $logger);
 
 $userProfilePhotos = new GetUserProfilePhotos();
 $userProfilePhotos->user_id = A_USER_ID;
