@@ -27,6 +27,13 @@ All known bugs can be found in the form of issues or pull requests. Found a new 
 [create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
 in the [special group](https://t.me/PHPBotAPI) :)
 
+## Roadmap
+
+- v3 (master branch) is the current active branch.
+- v2 (v2 branch) will be updated with the latest Bot API updates until at least April 2018. Depending on usage and some other factors, this can be extended.
+- v1 is deprecated and no new work will be done there.
+- v0 is deprecated and no new work will be done there.
+
 ## Installation
 
 [![Total Downloads](https://poser.pugx.org/unreal4u/telegram-api/downloads)](https://packagist.org/packages/unreal4u/telegram-api)
