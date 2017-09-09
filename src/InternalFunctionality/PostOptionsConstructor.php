@@ -63,7 +63,7 @@ class PostOptionsConstructor
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Content-Length' => strlen($body),
-                'User-Agent: PHP7+ Bot API',
+                'User-Agent' => 'PHP7+ Bot API',
             ],
             'body' => $body
         ];

@@ -13,7 +13,7 @@ use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
-class HttpClientRequestHandler implements RequestHandlerInterface
+class HttpClientRequestHandlerReact implements RequestHandlerInterface
 {
     /**
      * @var Client
@@ -56,7 +56,7 @@ class HttpClientRequestHandler implements RequestHandlerInterface
      * @param mixed $data
      * @return PromiseInterface
      */
-    public function processRequest(Request $request, $data = null): PromiseInterface
+    private function processRequest(Request $request, $data = null): PromiseInterface
     {
         $deferred = new Deferred();
 
