@@ -47,7 +47,7 @@ class HttpClientRequestHandlerAmp implements RequestHandlerInterface {
      * @return PromiseInterface
      */
     public function get(string $uri): PromiseInterface {
-         $request = (new Request($uri))->withMethod('GET');
+         $request = (new Request($uri));
 
          return $this->processRequest($request);
     }
@@ -59,7 +59,7 @@ class HttpClientRequestHandlerAmp implements RequestHandlerInterface {
      * @return PromiseInterface
      */
     public function post(string $uri, array $formFields): PromiseInterface {
-        $request = (new Request($uri))->withMethod('POST');
+        $request = new Request($uri, 'POST');
 
         if (!empty($formFields['headers']))
             $request = $request->withHeaders($formFields['headers']);
