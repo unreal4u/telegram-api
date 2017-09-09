@@ -5,13 +5,13 @@ declare(strict_types = 1);
 include __DIR__.'/basics.php';
 
 use React\EventLoop\Factory;
-use unreal4u\TelegramAPI\HttpClientRequestHandlerReact;
+use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\SendInvoice;
 use unreal4u\TelegramAPI\Telegram\Types\LabeledPrice;
 use unreal4u\TelegramAPI\TgLog;
 
 $loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandlerReact($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 
 $sendInvoice = new SendInvoice();
 $sendInvoice->chat_id = A_USER_CHAT_ID;

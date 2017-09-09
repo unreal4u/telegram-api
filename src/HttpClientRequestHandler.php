@@ -13,7 +13,7 @@ use React\Promise\PromiseInterface;
 use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
-class HttpClientRequestHandlerReact implements RequestHandlerInterface
+class HttpClientRequestHandler implements RequestHandlerInterface
 {
     /**
      * @var Client

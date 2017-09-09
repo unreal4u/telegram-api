@@ -5,7 +5,7 @@ declare(strict_types = 1);
 include __DIR__.'/basics.php';
 
 use React\EventLoop\Factory;
-use unreal4u\TelegramAPI\HttpClientRequestHandlerReact;
+use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use unreal4u\TelegramAPI\Telegram\Methods\EditMessageText;
@@ -17,7 +17,7 @@ $logger = new Logger('CUSTOM-EXAMPLE');
 $logger->pushHandler(new StreamHandler('logs/custom-example.log'));
 
 $loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandlerReact($loop), $logger);
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop), $logger);
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world, this is a test';
