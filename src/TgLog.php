@@ -91,6 +91,7 @@ class TgLog
                 return $method::bindToObject($response, $this->logger);
             }, function ($error) {
                 $this->logger->error($error);
+                throw $error;
             });
     }
 

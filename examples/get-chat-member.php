@@ -25,7 +25,7 @@ $getChatMemberPromise->then(
     },
     function (\Exception $exception) {
         // Onoes, an exception occurred...
-        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
+        echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage().PHP_EOL;
     }
 );
 
