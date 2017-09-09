@@ -17,5 +17,7 @@ use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
     $sendMessage->chat_id = A_USER_CHAT_ID;
     $sendMessage->text = 'Hello world!';
 
-    $tgLog->performApiRequest($sendMessage);
+    $result = yield $tgLog->performApiRequest($sendMessage);
+
+    var_dump($result);
 });

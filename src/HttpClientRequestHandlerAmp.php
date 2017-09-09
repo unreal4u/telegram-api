@@ -65,9 +65,8 @@ class HttpClientRequestHandlerAmp implements RequestHandlerInterface
      * @return PromiseInterface
      * @throws \unreal4u\TelegramAPI\Exceptions\ClientException
      */
-    public function post(string $uri, array $formFields): PromiseInterface
-    {
-        $request = (new Request($uri))->withMethod('POST');
+    public function post(string $uri, array $formFields): PromiseInterface {
+        $request = new Request($uri, 'POST');
 
         if (!empty($formFields['headers'])) {
             $request = $request->withHeaders($formFields['headers']);
