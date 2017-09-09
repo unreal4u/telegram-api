@@ -15,7 +15,7 @@ $tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandlerReact($loop));
 
 $sendPhoto = new SendPhoto();
 $sendPhoto->chat_id = A_USER_CHAT_ID;
-$sendPhoto->photo = new InputFile('binary-test-data/demo-photo.jpg');
+$sendPhoto->photo = new InputFile(__DIR__ . '/binary-test-data/demo-photo.jpg');
 $sendPhoto->caption = 'Not sure if sending image or image not arriving';
 
 $promise = $tgLog->performApiRequest($sendPhoto);
