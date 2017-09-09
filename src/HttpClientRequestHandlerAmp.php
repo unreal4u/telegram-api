@@ -16,7 +16,7 @@ use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
  * @param Promise $promise
  * @return \React\Promise\PromiseInterface
  */
-function omgAdapt(Promise $promise) {
+function reactAdapt(Promise $promise) {
     $deferred = new \React\Promise\Deferred();
 
     $promise->onResolve(function ($error = null, $result = null) use ($deferred) {
@@ -76,7 +76,7 @@ class HttpClientRequestHandlerAmp implements RequestHandlerInterface {
      * @return PromiseInterface
      */
     private function processRequest(Request $request) {
-        return omgAdapt(\Amp\call(function () use ($request) {
+        return reactAdapt(\Amp\call(function () use ($request) {
             /** @var Response $response */
             $response = yield $this->client->request($request);
 
