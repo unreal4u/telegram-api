@@ -56,7 +56,7 @@ class HttpClientRequestHandler implements RequestHandlerInterface
      * @param mixed $data
      * @return PromiseInterface
      */
-    private function processRequest(Request $request, $data = null): PromiseInterface
+    public function processRequest(Request $request, $data = null): PromiseInterface
     {
         $deferred = new Deferred();
 

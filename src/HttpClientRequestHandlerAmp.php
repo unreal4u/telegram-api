@@ -86,7 +86,7 @@ class HttpClientRequestHandlerAmp implements RequestHandlerInterface
      * @return PromiseInterface
      * @throws \unreal4u\TelegramAPI\Exceptions\ClientException
      */
-    private function processRequest(Request $request)
+    public function processRequest(Request $request)
     {
         return reactAdapt(\Amp\call(function () use ($request) {
             /** @var Response $response */
