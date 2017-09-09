@@ -90,7 +90,7 @@ class TgLog
             ->then(function (TelegramResponse $response) use ($method) {
                 return $method::bindToObject($response, $this->logger);
             }, function ($error) {
-                echo $error;
+                $this->logger->error($error);
             });
     }
 
