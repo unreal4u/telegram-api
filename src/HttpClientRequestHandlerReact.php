@@ -56,7 +56,7 @@ class HttpClientRequestHandlerReact implements RequestHandlerInterface
      * @param mixed $data
      * @return PromiseInterface
      */
-    public function processRequest(Request $request, $data = null): PromiseInterface
+    private function processRequest(Request $request, $data = null): PromiseInterface
     {
         $deferred = new Deferred();
 

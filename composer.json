@@ -16,6 +16,9 @@
   "require": {
     "php": ">=7.0.0",
     "psr/log": "^1.0",
+    "react/http-client": "^0.5",
+    "react/promise": "^2.5",
+    "clue/block-react": "^1.1",
     "yoshi2889/multipart-builder": "^0.1.1",
     "amphp/artax": "^3"
   },

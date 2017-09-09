@@ -89,6 +89,8 @@ class TgLog
         return $this->sendRequestToTelegram($method, $option)
             ->then(function (TelegramResponse $response) use ($method) {
                 return $method::bindToObject($response, $this->logger);
+            }, function ($error) {
+                echo $error;
             });
     }
 
