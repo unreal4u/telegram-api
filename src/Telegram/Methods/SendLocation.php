@@ -10,7 +10,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 /**
  * Use this method to send point on the map. On success, the sent Message is returned.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is october 2017
  *
  * @see https://core.telegram.org/bots/api#sendlocation
  */
@@ -33,6 +33,13 @@ class SendLocation extends TelegramMethods
      * @var float
      */
     public $longitude = 0.0;
+
+    /**
+     * Optional. Period in seconds for which the location will be updated (see Live Locations), should be between 60 and
+     * 86400
+     * @var int
+     */
+    public $live_period = 0;
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

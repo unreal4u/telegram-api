@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
  * Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use
  * input_message_content to send a message with the specified content instead of the location.
  *
- * Objects defined as-is april 2016
+ * Objects defined as-is october 2017
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultlocation
  */
@@ -40,6 +40,12 @@ class Location extends Result
      * @var string
      */
     public $title = '';
+
+    /**
+     * Optional. Period in seconds for which the location can be updated, should be between 60 and 86400
+     * @var int
+     */
+    public $live_period = 0;
 
     /**
      * Optional. Url of the thumbnail for the result
