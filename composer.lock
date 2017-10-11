@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "916cf3119d96ba6d3b5a8c9d9bdd258960400141"
+                "reference": "8b136336a9af595d00681c1407ef598ccfa599ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/916cf3119d96ba6d3b5a8c9d9bdd258960400141",
-                "reference": "916cf3119d96ba6d3b5a8c9d9bdd258960400141",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/8b136336a9af595d00681c1407ef598ccfa599ab",
+                "reference": "8b136336a9af595d00681c1407ef598ccfa599ab",
                 "shasum": ""
             },
             "require": {
@@ -79,20 +79,20 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2017-07-09T12:20:40+00:00"
+            "time": "2017-09-19T19:08:25+00:00"
         },
         {
             "name": "amphp/artax",
-            "version": "v3.0.4",
+            "version": "v3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/artax.git",
-                "reference": "48008dcfd6e7376d5631a6c55bdf01ff94878537"
+                "reference": "252eb90d06acea9b534ae0850ac61c92dc7fb52b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/artax/zipball/48008dcfd6e7376d5631a6c55bdf01ff94878537",
-                "reference": "48008dcfd6e7376d5631a6c55bdf01ff94878537",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/252eb90d06acea9b534ae0850ac61c92dc7fb52b",
+                "reference": "252eb90d06acea9b534ae0850ac61c92dc7fb52b",
                 "shasum": ""
             },
             "require": {
@@ -138,20 +138,20 @@
                 "parallel",
                 "rest"
             ],
-            "time": "2017-07-14T13:01:08+00:00"
+            "time": "2017-10-09T08:50:12+00:00"
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v1.1.2",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "6b9074fbf28fc871581204f5106c819004ed3aa3"
+                "reference": "d60ba033c41d3329419575f2fbb02230855c258e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/6b9074fbf28fc871581204f5106c819004ed3aa3",
-                "reference": "6b9074fbf28fc871581204f5106c819004ed3aa3",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/d60ba033c41d3329419575f2fbb02230855c258e",
+                "reference": "d60ba033c41d3329419575f2fbb02230855c258e",
                 "shasum": ""
             },
             "require": {
@@ -195,20 +195,20 @@
                 "non-blocking",
                 "stream"
             ],
-            "time": "2017-07-15T08:11:27+00:00"
+            "time": "2017-10-08T10:38:01+00:00"
         },
         {
             "name": "amphp/cache",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cache.git",
-                "reference": "d6ab81ce35019b0fd84ca6d665fd4817bfd11701"
+                "reference": "ab2339e465d9d383dc748f288d530fd7cd7aadea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cache/zipball/d6ab81ce35019b0fd84ca6d665fd4817bfd11701",
-                "reference": "d6ab81ce35019b0fd84ca6d665fd4817bfd11701",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/ab2339e465d9d383dc748f288d530fd7cd7aadea",
+                "reference": "ab2339e465d9d383dc748f288d530fd7cd7aadea",
                 "shasum": ""
             },
             "require": {
@@ -241,20 +241,20 @@
             ],
             "description": "A promise-aware caching API for Amp.",
             "homepage": "https://github.com/amphp/cache",
-            "time": "2017-06-24T09:51:10+00:00"
+            "time": "2017-10-04T19:22:12+00:00"
         },
         {
             "name": "amphp/dns",
-            "version": "v0.9.7",
+            "version": "v0.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "4005ff4d32972121fde11a2323a7d52fd7fbc490"
+                "reference": "1a41089d84675bbeed3b5c655ffccd3318a21f37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/4005ff4d32972121fde11a2323a7d52fd7fbc490",
-                "reference": "4005ff4d32972121fde11a2323a7d52fd7fbc490",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/1a41089d84675bbeed3b5c655ffccd3318a21f37",
+                "reference": "1a41089d84675bbeed3b5c655ffccd3318a21f37",
                 "shasum": ""
             },
             "require": {
@@ -318,7 +318,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2017-08-09T16:53:33+00:00"
+            "time": "2017-09-12T15:08:38+00:00"
         },
         {
             "name": "amphp/file",
@@ -624,16 +624,16 @@
         },
         {
             "name": "amphp/uri",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/uri.git",
-                "reference": "59b0d5df331f7a02da8b1c7f2d092c4722e97aa9"
+                "reference": "2de94666447319d8695f2d11f3f005d5fee0876a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/uri/zipball/59b0d5df331f7a02da8b1c7f2d092c4722e97aa9",
-                "reference": "59b0d5df331f7a02da8b1c7f2d092c4722e97aa9",
+                "url": "https://api.github.com/repos/amphp/uri/zipball/2de94666447319d8695f2d11f3f005d5fee0876a",
+                "reference": "2de94666447319d8695f2d11f3f005d5fee0876a",
                 "shasum": ""
             },
             "require-dev": {
@@ -664,7 +664,7 @@
             ],
             "description": "Uri Parser and Resolver.",
             "homepage": "https://github.com/amphp/uri",
-            "time": "2017-06-24T07:41:03+00:00"
+            "time": "2017-09-10T09:39:50+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -1168,16 +1168,16 @@
         },
         {
             "name": "react/http-client",
-            "version": "v0.5.4",
+            "version": "v0.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/http-client.git",
-                "reference": "e11eef9c82595a42a8523252bafe4bb5cbfb306d"
+                "reference": "eb521c0f9de9b9780b9ced78d90314085632377f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/http-client/zipball/e11eef9c82595a42a8523252bafe4bb5cbfb306d",
-                "reference": "e11eef9c82595a42a8523252bafe4bb5cbfb306d",
+                "url": "https://api.github.com/repos/reactphp/http-client/zipball/eb521c0f9de9b9780b9ced78d90314085632377f",
+                "reference": "eb521c0f9de9b9780b9ced78d90314085632377f",
                 "shasum": ""
             },
             "require": {
@@ -1186,8 +1186,8 @@
                 "php": ">=5.4.0",
                 "react/event-loop": "^1.0 || ^0.5 || ^0.4 || ^0.3",
                 "react/promise": "~2.2",
-                "react/socket": "^1.0 || ^0.8.2",
-                "react/stream": "^1.0 || ^0.7 || ^0.6 || ^0.5 || ^0.4.2"
+                "react/socket": "^1.0 || ^0.8.4",
+                "react/stream": "^1.0 || ^0.7.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.0 || ^4.8.10"
@@ -1206,7 +1206,7 @@
             "keywords": [
                 "http"
             ],
-            "time": "2017-08-25T12:20:26+00:00"
+            "time": "2017-09-17T14:41:00+00:00"
         },
         {
             "name": "react/promise",
@@ -1309,16 +1309,16 @@
         },
         {
             "name": "react/socket",
-            "version": "v0.8.3",
+            "version": "v0.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket.git",
-                "reference": "03f4f6a762633b2e07b3598d83830c15875e087f"
+                "reference": "ce2b577c2d69ee071c3f9e552942c320caa87e0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket/zipball/03f4f6a762633b2e07b3598d83830c15875e087f",
-                "reference": "03f4f6a762633b2e07b3598d83830c15875e087f",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/ce2b577c2d69ee071c3f9e552942c320caa87e0a",
+                "reference": "ce2b577c2d69ee071c3f9e552942c320caa87e0a",
                 "shasum": ""
             },
             "require": {
@@ -1352,20 +1352,20 @@
                 "reactphp",
                 "stream"
             ],
-            "time": "2017-09-08T14:15:16+00:00"
+            "time": "2017-09-16T17:16:49+00:00"
         },
         {
             "name": "react/stream",
-            "version": "v0.7.3",
+            "version": "v0.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/stream.git",
-                "reference": "5cc7bec91dc3f6ad123a81602489b82fdb180090"
+                "reference": "5c7db5261b3cc7e11b8ba765bed8ba31ee745f5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/stream/zipball/5cc7bec91dc3f6ad123a81602489b82fdb180090",
-                "reference": "5cc7bec91dc3f6ad123a81602489b82fdb180090",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/5c7db5261b3cc7e11b8ba765bed8ba31ee745f5c",
+                "reference": "5c7db5261b3cc7e11b8ba765bed8ba31ee745f5c",
                 "shasum": ""
             },
             "require": {
@@ -1401,7 +1401,7 @@
                 "stream",
                 "writable"
             ],
-            "time": "2017-08-05T09:16:09+00:00"
+            "time": "2017-10-11T17:58:46+00:00"
         },
         {
             "name": "yoshi2889/collections",
@@ -2931,16 +2931,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "c7594a88ae75401e8f8d0bd4deb8431b39045c51"
+                "reference": "3c2d0a0fe39684ba0c1eb842a6a775d0b938d699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/c7594a88ae75401e8f8d0bd4deb8431b39045c51",
-                "reference": "c7594a88ae75401e8f8d0bd4deb8431b39045c51",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/3c2d0a0fe39684ba0c1eb842a6a775d0b938d699",
+                "reference": "3c2d0a0fe39684ba0c1eb842a6a775d0b938d699",
                 "shasum": ""
             },
             "require": {
@@ -2950,7 +2950,7 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
             },
             "bin": [
                 "bin/phpcs",
@@ -2978,7 +2978,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-07-18T01:12:32+00:00"
+            "time": "2017-09-19T22:47:14+00:00"
         },
         {
             "name": "theseer/tokenizer",
