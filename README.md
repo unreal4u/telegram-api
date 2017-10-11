@@ -9,13 +9,13 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.3](https://core.telegram.org/bots/api-changelog#august-23-2017)
+This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.4](https://core.telegram.org/bots/api#october-11-2017)
 
 ### About this class
 
 * Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
 * Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
-* Doesn't need any dependency, except for Guzzle, which you can inyect if you already use it elsewhere.
+* Doesn't need any dependency, except for Guzzle, which you can inject if you already use it elsewhere.
 * **Full** inline bots support.
 * **Full** support for payment system.
 
@@ -37,7 +37,7 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.6"
+    "unreal4u/telegram-api": "~2.8"
   }
 }
 ```
