@@ -83,6 +83,18 @@ class Chat extends TelegramTypes
      */
     public $pinned_message;
 
+    /**
+     * Optional. For supergroups, name of Group sticker set. Returned only in getChat
+     * @var string
+     */
+    public $sticker_set_name = '';
+
+    /**
+     * Optional. True, if the bot can change group the sticker set. Returned only in getChat
+     * @var bool
+     */
+    public $can_set_sticker_set = false;
+
     public function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
