@@ -104,6 +104,13 @@ class Message extends TelegramTypes
     public $entities = [];
 
     /**
+     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in
+     * the caption
+     * @var MessageEntityArray
+     */
+    public $caption_entities = [];
+
+    /**
      * Optional. Message is an audio file, information about the file
      * @var Audio
      */
@@ -298,6 +305,7 @@ class Message extends TelegramTypes
             case 'pinned_message':
                 return new Message($data, $this->logger);
             case 'entities':
+            case 'caption_entities':
                 return new MessageEntityArray($data, $this->logger);
             case 'audio':
                 return new Audio($data, $this->logger);

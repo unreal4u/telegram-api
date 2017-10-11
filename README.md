@@ -9,7 +9,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.3](https://core.telegram.org/bots/api-changelog#august-23-2017)
+This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.4](https://core.telegram.org/bots/api#october-11-2017)
 
 ### About this class
 
@@ -44,7 +44,7 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~3.0"
+    "unreal4u/telegram-api": "~3.2"
   }
 }
 ```
