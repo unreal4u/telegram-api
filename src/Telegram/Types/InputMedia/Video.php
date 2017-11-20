@@ -7,11 +7,11 @@ namespace unreal4u\TelegramAPI\Telegram\Types\InputMedia;
 use unreal4u\TelegramAPI\Telegram\Types\InputMedia;
 
 /**
- * Represents a photo to be sent.
+ * Represents a video to be sent.
  *
  * Objects defined as-is november 2017
  *
- * @see https://core.telegram.org/bots/api#inputmediaphoto
+ * @see https://core.telegram.org/bots/api#inputmediavideo
  */
 class Video extends InputMedia
 {
