@@ -3,15 +3,14 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
-use unreal4u\TelegramAPI\Abstracts\CustomType;
 use Psr\Log\LoggerInterface;
-use unreal4u\TelegramAPI\Interfaces\CustomArrayType;
+use unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 
 /**
  * Used for methods that will return an array of messages
  */
-class MessageArray extends CustomType implements CustomArrayType
+class MessageArray extends TraversableCustomType
 {
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
