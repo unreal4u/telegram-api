@@ -9,7 +9,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.4](https://core.telegram.org/bots/api#october-11-2017)
+This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.5](https://core.telegram.org/bots/api#november-17-2017)
 
 ### About this class
 
@@ -18,6 +18,12 @@ This is a PHP7 bot API implementation for Telegram implementing the **totality**
 * Doesn't need any dependency, except for Guzzle, which you can inject if you already use it elsewhere.
 * **Full** inline bots support.
 * **Full** support for payment system.
+
+## Quick note
+
+This is the v2 branch which will cease to receive any more updates starting from April 2018. Please use the v3 branch if
+you are starting a new project or read about the [upgrade notes](https://github.com/unreal4u/telegram-api/wiki/Upgrading-from-v2-to-v3)
+so that you can refactor to v3.
 
 ## Known bugs
 
@@ -37,7 +43,7 @@ The preferred (and only for now) installation method is Composer, so add the fol
 ```json
 {
   "require": {
-    "unreal4u/telegram-api": "~2.8"
+    "unreal4u/telegram-api": "~2.9"
   }
 }
 ```
