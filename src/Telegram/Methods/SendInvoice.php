@@ -11,7 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Types\LabeledPrice;
 /**
  * Use this method to send invoices. On success, the sent Message is returned.
  *
- * Objects defined as-is May 2017
+ * Objects defined as-is november 2017
  *
  * @see https://core.telegram.org/bots/api#sendinvoice
  */
@@ -66,6 +66,15 @@ class SendInvoice extends TelegramMethods
      * @var LabeledPrice[]
      */
     public $prices = [];
+
+    /**
+     * Array data about the invoice, which will be shared with the payment provider. A detailed description of
+     * required fields should be provided by the payment provider.
+     *
+     * The conversion to JSON-encoded string will be handled by the class itself.
+     * @var array
+     */
+    public $provider_data;
 
     /**
      * Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a
@@ -151,6 +160,10 @@ class SendInvoice extends TelegramMethods
     {
         if (!empty($this->prices)) {
             $this->prices = json_encode($this->prices);
+        }
+
+        if (!empty($this->provider_data)) {
+            $this->provider_data = json_encode($this->provider_data);
         }
 
         return parent::performSpecialConditions();
