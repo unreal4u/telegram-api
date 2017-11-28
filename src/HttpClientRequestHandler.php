@@ -10,6 +10,7 @@ use React\HttpClient\Request;
 use React\HttpClient\Response;
 use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
+use React\Socket\Connector;
 use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
@@ -23,10 +24,11 @@ class HttpClientRequestHandler implements RequestHandlerInterface
     /**
      * HttpClientRequestHandler constructor.
      * @param LoopInterface $loop
+     * @param array $options Use this to set options such as DNS and alike
      */
-    public function __construct(LoopInterface $loop)
+    public function __construct(LoopInterface $loop, array $options = [])
     {
-        $this->client = new Client($loop);
+        $this->client = new Client($loop, new Connector($loop, $options));
     }
 
     /**
