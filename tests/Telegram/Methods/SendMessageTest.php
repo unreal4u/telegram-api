@@ -132,4 +132,25 @@ class SendMessageTest extends TestCase
 
         $this->tgLog->performApiRequest($sendMessage);
     }
+
+    public function testKickedBot()
+    {
+        $this->tgLog->specificTest = 'botWasKicked';
+        $this->tgLog->mockException = true;
+
+        $sendMessage = new SendMessage();
+        $sendMessage->text = 'Hello world!';
+        $sendMessage->chat_id = 0;
+
+        try {
+            $this->tgLog->performApiRequest($sendMessage);
+        } catch (MockClientException $e) {
+            $this->assertInstanceOf(\stdClass::class, $e->decodedResponse);
+            $this->assertEquals(403, $e->decodedResponse->error_code);
+
+            // Rethrow and set the expected exception this time
+            $this->expectException(MockClientException::class);
+            throw $e;
+        }
+    }
 }
