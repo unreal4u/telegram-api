@@ -80,11 +80,15 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         $cleanObject = new $this();
         foreach ($cleanObject as $fieldId => $value) {
             if ($this->$fieldId === $cleanObject->$fieldId) {
-                if (in_array($fieldId, $mandatoryFields, true)) {
-                    throw new MissingMandatoryField(sprintf(
-                        'The field "%s" is mandatory and empty, please correct',
-                        $fieldId
+                if (\in_array($fieldId, $mandatoryFields, true)) {
+                    $missingMandatoryField = new MissingMandatoryField(sprintf(
+                        'The field "%s" for class "%s" is mandatory and empty, please correct',
+                        $fieldId,
+                        \get_class($cleanObject)
                     ));
+                    $missingMandatoryField->method = \get_class($cleanObject);
+                    $missingMandatoryField->methodInstance = $this;
+                    throw $missingMandatoryField;
                 }
             } else {
                 $finalArray[$fieldId] = $this->$fieldId;
@@ -144,7 +148,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         foreach ($keyboardArray as $rowItems) {
             $elements = [];
             foreach ($rowItems as $rowItem) {
-                if (is_object($rowItem)) {
+                if (\is_object($rowItem)) {
                     // Button is effectively an object
                     $elements[] = $this->exportReplyMarkupItem($rowItem);
                 } else {

@@ -6,4 +6,7 @@ namespace unreal4u\TelegramAPI\Exceptions;
 
 class MissingMandatoryField extends \RuntimeException
 {
+    public $method;
+
+    public $methodInstance;
 }
