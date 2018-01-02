@@ -6,8 +6,8 @@ namespace unreal4u\TelegramAPI;
 
 use Psr\Log\LoggerInterface;
 use React\Promise\PromiseInterface;
+use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
-use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\PostOptionsConstructor;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
@@ -64,7 +64,7 @@ class TgLog
 
         // Initialize new dummy logger (PSR-3 compatible) if not injected
         if ($logger === null) {
-            $logger = new DummyLogger();
+            $logger = new Logger();
         }
         $this->logger = $logger;
 
@@ -113,6 +113,8 @@ class TgLog
     }
 
     /**
+     * This is the method that actually makes the call, which can be easily overwritten so that our unit tests can work
+     *
      * @param TelegramMethods $method
      * @param array $formData
      *
@@ -148,7 +150,7 @@ class TgLog
      */
     protected function composeApiMethodUrl(TelegramMethods $call): string
     {
-        $completeClassName = get_class($call);
+        $completeClassName = \get_class($call);
         $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
         $this->logger->info('About to perform API request', ['method' => $this->methodName]);
 

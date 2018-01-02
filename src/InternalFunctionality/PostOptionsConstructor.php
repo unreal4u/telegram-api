@@ -7,6 +7,7 @@ namespace unreal4u\TelegramAPI\InternalFunctionality;
 use MultipartBuilder\Builder;
 use MultipartBuilder\MultipartData;
 use Psr\Log\LoggerInterface;
+use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
@@ -30,7 +31,7 @@ class PostOptionsConstructor
     public function __construct(LoggerInterface $logger = null)
     {
         if ($logger === null) {
-            $logger = new DummyLogger();
+            $logger = new Logger();
         }
         $this->logger = $logger;
     }
