@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Abstracts;
 
 use Psr\Log\LoggerInterface;
-use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
+use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultArray;
 
 abstract class TelegramTypes
@@ -15,7 +15,7 @@ abstract class TelegramTypes
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if ($logger === null) {
-            $logger = new DummyLogger();
+            $logger = new Logger();
         }
 
         $this->logger = $logger;

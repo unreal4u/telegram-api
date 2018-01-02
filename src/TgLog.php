@@ -6,8 +6,8 @@ namespace unreal4u\TelegramAPI;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\InternalFunctionality\DummyLogger;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramDocument;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramRawData;
@@ -71,7 +71,7 @@ class TgLog
 
         // Initialize new dummy logger (PSR-3 compatible) if not injected
         if ($logger === null) {
-            $logger = new DummyLogger();
+            $logger = new Logger();
         }
         $this->logger = $logger;
 
@@ -93,7 +93,7 @@ class TgLog
      */
     public function performApiRequest(TelegramMethods $method): TelegramTypes
     {
-        $this->logger->debug('Request for API call, resetting internal values', [get_class($method)]);
+        $this->logger->debug('Request for API call, resetting internal values', [\get_class($method)]);
         $this->resetObjectValues();
         $rawData = $this->sendRequestToTelegram($method, $this->constructFormData($method));
 
@@ -121,7 +121,7 @@ class TgLog
      * Builds up the Telegram API url
      * @return TgLog
      */
-    final private function constructApiUrl(): TgLog
+    private function constructApiUrl(): TgLog
     {
         $this->apiUrl = 'https://api.telegram.org/bot' . $this->botToken . '/';
         $this->logger->debug('Built up the API URL');
@@ -213,7 +213,7 @@ class TgLog
         $return = [false];
 
         foreach ($method as $key => $value) {
-            if (is_object($value) && $value instanceof InputFile) {
+            if (\is_object($value) && $value instanceof InputFile) {
                 $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                 // If we are about to send a file, we must use the multipart/form-data way
                 $this->formType = 'multipart/form-data';
@@ -240,7 +240,7 @@ class TgLog
      */
     protected function composeApiMethodUrl(TelegramMethods $call): string
     {
-        $completeClassName = get_class($call);
+        $completeClassName = \get_class($call);
         $this->methodName = substr($completeClassName, strrpos($completeClassName, '\\') + 1);
         $this->logger->info('About to perform API request', ['method' => $this->methodName]);
 
