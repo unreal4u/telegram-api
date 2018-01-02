@@ -63,7 +63,7 @@ class PostOptionsConstructor
         return [
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
-                'Content-Length' => strlen($body),
+                'Content-Length' => \strlen($body),
                 'User-Agent' => 'PHP7+ Bot API',
             ],
             'body' => $body
@@ -84,7 +84,7 @@ class PostOptionsConstructor
         $return = [];
 
         foreach ($method as $key => $value) {
-            if (is_object($value) && $value instanceof InputFile) {
+            if (\is_object($value) && $value instanceof InputFile) {
                 $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                 // If we are about to send a file, we must use the multipart/form-data way
                 $this->formType = 'multipart/form-data';
@@ -131,7 +131,7 @@ class PostOptionsConstructor
         $array = [
             'headers' => [
                 'Content-Type' => 'multipart/form-data; boundary="' . $builder->getBoundary() . '"',
-                'Content-Length' => strlen($body)
+                'Content-Length' => \strlen($body)
             ],
             'body' => $body
         ];

@@ -26,8 +26,7 @@ class ResultBoolean extends CustomType
     {
         if ($this->data === true) {
             return '1';
-        } else {
-            return '0';
         }
+        return '0';
     }
 }

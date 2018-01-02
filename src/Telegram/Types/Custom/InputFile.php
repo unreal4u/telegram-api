@@ -41,7 +41,7 @@ class InputFile
     private function setStream(): InputFile
     {
         if (is_readable($this->path)) {
-            $this->stream = fopen($this->path, 'r');
+            $this->stream = fopen($this->path, 'rb');
         } else {
             throw new FileNotReadable(sprintf('Can not read local file "%s", please check', $this->path));
         }

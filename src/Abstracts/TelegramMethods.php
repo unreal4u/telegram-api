@@ -121,7 +121,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      * @param TelegramTypes $replyMarkup
      * @return TelegramTypes
      */
-    final private function formatReplyMarkup(TelegramTypes $replyMarkup): TelegramTypes
+    private function formatReplyMarkup(TelegramTypes $replyMarkup): TelegramTypes
     {
         if ($replyMarkup instanceof Markup) {
             $replyMarkup->inline_keyboard = $this->getArrayFromKeyboard($replyMarkup->inline_keyboard);
@@ -132,7 +132,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         return $replyMarkup;
     }
 
-    final private function getArrayFromKeyboard(array $keyboardArray): array
+    private function getArrayFromKeyboard(array $keyboardArray): array
     {
         $finalCleanArray = [];
 
@@ -161,7 +161,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
      * @param TelegramTypes $markupItem
      * @return array
      */
-    final private function exportReplyMarkupItem(TelegramTypes $markupItem): array
+    private function exportReplyMarkupItem(TelegramTypes $markupItem): array
     {
         $finalArray = [];
         $cleanObject = new $markupItem;

@@ -41,7 +41,7 @@ class TelegramDocument
 
         // Same with file length
         $this->file_size = !empty($headers['Content-Length']) ? $headers['Content-Length']
-            : strlen($response->getRawData());
+            : \strlen($response->getRawData());
         $this->contents = $response->getRawData();
     }
 
