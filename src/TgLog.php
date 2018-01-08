@@ -83,7 +83,7 @@ class TgLog
      */
     public function performApiRequest(TelegramMethods $method): PromiseInterface
     {
-        $this->logger->debug('Request for async API call, resetting internal values', [get_class($method)]);
+        $this->logger->debug('Request for async API call, resetting internal values', [\get_class($method)]);
         $this->resetObjectValues();
         $option = $this->formConstructor->constructOptions($method);
         return $this->sendRequestToTelegram($method, $option)

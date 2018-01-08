@@ -56,6 +56,22 @@ class SendMediaGroup extends TelegramMethods
     
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
-        return new MessageArray($data, $logger);
+        return new MessageArray($data->getResult(), $logger);
+    }
+
+    public function performSpecialConditions(): TelegramMethods
+    {
+        $imageQuantity = \count($this->media);
+        if ($imageQuantity < 2) {
+            throw new \RuntimeException('Must include at least 2 images');
+        }
+
+        if ($imageQuantity > 10) {
+            throw new \RuntimeException('Can not include more than 10 images');
+        }
+
+        $this->media = json_encode($this->media);
+
+        return parent::performSpecialConditions();
     }
 }
