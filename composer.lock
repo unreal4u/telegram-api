@@ -290,12 +290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0703d860f83775029738dc4a519301e8e3d81853"
+                "reference": "fe89fd2178cabef137b9a76fa91d64925474b956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0703d860f83775029738dc4a519301e8e3d81853",
-                "reference": "0703d860f83775029738dc4a519301e8e3d81853",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fe89fd2178cabef137b9a76fa91d64925474b956",
+                "reference": "fe89fd2178cabef137b9a76fa91d64925474b956",
                 "shasum": ""
             },
             "conflict": {
@@ -346,7 +346,7 @@
                 "oro/platform": ">=1.7,<1.7.4",
                 "phpmailer/phpmailer": ">=5,<5.2.24",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
-                "phpxmlrpc/extras": "<6.0.1",
+                "phpxmlrpc/extras": "<0.6.1",
                 "pusher/pusher-php-server": "<2.2.1",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
                 "shopware/shopware": "<5.2.25",
@@ -427,26 +427,25 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-12-24T19:52:27+00:00"
+            "time": "2018-01-07T00:56:33+00:00"
         },
         {
             "name": "unreal4u/dummy-logger",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unreal4u/dummyLogger.git",
-                "reference": "48e049c6e1519a67eee1173e88e8c4c5e969c267"
+                "reference": "b9f936257bc6c265d6410d68b30807b889caebbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unreal4u/dummyLogger/zipball/48e049c6e1519a67eee1173e88e8c4c5e969c267",
-                "reference": "48e049c6e1519a67eee1173e88e8c4c5e969c267",
+                "url": "https://api.github.com/repos/unreal4u/dummyLogger/zipball/b9f936257bc6c265d6410d68b30807b889caebbd",
+                "reference": "b9f936257bc6c265d6410d68b30807b889caebbd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
-                "psr/log": "~1.0",
-                "roave/security-advisories": "dev-master"
+                "psr/log": "~1.0"
             },
             "type": "library",
             "autoload": {
@@ -465,7 +464,7 @@
                 }
             ],
             "description": "Dummy logger that implements PSR-3 so that my own classes can work with a common base",
-            "time": "2018-01-02T21:34:48+00:00"
+            "time": "2018-01-08T13:02:56+00:00"
         }
     ],
     "packages-dev": [
@@ -1298,16 +1297,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "5.0.5",
+            "version": "5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "283b9f4f670e3a6fd6c4ff95c51a952eb5c75933"
+                "reference": "33fd41a76e746b8fa96d00b49a23dadfa8334cdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/283b9f4f670e3a6fd6c4ff95c51a952eb5c75933",
-                "reference": "283b9f4f670e3a6fd6c4ff95c51a952eb5c75933",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/33fd41a76e746b8fa96d00b49a23dadfa8334cdf",
+                "reference": "33fd41a76e746b8fa96d00b49a23dadfa8334cdf",
                 "shasum": ""
             },
             "require": {
@@ -1353,7 +1352,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-12-10T08:01:53+00:00"
+            "time": "2018-01-06T05:45:45+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
