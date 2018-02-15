@@ -10,7 +10,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 /**
  * Use this method to send photos. On success, the sent Message is returned
  *
- * Objects defined as-is January 2017
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#sendphoto
  */
@@ -36,6 +36,13 @@ class SendPhoto extends TelegramMethods
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

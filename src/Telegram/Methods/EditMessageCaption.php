@@ -17,7 +17,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Message;
  * Use this method to edit captions of messages sent by the bot or via the bot (for inline bots). On success, if edited
  * message is sent by the bot, the edited Message is returned, otherwise True is returned.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#editmessagecaption
  */
@@ -47,6 +47,13 @@ class EditMessageCaption extends TelegramMethods
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
 
     /**
      * Optional. A JSON-serialized object for an inline keyboard.
