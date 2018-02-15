@@ -66,6 +66,12 @@ class SendVideo extends TelegramMethods
     public $parse_mode = '';
 
     /**
+     * Pass True, if the uploaded video is suitable for streaming
+     * @var bool
+     */
+    public $supports_streaming = false;
+
+    /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
      * notification with no sound.
      * @see https://telegram.org/blog/channels-2-0#silent-messages
