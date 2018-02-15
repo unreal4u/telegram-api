@@ -279,6 +279,13 @@ class Message extends TelegramTypes
     public $successful_payment;
 
     /**
+     * Optional. The domain name of the website on which the user has logged in
+     * @see https://core.telegram.org/widgets/login
+     * @var string
+     */
+    public $connected_website = '';
+
+    /**
      * A message may contain one or more subobjects, map them always in this function
      *
      * @param string $key
