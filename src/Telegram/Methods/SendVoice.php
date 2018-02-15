@@ -14,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size,
  * this limit may be changed in the future.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#sendvoice
  */
@@ -40,6 +40,13 @@ class SendVoice extends TelegramMethods
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
 
     /**
      * Optional. Duration of sent voice message in seconds

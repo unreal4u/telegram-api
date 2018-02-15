@@ -13,7 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be
  * changed in the future.
  *
- * Objects defined as-is January 2017
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#sendvideo
  */
@@ -57,6 +57,19 @@ class SendVideo extends TelegramMethods
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
+
+    /**
+     * Pass True, if the uploaded video is suitable for streaming
+     * @var bool
+     */
+    public $supports_streaming = false;
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a

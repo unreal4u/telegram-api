@@ -18,7 +18,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
  * .ogg file encoded with OPUS. This behavior will be phased out in the future. For sending voice messages, use the
  * sendVoice method instead.
  *
- * Objects defined as-is January 2017
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#sendaudio
  */
@@ -45,6 +45,13 @@ class SendAudio extends TelegramMethods
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
 
     /**
      * Optional. Duration of the audio in seconds

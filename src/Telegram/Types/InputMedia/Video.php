@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMedia;
 /**
  * Represents a video to be sent.
  *
- * Objects defined as-is november 2017
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#inputmediavideo
  */
@@ -38,4 +38,10 @@ class Video extends InputMedia
      * @var int
      */
     public $duration = 0;
+
+    /**
+     * Pass True, if the uploaded video is suitable for streaming
+     * @var bool
+     */
+    public $supports_streaming = false;
 }

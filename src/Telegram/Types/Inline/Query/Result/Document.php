@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent;
  * you can use input_message_content to send a message with the specified content instead of the file. Currently, only
  * .PDF and .ZIP files can be sent using this method.
  *
- * Objects defined as-is april 2016
+ * Objects defined as-is February 2018
  *
  * @see https://core.telegram.org/bots/api#inlinequeryresultdocument
  */
@@ -35,6 +35,13 @@ class Document extends Result
      * @var string
      */
     public $caption = '';
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs
+     * in the media caption
+     * @var string
+     */
+    public $parse_mode = '';
 
     /**
      * A valid URL for the file
