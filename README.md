@@ -29,8 +29,9 @@ in the [special group](https://t.me/PHPBotAPI) :)
 
 ## Roadmap
 
+- v4 (no branch yet) will be the next mejor release. [More information](https://github.com/unreal4u/telegram-api/projects/5).
 - v3 (master branch) is the current active branch.
-- v2 (v2 branch) will be updated with the latest Bot API updates until at least April 2018. Depending on usage and some other factors, this can be extended.
+- v2 (v2 branch) will be updated with the latest Bot API updates until at v4 comes out (no plans for that yet, sorry!).
 - v1 is deprecated and no new work will be done there.
 - v0 is deprecated and no new work will be done there.
 
@@ -134,7 +135,7 @@ for more information that will make the development easier!
 [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
 
 I actually don't use Telegram. Nah, kidding, I created a group where you can contact me at [https://t.me/PHPBotAPI](https://t.me/PHPBotAPI).
-Another great way to help is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
+Another great way to get in touch is to simply [create an issue](https://github.com/unreal4u/telegram-api/issues) or a
 [pull request](https://github.com/unreal4u/telegram-api/pulls)!
 
 ### Bugs related with security
