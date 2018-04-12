@@ -29,7 +29,7 @@ in the [special group](https://t.me/PHPBotAPI) :)
 
 ## Roadmap
 
-- v4 (no branch yet) will be the next mejor release. [More information](https://github.com/unreal4u/telegram-api/projects/5).
+- v4 (no branch yet) will be the next major release. [More information](https://github.com/unreal4u/telegram-api/projects/5).
 - v3 (master branch) is the current active branch.
 - v2 (v2 branch) will be updated with the latest Bot API updates until v4 comes out (no plans for that yet, sorry!).
 - v1 is deprecated and no new work will be done there.
