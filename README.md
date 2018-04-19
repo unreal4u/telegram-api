@@ -54,7 +54,7 @@ If you are not familiar with it, I suggest reading the basic usage manual [locat
 
 ## Tip for Russian users
 
-In order to use a proxy, pass on the following options to the Client:
+In order to use a proxy, you can use the https://github.com/clue/php-socks-react class and pass on the following options to the Client:
 
 ```php
 <?php
