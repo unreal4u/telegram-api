@@ -52,6 +52,30 @@ The preferred (and only for now) installation method is Composer, so add the fol
 
 If you are not familiar with it, I suggest reading the basic usage manual [located here](https://getcomposer.org/doc/01-basic-usage.md).
 
+## Tip for Russian users
+
+In order to use a proxy, pass on the following options to the Client:
+
+```php
+<?php
+
+use Clue\React\Socks\Client;
+
+$this->loop = Factory::create();
+// Replace PROXY_ADDRESS and PROXY_PORT with the correct configuration
+$proxy = new Client('socks5://' . PROXY_ADDRESS . ':' . PROXY_PORT, new Connector($this->loop));
+$handler = new HttpClientRequestHandler($this->loop, [
+    'tcp' => $proxy,
+    'timeout' => 3.0,
+    'dns' => false
+]);
+
+$this->tgLog = new TgLog(BOT_TOKEN, $handler);
+// The rest is exactly the same as it normally is, see the examples folder for more information
+```
+
+With these simple steps, a proxy is configured in no time!
+
 ### Upgrading v2.x to v3
 
 A lot of backwards incompatibility changes, but in a nutshell: 
