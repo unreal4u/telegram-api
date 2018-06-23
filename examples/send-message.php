@@ -33,7 +33,7 @@ $promise->then(
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_GROUP_CHAT_ID;
-$sendMessage->text = 'And this is an hello the the group... also from a getMessage file';
+$sendMessage->text = 'And this is a hello to the group... also from a getMessage file';
 
 $promise = $tgLog->performApiRequest($sendMessage);
 
