@@ -34,7 +34,7 @@ abstract class TelegramTypes
     {
         foreach ($data as $key => $value) {
             $candidateKey = null;
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $this->logger->debug('Array detected, mapping subobjects for key', ['key' => $key]);
                 $candidateKey = $this->mapSubObjects($key, $value);
             }
@@ -73,7 +73,7 @@ abstract class TelegramTypes
                 $key,
                 'https://github.com/unreal4u/telegram-api/issues'
             ), [
-                'object' => get_class($this),
+                'object' => \get_class($this),
                 'data' => $data,
             ]);
         }
