@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Methods;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 
 /**
  * Use this method to send photos. On success, the sent Message is returned
@@ -61,7 +62,7 @@ class SendPhoto extends TelegramMethods
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
-     * @var null
+     * @var Markup
      */
     public $reply_markup;
 

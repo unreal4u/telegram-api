@@ -53,6 +53,12 @@ class SendVideo extends TelegramMethods
     public $height = 0;
 
     /**
+     *
+     * @var InputFile
+     */
+    public $thumb;
+
+    /**
      * Video caption (may also be used when resending videos by file_id).
      * @var string
      */
