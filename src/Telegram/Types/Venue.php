@@ -39,6 +39,13 @@ class Venue extends TelegramTypes
      */
     public $foursquare_id = '';
 
+    /**
+     * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium”
+     * or “food/icecream”.)
+     * @var string
+     */
+    public $foursquare_type = '';
+
     public function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
