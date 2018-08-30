@@ -9,7 +9,8 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v4.0](https://core.telegram.org/bots/api-changelog#july-26-2018)
+This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.6](https://core.telegram.org/bots/api#february-13-2018)
+and the vast mejority of the [Bot API up until v4.1](https://core.telegram.org/bots/api#august-27-2018)
 
 ### About this class
 
@@ -23,7 +24,9 @@ This is a PHP7 bot API implementation for Telegram implementing the **totality**
 
 [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
 
-All known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
+The only thing that is not included in this library (yet) is the Passport support. This will be implemented soon though!
+
+All other known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
 [create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
 in the [special group](https://t.me/PHPBotAPI) :)
 
