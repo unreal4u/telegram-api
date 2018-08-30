@@ -15,7 +15,6 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "roave/security-advisories": "dev-master",
     "guzzlehttp/guzzle": "~6.0",
     "unreal4u/dummy-logger": "~1.0"
   },
