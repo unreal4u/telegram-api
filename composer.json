@@ -15,7 +15,6 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "roave/security-advisories": "dev-master",
     "unreal4u/dummy-logger": "^1.0",
     "react/http-client": "^0.5",
     "react/promise": "^2.5",
