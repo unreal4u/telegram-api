@@ -53,6 +53,13 @@ class SendVenue extends TelegramMethods
     public $foursquare_id = '';
 
     /**
+     * Optional. Foursquare type of the venue. (For example, "arts_entertainment/default", "arts_entertainment/aquarium"
+     * or "food/icecream".)
+     * @var string
+     */
+    public $foursquare_type = '';
+
+    /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
      * notification with no sound.
      * @see https://telegram.org/blog/channels-2-0#silent-messages

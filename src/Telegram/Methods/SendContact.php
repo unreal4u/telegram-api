@@ -41,6 +41,13 @@ class SendContact extends TelegramMethods
     public $last_name = '';
 
     /**
+     * Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
+     * @see https://en.wikipedia.org/wiki/VCard
+     * @var string
+     */
+    public $vcard = '';
+
+    /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
      * notification with no sound.
      * @see https://telegram.org/blog/channels-2-0#silent-messages

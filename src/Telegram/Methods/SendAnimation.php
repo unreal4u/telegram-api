@@ -9,15 +9,14 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
 /**
- * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On
- * success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be
- * changed in the future.
+ * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message
+ * is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
  *
- * Objects defined as-is February 2018
+ * Objects defined as-is July 2018
  *
- * @see https://core.telegram.org/bots/api#sendvideo
+ * @see https://core.telegram.org/bots/api#sendanimation
  */
-class SendVideo extends TelegramMethods
+class SendAnimation extends TelegramMethods
 {
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -26,40 +25,44 @@ class SendVideo extends TelegramMethods
     public $chat_id = '';
 
     /**
-     * Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass
-     * an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using the InputFile
-     * class
+     * Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers
+     * (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new
+     * one using the InputFile class
+     *
      * @see InputFile
      * @var string|InputFile
      */
-    public $video = '';
+    public $animation = '';
 
     /**
-     * Optional. Duration of sent video in seconds
+     * Duration of sent animation in seconds
      * @var int
      */
     public $duration = 0;
 
     /**
-     * Video width
+     * Animation width
      * @var int
      */
     public $width = 0;
 
     /**
-     * Video height
+     * Animation height
      * @var int
      */
     public $height = 0;
 
     /**
-     *
-     * @var InputFile
+     * Optional. Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A
+     * thumbnail's width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data.
+     * Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>"
+     * if the thumbnail was uploaded using multipart/form-data under <file_attach_name>
+     * @var string|InputFile
      */
     public $thumb;
 
     /**
-     * Video caption (may also be used when resending videos by file_id).
+     * Optional. Animation caption (may also be used when resending animation by file_id), 0-200 characters
      * @var string
      */
     public $caption = '';
@@ -70,12 +73,6 @@ class SendVideo extends TelegramMethods
      * @var string
      */
     public $parse_mode = '';
-
-    /**
-     * Pass True, if the uploaded video is suitable for streaming
-     * @var bool
-     */
-    public $supports_streaming = false;
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
@@ -102,7 +99,7 @@ class SendVideo extends TelegramMethods
     {
         return [
             'chat_id',
-            'video',
+            'animation',
         ];
     }
 }

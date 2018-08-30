@@ -38,4 +38,11 @@ class Contact extends TelegramTypes
      * @var int
      */
     public $user_id = 0;
+
+    /**
+     * Optional. Additional data about the contact in the form of a vCard
+     * @see https://en.wikipedia.org/wiki/VCard
+     * @var string
+     */
+    public $vcard = '';
 }

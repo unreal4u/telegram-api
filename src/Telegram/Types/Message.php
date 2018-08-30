@@ -123,6 +123,13 @@ class Message extends TelegramTypes
     public $document;
 
     /**
+     * Optional. Message is an animation, information about the animation. For backward compatibility, when this field
+     * is set, the document field will also be set
+     * @var Animation
+     */
+    public $animation;
+
+    /**
      * Optional. Message is a game, information about the game
      * @see https://core.telegram.org/bots/api#games
      * @var Game
@@ -318,6 +325,8 @@ class Message extends TelegramTypes
                 return new Audio($data, $this->logger);
             case 'document':
                 return new Document($data, $this->logger);
+            case 'animation':
+                return new Animation($data, $this->logger);
             case 'game':
                 return new Game($data, $this->logger);
             case 'sticker':

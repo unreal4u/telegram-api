@@ -16,9 +16,9 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 class MessageEntity extends TelegramTypes
 {
     /**
-     * Type of the entity. Can be mention (@username), hashtag, bot_command, url, email, bold (bold text), italic
-     * (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text URLs), text_mention
-     * (for users without usernames)
+     * Type of the entity. Can be mention (@username), hashtag, cashtag, bot_command, url, email, phone_number, bold
+     * (bold text), italic (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text
+     * URLs), text_mention (for users without usernames)
      * @var string
      */
     public $type = '';

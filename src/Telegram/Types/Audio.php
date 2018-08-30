@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents an audio file to be treated as music by the Telegram clients
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is july 2018
  *
  * @see https://core.telegram.org/bots/api#audio
  */
@@ -50,4 +50,20 @@ class Audio extends TelegramTypes
      * @var int
      */
     public $file_size = 0;
+
+    /**
+     * Optional. Thumbnail of the album cover to which the music file belongs
+     * @var PhotoSize
+     */
+    public $thumb;
+
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
+    {
+        switch ($key) {
+            case 'thumb':
+                return new PhotoSize($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
+    }
 }

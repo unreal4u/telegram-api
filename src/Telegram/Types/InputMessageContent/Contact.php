@@ -33,4 +33,11 @@ class Contact extends InputMessageContent
      * @var string
      */
     public $last_name = '';
+
+    /**
+     * Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes
+     * @see https://en.wikipedia.org/wiki/VCard
+     * @var string
+     */
+    public $vcard = '';
 }
