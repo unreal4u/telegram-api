@@ -23,7 +23,6 @@ class SendMessageTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -33,7 +32,6 @@ class SendMessageTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testSendMessage()
@@ -61,9 +59,8 @@ class SendMessageTest extends TestCase
         });
     }
 
-
     /**
-     * Keyboard options don't give anything special back, those are just commands to the user. Test this condition
+     * Keyboard options don't give anything special back, those are just commands to the user. Test this condition.
      *
      * @depends testSendMessage
      */

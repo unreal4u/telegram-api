@@ -22,7 +22,6 @@ class SendPhotoTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -32,7 +31,6 @@ class SendPhotoTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testSendPhoto()
@@ -66,7 +64,7 @@ class SendPhotoTest extends TestCase
             $i = 1;
             foreach ($result->photo as $photo) {
                 $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);
-                $i++;
+                ++$i;
             }
         });
     }

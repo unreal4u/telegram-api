@@ -21,7 +21,6 @@ class GetUserProfilePhotosTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -31,11 +30,10 @@ class GetUserProfilePhotosTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     /**
-     * Tests a private message "Hello bot" to the bot
+     * Tests a private message "Hello bot" to the bot.
      */
     public function testGetUserProfilePhotos()
     {
@@ -53,7 +51,7 @@ class GetUserProfilePhotosTest extends TestCase
             $i = 1;
             foreach ($result->photos[0] as $photo) {
                 $this->assertEquals(sprintf('XXX-YYY-ZZZ-0%d', $i), $photo->file_id);
-                $i++;
+                ++$i;
             }
         });
     }

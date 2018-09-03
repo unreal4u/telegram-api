@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query\Result\Article;
 use unreal4u\TelegramAPI\Telegram\Types\InputMessageContent\Text;
 use unreal4u\TelegramAPI\tests\Mock\MockTgLog;
 
-#use PHPUnit\Framework\TestCase;
+//use PHPUnit\Framework\TestCase;
 
 class AnswerInlineQueryTest extends TestCase
 {
@@ -23,7 +23,6 @@ class AnswerInlineQueryTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -33,7 +32,6 @@ class AnswerInlineQueryTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testAnswerInlineQuery()

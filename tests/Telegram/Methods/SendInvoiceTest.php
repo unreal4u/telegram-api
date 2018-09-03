@@ -21,7 +21,6 @@ class SendInvoiceTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -31,7 +30,6 @@ class SendInvoiceTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testSendInvoice()
@@ -44,7 +42,7 @@ class SendInvoiceTest extends TestCase
         $sendInvoice->provider_token = 'TEST-TOKEN-TEST';
         $sendInvoice->start_parameter = 'u4u-invoice-0001';
         $sendInvoice->currency = 'EUR';
-        $sendInvoice->prices = [ new LabeledPrice(['amount' => 975, 'label' => 'That special item']) ];
+        $sendInvoice->prices = [new LabeledPrice(['amount' => 975, 'label' => 'That special item'])];
 
         $promise = $this->tgLog->performApiRequest($sendInvoice);
 

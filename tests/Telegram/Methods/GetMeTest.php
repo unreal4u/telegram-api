@@ -20,7 +20,6 @@ class GetMeTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -30,7 +29,6 @@ class GetMeTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testGetMe()
@@ -39,8 +37,7 @@ class GetMeTest extends TestCase
 
         $promise = $this->tgLog->performApiRequest($getMe);
 
-        $promise->then(function (User $result)
-        {
+        $promise->then(function (User $result) {
             $this->assertInstanceOf(User::class, $result);
             $this->assertNotEmpty($result->first_name);
             $this->assertNotEmpty($result->username);
