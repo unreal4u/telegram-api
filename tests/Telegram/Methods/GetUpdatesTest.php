@@ -25,7 +25,6 @@ class GetUpdatesTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -35,11 +34,10 @@ class GetUpdatesTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     /**
-     * Tests a private message "Hello bot" to the bot
+     * Tests a private message "Hello bot" to the bot.
      */
     public function testGetUpdatesMessageIncoming()
     {
@@ -108,7 +106,7 @@ class GetUpdatesTest extends TestCase
     }
 
     /**
-     * Sometimes new API changes do break existing functionality. Assert this can't happen with new unknown types
+     * Sometimes new API changes do break existing functionality. Assert this can't happen with new unknown types.
      */
     public function testNewBotApiImplementation()
     {
@@ -132,7 +130,7 @@ class GetUpdatesTest extends TestCase
     }
 
     /**
-     * new_chat_participant changed to new_chat_member. Validate this
+     * new_chat_participant changed to new_chat_member. Validate this.
      */
     public function testNewChatMemberInUpdate()
     {
@@ -157,7 +155,7 @@ class GetUpdatesTest extends TestCase
 
         $promise = $this->tgLog->performApiRequest($getUpdates);
 
-        /** @var Update $update */
+        /* @var Update $update */
         $promise->then(function (UpdatesArray $updatesArray) {
             foreach ($updatesArray->getIterator() as $update) {
                 $this->assertInstanceOf(Update::class, $update);

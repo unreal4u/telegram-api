@@ -20,7 +20,6 @@ class GetFileTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -30,7 +29,6 @@ class GetFileTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testGetFile()
@@ -41,11 +39,9 @@ class GetFileTest extends TestCase
         $promise = $this->tgLog->performApiRequest($getFile);
 
         $promise->then(function (File $result) {
-            {
-                $this->assertInstanceOf(File::class, $result);
-                $this->assertEquals('XXXYYYZZZ', $result->file_id);
-                $this->assertEquals('voice/file_8', $result->file_path);
-            }
+            $this->assertInstanceOf(File::class, $result);
+            $this->assertEquals('XXXYYYZZZ', $result->file_id);
+            $this->assertEquals('voice/file_8', $result->file_path);
         });
     }
 

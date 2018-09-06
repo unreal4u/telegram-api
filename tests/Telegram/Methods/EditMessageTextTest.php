@@ -18,7 +18,6 @@ class EditMessageTextTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -28,7 +27,6 @@ class EditMessageTextTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     /**

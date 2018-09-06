@@ -18,7 +18,6 @@ class TgLogTest extends TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
 
@@ -28,7 +27,6 @@ class TgLogTest extends TestCase
     protected function tearDown()
     {
         $this->tgLog = null;
-        parent::tearDown();
     }
 
     public function testComposeApiMethodUrl()
