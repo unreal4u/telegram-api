@@ -135,9 +135,6 @@ class PostOptionsConstructor
     {
         $builder = new Builder();
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
-                echo "================================ multipart_data \n";
-                var_dump($multipart_data);
-                echo "\n ================================ multipart_data END \n";
         foreach ($data as $id => $value) {
               if (array_key_exists($id,$multipart_data)) {
                 $data = new MultipartData(
@@ -156,9 +153,6 @@ class PostOptionsConstructor
                 $builder->append($data);
                }
             } else {
-                echo "================================ value \n";
-                var_dump($value);
-                echo "\n ================================ value END \n";
                 $data = new MultipartData((string) $id, (string) $value);
                 $builder->append($data);
             }
