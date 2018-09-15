@@ -49,13 +49,6 @@ class SendMediaGroup extends TelegramMethods
      */
     public $reply_to_message_id = 0;
     
-    /*public function __construct()
-    {
-      $this->mediagroup = new MediaGroup();
-      //return parent::construct();
-    }*/
-    
-
     public function getMandatoryFields(): array
     {
         return [
@@ -80,27 +73,17 @@ class SendMediaGroup extends TelegramMethods
             throw new \RuntimeException('Can not include more than 10 images');
         }
 
-        //if(is_string(reset($this->media))){
-          $this->media = json_encode($this->media);
-        //}
+        $this->media = json_encode($this->media);
 
         return parent::performSpecialConditions();
     }
     
     public function addMediaStream($key,$path,$caption)
     {
-      /*$this->media[$key]=new Photo();
-      $this->media[$key]->media= 'attach://'. pathinfo($path, PATHINFO_BASENAME);
-      $this->media[$key]->caption=$caption;
-      $this->mediagroup[$key]=new InputFile($path);*/
       $phfile=new Photo();
       $phfile->media= 'attach://'. pathinfo($path, PATHINFO_BASENAME);
       $phfile->caption=$caption;
       $this->media[]=$phfile;
       $this->mediagroup[]=new InputFile($path);
-      /*$this->{'media_'.$key}=new Photo();
-      $this->{'media_'.$key}->media= new InputFile($path);
-      $this->{'media_'.$key}->caption=$caption;
-      $this->media[$key]=$key;*/
     }
 }
