@@ -50,15 +50,6 @@ class HttpClientRequestHandler implements RequestHandlerInterface
     {
         $headers = !empty($options['headers']) ? $options['headers'] : [];
         $request = $this->client->request('POST', $uri, $headers);
-        echo "========================== headers \n";
-        var_dump($headers);
-        echo "\n========================== headers END \n";
-        echo "========================== options \n";
-        var_dump($options);
-        echo "\n========================== options END\n";
-        /*echo "========================== request \n";
-        var_dump($request);
-        echo "========================== request END\n";*/
         return $this->processRequest($request, (!empty($options['body']) ? $options['body'] : null));
     }
 
