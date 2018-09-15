@@ -82,7 +82,7 @@ class TgLog
      * @throws \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
      */
     public function performApiRequest(TelegramMethods $method): PromiseInterface
-    {
+    { var_dump($method);
         $this->logger->debug('Request for async API call, resetting internal values', [\get_class($method)]);
         $this->resetObjectValues();
         $option = $this->formConstructor->constructOptions($method);
