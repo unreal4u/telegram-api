@@ -78,7 +78,7 @@ class SendMediaGroup extends TelegramMethods
         return parent::performSpecialConditions();
     }
     
-    public function addMediaStream($key,$path,$caption)
+    public function addMediaStream($path,$caption)
     {
       $phfile=new Photo();
       $phfile->media= 'attach://'. pathinfo($path, PATHINFO_BASENAME);
