@@ -111,6 +111,7 @@ $sendMessage->text = 'Hello world!';
 $tgLog->performApiRequest($sendMessage);
 $loop->run();
 ```
+(Side note: In case `React\EventLoop\Factory` cannot be resolved in the above code, add `include('vendor/autoload.php')` to your PHP file).
 
 With the `SendMessage()` object, you can create a message to be sent through the TgLog object.  
 All other functionality is based upon this behaviour, so every other method is very similar: you instantiate an object, 
