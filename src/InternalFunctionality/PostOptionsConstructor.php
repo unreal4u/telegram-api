@@ -10,6 +10,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Types\InputMedia\Photo;
 
 class PostOptionsConstructor
 {
@@ -52,9 +53,7 @@ class PostOptionsConstructor
         if (!empty($result)) {
             return $this->constructMultipartOptions(
                 $method->export(),
-                $result['id'],
-                $result['stream'],
-                $result['filename']
+                $result
             );
         }
 
@@ -84,15 +83,39 @@ class PostOptionsConstructor
         $return = [];
 
         foreach ($method as $key => $value) {
-            if (\is_object($value) && $value instanceof InputFile) {
+            if ((\is_object($value) && $value instanceof InputFile)||(\is_object($value) && $value instanceof Photo)||((is_array($value) || $value instanceof Countable) && \count($value)>1 && (reset($value) instanceof InputFile||reset($value) instanceof Photo))) {
                 $this->logger->debug('About to send a file, so changing request to use multi-part instead');
                 // If we are about to send a file, we must use the multipart/form-data way
                 $this->formType = 'multipart/form-data';
-                $return = [
-                    'id' => $key,
-                    'filename' => $value->path,
-                    'stream' => $value->getStream()
-                ];
+                if($value instanceof InputFile){
+                  $return[$key] = [
+                      'id' => $key,
+                      'filename' => $value->path,
+                      'stream' => $value->getStream()
+                  ];
+                }elseif($value instanceof Photo){
+                   $return[$key] = [
+                      'id' => $key,
+                      'filename' => $value->media->path,
+                      'stream' => $value->media->getStream()
+                  ];
+                }elseif((is_array($value) || $value instanceof Countable)){
+                  foreach ($value as $kk => $vv){
+                  if($vv instanceof InputFile){
+                   $return[$kk] = [
+                      'id' => $kk,
+                      'filename' => $vv->path,
+                      'stream' => $vv->getStream()
+                  ];
+                }elseif($vv instanceof Photo){
+                    $return[$kk] = [
+                      'id' => $kk,
+                      'filename' => $vv->media->path,
+                      'stream' => $vv->media->getStream()
+                  ];
+                  }
+                  }
+                }
             }
         }
 
@@ -108,23 +131,31 @@ class PostOptionsConstructor
      * @param string $filename
      * @return array Returns the actual formdata to be sent
      */
-    public function constructMultipartOptions(array $data, string $fileKeyName, $stream, string $filename): array
+    public function constructMultipartOptions(array $data, array $multipart_data): array
     {
         $builder = new Builder();
         $this->logger->debug('Creating multi-part form array data (complex and expensive)');
-
         foreach ($data as $id => $value) {
-            if ($id === $fileKeyName) {
+              if (array_key_exists($id,$multipart_data)) {
                 $data = new MultipartData(
-                    (string) $id,
-                    stream_get_contents($stream),
-                    pathinfo($filename, PATHINFO_BASENAME)
+                    (string) $multipart_data[$id]['id'],
+                    stream_get_contents($multipart_data[$id]['stream']),
+                    pathinfo($multipart_data[$id]['filename'], PATHINFO_BASENAME)
                 );
+                $builder->append($data);
+            } elseif($id=='mediagroup') {
+               foreach($multipart_data as $ii => $mdata){
+                $data = new MultipartData(
+                    pathinfo($mdata['filename'], PATHINFO_BASENAME),
+                    stream_get_contents($mdata['stream']),
+                    pathinfo($mdata['filename'], PATHINFO_BASENAME)
+                );
+                $builder->append($data);
+               }
             } else {
                 $data = new MultipartData((string) $id, (string) $value);
+                $builder->append($data);
             }
-            
-            $builder->append($data);
         }
 
         $body = $builder->buildAll();

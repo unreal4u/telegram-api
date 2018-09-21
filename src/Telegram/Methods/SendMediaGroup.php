@@ -10,6 +10,8 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageArray;
 use unreal4u\TelegramAPI\Telegram\Types\InputMedia;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
+use unreal4u\TelegramAPI\Telegram\Types\InputMedia\Photo;
 
 /**
  * Use this method to send photos. On success, the sent Message is returned
@@ -31,6 +33,7 @@ class SendMediaGroup extends TelegramMethods
      * @var InputMedia[]
      */
     public $media = [];
+    public $mediagroup = [];
 
     /**
      * Optional. Sends the message silently. iOS users will not receive a notification, Android users will receive a
@@ -45,7 +48,7 @@ class SendMediaGroup extends TelegramMethods
      * @var int
      */
     public $reply_to_message_id = 0;
-
+    
     public function getMandatoryFields(): array
     {
         return [
@@ -73,5 +76,14 @@ class SendMediaGroup extends TelegramMethods
         $this->media = json_encode($this->media);
 
         return parent::performSpecialConditions();
+    }
+    
+    public function addMediaStream($path,$caption)
+    {
+      $phfile=new Photo();
+      $phfile->media= 'attach://'. pathinfo($path, PATHINFO_BASENAME);
+      $phfile->caption=$caption;
+      $this->media[]=$phfile;
+      $this->mediagroup[]=new InputFile($path);
     }
 }
