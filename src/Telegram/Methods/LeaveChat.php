@@ -15,7 +15,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  *
  * Objects defined as-is july 2016
  *
- * @see https://core.telegram.org/bots/api#kickchatmember
+ * @see https://core.telegram.org/bots/api#leavechat
  */
 class LeaveChat extends TelegramMethods
 {
