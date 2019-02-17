@@ -10,7 +10,7 @@
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
 This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.6](https://core.telegram.org/bots/api#february-13-2018)
-and the vast mejority of the [Bot API up until v4.1](https://core.telegram.org/bots/api#august-27-2018)
+and the vast majority of the [Bot API up until v4.1](https://core.telegram.org/bots/api#august-27-2018)
 
 ### About this class
 
