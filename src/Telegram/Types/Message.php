@@ -8,6 +8,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UserArray;
+use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 
 /**
  * This object represents a message.
@@ -293,6 +294,11 @@ class Message extends TelegramTypes
     public $connected_website = '';
 
     /**
+     * @var Markup
+     */
+    public $reply_markup;
+
+    /**
      * A message may contain one or more subobjects, map them always in this function
      *
      * @param string $key
@@ -347,6 +353,8 @@ class Message extends TelegramTypes
                 return new Invoice($data, $this->logger);
             case 'successful_payment':
                 return new SuccessfulPayment($data, $this->logger);
+            case 'reply_markup':
+                return new Markup($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches
