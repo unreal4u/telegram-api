@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -104,5 +105,15 @@ class SendVideo extends TelegramMethods
             'chat_id',
             'video',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->video instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'video' => $this->video;
     }
 }

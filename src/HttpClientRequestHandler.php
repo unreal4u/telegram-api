@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI;
 
+use Exception;
 use React\EventLoop\LoopInterface;
 use React\HttpClient\Client;
 use React\HttpClient\Request;
@@ -63,23 +64,23 @@ class HttpClientRequestHandler implements RequestHandlerInterface
         $deferred = new Deferred();
 
         $receivedData = '';
-        $request->on('response', function (Response $response) use ($deferred, &$receivedData) {
-            $response->on('data', function ($chunk) use (&$receivedData) {
+        $request->on('response', static function (Response $response) use ($deferred, &$receivedData) {
+            $response->on('data', static function ($chunk) use (&$receivedData) {
                 $receivedData .= $chunk;
             });
 
-            $response->on('end', function () use (&$receivedData, $deferred, $response) {
+            $response->on('end', static function () use (&$receivedData, $deferred, $response) {
                 try {
                     $endResponse = new TelegramResponse($receivedData, $response->getHeaders());
                     $deferred->resolve($endResponse);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     // Capture any exceptions thrown from TelegramResponse and reject the response
                     $deferred->reject($e);
                 }
             });
         });
 
-        $request->on('error', function (\Exception $e) use ($deferred) {
+        $request->on('error', static function (Exception $e) use ($deferred) {
             $deferred->reject(new ClientException($e->getMessage(), $e->getCode(), $e));
         });
 

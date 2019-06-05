@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
@@ -79,5 +80,15 @@ class SetWebhook extends TelegramMethods
         return [
             'url',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->certificate instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'certificate' => $this->certificate;
     }
 }

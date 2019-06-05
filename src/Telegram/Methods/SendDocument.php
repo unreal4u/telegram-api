@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -73,5 +74,15 @@ class SendDocument extends TelegramMethods
             'chat_id',
             'document',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->document instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'document' => $this->document;
     }
 }

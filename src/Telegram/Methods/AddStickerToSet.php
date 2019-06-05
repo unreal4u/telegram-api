@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
@@ -40,7 +41,7 @@ class AddStickerToSet extends TelegramMethods
      * width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the
      * Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one
      * using multipart/form-data
-     * @var InputFile
+     * @var string|InputFile
      */
     public $png_sticker;
 
@@ -69,5 +70,15 @@ class AddStickerToSet extends TelegramMethods
             'png_sticker',
             'emojis',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->png_sticker instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'png_sticker' => $this->png_sticker;
     }
 }

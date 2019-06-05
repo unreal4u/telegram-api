@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -81,5 +82,15 @@ class SendVoice extends TelegramMethods
             'chat_id',
             'voice',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->voice instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'voice' => $this->voice;
     }
 }

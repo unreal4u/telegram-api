@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\InternalFunctionality;
 
@@ -39,7 +39,7 @@ class TelegramResponse
      *
      * @param string $rawData
      * @return TelegramResponse
-     * @throws \unreal4u\TelegramAPI\Exceptions\ClientException
+     * @throws ClientException
      */
     public function fillRawData(string $rawData): TelegramResponse
     {

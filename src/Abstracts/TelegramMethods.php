@@ -1,16 +1,21 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Abstracts;
 
+use Generator;
 use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Exceptions\MissingMandatoryField;
 use unreal4u\TelegramAPI\Interfaces\TelegramMethodDefinitions;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\Telegram\Types\Message;
 use unreal4u\TelegramAPI\Telegram\Types\ReplyKeyboardMarkup;
+use function get_class;
+use function is_object;
+use function json_encode;
 
 /**
  * Contains methods that all Telegram methods should implement
@@ -59,6 +64,28 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
     }
 
     /**
+     * Ensure we have a method we can always call in order to check if we have any local files
+     *
+     * @see \unreal4u\TelegramAPI\InternalFunctionality\PostOptionsConstructor::checkIsMultipart
+     *
+     * @return bool
+     */
+    public function hasLocalFiles(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Yields all local files (if present)
+     *
+     * @return Generator|InputFile[]
+     */
+    public function getLocalFiles(): Generator
+    {
+        yield;
+    }
+
+    /**
      * Exports the class to an array in order to send it to the Telegram servers without extra fields that we don't need
      *
      * @return array
@@ -76,9 +103,9 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
                     $missingMandatoryField = new MissingMandatoryField(sprintf(
                         'The field "%s" for class "%s" is mandatory and empty, please correct',
                         $fieldId,
-                        \get_class($cleanObject)
+                        get_class($cleanObject)
                     ));
-                    $missingMandatoryField->method = \get_class($cleanObject);
+                    $missingMandatoryField->method = get_class($cleanObject);
                     $missingMandatoryField->methodInstance = $this;
                     throw $missingMandatoryField;
                 }
@@ -140,7 +167,7 @@ abstract class TelegramMethods implements TelegramMethodDefinitions
         foreach ($keyboardArray as $rowItems) {
             $elements = [];
             foreach ($rowItems as $rowItem) {
-                if (\is_object($rowItem)) {
+                if (is_object($rowItem)) {
                     // Button is effectively an object
                     $elements[] = $this->exportReplyMarkupItem($rowItem);
                 } else {

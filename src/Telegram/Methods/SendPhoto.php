@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
@@ -72,5 +73,15 @@ class SendPhoto extends TelegramMethods
             'chat_id',
             'photo',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->photo instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'photo' => $this->photo;
     }
 }

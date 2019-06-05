@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
@@ -59,5 +60,15 @@ class SendSticker extends TelegramMethods
             'chat_id',
             'sticker',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->sticker instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'sticker' => $this->sticker;
     }
 }

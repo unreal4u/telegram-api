@@ -15,12 +15,14 @@
   ],
   "require": {
     "php": ">=7.0.0",
+    "ext-json": "*",
     "unreal4u/dummy-logger": "^1.0",
     "react/http-client": "^0.5",
     "react/promise": "^2.5",
     "clue/block-react": "^1.1",
     "yoshi2889/multipart-builder": "^0.1.1",
-    "amphp/artax": "^3"
+    "amphp/artax": "^3",
+    "paragonie/random_compat": "1.2.2"
   },
   "require-dev": {
     "monolog/monolog": "^1.17",
@@ -38,9 +40,9 @@
       "unreal4u\\TelegramAPI\\tests\\": "tests"
     }
   },
-  "support" : {
-    "issues" : "https://github.com/unreal4u/telegram-api/issues",
-    "source" : "https://github.com/unreal4u/telegram-api"
+  "support": {
+    "issues": "https://github.com/unreal4u/telegram-api/issues",
+    "source": "https://github.com/unreal4u/telegram-api"
   },
   "license": "MIT"
 }

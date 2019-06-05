@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
+use Generator;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 
@@ -26,7 +27,7 @@ class UploadStickerFile extends TelegramMethods
     /**
      * Png image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either
      * width or height must be exactly 512px
-     * @var InputFile
+     * @var string|InputFile
      */
     public $png_sticker;
 
@@ -40,5 +41,15 @@ class UploadStickerFile extends TelegramMethods
             'user_id',
             'png_sticker',
         ];
+    }
+
+    public function hasLocalFiles(): bool
+    {
+        return $this->png_sticker instanceof InputFile;
+    }
+
+    public function getLocalFiles(): Generator
+    {
+        yield 'png_sticker' => $this->png_sticker;
     }
 }
