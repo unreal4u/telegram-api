@@ -2,14 +2,10 @@
 tests/ export-ignore
 vendor/ export-ignore
 logs/ export-ignore
-.vagrant/ export-ignore
+.docksal/ export-ignore
 
 .git* export-ignore
 .*.yml export-ignore
 phpunit.xml.dist export-ignore
-
-Vagrantfile export-ignore
-composer-install.sh export-ignore
-execute-tests.sh export-ignore
 
 *.php diff=php
