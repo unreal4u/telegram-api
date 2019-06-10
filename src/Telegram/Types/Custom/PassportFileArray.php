@@ -22,16 +22,4 @@ class PassportFileArray extends TraversableCustomType
             }
         }
     }
-
-    /**
-     * Traverses through our $data, yielding the result set
-     *
-     * @return PhotoSize[]
-     */
-    public function traverseObject(): \Generator
-    {
-        foreach ($this->data as $passportFile) {
-            yield $passportFile;
-        }
-    }
 }

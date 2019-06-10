@@ -80,6 +80,12 @@ class Update extends TelegramTypes
      */
     public $pre_checkout_query;
 
+    /**
+     * Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
+     * @var Poll
+     */
+    public $poll;
+
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
@@ -98,6 +104,8 @@ class Update extends TelegramTypes
                 return new ShippingQuery($data, $this->logger);
             case 'pre_checkout_query':
                 return new PreCheckoutQuery($data, $this->logger);
+            case 'poll':
+                return new Poll($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);

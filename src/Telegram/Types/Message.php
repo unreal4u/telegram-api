@@ -199,6 +199,12 @@ class Message extends TelegramTypes
     public $venue;
 
     /**
+     * Optional. Message is a native poll, information about the poll
+     * @var Poll
+     */
+    public $poll;
+
+    /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      * @var User
      */
@@ -349,6 +355,8 @@ class Message extends TelegramTypes
                 return new Location($data, $this->logger);
             case 'venue':
                 return new Venue($data, $this->logger);
+            case 'poll':
+                return new Poll($data, $this->logger);
             case 'invoice':
                 return new Invoice($data, $this->logger);
             case 'successful_payment':

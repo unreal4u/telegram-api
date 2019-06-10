@@ -1,6 +1,6 @@
-[![PHP 7 Telegram Bot API](https://github.com/unreal4u/telegram-api/blob/master/examples/binary-test-data/logo-php7-telegram-bot-api-small.png?raw=true)](https://github.com/unreal4u/telegram-api/wiki/100-stars!)
+[![PHP 7 Telegram Bot API Library](https://github.com/unreal4u/telegram-api/blob/master/examples/binary-test-data/logo-php7-telegram-bot-api-small.png?raw=true)](https://github.com/unreal4u/telegram-api/wiki/100-stars!)
 
-# Telegram API
+# Telegram API Library
 
 [![Latest Stable Version](https://poser.pugx.org/unreal4u/telegram-api/v/stable)](https://packagist.org/packages/unreal4u/telegram-api)
 [![Total Downloads](https://poser.pugx.org/unreal4u/telegram-api/downloads)](https://packagist.org/packages/unreal4u/telegram-api)
@@ -9,10 +9,11 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/unreal4u/telegram-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unreal4u/telegram-api/?branch=master)
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
-This is a PHP7 bot API implementation for Telegram implementing the **totality** of [Bot API up until v3.6](https://core.telegram.org/bots/api#february-13-2018)
-and the vast majority of the [Bot API up until v4.1](https://core.telegram.org/bots/api#august-27-2018)
+This is a PHP7 bot API implementation for Telegram implementing the **vast majority** of
+[Bot API up until v4.3](https://core.telegram.org/bots/api#february-13-2018). The only thing it does not implement is
+Telegram Passport which was introduced in [Bot API v4.0](https://core.telegram.org/bots/api#july-26-2018).
 
-### About this class
+### About this package
 
 * Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
 * Respects and implements the default types and methods made by Telegram itself. Have any doubts about any method? [Just check the original documentation](https://core.telegram.org/bots/api), this implementation will not differ too much.
@@ -24,7 +25,8 @@ and the vast majority of the [Bot API up until v4.1](https://core.telegram.org/b
 
 [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/PHPBotAPI)
 
-The only thing that is not included in this library (yet) is the Passport support. This will be implemented soon though!
+The only thing that is not included in this library (yet) is the Passport support. This was an ongoing development, but
+it ended up being a lot more work than initially thought, so if someone wants to pick that up... be my guest!
 
 All other known bugs can be found in the form of issues or pull requests. Found a new bug? Feel free to [submit a PR](https://github.com/unreal4u/telegram-api/pulls) or
 [create an issue](https://github.com/unreal4u/telegram-api/issues)! Not sure if you've found a new bug? You can always ask
@@ -34,7 +36,7 @@ in the [special group](https://t.me/PHPBotAPI) :)
 
 - v4 (no branch yet) will be the next major release. [More information](https://github.com/unreal4u/telegram-api/projects/5).
 - v3 (master branch) is the current active branch.
-- v2 (v2 branch) will be updated with the latest Bot API updates until v4 comes out (no plans for that yet, sorry!).
+- v2 (v2 branch) is deprecated and no new work will be done there.
 - v1 is deprecated and no new work will be done there.
 - v0 is deprecated and no new work will be done there.
 
