@@ -88,6 +88,8 @@ class Button extends TelegramTypes
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
+            case 'login_url':
+                return new LoginUrl($data, $this->logger);
             case 'callback_game':
                 return new CallbackGame($data, $this->logger);
         }
