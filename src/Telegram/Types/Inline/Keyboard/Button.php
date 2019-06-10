@@ -6,6 +6,7 @@ namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\Telegram\Types\CallbackGame;
+use unreal4u\TelegramAPI\Telegram\Types\LoginUrl;
 
 /**
  * This object represents one button of an inline keyboard. You must use exactly one of the optional fields
@@ -13,7 +14,7 @@ use unreal4u\TelegramAPI\Telegram\Types\CallbackGame;
  * Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported
  * message.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is july 2016. Updated in june 2019
  *
  * @see https://core.telegram.org/bots/api#inlinekeyboardbutton
  */
@@ -30,6 +31,12 @@ class Button extends TelegramTypes
      * @var string
      */
     public $url = '';
+	
+	/**
+     * Optional. An HTTP URL used to automatically authorize the user.
+     * @var LoginUrl
+     */
+	public $login_url;
 
     /**
      * Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
