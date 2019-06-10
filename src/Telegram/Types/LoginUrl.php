@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
@@ -16,9 +16,13 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 class LoginUrl extends TelegramTypes
 {
     /**
-     * An HTTP URL to be opened with user authorization data added to the query string when the button is pressed. 
-	 * If the user refuses to provide authorization data, the original URL without information about the user will be opened. 
-	 * The data added is the same as described in Receiving authorization data (https://core.telegram.org/widgets/login#receiving-authorization-data).
+     * An HTTP URL to be opened with user authorization data added to the query string when the button is pressed.
+     * If the user refuses to provide authorization data, the original URL without information about the user will be
+     * opened.
+     * The data added is the same as described in Receiving authorization data:
+     *
+     * @see https://core.telegram.org/widgets/login#receiving-authorization-dat
+     *
      * @var string
      */
     public $url = '';
@@ -34,8 +38,8 @@ class LoginUrl extends TelegramTypes
      * @var string
      */
     public $bot_username = '';
-	
-	/**
+
+    /**
      * Optional. Pass True to request the permission for your bot to send messages to the user.
      * @var bool
      */

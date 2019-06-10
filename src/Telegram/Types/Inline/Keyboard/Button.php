@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard;
 
@@ -31,12 +31,12 @@ class Button extends TelegramTypes
      * @var string
      */
     public $url = '';
-	
-	/**
+
+    /**
      * Optional. An HTTP URL used to automatically authorize the user.
      * @var LoginUrl
      */
-	public $login_url;
+    public $login_url;
 
     /**
      * Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
