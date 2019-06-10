@@ -68,6 +68,13 @@ class Message extends TelegramTypes
     public $forward_signature = '';
 
     /**
+     * Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in
+     * forwarded messages
+     * @var string
+     */
+    public $forward_sender_name = '';
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      * @var int
      */

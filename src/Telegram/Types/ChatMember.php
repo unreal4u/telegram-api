@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object contains information about one member of the chat
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is june 2019
  *
  * @see https://core.telegram.org/bots/api#chatmember
  */
@@ -88,6 +88,12 @@ class ChatMember extends TelegramTypes
      * @var bool
      */
     public $can_promote_members = false;
+
+    /**
+     * Optional. Restricted only. True, if the user is a member of the chat at the moment of the request
+     * @var bool
+     */
+    public $is_member = false;
 
     /**
      * Optional. Restricted only. True, if the user can send text messages, contacts, locations and venues
