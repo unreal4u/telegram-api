@@ -25,6 +25,15 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  */
 class SendChatAction extends TelegramMethods
 {
+    const ACTION_TYPING = 'typing';
+    const ACTION_UPLOAD_PHOTO = 'upload_photo';
+    const ACTION_RECORD_VIDEO = 'record_video';
+    const ACTION_RECORD_AUDIO = 'record_audio';
+    const ACTION_UPLOAD_DOCUMENT = 'upload_document';
+    const ACTION_FIND_LOCATION = 'find_location';
+    const ACTION_RECORD_VIDEO_NOTE = 'record_video_note';
+    const ACTION_UPLOAD_VIDEO_NOTE = 'upload_video_note';
+
     /**
      * Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @var string
