@@ -1,16 +1,17 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\StickerSetArray;
 
 /**
  * This object represents a sticker set
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is may 2020
  *
  * @see https://core.telegram.org/bots/api#stickerset
  */
@@ -29,10 +30,18 @@ class StickerSet extends TelegramTypes
     public $title = '';
 
     /**
+     * True, if the sticker set contains animated stickers
+     * @see https://telegram.org/blog/animated-stickers
+     *
+     * @var bool
+     */
+    public $is_animated = false;
+
+    /**
      * True, if the sticker set contains masks
      * @var bool
      */
-    public $is_masks = false;
+    public $contains_masks = false;
 
     /**
      * List of all set stickers
@@ -40,11 +49,19 @@ class StickerSet extends TelegramTypes
      */
     public $stickers = [];
 
+    /**
+     * Optional. Sticker set thumbnail in the .WEBP or .TGS format
+     * @var PhotoSize[]
+     */
+    public $thumb = [];
+
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
             case 'stickers':
                 return new StickerSetArray($data, $this->logger);
+            case 'thumb':
+                return new PhotoSizeArray($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);

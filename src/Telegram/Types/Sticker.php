@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a sticker
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is may 2020
  *
  * @see https://core.telegram.org/bots/api#sticker
  */
@@ -22,6 +22,14 @@ class Sticker extends TelegramTypes
     public $file_id = '';
 
     /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used
+     * to download or reuse the file
+     *
+     * @var string
+     */
+    public $file_unique_id = '';
+
+    /**
      * Photo width
      * @var int
      */
@@ -32,6 +40,14 @@ class Sticker extends TelegramTypes
      * @var int
      */
     public $height = 0;
+
+    /**
+     * True, if the sticker is animated
+     * @see https://telegram.org/blog/animated-stickers
+     *
+     * @var bool
+     */
+    public $is_animated = false;
 
     /**
      * Optional. Sticker thumbnail in .webp or .jpg format
