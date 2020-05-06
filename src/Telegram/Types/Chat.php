@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is may 2020
  *
  * @see https://core.telegram.org/bots/api#chat
  */
@@ -54,12 +54,6 @@ class Chat extends TelegramTypes
     public $last_name = '';
 
     /**
-     * Optional. True if a group has ‘All Members Are Admins’ enabled.
-     * @var bool
-     */
-    public $all_members_are_administrators = false;
-
-    /**
      * Optional. Chat photo. Returned only in getChat
      * @var ChatPhoto
      */
@@ -84,6 +78,23 @@ class Chat extends TelegramTypes
     public $pinned_message;
 
     /**
+     * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat
+     * @see https://core.telegram.org/bots/api#getchat
+     *
+     * @var ChatPermissions
+     */
+    public $permissions;
+
+    /**
+     * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged
+     * user. Returned only in getChat
+     * @see https://core.telegram.org/bots/api#getchat
+     *
+     * @var int
+     */
+    public $slow_mode_delay;
+
+    /**
      * Optional. For supergroups, name of Group sticker set. Returned only in getChat
      * @var string
      */
@@ -102,6 +113,8 @@ class Chat extends TelegramTypes
                 return new ChatPhoto($data, $this->logger);
             case 'pinned_message':
                 return new Message($data, $this->logger);
+            case 'permissions':
+                return new ChatPermissions($data, $this->logger);
         }
         return parent::mapSubObjects($key, $data);
     }
