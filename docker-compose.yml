@@ -1,0 +1,53 @@
+version: "3"
+services:
+  php74:
+    container_name: telegram-api-php74
+    build: "docker/php74"
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Amsterdam
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html:z
+      - ~/.composer:/.composer:z
+  php73:
+    container_name: telegram-api-php73
+    build: "docker/php73"
+    environment:
+      - TZ=Europe/Amsterdam
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html:z
+      - ~/.composer:/.composer:z
+  php72:
+    container_name: telegram-api-php72
+    build: "docker/php72"
+    environment:
+      - TZ=Europe/Amsterdam
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html:z
+      - ~/.composer:/.composer:z
+  php71:
+    container_name: telegram-api-php71
+    build: "docker/php71"
+    environment:
+      - TZ=Europe/Amsterdam
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html:z
+      - ~/.composer:/.composer:z
+  php70:
+    container_name: telegram-api-php70
+    build: "docker/php70"
+    environment:
+      - TZ=Europe/Amsterdam
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html:z
+      - ~/.composer:/.composer:z

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-fin composer update -o --prefer-dist

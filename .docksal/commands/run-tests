@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-rm -rf tests/report/
-fin exec /usr/local/bin/phpdbg -qrr vendor/bin/phpunit
