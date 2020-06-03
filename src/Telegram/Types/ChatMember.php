@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object contains information about one member of the chat
  *
- * Objects defined as-is june 2019
+ * Objects defined as-is June 2020
  *
  * @see https://core.telegram.org/bots/api#chatmember
  */
@@ -28,6 +28,12 @@ class ChatMember extends TelegramTypes
     public $status = '';
 
     /**
+     * Optional. Owner and administrators only. Custom title for this user
+     * @var string
+     */
+    public $custom_title = '';
+
+    /**
      * Optional. Restricted and kicked only. Date when restrictions will be lifted for this user, unix time
      * @var int
      */
@@ -38,12 +44,6 @@ class ChatMember extends TelegramTypes
      * @var bool
      */
     public $can_be_edited = false;
-
-    /**
-     * Optional. Administrators only. True, if the administrator can change the chat title, photo and other settings
-     * @var bool
-     */
-    public $can_change_info = false;
 
     /**
      * Optional. Administrators only. True, if the administrator can post in the channel, channels only
@@ -64,22 +64,10 @@ class ChatMember extends TelegramTypes
     public $can_delete_messages = false;
 
     /**
-     * Optional. Administrators only. True, if the administrator can invite new users to the chat
-     * @var bool
-     */
-    public $can_invite_users = false;
-
-    /**
      * Optional. Administrators only. True, if the administrator can restrict, ban or unban chat members
      * @var bool
      */
     public $can_restrict_members = false;
-
-    /**
-     * Optional. Administrators only. True, if the administrator can pin messages, supergroups only
-     * @var bool
-     */
-    public $can_pin_messages = false;
 
     /**
      * Optional. Administrators only. True, if the administrator can add new administrators with a subset of his own
@@ -88,6 +76,24 @@ class ChatMember extends TelegramTypes
      * @var bool
      */
     public $can_promote_members = false;
+
+    /**
+     * Optional. Administrators only. True, if the administrator can change the chat title, photo and other settings
+     * @var bool
+     */
+    public $can_change_info = false;
+
+    /**
+     * Optional. Administrators only. True, if the administrator can invite new users to the chat
+     * @var bool
+     */
+    public $can_invite_users = false;
+
+    /**
+     * Optional. Administrators only. True, if the administrator can pin messages, supergroups only
+     * @var bool
+     */
+    public $can_pin_messages = false;
 
     /**
      * Optional. Restricted only. True, if the user is a member of the chat at the moment of the request
@@ -107,6 +113,12 @@ class ChatMember extends TelegramTypes
      * @var bool
      */
     public $can_send_media_messages = false;
+
+    /**
+     * Optional. Restricted only. True, if the user is allowed to send polls
+     * @var bool
+     */
+    public $can_send_polls = false;
 
     /**
      * Optional. Restricted only. True, if the user can send animations, games, stickers and use inline bots, implies

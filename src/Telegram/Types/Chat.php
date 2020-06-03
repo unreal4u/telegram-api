@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is may 2020
+ * Objects defined as-is June 2020
  *
  * @see https://core.telegram.org/bots/api#chat
  */
@@ -60,7 +60,7 @@ class Chat extends TelegramTypes
     public $photo;
 
     /**
-     * Optional. Description, for supergroups and channel chats. Returned only in getChat
+     * Optional. Description, for groups, supergroups and channel chats. Returned only in getChat.
      * @var string
      */
     public $description = '';

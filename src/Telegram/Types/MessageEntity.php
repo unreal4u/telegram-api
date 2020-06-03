@@ -9,16 +9,19 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is June 2020
  *
  * @see https://core.telegram.org/bots/api#messageentity
  */
 class MessageEntity extends TelegramTypes
 {
     /**
-     * Type of the entity. Can be mention (@username), hashtag, cashtag, bot_command, url, email, phone_number, bold
-     * (bold text), italic (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text
-     * URLs), text_mention (for users without usernames)
+     * Type of the entity. Can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command”
+     * (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number”
+     * (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough”
+     * (strikethrough text), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs),
+     * “text_mention” (for users without usernames)
+     *
      * @var string
      */
     public $type = '';
@@ -46,6 +49,12 @@ class MessageEntity extends TelegramTypes
      * @var User
      */
     public $user;
+
+    /**
+     * Optional. For “pre” only, the programming language of the entity text
+     * @var string
+     */
+    public $language;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {

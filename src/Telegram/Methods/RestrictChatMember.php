@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
+use unreal4u\TelegramAPI\Telegram\Types\ChatPermissions;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
@@ -15,7 +16,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  * work and must have the appropriate admin rights. Pass True for all boolean parameters to lift restrictions from a
  * user. Returns True on success
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is June 2020
  *
  * @see https://core.telegram.org/bots/api#restrictchatmember
  */
@@ -35,36 +36,17 @@ class RestrictChatMember extends TelegramMethods
     public $user_id = 0;
 
     /**
+     * New user permissions
+     * @var ChatPermissions
+     */
+    public $permissions;
+
+    /**
      * Date when restrictions will be lifted for the user, unix time. If user is restricted for more than 366 days or
      * less than 30 seconds from the current time, they are considered to be restricted forever
      * @var int
      */
     public $until_date = 0;
-
-    /**
-     * Pass True, if the user can send text messages, contacts, locations and venues
-     * @var bool
-     */
-    public $can_send_messages = false;
-
-    /**
-     * Pass True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies
-     * can_send_messages
-     * @var bool
-     */
-    public $can_send_media_messages = false;
-
-    /**
-     * Pass True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages
-     * @var bool
-     */
-    public $can_send_other_messages = false;
-
-    /**
-     * Pass True, if the user may add web page previews to their messages, implies can_send_media_messages
-     * @var bool
-     */
-    public $can_add_web_page_previews = false;
 
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
@@ -76,6 +58,7 @@ class RestrictChatMember extends TelegramMethods
         return [
             'chat_id',
             'user_id',
+            'permissions',
         ];
     }
 }
