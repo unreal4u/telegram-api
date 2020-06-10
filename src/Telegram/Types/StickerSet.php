@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
-use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\StickerSetArray;
 
 /**
  * This object represents a sticker set
  *
- * Objects defined as-is may 2020
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#stickerset
  */
@@ -61,7 +60,7 @@ class StickerSet extends TelegramTypes
             case 'stickers':
                 return new StickerSetArray($data, $this->logger);
             case 'thumb':
-                return new PhotoSizeArray($data, $this->logger);
+                return new PhotoSize($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);

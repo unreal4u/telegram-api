@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
@@ -13,7 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 /**
  * This object represents a message.
  *
- * Objects defined as-is december 2015
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#message
  */
@@ -88,10 +88,22 @@ class Message extends TelegramTypes
     public $reply_to_message;
 
     /**
+     * Optional. Bot through which the message was sent
+     * @var User
+     */
+    public $via_bot;
+
+    /**
      * Optional. Date the message was last edited in Unix time
      * @var int
      */
     public $edit_date = 0;
+
+    /**
+     * Optional. The unique identifier of a media message group this message belongs to
+     * @var string
+     */
+    public $media_group_id;
 
     /**
      * Optional. Signature of the post author for messages in channels
@@ -112,11 +124,11 @@ class Message extends TelegramTypes
     public $entities = [];
 
     /**
-     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in
-     * the caption
-     * @var MessageEntityArray
+     * Optional. Message is an animation, information about the animation. For backward compatibility, when this field
+     * is set, the document field will also be set
+     * @var Animation
      */
-    public $caption_entities = [];
+    public $animation;
 
     /**
      * Optional. Message is an audio file, information about the file
@@ -129,20 +141,6 @@ class Message extends TelegramTypes
      * @var Document
      */
     public $document;
-
-    /**
-     * Optional. Message is an animation, information about the animation. For backward compatibility, when this field
-     * is set, the document field will also be set
-     * @var Animation
-     */
-    public $animation;
-
-    /**
-     * Optional. Message is a game, information about the game
-     * @see https://core.telegram.org/bots/api#games
-     * @var Game
-     */
-    public $game;
 
     /**
      * Optional. Message is a photo, available sizes of the photo
@@ -163,16 +161,66 @@ class Message extends TelegramTypes
     public $video;
 
     /**
+     * Optional. Message is a video note, information about the video message
+     * @var VideoNote
+     */
+    public $video_note;
+
+    /**
      * Optional. Message is a voice message, information about the file
      * @var Voice
      */
     public $voice;
 
     /**
-     * Optional. Message is a video note, information about the video message
-     * @var VideoNote
+     * Optional. Caption for the photo or video
+     * @var string
      */
-    public $video_note;
+    public $caption = '';
+
+    /**
+     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in
+     * the caption
+     * @var MessageEntityArray
+     */
+    public $caption_entities = [];
+
+    /**
+     * Optional. Message is a shared contact, information about the contact
+     * @var Contact
+     */
+    public $contact;
+
+    /**
+     * Optional. Message is a dice with random value from 1 to 6
+     * @var Dice
+     */
+    public $dice;
+
+    /**
+     * Optional. Message is a game, information about the game
+     * @see https://core.telegram.org/bots/api#games
+     * @var Game
+     */
+    public $game;
+
+    /**
+     * Optional. Message is a native poll, information about the poll
+     * @var Poll
+     */
+    public $poll;
+
+    /**
+     * Optional. Message is a venue, information about the venue
+     * @var Venue
+     */
+    public $venue;
+
+    /**
+     * Optional. Message is a shared location, information about the location
+     * @var Location
+     */
+    public $location;
 
     /**
      * Optional. New members that were added to the group or supergroup and information about them (the bot itself may
@@ -182,37 +230,9 @@ class Message extends TelegramTypes
     public $new_chat_members;
 
     /**
-     * Optional. Caption for the photo or video
-     * @var string
-     */
-    public $caption = '';
-
-    /**
-     * Optional. Message is a shared contact, information about the contact
-     * @var Contact
-     */
-    public $contact;
-
-    /**
-     * Optional. Message is a shared location, information about the location
-     * @var Location
-     */
-    public $location;
-
-    /**
-     * Optional. Message is a venue, information about the venue
-     * @var Venue
-     */
-    public $venue;
-
-    /**
-     * Optional. Message is a native poll, information about the poll
-     * @var Poll
-     */
-    public $poll;
-
-    /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
+     *
+     * @deprecated
      * @var User
      */
     public $new_chat_member;
@@ -325,6 +345,7 @@ class Message extends TelegramTypes
             case 'forward_from':
             case 'new_chat_member':
             case 'left_chat_member':
+            case 'via_bot':
                 return new User($data, $this->logger);
             case 'new_chat_members':
                 return new UserArray($data, $this->logger);
@@ -348,6 +369,8 @@ class Message extends TelegramTypes
                 return new Animation($data, $this->logger);
             case 'game':
                 return new Game($data, $this->logger);
+            case 'dice':
+                return new Dice($data, $this->logger);
             case 'sticker':
                 return new Sticker($data, $this->logger);
             case 'video':

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
@@ -17,7 +17,7 @@ use unreal4u\TelegramAPI\Telegram\Types\MaskPosition;
  * Use this method to create new sticker set owned by a user. The bot will be able to edit the created sticker set.
  * Returns True on success
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#createnewstickerset
  */
@@ -53,19 +53,27 @@ class CreateNewStickerSet extends TelegramMethods
     public $png_sticker;
 
     /**
+     * TGS animation with the sticker, uploaded using multipart/form-data.
+     *
+     * @see https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
+     * @var InputFile
+     */
+    public $tgs_sticker;
+
+    /**
      * One or more emoji corresponding to the sticker
      * @var string
      */
     public $emojis = '';
 
     /**
-     * Pass True, if a set of mask stickers should be created
+     * Optional. Pass True, if a set of mask stickers should be created
      * @var bool
      */
-    public $is_masks = false;
+    public $is_masks;
 
     /**
-     * Position where the mask should be placed on faces
+     * Optional. Position where the mask should be placed on faces
      * @var MaskPosition
      */
     public $mask_position;
@@ -77,22 +85,30 @@ class CreateNewStickerSet extends TelegramMethods
 
     public function getMandatoryFields(): array
     {
-        return [
+        $return = [
             'user_id',
             'name',
             'title',
-            'png_sticker',
             'emojis',
         ];
+
+        // Define property as mandatory when not filled in
+        if (empty($this->png_sticker) && empty($this->tgs_sticker)) {
+            $return[] = 'png_sticker';
+            $return[] = 'tgs_sticker';
+        }
+
+        return $return;
     }
 
     public function hasLocalFiles(): bool
     {
-        return $this->png_sticker instanceof InputFile;
+        return $this->png_sticker instanceof InputFile || $this->tgs_sticker instanceof InputFile;
     }
 
     public function getLocalFiles(): Generator
     {
         yield 'png_sticker' => $this->png_sticker;
+        yield 'tgs_sticker' => $this->tgs_sticker;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
@@ -16,7 +16,7 @@ use unreal4u\TelegramAPI\Telegram\Types\MaskPosition;
 /**
  * Use this method to add a new sticker to a set created by the bot. Returns True on success
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#addstickertoset
  */
@@ -46,6 +46,14 @@ class AddStickerToSet extends TelegramMethods
     public $png_sticker;
 
     /**
+     * TGS animation with the sticker, uploaded using multipart/form-data.
+     *
+     * @see https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
+     * @var InputFile
+     */
+    public $tgs_sticker;
+
+    /**
      * One or more emoji corresponding to the sticker
      * @var string
      */
@@ -64,21 +72,29 @@ class AddStickerToSet extends TelegramMethods
 
     public function getMandatoryFields(): array
     {
-        return [
+        $return = [
             'user_id',
             'name',
-            'png_sticker',
             'emojis',
         ];
+
+        // Define property as mandatory when not filled in
+        if (empty($this->png_sticker) && empty($this->tgs_sticker)) {
+            $return[] = 'png_sticker';
+            $return[] = 'tgs_sticker';
+        }
+
+        return $return;
     }
 
     public function hasLocalFiles(): bool
     {
-        return $this->png_sticker instanceof InputFile;
+        return $this->png_sticker instanceof InputFile || $this->tgs_sticker instanceof InputFile;
     }
 
     public function getLocalFiles(): Generator
     {
         yield 'png_sticker' => $this->png_sticker;
+        yield 'tgs_sticker' => $this->tgs_sticker;
     }
 }
