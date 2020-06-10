@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a Telegram user or bot.
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#user
  */
@@ -51,4 +51,22 @@ class User extends TelegramTypes
      * @var string
      */
     public $language_code = '';
+
+    /**
+     * Optional. True, if the bot can be invited to groups. Returned only in getMe
+     * @var bool
+     */
+    public $can_join_groups;
+
+    /**
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     * @var bool
+     */
+    public $can_read_all_group_messages;
+
+    /**
+     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     * @var bool
+     */
+    public $supports_inline_queries;
 }

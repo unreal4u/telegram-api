@@ -12,7 +12,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Query;
  * This object represents an incoming update.
  * At most one of the optional parameters can be present in any given update.
  *
- * Objects defined as-is January 2017
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#update
  */
@@ -86,6 +86,14 @@ class Update extends TelegramTypes
      */
     public $poll;
 
+    /**
+     * Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were
+     * sent by the bot itself.
+     *
+     * @var PollAnswer
+     */
+    public $poll_answer;
+
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
@@ -106,6 +114,8 @@ class Update extends TelegramTypes
                 return new PreCheckoutQuery($data, $this->logger);
             case 'poll':
                 return new Poll($data, $this->logger);
+            case 'poll_answer':
+                return new PollAnswer($data, $this->logger);
         }
 
         return parent::mapSubObjects($key, $data);
