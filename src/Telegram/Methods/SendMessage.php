@@ -10,7 +10,7 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 /**
  * Object that resembles a message object in Telegram
  *
- * Objects defined as-is july 2016
+ * Objects defined as-is June 2020
  *
  * @see https://core.telegram.org/bots/api#sendmessage
  */
@@ -29,8 +29,9 @@ class SendMessage extends TelegramMethods
     public $text = '';
 
     /**
-     * Optional. Send Markdown, if you want Telegram apps to show bold, italic and inline URLs in your bot's message.
-     * For the moment, only Telegram for Android supports this.
+     * Optional. Mode for parsing entities in the message text. See formatting options for more details.
+     *
+     * @see https://core.telegram.org/bots/api#formatting-options
      * @var string
      */
     public $parse_mode = '';

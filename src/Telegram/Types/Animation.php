@@ -7,10 +7,9 @@ namespace unreal4u\TelegramAPI\Telegram\Types;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 
 /**
- * You can provide an animation for your game so that it looks stylish in chats (check out Lumberjack for an example).
- * This object represents an animation file to be displayed in the message containing a game
+ * This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
  *
- * Objects defined as-is December 2016
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#animation
  */
@@ -21,6 +20,32 @@ class Animation extends TelegramTypes
      * @var string
      */
     public $file_id = '';
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used
+     * to download or reuse the file.
+     *
+     * @var string
+     */
+    public $file_unique_id = '';
+
+    /**
+     * Video width as defined by sender
+     * @var int
+     */
+    public $width = 0;
+
+    /**
+     * Video height as defined by sender
+     * @var int
+     */
+    public $height = 0;
+
+    /**
+     * Duration of the video in seconds as defined by sender
+     * @var int
+     */
+    public $duration = 0;
 
     /**
      * Optional. Animation thumbnail as defined by sender
@@ -45,4 +70,14 @@ class Animation extends TelegramTypes
      * @var int
      */
     public $file_size = 0;
+
+    protected function mapSubObjects(string $key, array $data): TelegramTypes
+    {
+        switch ($key) {
+            case 'thumb':
+                return new PhotoSize($data, $this->logger);
+        }
+
+        return parent::mapSubObjects($key, $data);
+    }
 }

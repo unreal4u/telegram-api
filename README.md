@@ -10,7 +10,7 @@
 [![License](https://poser.pugx.org/unreal4u/telegram-api/license)](https://packagist.org/packages/unreal4u/telegram-api)
 
 This is a PHP7 bot API implementation for Telegram implementing the **vast majority** of
-[Bot API up until v4.4](https://core.telegram.org/bots/api-changelog#july-29-2019). The only thing it does not implement
+[Bot API up until v4.5](https://core.telegram.org/bots/api-changelog#december-31-2019). The only thing it does not implement
 is Telegram Passport which was introduced in [Bot API v4.0](https://core.telegram.org/bots/api#july-26-2018). It is
 unlikely to be introduced as it may introduce security vulnerabilities. However, if you think you have a strong case for
 the need, feel free to let me know.

@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents an audio file to be treated as music by the Telegram clients
  *
- * Objects defined as-is july 2018
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#audio
  */
@@ -20,6 +20,14 @@ class Audio extends TelegramTypes
      * @var string
      */
     public $file_id = '';
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used
+     * to download or reuse the file.
+     *
+     * @var string
+     */
+    public $file_unique_id = '';
 
     /**
      * Duration of the audio in seconds as defined by sender

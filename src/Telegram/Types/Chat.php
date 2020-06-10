@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is June 2020
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#chat
  */

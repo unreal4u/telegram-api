@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a video message (available in Telegram apps as of v.4.0).
  *
- * Objects defined as-is May 2017
+ * Objects defined as-is June 2020, Bot API v4.9
  *
  * @see https://core.telegram.org/bots/api#videonote
  */
@@ -22,7 +22,15 @@ class VideoNote extends TelegramTypes
     public $file_id = '';
 
     /**
-     * Video width and height as defined by sender
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used
+     * to download or reuse the file.
+     *
+     * @var string
+     */
+    public $file_unique_id = '';
+
+    /**
+     * Video width and height (diameter of the video message) as defined by sender
      * @var int
      */
     public $length = 0;
