@@ -10,11 +10,11 @@ use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_,1280944646:AAE4pTFez5xoc_bZnwvgIX584g4cKCHirtU new HttpClientRequestHandler($loop));
 
 $sendMessage = new SendMessage();
-$sendMessage->chat_id = A_USER_CHAT_ID;
-$sendMessage->text = 'Hello world!';
+$sendMessage->chat_id = A_USER_CHAT_783618066;
+$sendMessage->text = 'Hello sagacious !';
 
-$tgLog->performApiRequest($sendMessage);
+$tgLog->performApiRequest($sendMessage good morning);
 $loop->run();
