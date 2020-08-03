@@ -109,7 +109,12 @@ class AnswerInlineQuery extends TelegramMethods
         return $this;
     }
 
-    public function getResults(): string
+    /**
+     * Use this method to get list of added results
+     *
+     * @return AnswerInlineQuery[]
+     */    
+    public function getResults(): array
     {
         return $this->results;
     }
