@@ -5,87 +5,94 @@ declare(strict_types=1);
 namespace unreal4u\TelegramAPI;
 
 use Exception;
+use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
-use React\HttpClient\Client;
-use React\HttpClient\Request;
-use React\HttpClient\Response;
-use React\Promise\Deferred;
+use React\Http\Browser;
 use React\Promise\PromiseInterface;
 use React\Socket\Connector;
 use unreal4u\TelegramAPI\Exceptions\ClientException;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
+/**
+ * Class HttpClientRequestHandler
+ *
+ * This class implements a request handler based on the react/http package.
+ *
+ * @package unreal4u\TelegramAPI
+ */
 class HttpClientRequestHandler implements RequestHandlerInterface
 {
+
     /**
-     * @var Client
+     * @var Browser
      */
     protected $client;
 
     /**
      * HttpClientRequestHandler constructor.
-     * @param LoopInterface $loop
-     * @param array $options Use this to set options such as DNS and alike
+     *
+     * @param  LoopInterface  $loop
+     * @param  array  $options  the options to pass to the socket connector
+     *
+     * @see https://github.com/reactphp/socket#connector
      */
     public function __construct(LoopInterface $loop, array $options = [])
     {
-        $this->client = new Client($loop, new Connector($loop, $options));
+        $this->client = new Browser($loop, new Connector($loop, $options));
     }
 
     /**
-     * @param string $uri
-     * @return PromiseInterface
+     * Performs a GET request against the given URI
+     *
+     * @param  string  $uri
+     *
+     * @return PromiseInterface with a TelegramResponse on fulfill or exception on reject
      */
     public function get(string $uri): PromiseInterface
     {
-        $request = $this->client->request('GET', $uri);
-        return $this->processRequest($request);
+        return $this->processRequest($this->client->get($uri));
     }
 
     /**
-     * @param string $uri
-     * @param array $options
-     * @return PromiseInterface
+     * Performs a POST request against the given uri, with the given options
+     *
+     * @param  string  $uri
+     * @param  array  $options an array consisting of request options; known keys include 'headers' and 'body'.
+     *
+     * @return PromiseInterface with a TelegramResponse on fulfill or exception on reject
      */
     public function post(string $uri, array $options): PromiseInterface
     {
-        $headers = !empty($options['headers']) ? $options['headers'] : [];
-        $request = $this->client->request('POST', $uri, $headers);
-        return $this->processRequest($request, (!empty($options['body']) ? $options['body'] : null));
+        return $this->processRequest(
+            $this->client->post(
+                $uri,
+                $options['headers'] ?? [],
+                $options['body'] ?? null
+            )
+        );
     }
 
     /**
-     * @param Request $request
-     * @param mixed $data
-     * @return PromiseInterface
+     * Processes and unwraps an incoming request.
+     *
+     * @param  \React\Promise\PromiseInterface  $request
+     *
+     * @return PromiseInterface with a TelegramResponse on fulfill or exception on reject
      */
-    public function processRequest(Request $request, $data = null): PromiseInterface
+    public function processRequest(PromiseInterface $request): PromiseInterface
     {
-        $deferred = new Deferred();
-
-        $receivedData = '';
-        $request->on('response', static function (Response $response) use ($deferred, &$receivedData) {
-            $response->on('data', static function ($chunk) use (&$receivedData) {
-                $receivedData .= $chunk;
-            });
-
-            $response->on('end', static function () use (&$receivedData, $deferred, $response) {
-                try {
-                    $endResponse = new TelegramResponse($receivedData, $response->getHeaders());
-                    $deferred->resolve($endResponse);
-                } catch (Exception $e) {
-                    // Capture any exceptions thrown from TelegramResponse and reject the response
-                    $deferred->reject($e);
-                }
-            });
-        });
-
-        $request->on('error', static function (Exception $e) use ($deferred) {
-            $deferred->reject(new ClientException($e->getMessage(), $e->getCode(), $e));
-        });
-
-        $request->end($data);
-
-        return $deferred->promise();
+        return $request->then(
+            // Promise fulfilled
+            static function (ResponseInterface $response) {
+                return new TelegramResponse(
+                    $response->getBody()->getContents(),
+                    $response->getHeaders()
+                );
+            },
+            // Promise rejected
+            static function (Exception $e) {
+                throw new ClientException($e->getMessage(), $e->getCode(), $e);
+            }
+        );
     }
 }
