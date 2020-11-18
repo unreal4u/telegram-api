@@ -13,6 +13,13 @@ use unreal4u\TelegramAPI\Telegram\Types\MessageEntity;
  */
 class MessageEntityArray extends TraversableCustomType
 {
+    /**
+     * @param array|null $data
+     * @param LoggerInterface|null $logger
+
+     * @noinspection MagicMethodsValidityInspection
+     * @noinspection PhpMissingParentConstructorInspection
+     */
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
         if (count($data) !== 0) {

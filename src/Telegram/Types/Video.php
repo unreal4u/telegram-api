@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a video file
  *
- * Objects defined as-is June 2020, Bot API v4.9
+ * Objects defined as-is november 2020, Bot API v5.0
  *
  * @see https://core.telegram.org/bots/api#video
  */
@@ -52,6 +52,12 @@ class Video extends TelegramTypes
      * @var PhotoSize
      */
     public $thumb;
+
+    /**
+     * Optional. Original filename as defined by sender
+     * @var string
+     */
+    public $file_name = '';
 
     /**
      * Optional. Mime type of a file as defined by sender
