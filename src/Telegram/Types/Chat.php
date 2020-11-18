@@ -9,7 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 /**
  * This object represents a chat.
  *
- * Objects defined as-is June 2020, Bot API v4.9
+ * Objects defined as-is november 2020, Bot API v5.0
  *
  * @see https://core.telegram.org/bots/api#chat
  */
@@ -54,10 +54,16 @@ class Chat extends TelegramTypes
     public $last_name = '';
 
     /**
-     * Optional. Chat photo. Returned only in getChat
+     * Optional. Chat photo. Returned only in {@see getChat}
      * @var ChatPhoto
      */
     public $photo;
+
+    /**
+     * Optional. Bio of the other party in a private chat. Returned only in {@see getChat}
+     * @var string
+     */
+    public $bio;
 
     /**
      * Optional. Description, for groups, supergroups and channel chats. Returned only in getChat.
@@ -105,6 +111,21 @@ class Chat extends TelegramTypes
      * @var bool
      */
     public $can_set_sticker_set = false;
+
+    /**
+     * Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice
+     * versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming
+     * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64
+     * bit integer or double-precision float type are safe for storing this identifier. Returned only in {@see getChat}.
+     * @var int
+     */
+    public $linked_chat_id = 0;
+
+    /**
+     * Optional. For supergroups, the location to which the supergroup is connected. Returned only in {@see getChat}.
+     * @var ChatLocation
+     */
+    public $location;
 
     public function mapSubObjects(string $key, array $data): TelegramTypes
     {
