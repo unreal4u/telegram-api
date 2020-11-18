@@ -56,6 +56,26 @@ class EditMessageLiveLocation extends TelegramMethods
     public $longitude = 0.0;
 
     /**
+     * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
+     * @var float
+     */
+    public $horizontal_accuracy = 0.0;
+
+    /**
+     * Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if
+     * specified
+     * @var int
+     */
+    public $heading;
+
+    /**
+     * Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in
+     * meters. Must be between 1 and 100000 if specified.
+     * @var int
+     */
+    public $proximity_alert_radius;
+
+    /**
      * Optional. A JSON-serialized object for an inline keyboard.
      * @var Markup
      */

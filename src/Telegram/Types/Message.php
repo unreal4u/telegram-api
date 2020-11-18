@@ -13,7 +13,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 /**
  * This object represents a message.
  *
- * Objects defined as-is June 2020, Bot API v4.9
+ * Objects defined as-is november 2020, Bot API v5.0
  *
  * @see https://core.telegram.org/bots/api#message
  */
@@ -327,6 +327,13 @@ class Message extends TelegramTypes
     public $connected_website = '';
 
     /**
+     * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live
+     * Location
+     * @var ProximityAlertTriggered
+     */
+    public $proximity_alert_triggered;
+
+    /**
      * @var Markup
      */
     public $reply_markup;
@@ -393,6 +400,8 @@ class Message extends TelegramTypes
                 return new SuccessfulPayment($data, $this->logger);
             case 'reply_markup':
                 return new Markup($data, $this->logger);
+            case 'proximity_alert_triggered':
+                return new ProximityAlertTriggered($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches
