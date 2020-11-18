@@ -34,6 +34,12 @@ class WebhookInfo extends TelegramTypes
     public $pending_update_count = 0;
 
     /**
+     * Optional. Currently used webhook IP address
+     * @var string
+     */
+    public $ip_address = '';
+
+    /**
      * Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
      * @var int
      */

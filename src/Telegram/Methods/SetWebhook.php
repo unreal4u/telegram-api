@@ -49,6 +49,13 @@ class SetWebhook extends TelegramMethods
     public $certificate;
 
     /**
+     * Optional. The fixed IP address which will be used to send webhook requests instead of the IP address resolved
+     * through DNS
+     * @var string
+     */
+    public $ip_address;
+
+    /**
      * Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to
      * 40. Use lower values to limit the load on your bot‘s server, and higher values to increase your bot’s
      * throughput
@@ -69,6 +76,12 @@ class SetWebhook extends TelegramMethods
      * @var string[]
      */
     public $allowed_updates = [];
+
+    /**
+     * Optional. Pass True to drop all pending updates
+     * @var bool
+     */
+    public $drop_pending_updates;
 
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
