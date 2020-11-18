@@ -15,7 +15,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
  * chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a
  * user. Returns True on success.
  *
- * Objects defined as-is july 2017
+ * Objects defined as-is november 2020, Bot API v5.0
  *
  * @see https://core.telegram.org/bots/api#promotechatmember
  */
@@ -33,6 +33,12 @@ class PromoteChatMember extends TelegramMethods
      * @var int
      */
     public $user_id = 0;
+
+    /**
+     * Optional. Pass True, if the administrator's presence in the chat is hidden
+     * @var bool
+     */
+    public $is_anonymous = false;
 
     /**
      * Pass True, if the administrator can change chat title, photo and other settings

@@ -34,6 +34,12 @@ class ChatMember extends TelegramTypes
     public $custom_title = '';
 
     /**
+     * Optional. Owner and administrators only. True, if the user's presence in the chat is hidden
+     * @var bool
+     */
+    public $is_anonymous = false;
+
+    /**
      * Optional. Restricted and kicked only. Date when restrictions will be lifted for this user, unix time
      * @var int
      */

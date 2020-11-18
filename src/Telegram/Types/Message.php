@@ -32,6 +32,14 @@ class Message extends TelegramTypes
     public $from;
 
     /**
+     * Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The
+     * supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically
+     * forwarded to the discussion group
+     * @var Chat
+     */
+    public $sender_chat;
+
+    /**
      * Date the message was sent in Unix time
      * @var int
      */
@@ -106,7 +114,8 @@ class Message extends TelegramTypes
     public $media_group_id;
 
     /**
-     * Optional. Signature of the post author for messages in channels
+     * Optional. Signature of the post author for messages in channels, or the custom title of an anonymous group
+     * administrator
      * @var string
      */
     public $author_signature = '';
@@ -359,6 +368,7 @@ class Message extends TelegramTypes
             case 'photo':
             case 'new_chat_photo':
                 return new PhotoSizeArray($data, $this->logger);
+            case 'sender_chat':
             case 'chat':
             case 'forward_from_chat':
                 return new Chat($data, $this->logger);
