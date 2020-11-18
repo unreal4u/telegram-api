@@ -24,9 +24,9 @@ use function json_encode;
 /**
  * Use this method to send photos. On success, the sent Message is returned
  *
- * Objects defined as-is January 2017
+ * Objects defined as-is november 2020, Bot API v5.0
  *
- * @see https://core.telegram.org/bots/api#sendphoto
+ * @see https://core.telegram.org/bots/api#sendmediagroup
  */
 class SendMediaGroup extends TelegramMethods
 {
@@ -60,6 +60,12 @@ class SendMediaGroup extends TelegramMethods
      * @var int
      */
     public $reply_to_message_id = 0;
+
+    /**
+     * Optional. Pass True, if the message should be sent even if the specified replied-to message is not found
+     * @var bool
+     */
+    public $allow_sending_without_reply;
 
     public function getMandatoryFields(): array
     {
