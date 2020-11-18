@@ -29,7 +29,7 @@ class AnswerInlineQuery extends TelegramMethods
 
     /**
      * A JSON-serialized array (of InlineQueryResult) of results for the inline query
-     * @var array[]
+     * @var AnswerInlineQuery[]|string string after performSpecialConditions has been called
      */
     protected $results = [];
 
@@ -112,9 +112,9 @@ class AnswerInlineQuery extends TelegramMethods
     /**
      * Use this method to get list of added results
      *
-     * @return AnswerInlineQuery[]
-     */    
-    public function getResults(): array
+     * @return AnswerInlineQuery[]|string string after performSpecialConditions has been called
+     */
+    public function getResults()
     {
         return $this->results;
     }
