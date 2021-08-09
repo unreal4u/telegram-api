@@ -8,6 +8,7 @@ use Exception;
 use Psr\Http\Message\ResponseInterface;
 use React\EventLoop\LoopInterface;
 use React\Http\Browser;
+use React\Http\Message\ResponseException;
 use React\Promise\PromiseInterface;
 use React\Socket\Connector;
 use unreal4u\TelegramAPI\Exceptions\ClientException;
@@ -91,6 +92,10 @@ class HttpClientRequestHandler implements RequestHandlerInterface
             },
             // Promise rejected
             static function (Exception $e) {
+                if ($e instanceof ResponseException) {
+                    throw ClientException::fromResponseException($e);
+                }
+
                 throw new ClientException($e->getMessage(), $e->getCode(), $e);
             }
         );
