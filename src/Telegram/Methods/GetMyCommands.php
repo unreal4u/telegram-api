@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
+use unreal4u\TelegramAPI\Telegram\Types\BotCommandScope;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\BotCommandArray;
 
 /**
@@ -20,6 +21,12 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\BotCommandArray;
  */
 class GetMyCommands extends TelegramMethods
 {
+    /**
+     * A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault.
+     * @var BotCommandScope
+     */
+    public $scope;
+
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
         return new BotCommandArray($data->getResult(), $logger);
@@ -28,5 +35,13 @@ class GetMyCommands extends TelegramMethods
     public function getMandatoryFields(): array
     {
         return [];
+    }
+
+    public function performSpecialConditions(): TelegramMethods
+    {
+        if ($this->scope) {
+            $this->scope = json_encode($this->scope);
+        }
+        return parent::performSpecialConditions();
     }
 }

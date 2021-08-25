@@ -9,6 +9,7 @@ use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
 use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 use unreal4u\TelegramAPI\Telegram\Types\BotCommand;
+use unreal4u\TelegramAPI\Telegram\Types\BotCommandScope;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultBoolean;
 
 /**
@@ -28,6 +29,14 @@ class SetMyCommands extends TelegramMethods
      */
     public $commands;
 
+    /**
+     * A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to
+     * BotCommandScopeDefault.
+     *
+     * @var BotCommandScope
+     */
+    public $scope;
+
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
@@ -43,6 +52,9 @@ class SetMyCommands extends TelegramMethods
     public function performSpecialConditions(): TelegramMethods
     {
         $this->commands = json_encode($this->commands);
+        if ($this->scope) {
+            $this->scope = json_encode($this->scope);
+        }
         return parent::performSpecialConditions();
     }
 }
