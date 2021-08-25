@@ -44,5 +44,10 @@
     "issues": "https://github.com/unreal4u/telegram-api/issues",
     "source": "https://github.com/unreal4u/telegram-api"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "config": {
+    "platform": {
+      "php": "7.0.0"
+    }
+  }
 }
