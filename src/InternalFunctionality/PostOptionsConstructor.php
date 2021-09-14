@@ -92,19 +92,17 @@ class PostOptionsConstructor
 
         $return = [];
 
-        foreach ($method as $key => $value) {
-            if ($method->hasLocalFiles() === true) {
-                $this->logger->debug('About to send a file, so changing request to use multi-part instead');
-                // If we are about to send a file, we must use the multipart/form-data way
-                $this->formType = 'multipart/form-data';
-                foreach ($method->getLocalFiles() as $identifier => $localFile) {
-                    $return[$identifier . '~' . $this->numberOfLocalFiles] = [
-                        'id' => $this->numberOfLocalFiles,
-                        'filename' => basename($localFile->path),
-                        'stream' => $localFile->getStream(),
-                    ];
-                    $this->numberOfLocalFiles++;
-                }
+        if ($method->hasLocalFiles() === true) {
+            $this->logger->debug('About to send a file, so changing request to use multi-part instead');
+            // If we are about to send a file, we must use the multipart/form-data way
+            $this->formType = 'multipart/form-data';
+            foreach ($method->getLocalFiles() as $identifier => $localFile) {
+                $return[$identifier . '~' . $this->numberOfLocalFiles] = [
+                    'id' => $this->numberOfLocalFiles,
+                    'filename' => basename($localFile->path),
+                    'stream' => $localFile->getStream(),
+                ];
+                $this->numberOfLocalFiles++;
             }
         }
 
