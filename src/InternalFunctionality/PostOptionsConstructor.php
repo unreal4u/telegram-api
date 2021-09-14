@@ -97,7 +97,7 @@ class PostOptionsConstructor
             // If we are about to send a file, we must use the multipart/form-data way
             $this->formType = 'multipart/form-data';
             foreach ($method->getLocalFiles() as $identifier => $localFile) {
-                if ($localFile !== null) {
+                if ($localFile instanceof InputFile) {
                     $return[$identifier . '~' . $this->numberOfLocalFiles] = [
                         'id' => $this->numberOfLocalFiles,
                         'filename' => basename($localFile->path),
