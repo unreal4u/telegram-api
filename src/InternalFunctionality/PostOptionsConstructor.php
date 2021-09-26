@@ -170,6 +170,7 @@ class PostOptionsConstructor
                 stream_get_contents($mediaStream['stream']),
                 pathinfo($mediaStream['filename'], PATHINFO_BASENAME)
             );
+            fclose($mediaStream['stream']);
 
             $builder->append($appendingData);
         }
