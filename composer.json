@@ -21,7 +21,8 @@
     "clue/block-react": "^1.3",
     "yoshi2889/multipart-builder": "^0.1.1",
     "amphp/artax": "^3",
-    "react/http": "^1.1"
+    "react/http": "^1.1",
+    "lucadevelop/telegram-entities-decoder": "^1.0.0"
   },
   "require-dev": {
     "monolog/monolog": "^1.17",

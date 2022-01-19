@@ -9,6 +9,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UserArray;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
+use lucadevelop\TelegramEntitiesDecoder\EntityDecoder;
 
 /**
  * This object represents a message.
@@ -416,5 +417,43 @@ class Message extends TelegramTypes
 
         // Return always null if none of the objects above matches
         return parent::mapSubObjects($key, $data);
+    }
+
+    /**
+     * Decode style entities from Telegram bot messages (bold, italic, etc.) in text with inline entities that duplicate (when possible) the exact style the message had originally when was sended to the bot.
+     *
+     * @param string $style
+     * @return string
+     */
+    public function decodeEntities($style = 'HTML')
+    {
+        $newMessageObj = new \stdClass();
+        $newMessageObj->text = $this->text;
+        $newEntities = [];
+        foreach($this->entities as $entity)
+        {
+            $newEntity = new \stdClass();
+            $newEntity->type = $entity->type;
+            $newEntity->offset = $entity->offset;
+            $newEntity->length = $entity->length;
+            if($entity->url != '')
+            {
+                $newEntity->url = $entity->url;
+            }
+            if($entity->user !== null)
+            {
+                $mentionUser = new \stdClass();
+                $mentionUser->id = $entity->user->id;
+                $newEntity->user = $mentionUser;
+            }
+            if($entity->language !== null)
+            {
+                $newEntity->language = $entity->language;
+            }
+            $newEntities[] = $newEntity;
+        }
+        $newMessageObj->entities = $newEntities;
+        $entitiesDecoder = new EntityDecoder($style);
+        return $entitiesDecoder->decode($newMessageObj);
     }
 }
