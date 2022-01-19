@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a64243a0391238b9c19a499819bc43ac",
+    "content-hash": "89b75cb9c7d6962d127c833a1535b244",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1156,16 +1156,16 @@
         },
         {
             "name": "lucadevelop/telegram-entities-decoder",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LucaDevelop/telegram-entities-decoder.git",
-                "reference": "26100cf1352cb219799de224d4c0eb40156d9f8c"
+                "reference": "d5130a899aaa4c8514a887e8dee6a7bf30b4459c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LucaDevelop/telegram-entities-decoder/zipball/26100cf1352cb219799de224d4c0eb40156d9f8c",
-                "reference": "26100cf1352cb219799de224d4c0eb40156d9f8c",
+                "url": "https://api.github.com/repos/LucaDevelop/telegram-entities-decoder/zipball/d5130a899aaa4c8514a887e8dee6a7bf30b4459c",
+                "reference": "d5130a899aaa4c8514a887e8dee6a7bf30b4459c",
                 "shasum": ""
             },
             "require": {
@@ -1174,7 +1174,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "": "src/"
+                    "lucadevelop\\TelegramEntitiesDecoder\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1190,9 +1190,9 @@
             "description": "Telegram entities decoder in PHP",
             "support": {
                 "issues": "https://github.com/LucaDevelop/telegram-entities-decoder/issues",
-                "source": "https://github.com/LucaDevelop/telegram-entities-decoder/tree/v1.0.0"
+                "source": "https://github.com/LucaDevelop/telegram-entities-decoder/tree/v1.0.1"
             },
-            "time": "2022-01-19T11:07:12+00:00"
+            "time": "2022-01-19T16:10:15+00:00"
         },
         {
             "name": "psr/http-message",
