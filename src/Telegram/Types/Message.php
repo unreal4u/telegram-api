@@ -427,33 +427,7 @@ class Message extends TelegramTypes
      */
     public function decodeEntities($style = 'HTML')
     {
-        $newMessageObj = new \stdClass();
-        $newMessageObj->text = $this->text;
-        $newEntities = [];
-        foreach($this->entities as $entity)
-        {
-            $newEntity = new \stdClass();
-            $newEntity->type = $entity->type;
-            $newEntity->offset = $entity->offset;
-            $newEntity->length = $entity->length;
-            if($entity->url != '')
-            {
-                $newEntity->url = $entity->url;
-            }
-            if($entity->user !== null)
-            {
-                $mentionUser = new \stdClass();
-                $mentionUser->id = $entity->user->id;
-                $newEntity->user = $mentionUser;
-            }
-            if($entity->language !== null)
-            {
-                $newEntity->language = $entity->language;
-            }
-            $newEntities[] = $newEntity;
-        }
-        $newMessageObj->entities = $newEntities;
         $entitiesDecoder = new EntityDecoder($style);
-        return $entitiesDecoder->decode($newMessageObj);
+        return $entitiesDecoder->decode($this);
     }
 }
