@@ -423,6 +423,9 @@ class Message extends TelegramTypes
      * Decode style entities from Telegram bot messages in text with inline entities.
      *
      * @param string $style Use 'HTML', 'MarkdownV2' or 'Markdown'
+     * 
+     * @throws InvalidArgumentException if the provided style name is invalid.
+     * 
      * @return string
      */
     public function decodeEntities($style = 'HTML'): string
