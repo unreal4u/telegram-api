@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa589b70756ada74618590eb1c8b5f4c",
+    "content-hash": "174f3d66b7d7e9c936d4372023c33e89",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1156,22 +1156,22 @@
         },
         {
             "name": "lucadevelop/telegram-entities-decoder",
-            "version": "dev-master",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LucaDevelop/telegram-entities-decoder.git",
-                "reference": "9d0af12635f8774ab26959c6de63cc8c3efdf97b"
+                "reference": "7cebf5d19b68a2e4f3298afd627daad1104f1acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LucaDevelop/telegram-entities-decoder/zipball/9d0af12635f8774ab26959c6de63cc8c3efdf97b",
-                "reference": "9d0af12635f8774ab26959c6de63cc8c3efdf97b",
+                "url": "https://api.github.com/repos/LucaDevelop/telegram-entities-decoder/zipball/7cebf5d19b68a2e4f3298afd627daad1104f1acb",
+                "reference": "7cebf5d19b68a2e4f3298afd627daad1104f1acb",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "php": ">=7.0.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1191,9 +1191,9 @@
             "description": "Telegram entities decoder in PHP",
             "support": {
                 "issues": "https://github.com/LucaDevelop/telegram-entities-decoder/issues",
-                "source": "https://github.com/LucaDevelop/telegram-entities-decoder/tree/master"
+                "source": "https://github.com/LucaDevelop/telegram-entities-decoder/tree/v1.2.1"
             },
-            "time": "2022-01-19T21:55:00+00:00"
+            "time": "2022-01-24T11:23:32+00:00"
         },
         {
             "name": "psr/http-message",
@@ -4051,9 +4051,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lucadevelop/telegram-entities-decoder": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

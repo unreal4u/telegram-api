@@ -420,12 +420,12 @@ class Message extends TelegramTypes
     }
 
     /**
-     * Decode style entities from Telegram bot messages (bold, italic, etc.) in text with inline entities that duplicate (when possible) the exact style the message had originally when was sended to the bot.
+     * Decode style entities from Telegram bot messages in text with inline entities.
      *
-     * @param string $style
+     * @param string $style Use 'HTML', 'MarkdownV2' or 'Markdown'
      * @return string
      */
-    public function decodeEntities($style = 'HTML')
+    public function decodeEntities($style = 'HTML'): string
     {
         $entitiesDecoder = new EntityDecoder($style);
         return $entitiesDecoder->decode($this);
