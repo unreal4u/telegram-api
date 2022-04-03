@@ -9,8 +9,7 @@ use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\GetUserProfilePhotos;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $userProfilePhotos = new GetUserProfilePhotos();
 $userProfilePhotos->user_id = A_USER_ID;
@@ -27,5 +26,3 @@ $userProfilePhotosPromise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();

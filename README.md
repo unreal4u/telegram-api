@@ -68,10 +68,9 @@ In order to use a proxy, you can use the https://github.com/clue/php-socks-react
 
 use Clue\React\Socks\Client;
 
-$loop = Factory::create();
 // Replace PROXY_ADDRESS and PROXY_PORT with the correct configuration
 $proxy = new Client('socks5://' . PROXY_ADDRESS . ':' . PROXY_PORT, new Connector($loop));
-$handler = new HttpClientRequestHandler($loop, [
+$handler = new HttpClientRequestHandler(Loop::get(), [
     'tcp' => $proxy,
     'timeout' => 3.0,
     'dns' => false
@@ -105,16 +104,14 @@ use \unreal4u\TelegramAPI\TgLog;
 use \unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 
 $loop = \React\EventLoop\Factory::create();
-$handler = new HttpClientRequestHandler($loop);
+$handler = new HttpClientRequestHandler(Loop::get());
 $tgLog = new TgLog(BOT_TOKEN, $handler);
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world!';
 
-$tgLog->performApiRequest($sendMessage);
-$loop->run();
-```
+$tgLog->performApiRequest($sendMessage);```
 (Side note: In case `React\EventLoop\Factory` cannot be resolved in the above code, add `include('vendor/autoload.php')` to your PHP file).
 
 With the `SendMessage()` object, you can create a message to be sent through the TgLog object.  

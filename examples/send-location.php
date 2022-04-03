@@ -9,8 +9,7 @@ use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\SendLocation;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $location = new SendLocation();
 $location->chat_id = A_USER_CHAT_ID;
@@ -30,5 +29,3 @@ $promise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();

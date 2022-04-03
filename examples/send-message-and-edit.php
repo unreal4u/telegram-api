@@ -16,14 +16,11 @@ use unreal4u\TelegramAPI\TgLog;
 $logger = new Logger('CUSTOM-EXAMPLE');
 $logger->pushHandler(new StreamHandler('logs/custom-example.log'));
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop), $logger);
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()), $logger);
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
 $sendMessage->text = 'Hello world, this is a test';
 $firstMessagePromise = $tgLog->performApiRequest($sendMessage);
-$loop->run();
-
 sleep(3);
 $firstMessagePromise->then(
     function (Message $message) use ($tgLog) {
@@ -47,5 +44,3 @@ $firstMessagePromise->then(
         );
     }
 );
-
-$loop->run();

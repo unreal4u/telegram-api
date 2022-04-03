@@ -10,8 +10,7 @@ use unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Types\BotCommand;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $promise = $tgLog->performApiRequest(new \unreal4u\TelegramAPI\Telegram\Methods\GetMyCommands());
 $promise->then(
@@ -26,5 +25,3 @@ $promise->then(
         var_dump($e->getTraceAsString());
     }
 );
-
-$loop->run();

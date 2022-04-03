@@ -10,8 +10,7 @@ use unreal4u\TelegramAPI\Telegram\Methods\SendAudio;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $sendAudio = new SendAudio();
 $sendAudio->chat_id = A_USER_CHAT_ID;
@@ -32,5 +31,3 @@ $promise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();

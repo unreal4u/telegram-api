@@ -10,8 +10,7 @@ use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_USER_CHAT_ID;
@@ -86,5 +85,3 @@ $promise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();

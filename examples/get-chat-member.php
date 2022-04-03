@@ -9,8 +9,7 @@ use \unreal4u\TelegramAPI\HttpClientRequestHandler;
 use unreal4u\TelegramAPI\Telegram\Methods\GetChatMember;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $getChatMember = new GetChatMember();
 $getChatMember->chat_id = A_GROUP_CHAT_ID;
@@ -28,5 +27,3 @@ $getChatMemberPromise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage().PHP_EOL;
     }
 );
-
-$loop->run();
