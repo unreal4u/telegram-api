@@ -25,8 +25,7 @@ use unreal4u\TelegramAPI\TgLog;
 $logger = new Logger('CUSTOM-EXAMPLE');
 $logger->pushHandler(new StreamHandler('logs/custom-example.log'));
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop), $logger);
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()), $logger);
 
 $userProfilePhotos = new GetUserProfilePhotos();
 $userProfilePhotos->user_id = A_USER_ID;

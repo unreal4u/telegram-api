@@ -10,8 +10,7 @@ use unreal4u\TelegramAPI\Telegram\Methods\GetUpdates;
 use \unreal4u\TelegramAPI\Abstracts\TraversableCustomType;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $getUpdates = new GetUpdates();
 
@@ -29,5 +28,3 @@ $updatePromise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();

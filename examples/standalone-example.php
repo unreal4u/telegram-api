@@ -11,8 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Methods\SendMessage;
 use unreal4u\TelegramAPI\Telegram\Types\User;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $getMe = new GetMe();
 $promise = $tgLog->performApiRequest($getMe);
@@ -36,5 +35,3 @@ $sendMessage = new SendMessage();
 $sendMessage->chat_id = A_GROUP_CHAT_ID;
 $sendMessage->text = 'And this is an hello the the group... from scratch :D';
 $tgLog->performApiRequest($sendMessage);
-
-$loop->run();

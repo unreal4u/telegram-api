@@ -11,8 +11,7 @@ use unreal4u\TelegramAPI\Telegram\Types\InputMedia\Photo;
 use unreal4u\TelegramAPI\Telegram\Types\InputMedia\Video;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 $sendMediaGroup = new SendMediaGroup();
 $sendMediaGroup->chat_id = A_USER_CHAT_ID;
@@ -54,5 +53,3 @@ $promise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage() . PHP_EOL;
     }
 );
-
-$loop->run();

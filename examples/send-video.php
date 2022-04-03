@@ -11,16 +11,13 @@ use unreal4u\TelegramAPI\Telegram\Methods\SendVideo;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\TgLog;
 
-$loop = Factory::create();
-$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
+$tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler(Loop::get()));
 
 // Let the user know we are doing some intensive stuff
 $sendChatAction = new SendChatAction();
 $sendChatAction->chat_id = A_USER_CHAT_ID;
 $sendChatAction->action = 'upload_video';
 $tgLog->performApiRequest($sendChatAction);
-$loop->run();
-
 $sendVideo = new SendVideo();
 $sendVideo->chat_id = A_USER_CHAT_ID;
 $sendVideo->video = new InputFile('binary-test-data/demo-video.mp4');
@@ -39,5 +36,3 @@ $promise->then(
         echo 'Exception ' . get_class($exception) . ' caught, message: ' . $exception->getMessage();
     }
 );
-
-$loop->run();
