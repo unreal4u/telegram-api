@@ -9,6 +9,7 @@ use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\PhotoSizeArray;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\UserArray;
 use unreal4u\TelegramAPI\Telegram\Types\Inline\Keyboard\Markup;
+use lucadevelop\TelegramEntitiesDecoder\EntityDecoder;
 
 /**
  * This object represents a message.
@@ -416,5 +417,20 @@ class Message extends TelegramTypes
 
         // Return always null if none of the objects above matches
         return parent::mapSubObjects($key, $data);
+    }
+
+    /**
+     * Decode style entities from Telegram bot messages in text with inline entities.
+     *
+     * @param string $style Use 'HTML', 'MarkdownV2' or 'Markdown'
+     * 
+     * @throws InvalidArgumentException if the provided style name is invalid.
+     * 
+     * @return string
+     */
+    public function decodeEntities($style = 'HTML'): string
+    {
+        $entitiesDecoder = new EntityDecoder($style);
+        return $entitiesDecoder->decode($this);
     }
 }
