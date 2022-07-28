@@ -83,6 +83,15 @@ class SetWebhook extends TelegramMethods
      */
     public $drop_pending_updates;
 
+    /**
+     * Optional. A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request,
+     * 1-256 characters. Only characters A-Z, a-z, 0-9, _ and - are allowed. The header is useful to ensure that the
+     * request comes from a webhook set by you.
+     *
+     * @var string
+     */
+    public $secret_token;
+
     public static function bindToObject(TelegramResponse $data, LoggerInterface $logger): TelegramTypes
     {
         return new ResultBoolean($data->getResultBoolean(), $logger);
