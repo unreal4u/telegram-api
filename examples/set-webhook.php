@@ -23,7 +23,7 @@ $webhook->secret_token = 'some-very-secret-string';
 $promise = $tgLog->performApiRequest($webhook);
 $promise->then(
     function (TelegramTypes $response) {
-        var_dump('Webhook was successfully set. Run get-webhookinfo.php to get detailed information about webhook from server.');
+        echo 'Webhook was successfully set. Run get-webhookinfo.php to get detailed information about webhook from server.';
     },
     function (\Exception $exception) {
         var_dump($exception->getMessage());
