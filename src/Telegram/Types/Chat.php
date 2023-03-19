@@ -53,6 +53,11 @@ class Chat extends TelegramTypes
      */
     public $last_name = '';
 
+	/**
+	 * Optional. True, if the supergroup chat is a forum (has topics enabled)
+	 */
+	public $is_forum = false;
+
     /**
      * Optional. Chat photo. Returned only in {@see getChat}
      * @var ChatPhoto

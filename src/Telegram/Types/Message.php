@@ -27,6 +27,12 @@ class Message extends TelegramTypes
     public $message_id = 0;
 
     /**
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     * @var int
+     */
+    public $message_thread_id = 0;
+
+    /**
      * Optional. Sender, can be empty for messages sent to channels
      * @var User
      */
@@ -88,6 +94,16 @@ class Message extends TelegramTypes
      * @var int
      */
     public $forward_date = 0;
+
+	/**
+	 * Optional. True, if the message is sent to a forum topic
+	 */
+	public $is_topic_message = false;
+
+	/**
+	 * @var bool
+	 */
+	public $is_automatic_forward = false;
 
     /**
      * Optional. For replies, the original message. Note that the Message object in this field will not contain further
@@ -343,6 +359,30 @@ class Message extends TelegramTypes
      */
     public $proximity_alert_triggered;
 
+	/**
+     * Optional. Service message: forum topic created
+	 * @var ForumTopicCreated
+	 */
+	public $forum_topic_created;
+
+	/**
+     * Optional. Service message: forum topic edited
+	 * @var ForumTopicEdited
+	 */
+	public $forum_topic_edited;
+
+	/**
+     * Optional. Service message: forum topic closed
+	 * @var ForumTopicClosed
+	 */
+	public $forum_topic_closed;
+
+	/**
+     * Optional. Service message: forum topic reopened
+	 * @var ForumTopicReopened
+	 */
+	public $forum_topic_reopened;
+
     /**
      * @var Markup
      */
@@ -413,6 +453,14 @@ class Message extends TelegramTypes
                 return new Markup($data, $this->logger);
             case 'proximity_alert_triggered':
                 return new ProximityAlertTriggered($data, $this->logger);
+            case 'forum_topic_created':
+                return new ForumTopicCreated($data, $this->logger);
+            case 'forum_topic_edited':
+                return new ForumTopicEdited($data, $this->logger);
+            case 'forum_topic_closed':
+                return new ForumTopicClosed($data, $this->logger);
+            case 'forum_topic_reopened':
+                return new ForumTopicReopened($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches
