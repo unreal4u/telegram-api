@@ -8,7 +8,7 @@ use unreal4u\TelegramAPI\InternalFunctionality\TelegramResponse;
 
 class TelegramRawDataTest extends TestCase
 {
-    public function providerGetTypeOfResult()
+    public static function providerGetTypeOfResult(): array
     {
         $mapValues[] = ['{"ok":true,"result":{"file_id":"XYZ","file_size":5254,"file_path":"voice\/file_8"}}', 'array'];
         $mapValues[] = ['{"ok":true,"result":[]}', 'array'];
@@ -32,7 +32,7 @@ class TelegramRawDataTest extends TestCase
         $this->assertSame($expectedResult, $actualResult);
     }
 
-    public function providerGetInvalidTypeOfResult()
+    public static function providerGetInvalidTypeOfResult(): array
     {
         $mapValues[] = ['{"ok":true,"result":"hello world"}'];
         $mapValues[] = ['{"ok":true,"result":3.1415}'];
@@ -43,11 +43,10 @@ class TelegramRawDataTest extends TestCase
 
     /**
      * @dataProvider providerGetInvalidTypeOfResult
-     * @param $data
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\InvalidResultType
      */
     public function testGetInvalidTypeOfResult($data)
     {
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\InvalidResultType::class);
         $tgRawData = new TelegramResponse($data);
         $tgRawData->getTypeOfResult();
     }

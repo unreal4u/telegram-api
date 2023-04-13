@@ -21,7 +21,7 @@ class SendAudioTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -29,7 +29,7 @@ class SendAudioTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }
@@ -64,12 +64,10 @@ class SendAudioTest extends TestCase
         });
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage chat_id
-     */
     public function testExportException()
     {
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
+        $this->expectExceptionMessage("chat_id");
         $sendAudio = new SendAudio();
         $sendAudio->export();
     }

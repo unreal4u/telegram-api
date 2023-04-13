@@ -21,7 +21,7 @@ class AnswerInlineQueryTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -29,7 +29,7 @@ class AnswerInlineQueryTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }
@@ -54,8 +54,8 @@ class AnswerInlineQueryTest extends TestCase
 
         $promise = $this->tgLog->performApiRequest($answerInlineQuery);
 
-        $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.json')),
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/Mock/MockData/AnswerInlineQueryArticle_unit-test-001.json',
             $answerInlineQuery->getResults()
         );
 

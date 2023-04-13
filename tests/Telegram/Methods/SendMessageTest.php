@@ -21,7 +21,7 @@ class SendMessageTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -29,7 +29,7 @@ class SendMessageTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }
@@ -73,8 +73,8 @@ class SendMessageTest extends TestCase
         $sendMessage->reply_markup->keyboard = [['Yes', 'No']];
 
         // Important assert: ensure we send a serialized object to Telegram
-        $this->assertEquals(
-            trim(file_get_contents('tests/Mock/MockData/SendMessage-replyKeyboardMarkup.json')),
+        $this->assertJsonStringEqualsJsonFile(
+            'tests/Mock/MockData/SendMessage-replyKeyboardMarkup.json',
             json_encode($sendMessage->reply_markup)
         );
 
@@ -118,12 +118,10 @@ class SendMessageTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage chat_id
-     */
     public function testSendIncompleteMessage()
     {
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
+        $this->expectExceptionMessage("chat_id");
         $sendMessage = new SendMessage();
         $sendMessage->text = 'Hello world!';
 
