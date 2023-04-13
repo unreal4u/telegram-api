@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.1",
     "ext-json": "*",
     "unreal4u/dummy-logger": "^1.0",
     "react/promise": "^2.7",
@@ -26,9 +26,9 @@
   },
   "require-dev": {
     "monolog/monolog": "^1.17",
-    "squizlabs/php_codesniffer": "^3.5",
-    "phpunit/phpunit": "^6.2",
-    "phpunit/php-code-coverage": "^5.2"
+    "squizlabs/php_codesniffer": "^3.7",
+    "phpunit/phpunit": "^10.0",
+    "phpunit/php-code-coverage": "^10.0"
   },
   "autoload": {
     "psr-4": {
