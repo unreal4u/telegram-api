@@ -141,6 +141,8 @@ class Chat extends TelegramTypes
                 return new Message($data, $this->logger);
             case 'permissions':
                 return new ChatPermissions($data, $this->logger);
+            case 'location':
+                return new ChatLocation($data, $this->logger);
         }
         return parent::mapSubObjects($key, $data);
     }
