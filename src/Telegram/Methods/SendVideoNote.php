@@ -62,6 +62,12 @@ class SendVideoNote extends TelegramMethods
     public $reply_to_message_id = 0;
 
     /**
+     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
+     * @var bool
+     */
+    public $allow_sending_without_reply = false;
+
+    /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
      * hide keyboard or to force a reply from the user
      * @var KeyboardMethods

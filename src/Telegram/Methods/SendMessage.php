@@ -51,6 +51,12 @@ class SendMessage extends TelegramMethods
     public $disable_notification = false;
 
     /**
+     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
+     * @var bool
+     */
+    public $allow_sending_without_reply = false;
+
+    /**
      * Optional. If the message is a reply, ID of the original message
      * @var int
      */

@@ -65,7 +65,7 @@ class SendMediaGroup extends TelegramMethods
      * Optional. Pass True, if the message should be sent even if the specified replied-to message is not found
      * @var bool
      */
-    public $allow_sending_without_reply;
+    public $allow_sending_without_reply = false;
 
     public function getMandatoryFields(): array
     {

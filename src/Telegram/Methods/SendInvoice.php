@@ -144,6 +144,12 @@ class SendInvoice extends TelegramMethods
     public $reply_to_message_id = 0;
 
     /**
+     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
+     * @var bool
+     */
+    public $allow_sending_without_reply = false;
+
+    /**
      * Optional. A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown.
      * If not empty, the first button must be a Pay button
      * @var Markup

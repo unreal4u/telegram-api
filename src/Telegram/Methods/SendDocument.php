@@ -86,7 +86,7 @@ class SendDocument extends TelegramMethods
     public $reply_to_message_id = 0;
 
     /**
-     * Optional. Pass True, if the message should be sent even if the specified replied-to message is not found
+     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
      * @var bool
      */
     public $allow_sending_without_reply = false;
