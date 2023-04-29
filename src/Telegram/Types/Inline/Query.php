@@ -31,12 +31,6 @@ class Query extends TelegramTypes
     public $from;
 
     /**
-     * Optional. Sender location, only for bots that request user location
-     * @var Location
-     */
-    public $location;
-
-    /**
      * Text of the query (up to 512 characters)
      * @var string
      */
@@ -47,6 +41,20 @@ class Query extends TelegramTypes
      * @var string
      */
     public $offset = '';
+
+    /**
+     * Optional. Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with
+     * the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for
+     * requests sent from official clients and most third-party clients, unless the request was sent from a secret chat
+     * @var string
+     */
+    public $chat_type = '';
+
+    /**
+     * Optional. Sender location, only for bots that request user location
+     * @var Location
+     */
+    public $location;
 
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
