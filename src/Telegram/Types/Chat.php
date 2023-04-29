@@ -67,7 +67,7 @@ class Chat extends TelegramTypes
 
     /**
      * Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels.
-     * Returned only in {@see getChat}.
+     * Returned only in {@see getChat}
      * @var array<string>
      */
     public $active_usernames = [];
