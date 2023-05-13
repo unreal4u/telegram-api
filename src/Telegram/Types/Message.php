@@ -258,16 +258,32 @@ class Message extends TelegramTypes
     /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      *
-     * @deprecated
+     * @deprecated Backward compatibility, use $new_chat_members array instead
      * @var User
      */
     public $new_chat_member;
+
+    /**
+     * Optional. A new member was added to the group, information about them (this member may be the bot itself)
+     *
+     * @deprecated Backward compatibility, use $new_chat_members array instead
+     * @var User
+     */
+    public $new_chat_participant;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be the bot itself)
      * @var User
      */
     public $left_chat_member;
+
+    /**
+     * Optional. A member was removed from the group, information about them (this member may be the bot itself)
+     *
+     * @deprecated Backward compatibility, use $left_chat_member instead
+     * @var User
+     */
+    public $left_chat_participant;
 
     /**
      * Optional. A chat title was changed to this value
@@ -401,7 +417,9 @@ class Message extends TelegramTypes
             case 'from':
             case 'forward_from':
             case 'new_chat_member':
+            case 'new_chat_participant':
             case 'left_chat_member':
+            case 'left_chat_participant':
             case 'via_bot':
                 return new User($data, $this->logger);
             case 'new_chat_members':
