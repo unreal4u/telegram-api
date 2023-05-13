@@ -125,6 +125,12 @@ class Message extends TelegramTypes
     public $edit_date = 0;
 
     /**
+     * 	Optional. True, if the message can't be forwarded
+     * @var bool
+     */
+    public $has_protected_content = false;
+
+    /**
      * Optional. The unique identifier of a media message group this message belongs to
      * @var string
      */
@@ -210,6 +216,13 @@ class Message extends TelegramTypes
      * @var MessageEntityArray
      */
     public $caption_entities = [];
+
+    /**
+     * Optional. True, if the message media is covered by a spoiler animation
+     * the caption
+     * @var bool
+     */
+    public $has_media_spoiler = false;
 
     /**
      * Optional. Message is a shared contact, information about the contact
@@ -326,6 +339,12 @@ class Message extends TelegramTypes
     public $channel_chat_created = false;
 
     /**
+     * Optional. Service message: auto-delete timer settings changed in the chat
+     * @see https://core.telegram.org/bots/api#messageautodeletetimerchanged @TODO
+     */
+    public $message_auto_delete_timer_changed;
+
+    /**
      * Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater
      * than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it smaller
      * than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier
@@ -362,11 +381,35 @@ class Message extends TelegramTypes
     public $successful_payment;
 
     /**
+     * Optional. Service message: a user was shared with the bot
+     * @see https://core.telegram.org/bots/api#usershared @TODO
+     */
+    public $user_shared;
+
+    /**
+     * Optional. Service message: a chat was shared with the bot
+     * @see https://core.telegram.org/bots/api#chatshared @TODO
+     */
+    public $chat_shared;
+
+    /**
      * Optional. The domain name of the website on which the user has logged in
      * @see https://core.telegram.org/widgets/login
      * @var string
      */
     public $connected_website = '';
+
+    /**
+     * Optional. Service message: the user allowed the bot added to the attachment menu to write messages
+     * @see https://core.telegram.org/bots/api#writeaccessallowed @TODO
+     */
+    public $write_access_allowed;
+
+    /**
+     * Optional. Telegram Passport data
+     * @see https://core.telegram.org/bots/api#passportdata @TODO
+     */
+    public $passport_data;
 
     /**
      * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live
@@ -398,6 +441,48 @@ class Message extends TelegramTypes
 	 * @var ForumTopicReopened
 	 */
 	public $forum_topic_reopened;
+
+    /**
+     * Optional. Service message: the 'General' forum topic hidden
+     * @see https://core.telegram.org/bots/api#generalforumtopichidden @TODO
+     */
+    public $general_forum_topic_hidden;
+
+    /**
+     * Optional. Service message: the 'General' forum topic unhidden
+     * @see https://core.telegram.org/bots/api#generalforumtopicunhidden @TODO
+     */
+    public $general_forum_topic_unhidden;
+
+    /**
+     * Optional. Service message: video chat scheduled
+     * @see https://core.telegram.org/bots/api#videochatscheduled @TODO
+     */
+    public $video_chat_scheduled;
+
+    /**
+     * Optional. Service message: video chat started
+     * @see https://core.telegram.org/bots/api#videochatstarted @TODO
+     */
+    public $video_chat_started;
+
+    /**
+     * Optional. Service message: video chat ended
+     * @see https://core.telegram.org/bots/api#videochatended @TODO
+     */
+    public $video_chat_ended;
+
+    /**
+     * Optional. Service message: new participants invited to a video chat
+     * @see https://core.telegram.org/bots/api#videochatparticipantsinvited @TODO
+     */
+    public $video_chat_participants_invited;
+
+    /**
+     * Optional. Service message: data sent by a Web App
+     * @see https://core.telegram.org/bots/api#webappdata @TODO
+     */
+    public $web_app_data;
 
     /**
      * @var Markup
