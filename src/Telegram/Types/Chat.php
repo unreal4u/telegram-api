@@ -53,11 +53,23 @@ class Chat extends TelegramTypes
      */
     public $last_name = '';
 
+	/**
+	 * Optional. True, if the supergroup chat is a forum (has topics enabled)
+	 */
+	public $is_forum = false;
+
     /**
      * Optional. Chat photo. Returned only in {@see getChat}
      * @var ChatPhoto
      */
     public $photo;
+
+    /**
+     * Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels.
+     * Returned only in {@see getChat}
+     * @var array<string>
+     */
+    public $active_usernames = [];
 
     /**
      * Optional. Bio of the other party in a private chat. Returned only in {@see getChat}
@@ -136,6 +148,8 @@ class Chat extends TelegramTypes
                 return new Message($data, $this->logger);
             case 'permissions':
                 return new ChatPermissions($data, $this->logger);
+            case 'location':
+                return new ChatLocation($data, $this->logger);
         }
         return parent::mapSubObjects($key, $data);
     }

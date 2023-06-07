@@ -17,7 +17,7 @@ class GetWebhookInfoTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -25,7 +25,7 @@ class GetWebhookInfoTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }

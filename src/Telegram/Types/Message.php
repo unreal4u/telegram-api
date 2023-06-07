@@ -27,6 +27,12 @@ class Message extends TelegramTypes
     public $message_id = 0;
 
     /**
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     * @var int
+     */
+    public $message_thread_id = 0;
+
+    /**
      * Optional. Sender, can be empty for messages sent to channels
      * @var User
      */
@@ -89,6 +95,16 @@ class Message extends TelegramTypes
      */
     public $forward_date = 0;
 
+	/**
+	 * Optional. True, if the message is sent to a forum topic
+	 */
+	public $is_topic_message = false;
+
+	/**
+	 * @var bool
+	 */
+	public $is_automatic_forward = false;
+
     /**
      * Optional. For replies, the original message. Note that the Message object in this field will not contain further
      * reply_to_message fields even if it itself is a reply.
@@ -107,6 +123,12 @@ class Message extends TelegramTypes
      * @var int
      */
     public $edit_date = 0;
+
+    /**
+     * 	Optional. True, if the message can't be forwarded
+     * @var bool
+     */
+    public $has_protected_content = false;
 
     /**
      * Optional. The unique identifier of a media message group this message belongs to
@@ -196,6 +218,13 @@ class Message extends TelegramTypes
     public $caption_entities = [];
 
     /**
+     * Optional. True, if the message media is covered by a spoiler animation
+     * the caption
+     * @var bool
+     */
+    public $has_media_spoiler = false;
+
+    /**
      * Optional. Message is a shared contact, information about the contact
      * @var Contact
      */
@@ -242,16 +271,32 @@ class Message extends TelegramTypes
     /**
      * Optional. A new member was added to the group, information about them (this member may be the bot itself)
      *
-     * @deprecated
+     * @deprecated Backward compatibility, use $new_chat_members array instead
      * @var User
      */
     public $new_chat_member;
+
+    /**
+     * Optional. A new member was added to the group, information about them (this member may be the bot itself)
+     *
+     * @deprecated Backward compatibility, use $new_chat_members array instead
+     * @var User
+     */
+    public $new_chat_participant;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be the bot itself)
      * @var User
      */
     public $left_chat_member;
+
+    /**
+     * Optional. A member was removed from the group, information about them (this member may be the bot itself)
+     *
+     * @deprecated Backward compatibility, use $left_chat_member instead
+     * @var User
+     */
+    public $left_chat_participant;
 
     /**
      * Optional. A chat title was changed to this value
@@ -294,6 +339,12 @@ class Message extends TelegramTypes
     public $channel_chat_created = false;
 
     /**
+     * Optional. Service message: auto-delete timer settings changed in the chat
+     * @see https://core.telegram.org/bots/api#messageautodeletetimerchanged @TODO
+     */
+    public $message_auto_delete_timer_changed;
+
+    /**
      * Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater
      * than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it smaller
      * than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier
@@ -330,6 +381,18 @@ class Message extends TelegramTypes
     public $successful_payment;
 
     /**
+     * Optional. Service message: a user was shared with the bot
+     * @see https://core.telegram.org/bots/api#usershared @TODO
+     */
+    public $user_shared;
+
+    /**
+     * Optional. Service message: a chat was shared with the bot
+     * @see https://core.telegram.org/bots/api#chatshared @TODO
+     */
+    public $chat_shared;
+
+    /**
      * Optional. The domain name of the website on which the user has logged in
      * @see https://core.telegram.org/widgets/login
      * @var string
@@ -337,11 +400,89 @@ class Message extends TelegramTypes
     public $connected_website = '';
 
     /**
+     * Optional. Service message: the user allowed the bot added to the attachment menu to write messages
+     * @see https://core.telegram.org/bots/api#writeaccessallowed @TODO
+     */
+    public $write_access_allowed;
+
+    /**
+     * Optional. Telegram Passport data
+     * @see https://core.telegram.org/bots/api#passportdata @TODO
+     */
+    public $passport_data;
+
+    /**
      * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live
      * Location
      * @var ProximityAlertTriggered
      */
     public $proximity_alert_triggered;
+
+	/**
+     * Optional. Service message: forum topic created
+	 * @var ForumTopicCreated
+	 */
+	public $forum_topic_created;
+
+	/**
+     * Optional. Service message: forum topic edited
+	 * @var ForumTopicEdited
+	 */
+	public $forum_topic_edited;
+
+	/**
+     * Optional. Service message: forum topic closed
+	 * @var ForumTopicClosed
+	 */
+	public $forum_topic_closed;
+
+	/**
+     * Optional. Service message: forum topic reopened
+	 * @var ForumTopicReopened
+	 */
+	public $forum_topic_reopened;
+
+    /**
+     * Optional. Service message: the 'General' forum topic hidden
+     * @see https://core.telegram.org/bots/api#generalforumtopichidden @TODO
+     */
+    public $general_forum_topic_hidden;
+
+    /**
+     * Optional. Service message: the 'General' forum topic unhidden
+     * @see https://core.telegram.org/bots/api#generalforumtopicunhidden @TODO
+     */
+    public $general_forum_topic_unhidden;
+
+    /**
+     * Optional. Service message: video chat scheduled
+     * @see https://core.telegram.org/bots/api#videochatscheduled @TODO
+     */
+    public $video_chat_scheduled;
+
+    /**
+     * Optional. Service message: video chat started
+     * @see https://core.telegram.org/bots/api#videochatstarted @TODO
+     */
+    public $video_chat_started;
+
+    /**
+     * Optional. Service message: video chat ended
+     * @see https://core.telegram.org/bots/api#videochatended @TODO
+     */
+    public $video_chat_ended;
+
+    /**
+     * Optional. Service message: new participants invited to a video chat
+     * @see https://core.telegram.org/bots/api#videochatparticipantsinvited @TODO
+     */
+    public $video_chat_participants_invited;
+
+    /**
+     * Optional. Service message: data sent by a Web App
+     * @see https://core.telegram.org/bots/api#webappdata @TODO
+     */
+    public $web_app_data;
 
     /**
      * @var Markup
@@ -361,7 +502,9 @@ class Message extends TelegramTypes
             case 'from':
             case 'forward_from':
             case 'new_chat_member':
+            case 'new_chat_participant':
             case 'left_chat_member':
+            case 'left_chat_participant':
             case 'via_bot':
                 return new User($data, $this->logger);
             case 'new_chat_members':
@@ -413,6 +556,14 @@ class Message extends TelegramTypes
                 return new Markup($data, $this->logger);
             case 'proximity_alert_triggered':
                 return new ProximityAlertTriggered($data, $this->logger);
+            case 'forum_topic_created':
+                return new ForumTopicCreated($data, $this->logger);
+            case 'forum_topic_edited':
+                return new ForumTopicEdited($data, $this->logger);
+            case 'forum_topic_closed':
+                return new ForumTopicClosed($data, $this->logger);
+            case 'forum_topic_reopened':
+                return new ForumTopicReopened($data, $this->logger);
         }
 
         // Return always null if none of the objects above matches

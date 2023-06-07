@@ -17,7 +17,7 @@ class SetWebhookTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -25,17 +25,15 @@ class SetWebhookTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage url
-     */
     public function testMandatoryFields()
     {
+        $this->expectExceptionMessage("url");
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
         $setWebhook = new SetWebhook();
         $this->tgLog->performApiRequest($setWebhook);
     }

@@ -16,7 +16,7 @@ class EditMessageTextTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tgLog = new MockTgLog('TEST-TEST');
     }
@@ -24,38 +24,32 @@ class EditMessageTextTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->tgLog = null;
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage chat_id
-     */
     public function testMissingMandatoryExportField()
     {
+        $this->expectExceptionMessage("chat_id");
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
         $editMessageText = new EditMessageText();
         $editMessageText->export();
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage text
-     */
     public function testMissingMandatoryTextField()
     {
+        $this->expectExceptionMessage("text");
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
         $editMessageText = new EditMessageText();
         $editMessageText->inline_message_id = 12341234;
         $editMessageText->export();
     }
 
-    /**
-     * @expectedException \unreal4u\TelegramAPI\Exceptions\MissingMandatoryField
-     * @expectedExceptionMessage message_id
-     */
     public function testMissingMandatoryMessageIdField()
     {
+        $this->expectException(\unreal4u\TelegramAPI\Exceptions\MissingMandatoryField::class);
+        $this->expectExceptionMessage("message_id");
         $editMessageText = new EditMessageText();
         $editMessageText->chat_id = 12341234;
         $editMessageText->text = 'Hello world';
