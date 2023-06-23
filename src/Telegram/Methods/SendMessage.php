@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
-use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
+use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 
 /**
  * Object that resembles a message object in Telegram
@@ -21,6 +21,12 @@ class SendMessage extends TelegramMethods
      * @var string
      */
     public $chat_id = '';
+
+    /**
+     * Optional. Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @var int
+     */
+    public $message_thread_id = 0;
 
     /**
      * Text of the message to be sent
@@ -51,16 +57,23 @@ class SendMessage extends TelegramMethods
     public $disable_notification = false;
 
     /**
-     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
+     * Optional. Protects the contents of the sent message from forwarding and saving
+     *
      * @var bool
      */
-    public $allow_sending_without_reply = false;
+    public $protect_content = false;
 
     /**
      * Optional. If the message is a reply, ID of the original message
      * @var int
      */
     public $reply_to_message_id = 0;
+
+    /**
+     * Optional. Pass True if the message should be sent even if the specified replied-to message is not found
+     * @var bool
+     */
+    public $allow_sending_without_reply = false;
 
     /**
      * Optional. Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to
