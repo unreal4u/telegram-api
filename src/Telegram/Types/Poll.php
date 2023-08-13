@@ -63,7 +63,7 @@ class Poll extends TelegramTypes
      * True, if the poll allows multiple answers
      * @var bool
      */
-    public $allow_multiple_answers;
+    public $allows_multiple_answers;
 
     /**
      * Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are
