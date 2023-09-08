@@ -52,12 +52,24 @@ class Mpeg4Gif extends Result
      * URL of the thumbnail for the photo
      * @var string
      */
+    public $thumbnail_url = '';
+
+    /**
+     * @deprecated Use $thumbnail_url instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var string
+     */
     public $thumb_url = '';
 
     /**
      * Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to
      * “image/jpeg”
      *
+     * @var string
+     */
+    public $thumbnail_mime_type = '';
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
      * @var string
      */
     public $thumb_mime_type = '';

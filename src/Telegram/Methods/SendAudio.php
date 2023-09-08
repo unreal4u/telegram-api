@@ -49,6 +49,12 @@ class SendAudio extends TelegramMethods
      * uploaded using multipart/form-data under <file_attach_name>.
      * @var string|InputFile
      */
+    public $thumbnail;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var string|InputFile
+     */
     public $thumb;
 
     /**
@@ -126,6 +132,7 @@ class SendAudio extends TelegramMethods
     {
         yield from [
             'audio' => $this->audio,
+            'thumbnail' => $this->thumbnail,
             'thumb' => $this->thumb,
         ];
     }

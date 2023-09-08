@@ -57,6 +57,12 @@ class SendVideo extends TelegramMethods
      *
      * @var InputFile
      */
+    public $thumbnail;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var InputFile
+     */
     public $thumb;
 
     /**

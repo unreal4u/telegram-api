@@ -45,6 +45,12 @@ class Photo extends Result
      * URL of the thumbnail for the photo
      * @var string
      */
+    public $thumbnail_url = '';
+
+    /**
+     * @deprecated Use $thumbnail_url instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var string
+     */
     public $thumb_url = '';
 
     /**

@@ -17,7 +17,7 @@ $sendAudio = new SendAudio();
 $sendAudio->chat_id = A_USER_CHAT_ID;
 $sendAudio->audio = new InputFile('binary-test-data/ICQ-uh-oh.mp3');
 $sendAudio->title = 'The famous ICQ new message alert';
-$sendAudio->thumb = new InputFile(__DIR__ . '/binary-test-data/logo-php7-telegram-bot-api-thumbnail.jpg');
+$sendAudio->thumbnail = new InputFile(__DIR__ . '/binary-test-data/logo-php7-telegram-bot-api-thumbnail.jpg');
 
 $promise = $tgLog->performApiRequest($sendAudio);
 
