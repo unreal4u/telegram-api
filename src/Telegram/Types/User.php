@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
 use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
+use unreal4u\TelegramAPI\Telegram\Methods\GetMe;
 
 /**
  * This object represents a Telegram user or bot.
@@ -53,19 +54,29 @@ class User extends TelegramTypes
     public $language_code = '';
 
     /**
-     * Optional. True, if the bot can be invited to groups. Returned only in getMe
+     * Optional. True, if this user is a Telegram Premium user
+     * @var bool
+     */
+    public $is_premium = false;
+
+    /**
+     * Optional. True, if the bot can be invited to groups.
+     * Returned only in {@see GetMe}.
      * @var bool
      */
     public $can_join_groups;
 
     /**
-     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     * Optional. True, if privacy mode is disabled for the bot.
+     * @see https://core.telegram.org/bots/features#privacy-mode
+     * Returned only in {@see GetMe}.
      * @var bool
      */
     public $can_read_all_group_messages;
 
     /**
-     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     * Optional. True, if the bot supports inline queries.
+     * Returned only in {@see GetMe}.
      * @var bool
      */
     public $supports_inline_queries;
