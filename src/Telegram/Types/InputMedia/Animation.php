@@ -29,6 +29,12 @@ class Animation extends InputMedia
      * if the thumbnail was uploaded using multipart/form-data under <file_attach_name>.
      * @var InputFile
      */
+    public $thumbnail;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var string|InputFile
+     */
     public $thumb;
 
     /**

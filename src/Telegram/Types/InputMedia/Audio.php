@@ -29,6 +29,12 @@ class Audio extends InputMedia
      * if the thumbnail was uploaded using multipart/form-data under <file_attach_name>.
      * @var InputFile
      */
+    public $thumbnail;
+
+    /**
+     * @deprecated use $thumbnail instead
+     * @var InputFile
+     */
     public $thumb;
 
     /**

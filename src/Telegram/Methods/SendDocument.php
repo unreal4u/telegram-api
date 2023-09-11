@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Methods;
 
@@ -9,7 +9,6 @@ use unreal4u\TelegramAPI\Abstracts\KeyboardMethods;
 use unreal4u\TelegramAPI\Abstracts\TelegramMethods;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\InputFile;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\MessageEntityArray;
-use unreal4u\TelegramAPI\Telegram\Types\MessageEntity;
 
 /**
  * Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any
@@ -42,6 +41,12 @@ class SendDocument extends TelegramMethods
      * should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused
      * and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was
      * uploaded using multipart/form-data under <file_attach_name>.
+     * @var string|InputFile
+     */
+    public $thumbnail;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
      * @var string|InputFile
      */
     public $thumb;
@@ -108,13 +113,16 @@ class SendDocument extends TelegramMethods
 
     public function hasLocalFiles(): bool
     {
-        return $this->document instanceof InputFile || $this->thumb instanceof InputFile;
+        return $this->document instanceof InputFile
+            || $this->thumbnail instanceof InputFile
+            || $this->thumb instanceof InputFile;
     }
 
     public function getLocalFiles(): Generator
     {
         yield from [
             'document' => $this->document,
+            'thumbnail' => $this->thumbnail,
             'thumb' => $this->thumb,
         ];
     }

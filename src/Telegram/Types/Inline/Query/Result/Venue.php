@@ -64,16 +64,34 @@ class Venue extends Result
      * Optional. Url of the thumbnail for the result
      * @var string
      */
+    public $thumbnail_url = '';
+
+    /**
+     * @deprecated Use $thumbnail_url instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var string
+     */
     public $thumb_url = '';
 
     /**
      * Optional. Width of the thumbnail
      * @var int
      */
+    public $thumbnail_width = 0;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var int
+     */
     public $thumb_width = 0;
 
     /**
      * Optional. Height of the thumbnail
+     * @var int
+     */
+    public $thumbnail_height = 0;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
      * @var int
      */
     public $thumb_height = 0;

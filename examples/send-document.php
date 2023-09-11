@@ -18,7 +18,7 @@ $tgLog = new TgLog(BOT_TOKEN, new HttpClientRequestHandler($loop));
 $sendDocument = new SendDocument();
 $sendDocument->chat_id = A_USER_CHAT_ID;
 $sendDocument->document = new InputFile(__FILE__);
-$sendDocument->thumb = new InputFile(__DIR__ . '/binary-test-data/logo-php7-telegram-bot-api-thumbnail.jpg');
+$sendDocument->thumbnail = new InputFile(__DIR__ . '/binary-test-data/logo-php7-telegram-bot-api-thumbnail.jpg');
 
 $promise = $tgLog->performApiRequest($sendDocument);
 
@@ -37,7 +37,7 @@ $promise->then(
 
         // Load uploaded thumbnail and generate URL to download using bot token
         $getFileThumb = new GetFile();
-        $getFileThumb->file_id = $response->document->thumb->file_id;
+        $getFileThumb->file_id = $response->document->thumbnail->file_id;
         $fileThumb = await($tgLog->performApiRequest($getFileThumb), $loop);
         var_dump('Thumbnail url: ' . $tgLog->fileUrl($fileThumb));
     },

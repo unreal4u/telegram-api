@@ -53,6 +53,12 @@ class Sticker extends TelegramTypes
      * Optional. Sticker thumbnail in .webp or .jpg format
      * @var PhotoSize
      */
+    public $thumbnail;
+
+    /**
+     * @deprecated Use $thumbnail instead (Bot API 6.6, March 9, 2023 https://core.telegram.org/bots/api-changelog#march-9-2023)
+     * @var PhotoSize
+     */
     public $thumb;
 
     /**
@@ -82,6 +88,7 @@ class Sticker extends TelegramTypes
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         switch ($key) {
+            case 'thumbnail':
             case 'thumb':
                 return new PhotoSize($data, $this->logger);
             case 'mask_position':

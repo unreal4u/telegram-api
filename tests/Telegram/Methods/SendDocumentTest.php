@@ -59,7 +59,7 @@ class SendDocumentTest extends TestCase
 
             $this->assertInstanceOf(Document::class, $result->document);
             $this->assertEquals('XXX-YYY-ZZZ-01', $result->document->file_id);
-            $this->assertNull($result->document->thumb);
+            $this->assertNull($result->document->thumbnail);
         });
     }
 }

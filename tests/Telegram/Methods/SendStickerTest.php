@@ -59,8 +59,8 @@ class SendStickerTest extends TestCase
 
             $this->assertInstanceOf(Sticker::class, $result->sticker);
             $this->assertEquals($sendSticker->sticker, $result->sticker->file_id);
-            $this->assertInstanceOf(PhotoSize::class, $result->sticker->thumb);
-            $this->assertEquals(128, $result->sticker->thumb->height);
+            $this->assertInstanceOf(PhotoSize::class, $result->sticker->thumbnail);
+            $this->assertEquals(128, $result->sticker->thumbnail->height);
 
             $this->assertSame('{"key":"value"}', json_encode($result->sticker->unknown_field));
         });
