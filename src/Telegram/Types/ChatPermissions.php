@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types;
 
@@ -27,8 +27,51 @@ class ChatPermissions extends TelegramTypes
      * implies can_send_messages
      *
      * @var bool
+     * @deprecated Use more granual permissions instead (Bot API 6.5, February 3, 2023 https://core.telegram.org/bots/api-changelog#february-3-2023)
      */
     public $can_send_media_messages;
+
+    /**
+     * Optional. True, if the user is allowed to send audios
+     *
+     * @var bool
+     */
+    public $can_send_audios;
+
+    /**
+     * Optional. True, if the user is allowed to send documents
+     *
+     * @var bool
+     */
+    public $can_send_documents;
+
+    /**
+     * Optional. True, if the user is allowed to send photos
+     *
+     * @var bool
+     */
+    public $can_send_photos;
+
+    /**
+     * Optional. True, if the user is allowed to send videos
+     *
+     * @var bool
+     */
+    public $can_send_videos;
+
+    /**
+     * Optional. True, if the user is allowed to send video notes
+     *
+     * @var bool
+     */
+    public $can_send_video_notes;
+
+    /**
+     * Optional. True, if the user is allowed to send voice notes
+     *
+     * @var bool
+     */
+    public $can_send_voice_notes;
 
     /**
      * Optional. True, if the user is allowed to send polls, implies can_send_messages
@@ -74,4 +117,12 @@ class ChatPermissions extends TelegramTypes
      * @var bool
      */
     public $can_pin_messages;
+
+    /**
+     * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the
+     * value of can_pin_messages
+     *
+     * @var bool
+     */
+    public $can_manage_topics;
 }
