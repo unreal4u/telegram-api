@@ -64,7 +64,7 @@ class ChatMemberUpdated extends TelegramTypes
                 return new User($data, $this->logger);
             case 'old_chat_member':
             case 'new_chat_member':
-                return new ChatMember($data, $this->logger);
+                return ChatMember::create($data, $this->logger);
             case 'invite_link':
                 return new ChatInviteLink($data, $this->logger);
         }
