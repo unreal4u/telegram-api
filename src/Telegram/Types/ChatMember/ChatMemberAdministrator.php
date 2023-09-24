@@ -104,6 +104,24 @@ class ChatMemberAdministrator extends ChatMember
     public $can_pin_messages = false;
 
     /**
+     * Optional. True, if the administrator can post stories in the channel; channels only
+     * @var bool
+     */
+    public $can_post_stories = false;
+
+    /**
+     * Optional. True, if the administrator can edit stories posted by other users; channels only
+     * @var bool
+     */
+    public $can_edit_stories = false;
+
+    /**
+     * Optional. True, if the administrator can delete stories posted by other users; channels only
+     * @var bool
+     */
+    public $can_delete_stories = false;
+
+    /**
      * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
      * @var bool
      */
