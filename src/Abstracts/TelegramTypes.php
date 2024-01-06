@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use unreal4u\Dummy\Logger;
 use unreal4u\TelegramAPI\Telegram\Types\Custom\ResultArray;
 
+#[\AllowDynamicProperties]
 abstract class TelegramTypes
 {
     /**
@@ -62,21 +63,19 @@ abstract class TelegramTypes
     /**
      * The default is that we have no subobjects at all, so this function will return nothing
      *
-     * @param string $key
-     * @param array $data
-     *
      * @return TelegramTypes
      */
     protected function mapSubObjects(string $key, array $data): TelegramTypes
     {
         if (!isset($this->$key)) {
             $this->logger->error(sprintf(
-                'The key "%s" does not exist in the class! Maybe a recent Telegram Bot API update? In any way, please '.
+                'The key "%s" does not exist in the class %s! Maybe a recent Telegram Bot API update? In any way, please '.
                 'submit an issue (bug report) at %s with this complete log line',
                 $key,
-                'https://github.com/unreal4u/telegram-api/issues'
+	            static::class,
+                'https://github.com/unreal4u/telegram-api/issues',
             ), [
-                'object' => \get_class($this),
+                'object' => static::class,
                 'data' => $data,
             ]);
         }
