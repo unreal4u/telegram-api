@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace unreal4u\TelegramAPI\Telegram\Types\Custom;
 
@@ -15,10 +15,8 @@ class ChatMembersArray extends TraversableCustomType
 {
     public function __construct(array $data = null, LoggerInterface $logger = null)
     {
-        if (count($data) !== 0) {
-            foreach ($data as $id => $chatMember) {
-                $this->data[$id] = new ChatMember($chatMember, $logger);
-            }
+        foreach ($data ?? [] as $id => $chatMember) {
+            $this->data[$id] = ChatMember::create($chatMember, $logger);
         }
     }
 }

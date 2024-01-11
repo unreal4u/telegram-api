@@ -15,6 +15,11 @@ use unreal4u\TelegramAPI\Abstracts\TelegramTypes;
  */
 class Chat extends TelegramTypes
 {
+    public const TYPE_PRIVATE = 'private';
+    public const TYPE_GROUP = 'group';
+    public const TYPE_SUPERGROUP = 'supergroup';
+    public const TYPE_CHANNEL = 'channel';
+
     /**
      * Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have
      * difficulty/silent defects in interpreting it. But it smaller than 52 bits, so a signed 64 bit integer or
