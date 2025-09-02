@@ -15,6 +15,12 @@ is Telegram Passport which was introduced in [Bot API v4.0](https://core.telegra
 unlikely to be introduced as it may introduce security vulnerabilities. However, if you think you have a strong case for
 the need, feel free to let me know.
 
+## Update Sept. 2025: this repository is now considered abandonware
+
+Please do not use this package anymore and refer to any of the other ones still recommended by Telegram. I will not maintain this anymore since it has literally been years since I've touched any PHP code. As such, I won't be able to provide any more support nor new features or keep up with the development of the Bot API. 
+
+If somebody feels like it, they can fork this repository and built upon that. It was a nice project and quite useful for quite some time, but for now: Good morning, and in case I don't see ya: Good afternoon, good evening, and good night!
+
 ### About this package
 
 * Enables you to anything supported by the Telegram Bot API: messages, stickers, location, inline bots and any other supported method via PHP to a Telegram user (either direct conversation, channel, group or supergroup).
